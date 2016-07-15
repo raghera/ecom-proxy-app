@@ -4,16 +4,20 @@
     <groupId>com.vodafone</groupId>
     <artifactId>EcomProxyApp</artifactId>
     <version>1.0</version>
-    <packaging>pom</packaging>
-    <name>EcomProxyApp Maven Webapp</name>
+    <name>Ecom Proxy Application </name>
     <url>http://maven.apache.org</url>
 
+    <packaging>pom</packaging>
 
     <properties>
+        <er.api.version>1.0-SNAPSHOT</er.api.version>
+        <er.translog.version>1.0-SNAPSHOT</er.translog.version>
+
         <java.version>1.7</java.version>
         <slf4j.version>1.7.12</slf4j.version>
         <junit.version>4.12</junit.version>
         <spring.version>4.2.4.RELEASE</spring.version>
+
     </properties>
 
     <dependencies>
@@ -23,10 +27,31 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.vodafone</groupId>
+            <artifactId>er-api</artifactId>
+            <version>${er.api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vodafone</groupId>
+            <artifactId>er-trans-log</artifactId>
+            <version>${er.translog.version}</version>
+        </dependency>
+        <!-- Add another for something like app-common -->
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.vodafone</groupId>
+                <artifactId>er-api</artifactId>
+                <version>${er.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vodafone</groupId>
+                <artifactId>er-trans-log</artifactId>
+                <version>${er.translog.version}</version>
+            </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
