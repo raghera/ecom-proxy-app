@@ -1,4 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/
 target/
-EcomProxyApp.iml
+*.iml
+ecom-proxy-app/ecom-proxy-app.iml
