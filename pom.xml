@@ -10,8 +10,12 @@
     <packaging>pom</packaging>
 
     <properties>
-        <er.api.version>1.0-SNAPSHOT</er.api.version>
-        <er.translog.version>1.0-SNAPSHOT</er.translog.version>
+        <er.api.version>0.1080.4-SNAPSHOT</er.api.version>
+        <build.sourceEncoding>UTF-8</build.sourceEncoding>
+        <er.translog.version>0.52.0-SNAPSHOT</er.translog.version>
+        <er.client.version>1.0-SNAPSHOT</er.client.version>
+        <er.decoupling.client.version>0.162.3-SNAPSHOT</er.decoupling.client.version>
+        <er.decoupling.common.version>0.160.0-SNAPSHOT</er.decoupling.common.version>
 
         <java.version>1.7</java.version>
         <slf4j.version>1.7.12</slf4j.version>
@@ -22,40 +26,67 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.vodafone</groupId>
-            <artifactId>er-api</artifactId>
-            <version>${er.api.version}</version>
+        <groupId>com.vodafone.er</groupId>
+        <artifactId>ER_api</artifactId>
+        <version>${er.api.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.vodafone</groupId>
-            <artifactId>er-trans-log</artifactId>
-            <version>${er.translog.version}</version>
+        <groupId>com.vodafone.er</groupId>
+        <artifactId>ER_transactions_log</artifactId>
+        <version>${er.translog.version}</version>
         </dependency>
-        <!-- Add another for something like app-common -->
+        <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+
+        <!--Add another for something like app-common -->
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.vodafone</groupId>
-                <artifactId>er-api</artifactId>
+                <groupId>com.vodafone.er</groupId>
+                <artifactId>ER_api</artifactId>
                 <version>${er.api.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.vodafone</groupId>
-                <artifactId>er-trans-log</artifactId>
+                <groupId>com.vodafone.er</groupId>
+                <artifactId>ER_transactions_log</artifactId>
                 <version>${er.translog.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vodafone.er</groupId>
+                <artifactId>DECOUPLING_common</artifactId>
+                <version>${er.decoupling.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vodafone.er</groupId>
+                <artifactId>ER_client</artifactId>
+                <version>${er.client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vodafone.er</groupId>
+                <artifactId>DECOUPLING_client</artifactId>
+                <version>${er.decoupling.client.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>2.5.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -66,6 +97,18 @@
 
     <build>
         <finalName>EcomProxyApp</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <encoding>${build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
 </project>

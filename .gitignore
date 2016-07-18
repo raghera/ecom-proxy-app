@@ -3,3 +3,4 @@
 target/
 *.iml
 ecom-proxy-app/ecom-proxy-app.iml
+ecom-proxy-app/src/main/CVS/
