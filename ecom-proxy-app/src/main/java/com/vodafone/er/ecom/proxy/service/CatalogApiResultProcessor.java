@@ -6,15 +6,22 @@ import com.vizzavi.ecommerce.business.catalog.CatalogService;
 import com.vizzavi.ecommerce.business.catalog.PricePoint;
 import com.vizzavi.ecommerce.business.catalog.internal.BalanceImpact;
 import com.vizzavi.ecommerce.business.selfcare.ResourceBalance;
+import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.util.CatalogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class CatalogApiResultProcessor {
+	CatalogApi catalogApi;
 
-    //TODO refactor so can be more re-usable
-    public CatalogPackage processCatalogPackage(CatalogPackage result, CatalogApi catalogApi) {
+    public CatalogApiResultProcessor(Locale locale, String clientId) {
+    	catalogApi = DecouplingApiFactory.getCatalogApi(locale, clientId);
+	}
+
+	//TODO refactor so can be more re-usable
+    public CatalogPackage processCatalogPackage(CatalogPackage result) {
         //populate missing service data
         for(CatalogService service : result.getServiceArray()) {
             final CatalogService returnedService = catalogApi.getService(service.getId());
