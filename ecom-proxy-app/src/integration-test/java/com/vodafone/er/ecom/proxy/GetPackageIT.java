@@ -11,7 +11,7 @@ import java.util.Locale;
 
 import static org.junit.Assert.assertNotNull;
 
-public class CatalogApiIT {
+public class GetPackageIT {
 
     private SoftAssertions softly = new SoftAssertions();
 
@@ -2031,7 +2031,7 @@ public class CatalogApiIT {
     }
 
 	public static void main (String args[]) throws Exception	{
-		CatalogApiIT test = new CatalogApiIT();
+		GetPackageIT test = new GetPackageIT();
 		CatalogPackage pack = EcomApiFactory.getCatalogApi(Locale.UK).getPackage("pAlt");
 //		TestHelper.generateTestCode(pack, "pack");
 
