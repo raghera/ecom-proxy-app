@@ -42,7 +42,7 @@ public class EcomProxyJetty9Server {
         System.out.println("Warfile path: " + warfile.getAbsolutePath());
 
         System.out.println(System.getProperty("user.dir"));
-        
+
 
 
         webAppContext.setWar(warfile.getAbsolutePath());
