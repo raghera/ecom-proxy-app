@@ -27,7 +27,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
     private static Logger log = Logger.getLogger(CatalogApiServlet.class);
 
 
-    private CatalogApiResultProcessor catalogApiResultProcessor = new CatalogApiResultProcessor();
+    //private CatalogApiResultProcessor catalogApiResultProcessor = new CatalogApiResultProcessor();
 
     @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
@@ -250,8 +250,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             try {
 
                 result = getCatalogDecouplingClient(locale).getPackage(id);
-
-                result = catalogApiResultProcessor.processCatalogPackage(result, getCatalogDecouplingClient(locale));
+                result = new CatalogApiResultProcessor(locale, clientId).processCatalogPackage(result);
 
             }
             catch (Exception e1) {
