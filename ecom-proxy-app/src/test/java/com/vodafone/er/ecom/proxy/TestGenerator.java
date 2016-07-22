@@ -23,6 +23,7 @@ public class TestGenerator {
 
     //Make sure ER Core 15-12-2 is running with Java7 and JBOSS 5
     // and run against this to generate assert statements requried.
+    //Also change the port for the server to 8094 (E.g. CatalogApiStub) - want to call ER through decoupling client
 	public static void main (String args[]) throws Exception	{
 
 //		CatalogPackage pack = EcomApiFactory.getCatalogApi(Locale.UK).getPackage("pAlt");
