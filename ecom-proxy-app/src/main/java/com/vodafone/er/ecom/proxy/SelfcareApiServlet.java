@@ -1,34 +1,17 @@
 package com.vodafone.er.ecom.proxy;
 
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Locale;
+import com.vizzavi.ecommerce.business.charging.*;
+import com.vizzavi.ecommerce.business.selfcare.*;
+import com.vodafone.er.ecom.proxy.service.SelfcareApiResultProcessor;
+import com.vodafone.global.er.business.selfcare.*;
+import com.vodafone.global.er.data.*;
+import com.vodafone.global.er.util.*;
+import org.apache.log4j.*;
 
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.transaction.SystemException;
-
-import org.apache.log4j.Logger;
-
-import com.vizzavi.ecommerce.business.charging.BaseAuthorization;
-import com.vizzavi.ecommerce.business.selfcare.CustcareAttributes;
-import com.vizzavi.ecommerce.business.selfcare.MicroServiceFilter;
-import com.vizzavi.ecommerce.business.selfcare.ResourceBalance;
-import com.vizzavi.ecommerce.business.selfcare.Subscription;
-import com.vizzavi.ecommerce.business.selfcare.SubscriptionFilter;
-import com.vizzavi.ecommerce.business.selfcare.Transaction;
-import com.vizzavi.ecommerce.business.selfcare.TransactionFilter;
-import com.vodafone.config.ConfigProvider;
-import com.vodafone.global.er.business.selfcare.BalanceFilter;
-import com.vodafone.global.er.business.selfcare.MicroServiceStatus;
-import com.vodafone.global.er.business.selfcare.ParentTransaction;
-import com.vodafone.global.er.data.ERLogDataImpl;
-import com.vodafone.global.er.util.ExceptionAdapter;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
+import java.util.*;
 
 public class SelfcareApiServlet extends AbstractEcomServlet {
 
@@ -235,6 +218,7 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
                 result = getSelfcareApiDelegate(locale).getSubscriptions(clientId,msisdn,device,filter);
+                result = new SelfcareApiResultProcessor(locale).process(result);
                //hydrateSubscriptions(result);
             }
             catch (Exception e1) {                

@@ -20,6 +20,8 @@
         <main.class>com.vodafone.er.ecom.proxy.server.EcomProxyJetty9Server</main.class>
         <jetty.version>9.3.9.v20160517</jetty.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <hiberante.version>4.3.10.Final</hiberante.version>
+        <guava.version>19.0</guava.version>
     </properties>
 
     <profiles>
@@ -139,6 +141,13 @@
             <artifactId>DECOUPLING_client</artifactId>
         </dependency>
 
+        <!--Open Source-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
         <!--Test dependencies-->
         <dependency>
             <groupId>junit</groupId>
@@ -163,6 +172,13 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
             <version>9.3.8.v20160314</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hiberante.version}</version>
+            <scope>compile</scope>
         </dependency>
 
         <!--<dependency>-->
