@@ -26,9 +26,7 @@ public class GetPackageIT {
 
     @Test
     public void testGetPackage2AssertJ() throws Exception {
-//
         CatalogPackage pack = getCatalogApi().getPackage("pAlt");
-//        CatalogService serv = getCatalogApi().getService("sAlt");
         assertNotNull(pack);
 
 

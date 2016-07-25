@@ -42,14 +42,14 @@ public class GetSubscriptionsIT {
         Subscription subscription1 = subscriptions[0];
         Subscription subscription2 = subscriptions[1];
 
-        //TODO no purchasesServices being returned
-/*        softly.assertThat(subscription1.getPurchasedServices()[0].getId() ).as(" subscription1.getPurchasedServices()[0].getId()" ).isEqualTo(new Long(19)) ;
+        //TODO no purchasesServices being returned.  Can populate these if required but may need a change in ER
+        softly.assertThat(subscription1.getPurchasedServices()).as(" subscription1.getPurchasedServices()" ).isNotNull();
+        softly.assertThat(subscription1.getPurchasedServices()[0]).as(" subscription1.getPurchasedServices()");
+/*      softly.assertThat(subscription1.getPurchasedServices()[0].getId() ).as(" subscription1.getPurchasedServices()[0].getId()" ).isEqualTo(new Long(19)) ;
         softly.assertThat(subscription1.getPurchasedServices()[0].getServiceId() ).as(" subscription1.getPurchasedServices()[0].getServiceId()" ).isEqualTo("2PP_S001");
         softly.assertThat(subscription1.getPurchasedServices()[0].getProvStatus() ).as(" subscription1.getPurchasedServices()[0].getProvStatus()" ).isEqualTo(221) ;
         softly.assertThat(subscription1.getPurchasedServices()[0].getLastProvisionUpdate() ).as(" subscription1.getPurchasedServices()[0].getLastProvisionUpdate()" ).isNull();
         softly.assertThat(subscription1.getPurchasedServices()[0].getStatus() ).as(" subscription1.getPurchasedServices()[0].getStatus()" ).isEqualTo(201) ;
-
-
         softly.assertThat(subscription1.getPurchasedServices()[0].getSubscription() ).as(" subscription1.getPurchasedServices()[0].getSubscription()" ).isNull();
         softly.assertThat(subscription1.getPurchasedServices()[0].getServiceClass() ).as(" subscription1.getPurchasedServices()[0].getServiceClass()" ).isNull();
         softly.assertThat(subscription1.getPurchasedServices()[0].getUpdateTimeStamp() ).as(" subscription1.getPurchasedServices()[0].getUpdateTimeStamp()" ).isNull();
