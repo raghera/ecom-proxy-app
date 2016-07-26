@@ -310,7 +310,7 @@ public class GetServiceIT {
         softly.assertThat(catalogService.getPricePoints().get(1).isEvent() ).as(" catalogService.getPricePoints().get(1).isEvent()" ).isFalse() ;
         softly.assertThat(catalogService.getPricePoints().get(1).isRecurring() ).as(" catalogService.getPricePoints().get(1).isRecurring()" ).isFalse() ;
         softly.assertThat(catalogService.getPricePoints().get(1).isHistoric() ).as(" catalogService.getPricePoints().get(1).isHistoric()" ).isFalse() ;
-        softly.assertThat(catalogService.getPricePoints().get(1).getPricepointIdLink() ).as(" catalogService.getPricePoints().get(1).getPricepointIdLink()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricepointIdLink() ).as(" catalogService.getPricePoints().get(1).getPricepointIdLink()" ).isNullOrEmpty();
         softly.assertThat(catalogService.getPricePoints().get(1).isTrial() ).as(" catalogService.getPricePoints().get(1).isTrial()" ).isFalse() ;
         softly.assertThat(catalogService.getPricePoints().get(1).isNonRecurring() ).as(" catalogService.getPricePoints().get(1).isNonRecurring()" ).isFalse() ;
         softly.assertThat(catalogService.getPricePoints().get(1).getPackageId() ).as(" catalogService.getPricePoints().get(1).getPackageId()" ).isEqualTo("pAlt");

@@ -1,9 +1,6 @@
 package com.vodafone.er.ecom.proxy.service;
 
-import com.vizzavi.ecommerce.business.catalog.CatalogApi;
-import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
-import com.vizzavi.ecommerce.business.catalog.CatalogService;
-import com.vizzavi.ecommerce.business.catalog.PricePoint;
+import com.vizzavi.ecommerce.business.catalog.*;
 import com.vizzavi.ecommerce.business.catalog.internal.BalanceImpact;
 import com.vizzavi.ecommerce.business.selfcare.ResourceBalance;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
@@ -76,9 +73,25 @@ public class CatalogApiResultProcessor {
         }
 
         return result;
-
     }
 
+    public CatalogService processCatalogService(final CatalogService catalogService) {
 
+        //Go through the pricepoints, deduce the packageId and populate.
+        final PricePoints origPpts = catalogService.getPricePoints();
+        origPpts.stream().forEach(pricePoint -> {
+
+            String packageId = CatalogUtil.getPackageIdFromServicePricepoint(pricePoint.getId());
+            final PricePoint pricePointFromServer = catalogApi.getPricePoint(pricePoint.getId());
+
+            pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()));
+            pricePoint.setPackageId(packageId);
+            pricePoint.setContentId(catalogService.getId());
+            catalogService.setPackageId(packageId);
+        });
+
+        return catalogService;
+
+    }
 }
 
