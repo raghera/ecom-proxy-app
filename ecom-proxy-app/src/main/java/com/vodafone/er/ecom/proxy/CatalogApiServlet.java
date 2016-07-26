@@ -201,7 +201,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
 //                result = getCatalogEcomClient(locale).getService(id);
-                result = getCatalogEcomClient(locale).getService(id);
+                result = DecouplingApiFactory.getCatalogApi(locale, "ecom-proxy").getService(id);
             }
             catch (Exception e1) {
                 oos.writeObject( new ExceptionAdapter(e1));

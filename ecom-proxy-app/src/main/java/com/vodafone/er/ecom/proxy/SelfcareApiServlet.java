@@ -1,17 +1,22 @@
 package com.vodafone.er.ecom.proxy;
 
-import com.vizzavi.ecommerce.business.charging.*;
+import com.vizzavi.ecommerce.business.charging.BaseAuthorization;
 import com.vizzavi.ecommerce.business.selfcare.*;
 import com.vodafone.er.ecom.proxy.service.SelfcareApiResultProcessor;
-import com.vodafone.global.er.business.selfcare.*;
-import com.vodafone.global.er.data.*;
-import com.vodafone.global.er.util.*;
-import org.apache.log4j.*;
+import com.vodafone.global.er.business.selfcare.BalanceFilter;
+import com.vodafone.global.er.business.selfcare.MicroServiceStatus;
+import com.vodafone.global.er.business.selfcare.ParentTransaction;
+import com.vodafone.global.er.data.ERLogDataImpl;
+import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
+import com.vodafone.global.er.util.ExceptionAdapter;
+import org.apache.log4j.Logger;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Locale;
 
 public class SelfcareApiServlet extends AbstractEcomServlet {
 
@@ -217,7 +222,8 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getSelfcareApiDelegate(locale).getSubscriptions(clientId,msisdn,device,filter);
+//                result = getSelfcareApiDelegate(locale).getSubscriptions(clientId,msisdn,device,filter);
+                result = DecouplingApiFactory.getSelfcareApi(locale, "ecom-proxy").getSubscriptions(clientId,msisdn,device,filter);
                 result = new SelfcareApiResultProcessor(locale).process(result);
                //hydrateSubscriptions(result);
             }

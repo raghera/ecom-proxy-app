@@ -24,29 +24,49 @@
 
     <dependencies>
         <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>${junit.version}</version>
-        <scope>test</scope>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
-        <groupId>com.vodafone.er</groupId>
-        <artifactId>ER_api</artifactId>
-        <version>${er.api.version}</version>
+            <groupId>com.vodafone.er</groupId>
+            <artifactId>ER_api</artifactId>
+            <version>${er.api.version}</version>
         </dependency>
         <dependency>
-        <groupId>com.vodafone.er</groupId>
-        <artifactId>ER_transactions_log</artifactId>
-        <version>${er.translog.version}</version>
+            <groupId>com.vodafone.er</groupId>
+            <artifactId>ER_transactions_log</artifactId>
+            <version>${er.translog.version}</version>
         </dependency>
+        <!--<dependency>-->
+        <!--<groupId>com.vodafone.er</groupId>-->
+        <!--<artifactId>ER_client</artifactId>-->
+        <!--<version>${er.client.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>com.vodafone.er</groupId>-->
+        <!--<artifactId>ER_transactions_log</artifactId>-->
+        <!--<version>${er.translog.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>com.vodafone.er</groupId>-->
+        <!--<artifactId>DECOUPLING_common</artifactId>-->
+        <!--<version>${er.decoupling.common.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>com.vodafone.er</groupId>-->
+        <!--<artifactId>DECOUPLING_client</artifactId>-->
+        <!--<version>${er.decoupling.client.version}</version>-->
+        <!--</dependency>-->
         <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>2.5.0</version>
+            <version>3.5.2</version>
+            <scope>test</scope>
         </dependency>
 
-        <!--Add another for something like app-common -->
     </dependencies>
 
     <dependencyManagement>
@@ -81,10 +101,17 @@
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
             </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.assertj</groupId>-->
+                <!--<artifactId>assertj-core</artifactId>-->
+                <!--<version>2.5.0</version>-->
+                <!--<scope>test</scope>-->
+            <!--</dependency>-->
+            <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
-                <version>2.5.0</version>
+                <version>3.5.2</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>

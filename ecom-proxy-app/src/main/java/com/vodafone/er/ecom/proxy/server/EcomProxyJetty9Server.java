@@ -43,8 +43,6 @@ public class EcomProxyJetty9Server {
 
         System.out.println(System.getProperty("user.dir"));
 
-
-
         webAppContext.setWar(warfile.getAbsolutePath());
 
         webAppContext.addAliasCheck(new AllowSymLinkAliasChecker());

@@ -26,12 +26,13 @@ public class SelfcareApiResultProcessor {
     }
 
     public Subscription [] process(final Subscription [] subscriptions) {
-
         final List<Subscription> subsList = Arrays.asList(subscriptions);
 
 //        populatePurchasedServices(subsList);
 
-        throw new UnsupportedOperationException();
+        //Currently nothing required
+        return subscriptions;
+
     }
 
     //TODO Rather delete this method as potentially thousands of calls to catalogApi.getService(serviceId);
@@ -56,6 +57,7 @@ public class SelfcareApiResultProcessor {
             subscription.setPurcServiceList(purchasedServices);
 
         });
+
 
 
     }

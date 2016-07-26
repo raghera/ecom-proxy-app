@@ -1,39 +1,19 @@
 package com.vodafone.er.ecom.proxy;
 
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Locale;
+import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
+import com.vizzavi.ecommerce.business.charging.*;
+import com.vodafone.global.er.data.ERLogDataImpl;
+import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
+import com.vodafone.global.er.util.ExceptionAdapter;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.SystemException;
+import java.io.*;
+import java.util.HashMap;
+import java.util.Locale;
 
-import org.apache.log4j.Logger;
-
-import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
-import com.vizzavi.ecommerce.business.charging.GoodwillCreditAuthorization;
-import com.vizzavi.ecommerce.business.charging.ModifyTariffAttributes;
-import com.vizzavi.ecommerce.business.charging.ModifyTariffAuthorization;
-import com.vizzavi.ecommerce.business.charging.PurchaseApi;
-import com.vizzavi.ecommerce.business.charging.PurchaseAttributes;
-import com.vizzavi.ecommerce.business.charging.PurchaseAuthorization;
-import com.vizzavi.ecommerce.business.charging.ValidatePromoParam;
-import com.vizzavi.ecommerce.business.charging.ValidatePromoStatus;
-import com.vizzavi.ecommerce.business.charging.GoodwillCreditAttributes;
-import com.vodafone.global.er.data.ERLogDataImpl;
-import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
-import com.vodafone.global.er.util.ExceptionAdapter;
-
-/**
- * The ECOM layer front end - this class handles all requests to /delegates/PurchaseApi
- * @author matt
- *
- */
 public class PurchaseApiServlet extends AbstractEcomServlet {
 	
 	private static final long	serialVersionUID	= -5298650083905760799L;
@@ -134,7 +114,7 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getPurchaseApiDelegate(locale).purchasePackageMsisdn(clientApplicationId,msisdn,packageId,purchaseAttributes);
+                result = DecouplingApiFactory.getPurchaseApi(locale, clientId).purchasePackage(clientApplicationId,msisdn,packageId,purchaseAttributes);
                 
             }
             catch (Exception e1) {

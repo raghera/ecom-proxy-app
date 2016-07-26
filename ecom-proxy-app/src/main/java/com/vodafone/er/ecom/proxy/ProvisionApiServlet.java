@@ -1,24 +1,17 @@
 package com.vodafone.er.ecom.proxy;
 
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Locale;
-
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.transaction.SystemException;
-
-import org.apache.log4j.Logger;
-
 import com.vizzavi.ecommerce.business.provision.ProvisionApi;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.util.ExceptionAdapter;
+import org.apache.log4j.Logger;
+
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.util.HashMap;
+import java.util.Locale;
 
 public class ProvisionApiServlet extends AbstractEcomServlet {
 	
@@ -134,7 +127,7 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getProvisionApiDelegate(locale).updateServiceStatus(provisioningId,serviceStatus,provisioningStatus,provisioningTag);
+                result = DecouplingApiFactory.getProvisionApi(locale, clientId).updateServiceStatus(provisioningId,serviceStatus,provisioningStatus,provisioningTag);
             }
             catch (Exception e1) {                
                 oos.writeObject( new ExceptionAdapter(e1));
