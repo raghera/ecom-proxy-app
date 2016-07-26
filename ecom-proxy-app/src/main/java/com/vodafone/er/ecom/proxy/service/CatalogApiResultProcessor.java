@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.Locale;
 
 public class CatalogApiResultProcessor {
-	CatalogApi catalogApi;
+    CatalogApi catalogApi;
 
     public CatalogApiResultProcessor(Locale locale, String clientId) {
-    	catalogApi = DecouplingApiFactory.getCatalogApi(locale, clientId);
-	}
+        catalogApi = DecouplingApiFactory.getCatalogApi(locale, clientId);
+    }
 
-	//TODO refactor so can be more re-usable
+    //TODO refactor so can be more re-usable
     public CatalogPackage processCatalogPackage(CatalogPackage result) {
         //populate missing service data
         for(CatalogService service : result.getServiceArray()) {
@@ -48,7 +48,10 @@ public class CatalogApiResultProcessor {
             }
 
             //Populate missing packagePricepoint data
-            for(PricePoint packagePricePoint : result.getPricePoints()) {
+//            for(PricePoint packagePricePoint : result.getPricePoints()) {
+
+            result.getPricePoints().stream().forEach(packagePricePoint -> {
+
                 PricePoint returnedPricePoint = catalogApi.getPricePoint(packagePricePoint.getId());
 
                 BalanceImpact[] balanceImpacts = packagePricePoint.getAllBalanceImpacts().getBalanceImpacts();
@@ -67,9 +70,7 @@ public class CatalogApiResultProcessor {
                     resourceBalances.add(resourceBalance);
                 }
                 packagePricePoint.setBalances(resourceBalances.toArray(new ResourceBalance[resourceBalances.size()]));
-
-            }
-
+            });
         }
 
         return result;

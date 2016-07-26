@@ -120,7 +120,7 @@ public class GetSubscriptionsIT {
         softly.assertThat(subscription1.getNextPaymentAmount() ).as(" subscription1.getNextPaymentAmount()" ).isEqualTo(new Double(2.0)) ;
         softly.assertThat(subscription1.getResourceBalancesList() ).as(" subscription1.getResourceBalancesList()" ).isNull();
 // com.vodafone.global.er.subscriptionmanagement.ERRatingAttributes
-        softly.assertThat(subscription1.getPaymentTransactionId() ).as(" subscription1.getPaymentTransactionId()" ).isEqualTo(new Long(19)) ;
+        softly.assertThat(subscription1.getPaymentTransactionId() ).as(" subscription1.getPaymentTransactionId()" ).isNotNull() ;
         softly.assertThat(subscription1.getNonRefundDescription() ).as(" subscription1.getNonRefundDescription()" ).isEqualTo("Sorry, the package is not refundable, because at least one of its service is not refundable!");
         softly.assertThat(subscription1.getInteractiveUsageFlag() ).as(" subscription1.getInteractiveUsageFlag()" ).isEqualTo(1) ;
         softly.assertThat(subscription1.isFirstUsage() ).as(" subscription1.isFirstUsage()" ).isTrue() ;
@@ -356,7 +356,7 @@ public class GetSubscriptionsIT {
         softly.assertThat(subscription2.getResourceBalancesList().get(0).getSubscriptionIdLong() ).as(" subscription2.getResourceBalancesList().get(0).getSubscriptionIdLong()" ).isEqualTo(new Long(32)) ;
         softly.assertThat(subscription2.getResourceBalancesList().get(0).getOldestSubscriptionId() ).as(" subscription2.getResourceBalancesList().get(0).getOldestSubscriptionId()" ).isNull();
 // com.vodafone.global.er.subscriptionmanagement.ERRatingAttributes
-        softly.assertThat(subscription2.getPaymentTransactionId() ).as(" subscription2.getPaymentTransactionId()" ).isEqualTo(new Long(18)) ;
+        softly.assertThat(subscription2.getPaymentTransactionId() ).as(" subscription2.getPaymentTransactionId()" ).isNotNull() ;
         softly.assertThat(subscription2.getNonRefundDescription() ).as(" subscription2.getNonRefundDescription()" ).isNull();
         softly.assertThat(subscription2.getInteractiveUsageFlag() ).as(" subscription2.getInteractiveUsageFlag()" ).isEqualTo(1) ;
         softly.assertThat(subscription2.isFirstUsage() ).as(" subscription2.isFirstUsage()" ).isTrue() ;
