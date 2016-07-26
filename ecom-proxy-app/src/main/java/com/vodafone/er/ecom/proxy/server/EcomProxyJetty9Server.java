@@ -7,7 +7,9 @@ import org.eclipse.jetty.server.handler.ContextHandler;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 import java.io.File;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
+import java.util.Properties;
 
 public class EcomProxyJetty9Server {
 
@@ -19,6 +21,18 @@ public class EcomProxyJetty9Server {
 
     public static void main(String[] args) throws Exception {
         BasicConfigurator.configure();
+
+        Properties props = new Properties();
+        InputStream in = EcomProxyJetty9Server.class.getClassLoader().getResourceAsStream("env.properties");
+
+        System.out.println("Input stream " + in);
+        props.load(in);
+
+        System.out.println("ER host " + props.getProperty("er.server.host"));
+        System.out.println("ER port " + props.getProperty("er.server.port"));
+        System.out.println("EPA host " + props.getProperty("ecom.proxy.host"));
+        System.out.println("EPA port " + props.getProperty("ecom.proxy.port"));
+
 
         Logger.getRootLogger().setLevel(Level.DEBUG);
         Logger.getLogger("com.vodafone").setLevel(Level.DEBUG);

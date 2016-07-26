@@ -24,7 +24,8 @@ public class CatalogApiResultProcessor {
             final CatalogService returnedService = catalogApi.getService(service.getId());
             service.setPricePoints(returnedService.getPricePoints());
 
-            for (PricePoint ppt : service.getPricePoints()) {
+            service.getPricePoints().stream().forEach(ppt -> {
+
                 PricePoint returnedServPricePoint = catalogApi.getPricePoint(ppt.getId());
                 ppt.setPackageId(result.getSimplePackageId());
                 ppt.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(ppt.getId()));
@@ -45,10 +46,7 @@ public class CatalogApiResultProcessor {
                 }
                 ppt.setBalances(resourceBalances.toArray(new ResourceBalance[resourceBalances.size()]));
 
-            }
-
-            //Populate missing packagePricepoint data
-//            for(PricePoint packagePricePoint : result.getPricePoints()) {
+            });
 
             result.getPricePoints().stream().forEach(packagePricePoint -> {
 
@@ -77,13 +75,12 @@ public class CatalogApiResultProcessor {
     }
 
     public CatalogService processCatalogService(final CatalogService catalogService) {
-
         //Go through the pricepoints, deduce the packageId and populate.
         final PricePoints origPpts = catalogService.getPricePoints();
         origPpts.stream().forEach(pricePoint -> {
 
             String packageId = CatalogUtil.getPackageIdFromServicePricepoint(pricePoint.getId());
-            final PricePoint pricePointFromServer = catalogApi.getPricePoint(pricePoint.getId());
+//            final PricePoint pricePointFromServer = catalogApi.getPricePoint(pricePoint.getId());
 
             pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()));
             pricePoint.setPackageId(packageId);
@@ -92,7 +89,6 @@ public class CatalogApiResultProcessor {
         });
 
         return catalogService;
-
     }
 }
 
