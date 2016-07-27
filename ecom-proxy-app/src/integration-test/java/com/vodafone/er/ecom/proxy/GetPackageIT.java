@@ -29,7 +29,6 @@ public class GetPackageIT {
         CatalogPackage pack = getCatalogApi().getPackage("pAlt");
         assertNotNull(pack);
 
-
         softly.assertThat(pack.getName() ).as(" pack.getName()" ).isEqualTo("2 Usage Alternative Payment Pkg");
         softly.assertThat(pack.getResource() ).as(" pack.getResource()" ).isNull();
         softly.assertThat(pack.getKey() ).as(" pack.getKey()" ).isNull();

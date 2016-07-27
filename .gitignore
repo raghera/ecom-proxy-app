@@ -5,7 +5,4 @@ target/
 ecom-proxy-app/ecom-proxy-app.iml
 ecom-proxy-app/src/main/CVS/
 .gitignore
-src/integration-test/java/com/vodafone/er/ecom/proxy/utils/
-src/integration-test/resources/
 src/main/webapp/WEB-INF/lib/
-src/test/resources/

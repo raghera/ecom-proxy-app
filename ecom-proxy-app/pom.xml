@@ -190,7 +190,7 @@
             <artifactId>javaee-api</artifactId>
             <version>6.0</version>
             <!--scope required at runtime to be able to run on Jetty-->
-            <scope>runtime</scope>
+            <scope>provided</scope>
         </dependency>
 
         <!--JBOSS Dependencies -->
