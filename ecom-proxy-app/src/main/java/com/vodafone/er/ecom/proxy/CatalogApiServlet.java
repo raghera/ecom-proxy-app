@@ -26,9 +26,6 @@ public class CatalogApiServlet extends AbstractEcomServlet {
     //private static LWLogger log = LWSupportFactoryImpl.getInstance().getLogger(CatalogApiServlet.class);
     private static Logger log = Logger.getLogger(CatalogApiServlet.class);
 
-
-    //private CatalogApiResultProcessor catalogApiResultProcessor = new CatalogApiResultProcessor();
-
     @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 

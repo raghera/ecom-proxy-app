@@ -5,13 +5,15 @@ import com.vizzavi.ecommerce.business.catalog.internal.BalanceImpact;
 import com.vizzavi.ecommerce.business.selfcare.ResourceBalance;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.util.CatalogUtil;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+@Component
 public class CatalogApiResultProcessor {
-    CatalogApi catalogApi;
+    private CatalogApi catalogApi;
 
     public CatalogApiResultProcessor(Locale locale, String clientId) {
         catalogApi = DecouplingApiFactory.getCatalogApi(locale, clientId);
@@ -21,10 +23,11 @@ public class CatalogApiResultProcessor {
     public CatalogPackage processCatalogPackage(CatalogPackage result) {
         //populate missing service data
         for(CatalogService service : result.getServiceArray()) {
+            processCatalogService(service);
             final CatalogService returnedService = catalogApi.getService(service.getId());
             service.setPricePoints(returnedService.getPricePoints());
 
-            service.getPricePoints().stream().forEach(ppt -> {
+            service.getPricePoints().forEach(ppt -> {
 
                 PricePoint returnedServPricePoint = catalogApi.getPricePoint(ppt.getId());
                 ppt.setPackageId(result.getSimplePackageId());
@@ -77,7 +80,7 @@ public class CatalogApiResultProcessor {
     public CatalogService processCatalogService(final CatalogService catalogService) {
         //Go through the pricepoints, deduce the packageId and populate.
         final PricePoints origPpts = catalogService.getPricePoints();
-        origPpts.stream().forEach(pricePoint -> {
+        origPpts.forEach(pricePoint -> {
 
             String packageId = CatalogUtil.getPackageIdFromServicePricepoint(pricePoint.getId());
 //            final PricePoint pricePointFromServer = catalogApi.getPricePoint(pricePoint.getId());

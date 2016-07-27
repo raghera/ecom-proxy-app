@@ -20,8 +20,6 @@
         <main.class>com.vodafone.er.ecom.proxy.server.EcomProxyJetty9Server</main.class>
         <jetty.version>9.3.9.v20160517</jetty.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <hiberante.version>4.3.10.Final</hiberante.version>
-        <guava.version>19.0</guava.version>
     </properties>
 
     <profiles>
@@ -144,10 +142,33 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
         </dependency>
 
         <!--Test dependencies-->
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -178,12 +199,6 @@
             <version>9.3.8.v20160314</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>${hiberante.version}</version>
-            <scope>compile</scope>
-        </dependency>
 
         <dependency>
             <groupId>javax</groupId>

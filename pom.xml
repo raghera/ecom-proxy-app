@@ -19,7 +19,11 @@
         <slf4j.version>1.7.12</slf4j.version>
         <junit.version>4.12</junit.version>
         <assertj.version>3.5.2</assertj.version>
-        <spring.version>4.2.4.RELEASE</spring.version>
+        <spring.version>4.3.1.RELEASE</spring.version>
+        <hiberante.version>4.3.10.Final</hiberante.version>
+        <guava.version>19.0</guava.version>
+        <mockito.version>1.9.5</mockito.version>
+        <powermock.version>1.6.5</powermock.version>
 
     </properties>
 
@@ -64,9 +68,10 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.5.2</version>
+            <version>${assertj.version}</version>
             <scope>test</scope>
         </dependency>
+
 
     </dependencies>
 
@@ -98,23 +103,59 @@
                 <version>${er.decoupling.client.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hiberante.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <!--Test dependencies -->
+            <dependency>
+                <groupId>org.powermock</groupId>
+                <artifactId>powermock-module-junit4</artifactId>
+                <version>${powermock.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.powermock</groupId>
+                <artifactId>powermock-api-mockito</artifactId>
+                <version>${powermock.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${mockito.version}</version>
+            </dependency>
+
             <!--<dependency>-->
                 <!--<groupId>org.assertj</groupId>-->
                 <!--<artifactId>assertj-core</artifactId>-->
                 <!--<version>2.5.0</version>-->
                 <!--<scope>test</scope>-->
             <!--</dependency>-->
-            <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
-            <dependency>
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-core</artifactId>
-                <version>3.5.2</version>
-                <scope>test</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 

@@ -3,9 +3,11 @@ package com.vodafone.er.ecom.proxy.service;
 import com.vizzavi.ecommerce.business.catalog.CatalogApi;
 import com.vizzavi.ecommerce.business.catalog.CatalogService;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
+import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vizzavi.ecommerce.business.selfcare.PurchasedService;
 import com.vizzavi.ecommerce.business.selfcare.SelfcareApi;
 import com.vizzavi.ecommerce.business.selfcare.Subscription;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,13 +17,14 @@ import java.util.Locale;
 /**
  * Created by Ravi Aghera
  */
+@Component
 public class SelfcareApiResultProcessor {
 
     private SelfcareApi selfcareApi;
     private CatalogApi catalogApi;
 
     //TODO initialize in Spring
-    public SelfcareApiResultProcessor(Locale locale) throws com.vizzavi.ecommerce.business.common.EcommerceException {
+    public SelfcareApiResultProcessor(Locale locale) throws EcommerceException {
         selfcareApi = EcomApiFactory.getSelfcareApi(locale);
     }
 
