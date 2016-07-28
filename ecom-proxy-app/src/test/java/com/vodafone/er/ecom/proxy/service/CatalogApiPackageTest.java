@@ -4,7 +4,6 @@ import com.vizzavi.ecommerce.business.catalog.CatalogApi;
 import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
 import com.vizzavi.ecommerce.business.catalog.CatalogService;
 import com.vizzavi.ecommerce.business.catalog.PricePoint;
-import com.vodafone.er.ecom.proxy.data.builder.CatalogPackageDataBuilder;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.generated.CatalogApiStub;
 import org.junit.Before;
@@ -19,6 +18,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import java.util.Locale;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static com.vodafone.er.ecom.proxy.data.builder.CatalogPackageDataBuilder.aCatalogPackage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.anyString;
@@ -56,8 +56,9 @@ public class CatalogApiPackageTest {
     @Test
     public void shouldProcessCatalogPackageSuccess() {
         //given
-        final CatalogPackage catalogPackage = CatalogPackageDataBuilder.aCatalogPackage();
-        final CatalogPackage expected = CatalogPackageDataBuilder.aCatalogPackage();
+        final CatalogPackage catalogPackage = aCatalogPackage();
+        final CatalogPackage expected = aCatalogPackage();
+        expected.setTaxCode("TAX");
 
         CatalogPackage resultPackage = new CatalogPackage();
         resultPackage.setId("pAlt");
@@ -71,6 +72,7 @@ public class CatalogApiPackageTest {
 //        PricePoint packagePp = new PricePoint();
         serviceResponse.setId(serviceId);
 
+        when(catalogApi.getPackage(catalogPackage.getId())).thenReturn(catalogPackage);
         when(catalogApi.getService(serviceId)).thenReturn(catalogPackage.getServices().get(0));
         when(catalogApi.getPricePoint(anyString())).thenReturn(catalogPackage.getPricePoints().get(0));
 
