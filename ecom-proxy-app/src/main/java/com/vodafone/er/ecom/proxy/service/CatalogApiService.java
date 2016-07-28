@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Locale;
 
 import static com.vodafone.er.ecom.proxy.constants.EcomConstantsEnum.CLIENT_ID;
-import static org.apache.axis2.i18n.MessagesConstants.locale;
 
 @Component
 public class CatalogApiService {
@@ -23,9 +22,9 @@ public class CatalogApiService {
 
     private CatalogApi catalogApi;
 
-    public CatalogApi getCatalogApi() {
+    public CatalogApi getCatalogApi(Locale locale) {
         if (null != catalogApi) {
-            DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.getValue());
+            DecouplingApiFactory.getCatalogApi(locale , CLIENT_ID.getValue());
         }
         return catalogApi;
     }
@@ -33,25 +32,25 @@ public class CatalogApiService {
     public CatalogPackage getCatalogPackage(final Locale locale, String packageId) {
         logger.info("calling catalogApi.getPackage with locale={}, client-id={}", locale, CLIENT_ID.getValue());
         //TODO move to it's own method that only instantiates one
-        catalogApi = getCatalogApi();
+        catalogApi = getCatalogApi(locale);
         final CatalogPackage result = catalogApi.getPackage(packageId);
         return processCatalogPackage(locale, result);
     }
 
     public CatalogService getCatalogService(final Locale locale, String serviceId) {
-        catalogApi = getCatalogApi();
+        catalogApi = getCatalogApi(locale);
         final CatalogService service = catalogApi.getService(serviceId);
         return processCatalogService(locale, service);
     }
 
     public PricePoint getPricePoint(final Locale locale, final String pricePointId) {
-        catalogApi = getCatalogApi();
+        catalogApi = getCatalogApi(locale);
         final PricePoint pricePoint = catalogApi.getPricePoint(pricePointId);
         return processPricePoint(pricePoint);
     }
 
     private PricePoint processPricePoint(final PricePoint pricePoint) {
-        //TODO fill in any required gaps here
+        //TODO fill in any common gaps
         pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()));
         return pricePoint;
     }

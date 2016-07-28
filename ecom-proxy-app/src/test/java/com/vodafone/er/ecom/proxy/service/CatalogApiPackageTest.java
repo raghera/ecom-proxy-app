@@ -1,22 +1,38 @@
 package com.vodafone.er.ecom.proxy.service;
 
 import com.vizzavi.ecommerce.business.catalog.CatalogApi;
+import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
+import com.vizzavi.ecommerce.business.catalog.CatalogService;
+import com.vizzavi.ecommerce.business.catalog.PricePoint;
+import com.vodafone.er.ecom.proxy.data.builder.CatalogPackageDataBuilder;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
+import com.vodafone.global.er.generated.CatalogApiStub;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+
+import java.util.Locale;
+
+import static com.google.common.collect.Lists.newArrayList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Ravi Aghera
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(DecouplingApiFactory.class)
-public class CatalogApiServiceTest {
+public class CatalogApiPackageTest {
 
+
+    private static final String serviceId = "test-service-id";
 
     //SUT
     private CatalogApiService processor;
@@ -28,22 +44,21 @@ public class CatalogApiServiceTest {
 
     @Before
     public void setUp() {
+        processor = new CatalogApiService();
 
-//        PowerMockito.mockStatic(DecouplingApiFactory.class);
-//        PowerMockito.when(DecouplingApiFactory.getCatalogApi(any(Locale.class), anyString()))
-//                .thenReturn(new CatalogApiStub(Locale.UK));
-//
-//        processor = new CatalogApiService(Locale.UK, "ecom-client-id");
-//
-//        MockitoAnnotations.initMocks(processor);
+        PowerMockito.mockStatic(DecouplingApiFactory.class);
+        PowerMockito.when(DecouplingApiFactory.getCatalogApi(any(Locale.class), anyString()))
+                .thenReturn(new CatalogApiStub(Locale.UK));
+
+        MockitoAnnotations.initMocks(processor);
     }
 
     @Test
-    @Ignore //TODO - incomplete test currently.  Find a better way to create test objects
     public void shouldProcessCatalogPackageSuccess() {
-/*
         //given
-        final String serviceId = "test-service-id";
+        final CatalogPackage catalogPackage = CatalogPackageDataBuilder.aCatalogPackage();
+        final CatalogPackage expected = CatalogPackageDataBuilder.aCatalogPackage();
+
         CatalogPackage resultPackage = new CatalogPackage();
         resultPackage.setId("pAlt");
         CatalogService resultService = new CatalogService();
@@ -56,18 +71,18 @@ public class CatalogApiServiceTest {
 //        PricePoint packagePp = new PricePoint();
         serviceResponse.setId(serviceId);
 
-        when(catalogApi.getService(serviceId)).thenReturn(serviceResponse);
-        when(catalogApi.getPricePoint(anyString())).thenReturn(servicePp);
+        when(catalogApi.getService(serviceId)).thenReturn(catalogPackage.getServices().get(0));
+        when(catalogApi.getPricePoint(anyString())).thenReturn(catalogPackage.getPricePoints().get(0));
 
         //when
-        CatalogPackage result = processor.processCatalogPackage(resultPackage);
+        CatalogPackage result = processor.getCatalogPackage(Locale.UK, "pAlt");
 
         //then
         assertNotNull(result);
         assertEquals(result.getSimplePackageId(), "pAlt");
         verify(catalogApi).getService(serviceId);
         verify(catalogApi, times(3)).getPricePoint(anyString());
-*/
+
     }
 
 
