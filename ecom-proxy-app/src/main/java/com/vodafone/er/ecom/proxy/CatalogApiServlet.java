@@ -3,7 +3,7 @@ package com.vodafone.er.ecom.proxy;
 import com.vizzavi.ecommerce.business.catalog.*;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
-import com.vodafone.er.ecom.proxy.service.CatalogApiResultProcessor;
+import com.vodafone.er.ecom.proxy.service.CatalogApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.translog.TransLogManagerFactory;
@@ -25,6 +25,8 @@ public class CatalogApiServlet extends AbstractEcomServlet {
 	//CR1231
     //private static LWLogger log = LWSupportFactoryImpl.getInstance().getLogger(CatalogApiServlet.class);
     private static Logger log = Logger.getLogger(CatalogApiServlet.class);
+
+    private CatalogApiService processor;
 
     @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
@@ -198,8 +200,12 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
 
-                result = DecouplingApiFactory.getCatalogApi(locale, clientId).getService(id);
-                result = new CatalogApiResultProcessor(locale, clientId).processCatalogService(result);
+                //TODO remove and configure through Spring.
+                processor = new CatalogApiService();
+                result = processor.getCatalogService(locale, id);
+
+//                result = DecouplingApiFactory.getCatalogApi(locale, clientId).getService(id);
+//                result = new CatalogApiService(locale, clientId).processCatalogService(result);
 
             }
             catch (Exception e1) {
@@ -243,14 +249,14 @@ public class CatalogApiServlet extends AbstractEcomServlet {
 	public void getPackageHandler(final Locale locale, final HttpServletResponse resp, String id) {
         ObjectOutputStream oos = null;
         try {
-            CatalogPackage result = null;
+            CatalogPackage result;
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
 
-                result = getCatalogDecouplingClient(locale).getPackage(id);
-                result = new CatalogApiResultProcessor(locale, clientId).processCatalogPackage(result);
-
+                //TODO remove and configure through Spring.
+                processor = new CatalogApiService();
+                result = processor.getCatalogPackage(locale, id);
             }
             catch (Exception e1) {
                 oos.writeObject( new ExceptionAdapter(e1));

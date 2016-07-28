@@ -13,9 +13,8 @@ import java.util.Properties;
 
 public class EcomProxyJetty9Server {
 
-    //TODO set as a configuration property
-    //Servlets set by web.xml
-    private static final int JETTY_PORT = 8888;
+    private int JETTY_PORT = 8888;
+    private String JETTY_HOST = "localhost";
     private static final String WAR_PATH = "./ecom-proxy-app/target/ecom-proxy-app.war";
     private static final String CONTEXT_PATH = "/delegates";
 
@@ -33,6 +32,9 @@ public class EcomProxyJetty9Server {
         System.out.println("EPA host " + props.getProperty("ecom.proxy.host"));
         System.out.println("EPA port " + props.getProperty("ecom.proxy.port"));
 
+
+        String host = props.getProperty("ecom.proxy.host");
+        int port = Integer.valueOf(props.getProperty("ecom.proxy.port"));
 
         Logger.getRootLogger().setLevel(Level.DEBUG);
         Logger.getLogger("com.vodafone").setLevel(Level.DEBUG);

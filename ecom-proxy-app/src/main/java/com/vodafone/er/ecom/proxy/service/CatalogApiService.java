@@ -5,22 +5,38 @@ import com.vizzavi.ecommerce.business.catalog.internal.BalanceImpact;
 import com.vizzavi.ecommerce.business.selfcare.ResourceBalance;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.util.CatalogUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import static com.vodafone.er.ecom.proxy.constants.EcomConstantsEnum.CLIENT_ID;
+
 @Component
-public class CatalogApiResultProcessor {
+public class CatalogApiService {
+    private Logger logger = LoggerFactory.getLogger(CatalogApiService.class);
+
     private CatalogApi catalogApi;
 
-    public CatalogApiResultProcessor(Locale locale, String clientId) {
-        catalogApi = DecouplingApiFactory.getCatalogApi(locale, clientId);
+    public CatalogPackage getCatalogPackage(final Locale locale, String packageId) {
+        logger.info("calling catalogApi.getPackage with locale={}, client-id={}", locale, CLIENT_ID.getValue());
+        //TODO move to it's own method that only instantiates one
+        catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.getValue());
+        final CatalogPackage result = catalogApi.getPackage(packageId);
+        return processCatalogPackage(result);
+    }
+
+    public CatalogService getCatalogService(final Locale locale, String serviceId) {
+        catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.getValue());
+        final CatalogService service = catalogApi.getService(serviceId);
+        return processCatalogService(service);
     }
 
     //TODO refactor so can be more re-usable
-    public CatalogPackage processCatalogPackage(CatalogPackage result) {
+    private CatalogPackage processCatalogPackage(CatalogPackage result) {
         //populate missing service data
         for(CatalogService service : result.getServiceArray()) {
             processCatalogService(service);
@@ -85,7 +101,7 @@ public class CatalogApiResultProcessor {
             String packageId = CatalogUtil.getPackageIdFromServicePricepoint(pricePoint.getId());
 //            final PricePoint pricePointFromServer = catalogApi.getPricePoint(pricePoint.getId());
 
-            pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()));
+//            pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()));
             pricePoint.setPackageId(packageId);
             pricePoint.setContentId(catalogService.getId());
             catalogService.setPackageId(packageId);
