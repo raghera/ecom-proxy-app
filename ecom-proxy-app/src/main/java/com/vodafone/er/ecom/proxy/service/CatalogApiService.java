@@ -10,10 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
 import static com.vodafone.er.ecom.proxy.constants.EcomConstantsEnum.CLIENT_ID;
+import static org.apache.axis2.i18n.MessagesConstants.locale;
 
 @Component
 public class CatalogApiService {
@@ -21,22 +23,29 @@ public class CatalogApiService {
 
     private CatalogApi catalogApi;
 
+    public CatalogApi getCatalogApi() {
+        if (null != catalogApi) {
+            DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.getValue());
+        }
+        return catalogApi;
+    }
+
     public CatalogPackage getCatalogPackage(final Locale locale, String packageId) {
         logger.info("calling catalogApi.getPackage with locale={}, client-id={}", locale, CLIENT_ID.getValue());
         //TODO move to it's own method that only instantiates one
-        catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.getValue());
+        catalogApi = getCatalogApi();
         final CatalogPackage result = catalogApi.getPackage(packageId);
         return processCatalogPackage(locale, result);
     }
 
     public CatalogService getCatalogService(final Locale locale, String serviceId) {
-        catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.getValue());
+        catalogApi = getCatalogApi();
         final CatalogService service = catalogApi.getService(serviceId);
-        return processCatalogService(service);
+        return processCatalogService(locale, service);
     }
 
     public PricePoint getPricePoint(final Locale locale, final String pricePointId) {
-        catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.getValue());
+        catalogApi = getCatalogApi();
         final PricePoint pricePoint = catalogApi.getPricePoint(pricePointId);
         return processPricePoint(pricePoint);
     }
@@ -47,7 +56,6 @@ public class CatalogApiService {
         return pricePoint;
     }
 
-    //TODO refactor so can be more re-usable
     private CatalogPackage processCatalogPackage(final Locale locale, final CatalogPackage catalogPackage) {
         //populate missing service data
         for(CatalogService service : catalogPackage.getServiceArray()) {
@@ -56,6 +64,7 @@ public class CatalogApiService {
             service.setPricePoints(returnedService.getPricePoints());
             service.getPricePoints().forEach(ppt -> {
 
+                //Populate Service Pricepoint data
                 final PricePoint processedPricePoint = getPricePoint(locale, ppt.getId());
                 ppt.setPackageId(catalogPackage.getSimplePackageId());
                 ppt.setTaxCode(processedPricePoint.getTaxCode());
@@ -78,20 +87,17 @@ public class CatalogApiService {
 
             });
 
+            //Populate PackagePricepoint Attributes
             catalogPackage.getPricePoints().forEach(packagePricePoint -> {
 
                 final PricePoint processedPricePoint = getPricePoint(locale, packagePricePoint.getId());
 
-                BalanceImpact[] balanceImpacts = packagePricePoint.getAllBalanceImpacts().getBalanceImpacts();
                 packagePricePoint.setPackageId(catalogPackage.getSimplePackageId());
                 packagePricePoint.setTaxCode(processedPricePoint.getTaxCode());
                 packagePricePoint.setTariff(processedPricePoint.getTariff());
 
-                List<ResourceBalance> resourceBalances = new ArrayList<>();
-                for (BalanceImpact balanceImpact : balanceImpacts) {
-                    ResourceBalance resourceBalance = new ResourceBalance(balanceImpact.getResource(), balanceImpact.getFixedAmount());
-                    resourceBalances.add(resourceBalance);
-                }
+                final BalanceImpact[] balanceImpacts = packagePricePoint.getAllBalanceImpacts().getBalanceImpacts();
+                final List<ResourceBalance> resourceBalances = processBalanceImpacts(Arrays.asList(balanceImpacts));
                 packagePricePoint.setBalances(resourceBalances.toArray(new ResourceBalance[resourceBalances.size()]));
             });
         }
@@ -99,15 +105,26 @@ public class CatalogApiService {
         return catalogPackage;
     }
 
+    private List<ResourceBalance> processBalanceImpacts(List<BalanceImpact> balanceImpacts) {
+        List<ResourceBalance> resourceBalances = new ArrayList<>();
+        balanceImpacts.forEach(balanceImpact -> {
+            ResourceBalance resourceBalance = new ResourceBalance(balanceImpact.getResource(), balanceImpact.getFixedAmount());
+            resourceBalances.add(resourceBalance);
+        });
+        return resourceBalances;
+    }
+
     //Takes a service and populates what is missing but required.
-    private CatalogService processCatalogService(final CatalogService catalogService) {
+    private CatalogService processCatalogService(final Locale locale, final CatalogService catalogService) {
 
         //Go through the pricepoints, deduce the packageId and populate.
         final PricePoints origPpts = catalogService.getPricePoints();
         origPpts.forEach(pricePoint -> {
+            //TODO currently does not need to go to the server but could add here for PricePoints
+//            PricePoint processedPricePoint = getPricePoint(locale, pricePoint.getId());
+            //For instance we can get the Tarriff info
 
             String packageId = CatalogUtil.getPackageIdFromServicePricepoint(pricePoint.getId());
-//            final PricePoint pricePointFromServer = catalogApi.getPricePoint(pricePoint.getId());
 
             //TODO this does not always work so test
             pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()));
@@ -118,7 +135,6 @@ public class CatalogApiService {
 
         return catalogService;
     }
-
 
 }
 
