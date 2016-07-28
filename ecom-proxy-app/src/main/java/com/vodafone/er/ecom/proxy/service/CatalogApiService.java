@@ -26,7 +26,7 @@ public class CatalogApiService {
         //TODO move to it's own method that only instantiates one
         catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.getValue());
         final CatalogPackage result = catalogApi.getPackage(packageId);
-        return processCatalogPackage(result);
+        return processCatalogPackage(locale, result);
     }
 
     public CatalogService getCatalogService(final Locale locale, String serviceId) {
@@ -35,21 +35,32 @@ public class CatalogApiService {
         return processCatalogService(service);
     }
 
-    //TODO refactor so can be more re-usable
-    private CatalogPackage processCatalogPackage(CatalogPackage result) {
-        //populate missing service data
-        for(CatalogService service : result.getServiceArray()) {
-            processCatalogService(service);
-            final CatalogService returnedService = catalogApi.getService(service.getId());
-            service.setPricePoints(returnedService.getPricePoints());
+    public PricePoint getPricePoint(final Locale locale, final String pricePointId) {
+        catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.getValue());
+        final PricePoint pricePoint = catalogApi.getPricePoint(pricePointId);
+        return processPricePoint(pricePoint);
+    }
 
+    private PricePoint processPricePoint(final PricePoint pricePoint) {
+        //TODO fill in any required gaps here
+        pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()));
+        return pricePoint;
+    }
+
+    //TODO refactor so can be more re-usable
+    private CatalogPackage processCatalogPackage(final Locale locale, final CatalogPackage catalogPackage) {
+        //populate missing service data
+        for(CatalogService service : catalogPackage.getServiceArray()) {
+
+            final CatalogService returnedService = getCatalogService(locale, service.getId());
+            service.setPricePoints(returnedService.getPricePoints());
             service.getPricePoints().forEach(ppt -> {
 
-                PricePoint returnedServPricePoint = catalogApi.getPricePoint(ppt.getId());
-                ppt.setPackageId(result.getSimplePackageId());
-                ppt.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(ppt.getId()));
+                final PricePoint processedPricePoint = getPricePoint(locale, ppt.getId());
+                ppt.setPackageId(catalogPackage.getSimplePackageId());
+                ppt.setTaxCode(processedPricePoint.getTaxCode());
                 ppt.setContentId(service.getId());
-                ppt.setTariff(returnedServPricePoint.getTariff());
+                ppt.setTariff(processedPricePoint.getTariff());
 
                 //Should be fixed on core
                 if(ppt.getReceiptingAttribute() != null && ppt.getReceiptingAttribute().equals("NULL")) {
@@ -67,22 +78,17 @@ public class CatalogApiService {
 
             });
 
-            result.getPricePoints().stream().forEach(packagePricePoint -> {
+            catalogPackage.getPricePoints().forEach(packagePricePoint -> {
 
-                PricePoint returnedPricePoint = catalogApi.getPricePoint(packagePricePoint.getId());
+                final PricePoint processedPricePoint = getPricePoint(locale, packagePricePoint.getId());
 
                 BalanceImpact[] balanceImpacts = packagePricePoint.getAllBalanceImpacts().getBalanceImpacts();
-                packagePricePoint.setPackageId(result.getSimplePackageId());
-                packagePricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(packagePricePoint.getId()));
-//                    packagePricePoint.setTariff(returnedPricePoint.getTariff());
-
-                //Should be fixed on core
-                if(packagePricePoint.getReceiptingAttribute() != null && packagePricePoint.getReceiptingAttribute().equals("NULL")) {
-                    packagePricePoint.setReceiptingAttribute(null);
-                }
+                packagePricePoint.setPackageId(catalogPackage.getSimplePackageId());
+                packagePricePoint.setTaxCode(processedPricePoint.getTaxCode());
+                packagePricePoint.setTariff(processedPricePoint.getTariff());
 
                 List<ResourceBalance> resourceBalances = new ArrayList<>();
-                for(BalanceImpact balanceImpact : balanceImpacts) {
+                for (BalanceImpact balanceImpact : balanceImpacts) {
                     ResourceBalance resourceBalance = new ResourceBalance(balanceImpact.getResource(), balanceImpact.getFixedAmount());
                     resourceBalances.add(resourceBalance);
                 }
@@ -90,10 +96,12 @@ public class CatalogApiService {
             });
         }
 
-        return result;
+        return catalogPackage;
     }
 
-    public CatalogService processCatalogService(final CatalogService catalogService) {
+    //Takes a service and populates what is missing but required.
+    private CatalogService processCatalogService(final CatalogService catalogService) {
+
         //Go through the pricepoints, deduce the packageId and populate.
         final PricePoints origPpts = catalogService.getPricePoints();
         origPpts.forEach(pricePoint -> {
@@ -101,7 +109,8 @@ public class CatalogApiService {
             String packageId = CatalogUtil.getPackageIdFromServicePricepoint(pricePoint.getId());
 //            final PricePoint pricePointFromServer = catalogApi.getPricePoint(pricePoint.getId());
 
-//            pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()));
+            //TODO this does not always work so test
+            pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()));
             pricePoint.setPackageId(packageId);
             pricePoint.setContentId(catalogService.getId());
             catalogService.setPackageId(packageId);
@@ -109,5 +118,7 @@ public class CatalogApiService {
 
         return catalogService;
     }
+
+
 }
 

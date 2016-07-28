@@ -18,13 +18,13 @@ import java.util.Locale;
  * Created by Ravi Aghera
  */
 @Component
-public class SelfcareApiResultProcessor {
+public class SelfcareApiService {
 
     private SelfcareApi selfcareApi;
     private CatalogApi catalogApi;
 
     //TODO initialize in Spring
-    public SelfcareApiResultProcessor(Locale locale) throws EcommerceException {
+    public SelfcareApiService(Locale locale) throws EcommerceException {
         selfcareApi = EcomApiFactory.getSelfcareApi(locale);
     }
 

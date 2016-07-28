@@ -2,7 +2,7 @@ package com.vodafone.er.ecom.proxy;
 
 import com.vizzavi.ecommerce.business.charging.BaseAuthorization;
 import com.vizzavi.ecommerce.business.selfcare.*;
-import com.vodafone.er.ecom.proxy.service.SelfcareApiResultProcessor;
+import com.vodafone.er.ecom.proxy.service.SelfcareApiService;
 import com.vodafone.global.er.business.selfcare.BalanceFilter;
 import com.vodafone.global.er.business.selfcare.MicroServiceStatus;
 import com.vodafone.global.er.business.selfcare.ParentTransaction;
@@ -224,7 +224,7 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
             try {
 //                result = getSelfcareApiDelegate(locale).getSubscriptions(clientId,msisdn,device,filter);
                 result = DecouplingApiFactory.getSelfcareApi(locale, "ecom-proxy").getSubscriptions(clientId,msisdn,device,filter);
-                result = new SelfcareApiResultProcessor(locale).process(result);
+                result = new SelfcareApiService(locale).process(result);
                //hydrateSubscriptions(result);
             }
             catch (Exception e1) {                
