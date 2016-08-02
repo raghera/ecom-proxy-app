@@ -212,8 +212,10 @@
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>6.0</version>
-            <!--scope required at runtime to be able to run on Jetty-->
-            <scope>provided</scope>
+            <!--scope required at runtime to be able to work on Jetty-->
+            <!--scope required as provided to be able to run on Tomcat!-->
+            <!--<scope>provided</scope>-->
+            <scope>runtime</scope>
         </dependency>
 
         <!--JBOSS Dependencies -->

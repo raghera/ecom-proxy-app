@@ -23,15 +23,14 @@ public class CatalogApiService {
     private CatalogApi catalogApi;
 
     public CatalogApi getCatalogApi(Locale locale) {
-        if (null != catalogApi) {
-            DecouplingApiFactory.getCatalogApi(locale , CLIENT_ID.getValue());
+        if (null == catalogApi) {
+            catalogApi = DecouplingApiFactory.getCatalogApi(locale , CLIENT_ID.getValue());
         }
         return catalogApi;
     }
 
     public CatalogPackage getCatalogPackage(final Locale locale, String packageId) {
         logger.info("calling catalogApi.getPackage with locale={}, client-id={}", locale, CLIENT_ID.getValue());
-        //TODO move to it's own method that only instantiates one
         catalogApi = getCatalogApi(locale);
         final CatalogPackage result = catalogApi.getPackage(packageId);
         return processCatalogPackage(locale, result);
@@ -75,14 +74,7 @@ public class CatalogApiService {
                     ppt.setReceiptingAttribute(null);
                 }
 
-                BalanceImpact[] origBalanceImpacts = ppt.getAllBalanceImpacts().getBalanceImpacts();
-                List<ResourceBalance> resourceBalances = new ArrayList<>();
-                for(BalanceImpact balanceImpact : origBalanceImpacts) {
-                    ResourceBalance resourceBalance = new ResourceBalance(balanceImpact.getResource(), balanceImpact.getFixedAmount());
-                    resourceBalance.getResource().setName(balanceImpact.getResource().getName());
-                    resourceBalances.add(resourceBalance);
-                }
-                ppt.setBalances(resourceBalances.toArray(new ResourceBalance[resourceBalances.size()]));
+                processPricePointBalanceImpacts(ppt);
 
             });
 
@@ -102,6 +94,17 @@ public class CatalogApiService {
         }
 
         return catalogPackage;
+    }
+
+    public void processPricePointBalanceImpacts(PricePoint pricePoint) {
+        BalanceImpact[] origBalanceImpacts = pricePoint.getAllBalanceImpacts().getBalanceImpacts();
+        List<ResourceBalance> resourceBalances = new ArrayList<>();
+        for(BalanceImpact balanceImpact : origBalanceImpacts) {
+            ResourceBalance resourceBalance = new ResourceBalance(balanceImpact.getResource(), balanceImpact.getFixedAmount());
+            resourceBalance.getResource().setName(balanceImpact.getResource().getName());
+            resourceBalances.add(resourceBalance);
+        }
+        pricePoint.setBalances(resourceBalances.toArray(new ResourceBalance[resourceBalances.size()]));
     }
 
     private List<ResourceBalance> processBalanceImpacts(List<BalanceImpact> balanceImpacts) {
@@ -125,11 +128,10 @@ public class CatalogApiService {
 
             String packageId = CatalogUtil.getPackageIdFromServicePricepoint(pricePoint.getId());
 
-            //TODO this does not always work so test
             pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()));
             pricePoint.setPackageId(packageId);
             pricePoint.setContentId(catalogService.getId());
-            catalogService.setPackageId(packageId);
+//            catalogService.setPackageId(packageId);
         });
 
         return catalogService;

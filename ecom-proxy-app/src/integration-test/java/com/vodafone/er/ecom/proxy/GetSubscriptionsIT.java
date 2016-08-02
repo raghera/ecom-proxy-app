@@ -2,7 +2,9 @@ package com.vodafone.er.ecom.proxy;
 
 import com.vizzavi.ecommerce.business.charging.PurchaseAttributes;
 import com.vizzavi.ecommerce.business.charging.PurchaseAuthorization;
+import com.vizzavi.ecommerce.business.common.DeviceType;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
+import com.vizzavi.ecommerce.business.selfcare.SelfcareApi;
 import com.vizzavi.ecommerce.business.selfcare.Subscription;
 import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
 import org.assertj.core.api.SoftAssertions;
@@ -11,11 +13,28 @@ import org.junit.Test;
 import java.util.Locale;
 import java.util.Random;
 
+import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getSelfcareApi;
 import static org.junit.Assert.*;
 
 public class GetSubscriptionsIT {
 
     private SoftAssertions softly = new SoftAssertions();
+
+    @Test
+    public void testGetSubscription10() throws Exception {
+        final SelfcareApi selfcareApi = EcomApiFactory.getSelfcareApi(Locale.UK);
+        //Fails de-serialising ERSubcription
+        Subscription sub1 = selfcareApi.getSubscription("ecom-test","P1470128365670", DeviceType.WEB, "798");
+        assertNotNull(sub1);
+    }
+
+//    @Test
+//    public void testTransaction() throws Exception {
+//        SelfcareApi selfcareApi = EcomApiFactory.getSelfcareApi(Locale.UK);
+//        Transaction sub1 = selfcareApi.getTransaction("ecom-client", "798");
+//        assertNotNull(sub1);
+//    }
+
 
     @Test
     public void testGetSubsciptions2() throws Exception {
@@ -34,7 +53,7 @@ public class GetSubscriptionsIT {
 
         SubscriptionFilterImpl filter = new SubscriptionFilterImpl();
         filter.setTransactionsNotRequired("no");
-        final Subscription[] subscriptions = EcomApiFactory.getSelfcareApi(Locale.UK).getSubscriptions("test", msisdn, 0, new SubscriptionFilterImpl());
+        final Subscription[] subscriptions = getSelfcareApi(Locale.UK).getSubscriptions("test", msisdn, 0, new SubscriptionFilterImpl());
         assertNotNull(subscriptions);
         assertTrue("Size= " + subscriptions.length, subscriptions.length > 0);
         assertEquals("Size= " + subscriptions.length, subscriptions.length, 2);

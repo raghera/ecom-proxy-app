@@ -2,10 +2,8 @@ package com.vodafone.er.ecom.proxy.service;
 
 import com.vizzavi.ecommerce.business.catalog.CatalogApi;
 import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
-import com.vizzavi.ecommerce.business.catalog.CatalogService;
 import com.vizzavi.ecommerce.business.catalog.PricePoint;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
-import com.vodafone.global.er.generated.CatalogApiStub;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,8 +15,9 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.Locale;
 
-import static com.google.common.collect.Lists.newArrayList;
+import static com.vodafone.er.ecom.proxy.constants.EcomConstantsEnum.CLIENT_ID;
 import static com.vodafone.er.ecom.proxy.data.builder.CatalogPackageDataBuilder.aCatalogPackage;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.anyString;
@@ -47,8 +46,8 @@ public class CatalogApiPackageTest {
         processor = new CatalogApiService();
 
         PowerMockito.mockStatic(DecouplingApiFactory.class);
-        PowerMockito.when(DecouplingApiFactory.getCatalogApi(any(Locale.class), anyString()))
-                .thenReturn(new CatalogApiStub(Locale.UK));
+        PowerMockito.when(DecouplingApiFactory.getCatalogApi(Locale.UK, CLIENT_ID.getValue()))
+                .thenReturn(catalogApi);
 
         MockitoAnnotations.initMocks(processor);
     }
@@ -56,34 +55,33 @@ public class CatalogApiPackageTest {
     @Test
     public void shouldProcessCatalogPackageSuccess() {
         //given
-        final CatalogPackage catalogPackage = aCatalogPackage();
-        final CatalogPackage expected = aCatalogPackage();
-        expected.setTaxCode("TAX");
+        final CatalogPackage pack = aCatalogPackage();
+        final CatalogPackage expectedPack = aCatalogPackage();
+        expectedPack.getPricePoints().get(0).setTaxCode("TAX");
+        expectedPack.getServices().get(0).getPricePoints().get(0).setTaxCode("TAX");
+//        expectedPack.setTaxCode("TAX");
+        PricePoint ppt = pack.getPricePoints().get(0);
 
-        CatalogPackage resultPackage = new CatalogPackage();
-        resultPackage.setId("pAlt");
-        CatalogService resultService = new CatalogService();
-        resultService.setId(serviceId);
-        PricePoint resultPackagePp = new PricePoint();
-        resultPackagePp.setId("pAlt");
-        CatalogService serviceResponse = new CatalogService();
-        resultPackage.setServices(newArrayList(resultService));
-        PricePoint servicePp = new PricePoint();
-//        PricePoint packagePp = new PricePoint();
-        serviceResponse.setId(serviceId);
-
-        when(catalogApi.getPackage(catalogPackage.getId())).thenReturn(catalogPackage);
-        when(catalogApi.getService(serviceId)).thenReturn(catalogPackage.getServices().get(0));
-        when(catalogApi.getPricePoint(anyString())).thenReturn(catalogPackage.getPricePoints().get(0));
+        when(catalogApi.getPackage(pack.getId())).thenReturn(pack);
+        when(catalogApi.getService(pack.getServices().get(0).getId())).thenReturn(pack.getServices().get(0));
+        when(catalogApi.getPricePoint(pack.getPricePoints().get(0).getId())).thenReturn(ppt);
+        when(catalogApi.getPricePoint(pack.getServices().get(0).getPricePoints().get(0).getId())).thenReturn(ppt);
 
         //when
-        CatalogPackage result = processor.getCatalogPackage(Locale.UK, "pAlt");
+        CatalogPackage result = processor.getCatalogPackage(Locale.UK, pack.getId());
 
         //then
         assertNotNull(result);
-        assertEquals(result.getSimplePackageId(), "pAlt");
-        verify(catalogApi).getService(serviceId);
-        verify(catalogApi, times(3)).getPricePoint(anyString());
+        assertEquals(expectedPack.getId(), result.getSimplePackageId());
+        assertThat(result).as("CatalogPackage fields ought to be the same").isEqualToIgnoringGivenFields(expectedPack, "mServices", "mPricePoints");
+        assertThat(result.getServices().get(0)).isEqualToIgnoringGivenFields(expectedPack.getServices().get(0), "mPricePoints");
+
+        assertThat(result.getPricePoints().get(0))
+                .as("Pricepoints")
+                .isEqualToIgnoringGivenFields(expectedPack.getPricePoints().get(0),
+                        "mBalances", "mPricePointTier", "mMultiUsageMode", "mNetworkCodeMatchMethod", "mRefuseUsageWhenProvisioning");
+        verify(catalogApi).getService(anyString());
+        verify(catalogApi, times(2)).getPricePoint(anyString());//1 service & 1 package
 
     }
 

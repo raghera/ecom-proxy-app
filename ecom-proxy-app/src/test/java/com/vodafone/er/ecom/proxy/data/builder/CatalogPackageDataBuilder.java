@@ -1,15 +1,18 @@
 package com.vodafone.er.ecom.proxy.data.builder;
 
-import com.google.common.collect.Lists;
 import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
 import com.vizzavi.ecommerce.business.catalog.PricePoints;
 
+import static com.google.common.collect.Lists.newArrayList;
+import static com.vodafone.er.ecom.proxy.data.builder.CatalogServiceDataBuilder.*;
+
 /**
  * Created by Ravi Aghera
+ *
  */
 public class CatalogPackageDataBuilder {
 
-    private static final String PACKAGE_ID = "pAlt";
+    protected static final String PACKAGE_ID = "pAlt";
 
     private CatalogPackageDataBuilder() {}
 
@@ -17,7 +20,7 @@ public class CatalogPackageDataBuilder {
     public static CatalogPackage aCatalogPackage() {
         CatalogPackage catalogPackage = new CatalogPackage();
         catalogPackage.setId(PACKAGE_ID);
-        catalogPackage.setServices(Lists.newArrayList(CatalogServiceDataBuilder.aCatalogService()));
+        catalogPackage.setServices(newArrayList(aCatalogService()));
         PricePoints ppts = new PricePoints();
         ppts.add(PricePointDataBuilder.aPricePoint());
         catalogPackage.setPricePoints(ppts);

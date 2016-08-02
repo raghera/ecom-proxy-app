@@ -3,13 +3,12 @@ package com.vodafone.er.ecom.proxy;
 import com.vizzavi.ecommerce.business.charging.AccountValidationAuthorization;
 import com.vizzavi.ecommerce.business.charging.ModifyAuthorisation;
 import com.vizzavi.ecommerce.business.charging.SubscriptionAttributes;
+import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.*;
-import com.vizzavi.ecommerce.business.selfcare.SpendLimits;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.util.ExceptionAdapter;
 import org.apache.log4j.Logger;
-
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -24,9 +23,10 @@ public class CustcareApiServlet extends AbstractEcomServlet {
 
 	private static final long	serialVersionUID	= 7283816389304078194L;
 	private static Logger log = Logger.getLogger(CustcareApiServlet.class);
-	
 
- 
+    protected SelfcareApi getSelfcareApiDelegate(Locale locale) throws Exception {
+        return EcomApiFactory.getSelfcareApi(locale);
+    }
 
     @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {

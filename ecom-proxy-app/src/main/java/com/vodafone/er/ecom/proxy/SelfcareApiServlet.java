@@ -1,6 +1,7 @@
 package com.vodafone.er.ecom.proxy;
 
 import com.vizzavi.ecommerce.business.charging.BaseAuthorization;
+import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.*;
 import com.vodafone.er.ecom.proxy.service.SelfcareApiService;
 import com.vodafone.global.er.business.selfcare.BalanceFilter;
@@ -24,7 +25,10 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
 	//CR1231
     //private static LWLogger log = LWSupportFactoryImpl.getInstance().getLogger(SelfcareApiServlet.class);
 	private static Logger log = Logger.getLogger(SelfcareApiServlet.class);
-	
+
+    protected SelfcareApi getSelfcareApiDelegate(Locale locale) throws Exception {
+        return EcomApiFactory.getSelfcareApi(locale);
+    }
   
     @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
@@ -222,7 +226,6 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-//                result = getSelfcareApiDelegate(locale).getSubscriptions(clientId,msisdn,device,filter);
                 result = DecouplingApiFactory.getSelfcareApi(locale, "ecom-proxy").getSubscriptions(clientId,msisdn,device,filter);
                 result = new SelfcareApiService(locale).process(result);
                //hydrateSubscriptions(result);
