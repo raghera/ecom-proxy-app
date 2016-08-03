@@ -6,7 +6,6 @@ import com.vizzavi.ecommerce.business.charging.SubscriptionAttributes;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.*;
 import com.vodafone.global.er.data.ERLogDataImpl;
-import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.util.ExceptionAdapter;
 import org.apache.log4j.Logger;
 
@@ -1954,8 +1953,8 @@ public class CustcareApiServlet extends AbstractEcomServlet {
 	}
 
 
-	private CustcareApi getCustcareApiDelegate(Locale locale) {
-		return DecouplingApiFactory.getCustcareApi(locale, clientId);
+	private CustcareApi getCustcareApiDelegate(Locale locale) throws Exception {
+		return EcomApiFactory.getCustcareApi(locale);
 	}
 	
 }

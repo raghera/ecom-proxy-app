@@ -16,8 +16,7 @@ public class GetPackageIT {
     private SoftAssertions softly = new SoftAssertions();
 
     private CatalogApi catalogApi;
-	
-	
+
 	private CatalogApi getCatalogApi() throws EcommerceException	{
 		if (catalogApi==null)
 			catalogApi = EcomApiFactory.getCatalogApi(Locale.UK);

@@ -29,6 +29,10 @@
 		<servlet-name>ProvisionApiServlet</servlet-name>
 		<servlet-class>com.vodafone.er.ecom.proxy.ProvisionApiServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>CustcareApiServlet</servlet-name>
+		<servlet-class>com.vodafone.er.ecom.proxy.CustcareApiServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>CatalogApiServlet</servlet-name>
 		<url-pattern>/CatalogApi</url-pattern>
@@ -48,6 +52,10 @@
 	<servlet-mapping>
 		<servlet-name>ProvisionApiServlet</servlet-name>
 		<url-pattern>/ProvisionApi</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CustcareApiServlet</servlet-name>
+		<url-pattern>/CustcareApi</url-pattern>
 	</servlet-mapping>
 
 </web-app>
