@@ -3,6 +3,7 @@ package com.vodafone.er.ecom.proxy;
 import com.vizzavi.ecommerce.business.charging.BaseAuthorization;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.*;
+import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.er.ecom.proxy.service.SelfcareApiService;
 import com.vodafone.global.er.business.selfcare.BalanceFilter;
 import com.vodafone.global.er.business.selfcare.MicroServiceStatus;
@@ -18,6 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Optional;
+
+import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getSelfcareApi;
+import static com.vodafone.er.ecom.proxy.constants.EcomConstantsEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_GET_SUBSCRIPTIONS2;
 
 public class SelfcareApiServlet extends AbstractEcomServlet {
 
@@ -27,7 +33,7 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
 	private static Logger log = Logger.getLogger(SelfcareApiServlet.class);
 
     protected SelfcareApi getSelfcareApiDelegate(Locale locale) throws Exception {
-        return EcomApiFactory.getSelfcareApi(locale);
+        return getSelfcareApi(locale);
     }
   
     @Override
@@ -225,10 +231,18 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
             Subscription[] result = null;
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
+
+            final Optional<Boolean> shouldProxy =
+                    PropertyService.getPropertyAsBoolean(PROP_GET_SUBSCRIPTIONS2.value(), true);
+
             try {
-                result = DecouplingApiFactory.getSelfcareApi(locale, "ecom-proxy").getSubscriptions(clientId,msisdn,device,filter);
-                result = new SelfcareApiService(locale).process(result);
-               //hydrateSubscriptions(result);
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    result = DecouplingApiFactory.getSelfcareApi(locale, CLIENT_ID.getValue()).getSubscriptions(clientId, msisdn, device, filter);
+                    result = new SelfcareApiService(locale).process(result);
+                } else {
+                    result = EcomApiFactory.getSelfcareApi(locale).getSubscriptions(clientId,msisdn,device,filter);
+                }
+
             }
             catch (Exception e1) {                
                 oos.writeObject( new ExceptionAdapter(e1));

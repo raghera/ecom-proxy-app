@@ -2,6 +2,8 @@ package com.vodafone.er.ecom.proxy;
 
 import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
 import com.vizzavi.ecommerce.business.charging.*;
+import com.vizzavi.ecommerce.business.common.EcomApiFactory;
+import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.util.ExceptionAdapter;
@@ -13,6 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Optional;
+
+import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_PURCHASE_PACKAGE_MSISDN1;
 
 public class PurchaseApiServlet extends AbstractEcomServlet {
 	
@@ -113,9 +118,16 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             PurchaseAuthorization result = null;
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
+
+            final Optional<Boolean> shouldProxy =
+                    PropertyService.getPropertyAsBoolean(PROP_PURCHASE_PACKAGE_MSISDN1.value(), true);
+
             try {
-                result = DecouplingApiFactory.getPurchaseApi(locale, clientId).purchasePackage(clientApplicationId,msisdn,packageId,purchaseAttributes);
-                
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    result = DecouplingApiFactory.getPurchaseApi(locale, clientId).purchasePackage(clientApplicationId, msisdn, packageId, purchaseAttributes);
+                } else {
+                    result = EcomApiFactory.getPurchaseApi(locale).purchasePackageMsisdn(clientApplicationId,msisdn,packageId,purchaseAttributes);
+                }
             }
             catch (Exception e1) {
                 // Commit the transaction here as it will be committed in doPost anyway but we need to commit

@@ -1,0 +1,627 @@
+devadm@ah1vltestdb:/opt/er/er_bulk_er96 TST$ appctl start proxytest-getpackage.txt
+***************************
+APPCTL Startup script v1.1
+***************************
+
+Running mode          : start
+Application home      : /opt/er/er_bulk_er96
+Invocation directory  : /opt/er/er_bulk_er96
+Java Home             : /opt/j2sdk/current
+JVM paremeters        : -Xms128 -Xmx128
+Application name      : hu.psipka.vodafone.er.bulk.Bulk
+Vizzavi log directory : /opt/er/er_bulk_er96/log
+Lock filename         : /opt/er/er_bulk_er96/log/application.pid
+Debug ON/OFF          : OFF
+Classpath             : .:/opt/er/er_bulk_er96/lib::/opt/er/er_bulk_er96/config:/opt/er/er_bulk_er96/lib/APPLICATION_er2_pricingtool_v2.j                                        ar:/opt/er/er_bulk_er96/lib/ECOM_CORE_lw.jar:/opt/er/er_bulk_er96/lib/ECOM_MESSAGING.jar:/opt/er/er_bulk_er96/lib/ECOM_PLUGIN_log4j.jar:/                                        opt/er/er_bulk_er96/lib/ER_CORE_api.jar:/opt/er/er_bulk_er96/lib/ER_api.jar:/opt/er/er_bulk_er96/lib/ER_catalog.jar:/opt/er/er_bulk_er96/                                        lib/ER_client.jar:/opt/er/er_bulk_er96/lib/ER_delegate.jar:/opt/er/er_bulk_er96/lib/VFH_ER_Applications_3-0-2.jar:/opt/er/er_bulk_er96/li                                        b/castor-0.9.5.2.jar:/opt/er/er_bulk_er96/lib/commons-codec-1.2.jar:/opt/er/er_bulk_er96/lib/commons-httpclient.jar:/opt/er/er_bulk_er96/                                        lib/commons-logging.jar:/opt/er/er_bulk_er96/lib/jboss-j2ee.jar:/opt/er/er_bulk_er96/lib/jdom_1-0b8.jar:/opt/er/er_bulk_er96/lib/log4j-1.                                        2.8.jar:/opt/er/er_bulk_er96/lib/xerces-2.6.2.jar
+
+Running application
+There are        1 actions in the input file.
+ER Bulk Processor Started...
+main DEBUG hu.psipka.vodafone.er.api.ERApiFactory 2016-08-03 16:56:27,993
+--->Request received for ERChargingApi.
+
+main DEBUG hu.psipka.vodafone.er.api.ERApiFactory 2016-08-03 16:56:27,998
+--->Null PropertyServer received, so trying to load the VFH_ER_Applications.properties
+
+main DEBUG hu.psipka.vodafone.er.api.ERApiFactory 2016-08-03 16:56:28,030
+--->Generating new object: hu.psipka.vodafone.er.api.ERChargingApi
+
+[ECOM-BOOT] Wed Aug 03 16:56:29 CEST 2016 Initialized logging system. Using logger class: com.vizzavi.ecommerce.log.log4j.Log4jLoggerImpl
+[ECOM-BOOT] Wed Aug 03 16:56:29 CEST 2016 Property watch maintenance system is set to disabled. Thread will NOT be started.
+[ECOM-BOOT] Wed Aug 03 16:56:29 CEST 2016 core debug flag=false. This can be set by system property 'er2.debug'.
+                          SYSTEM PROPERTIES
+ _______________________________________________________________________
+file path: /opt/er/er_bulk_er96/config/ecom/er2.properties
+ _______________________________________________________________________
+datadirectory= resources/catalog
+MAX_EVENTS= 300
+er.http.connector.method= httpclient
+maintenance.thread.enabled= false
+er.server.host= localhost
+maintenance.thread.sleep.seconds= 30
+logger.class= com.vizzavi.ecommerce.log.log4j.Log4jLoggerImpl
+er.server.port= 8080
+NO_ZERO_COST= false
+er.http.connection.timeout= 30000
+ _______________________________________________________________________
+                        SYSTEM PROPERTIES END
+main DEBUG hu.psipka.vodafone.er.api.ERApiFactory 2016-08-03 16:56:29,464
+--->Request received for ERCustcareApi.
+
+main DEBUG hu.psipka.vodafone.er.api.ERApiFactory 2016-08-03 16:56:29,465
+--->Generating new object: hu.psipka.vodafone.er.api.ERCustcareApi
+
+main DEBUG hu.psipka.vodafone.er.api.ERApiFactory 2016-08-03 16:56:29,634
+--->Request received for ERPurchaseApi.
+
+main DEBUG hu.psipka.vodafone.er.api.ERApiFactory 2016-08-03 16:56:29,635
+--->Generating new object: hu.psipka.vodafone.er.api.ERPurchaseApi
+
+main DEBUG hu.psipka.vodafone.er.api.ERApiFactory 2016-08-03 16:56:29,678
+--->Request received for ERSelfcareApi.
+
+main DEBUG hu.psipka.vodafone.er.api.ERApiFactory 2016-08-03 16:56:29,679
+--->Generating new object: hu.psipka.vodafone.er.api.ERSelfcareApi
+
+main DEBUG hu.psipka.vodafone.er.api.ERApiFactory 2016-08-03 16:56:29,767
+--->Request received for ERProvisionApi.
+
+main DEBUG hu.psipka.vodafone.er.api.ERApiFactory 2016-08-03 16:56:29,768
+--->Generating new object: hu.psipka.vodafone.er.api.ERProvisionApi
+
+main DEBUG hu.psipka.vodafone.er.api.ERApiFactory 2016-08-03 16:56:29,791
+--->Request received for ERCatalogApi.
+
+main DEBUG hu.psipka.vodafone.er.api.ERApiFactory 2016-08-03 16:56:29,792
+--->Generating new object: hu.psipka.vodafone.er.api.ERCatalogApi
+
+main INFO hu.psipka.vodafone.er.bulk.ResultWriter 2016-08-03 16:56:29,885
+--->The TextfileReader character encoding is: UTF8
+
+main INFO hu.psipka.tools.text.TextFileWriter 2016-08-03 16:56:29,893
+--->The TextfileWriter character encoding is: ISO8859_1
+
+main DEBUG hu.psipka.vodafone.er.bulk.FunctionSelector 2016-08-03 16:56:29,893
+--->Input file: /opt/er/er_bulk_er96/work/proxytest-getpackage.txt
+
+main DEBUG hu.psipka.vodafone.er.bulk.FunctionSelector 2016-08-03 16:56:29,894
+--->Output file: /opt/er/er_bulk_er96/work/proxytest-getpackage.txt.processed
+
+main DEBUG hu.psipka.vodafone.er.bulk.FunctionSelector 2016-08-03 16:56:29,895
+--->Processing line :GETPACKAGE,p_idvod1_e_780
+
+main DEBUG com.vodafone.global.er.generated.CatalogApiStub 2016-08-03 16:56:29,901
+---> In HTTP ConnectionManager- Connection in use : 0
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:29,909
+--->Java version: 1.8.0_101
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:29,910
+--->Java vendor: Oracle Corporation
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:29,910
+--->Java class path: .:/opt/er/er_bulk_er96/lib::/opt/er/er_bulk_er96/config:/opt/er/er_bulk_er96/lib/APPLICATION_er2_pricingtool_v2.jar:                                        /opt/er/er_bulk_er96/lib/ECOM_CORE_lw.jar:/opt/er/er_bulk_er96/lib/ECOM_MESSAGING.jar:/opt/er/er_bulk_er96/lib/ECOM_PLUGIN_log4j.jar:/opt                                        /er/er_bulk_er96/lib/ER_CORE_api.jar:/opt/er/er_bulk_er96/lib/ER_api.jar:/opt/er/er_bulk_er96/lib/ER_catalog.jar:/opt/er/er_bulk_er96/lib                                        /ER_client.jar:/opt/er/er_bulk_er96/lib/ER_delegate.jar:/opt/er/er_bulk_er96/lib/VFH_ER_Applications_3-0-2.jar:/opt/er/er_bulk_er96/lib/c                                        astor-0.9.5.2.jar:/opt/er/er_bulk_er96/lib/commons-codec-1.2.jar:/opt/er/er_bulk_er96/lib/commons-httpclient.jar:/opt/er/er_bulk_er96/lib                                        /commons-logging.jar:/opt/er/er_bulk_er96/lib/jboss-j2ee.jar:/opt/er/er_bulk_er96/lib/jdom_1-0b8.jar:/opt/er/er_bulk_er96/lib/log4j-1.2.8                                        .jar:/opt/er/er_bulk_er96/lib/xerces-2.6.2.jar
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:29,911
+--->Operating system name: SunOS
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:29,911
+--->Operating system architecture: sparcv9
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:29,912
+--->Operating system version: 5.10
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:30,950
+--->OracleUcrypto 1.8: Provider using Oracle Ucrypto API
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:30,951
+--->SunPKCS11-Solaris 1.8: SunPKCS11 accessing Solaris Cryptographic Framework
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:30,951
+--->SUN 1.8: SUN (DSA key/parameter generation; DSA signing; SHA-1, MD5 digests; SecureRandom; X.509 certificates; JKS & DKS keystores; P                                        KIX CertPathValidator; PKIX CertPathBuilder; LDAP, Collection CertStores, JavaPolicy Policy; JavaLoginConfig Configuration)
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:30,952
+--->SunRsaSign 1.8: Sun RSA signature provider
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:30,952
+--->SunEC 1.8: Sun Elliptic Curve provider (EC, ECDSA, ECDH)
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:30,952
+--->SunJSSE 1.8: Sun JSSE provider(PKCS12, SunX509/PKIX key/trust factories, SSLv3/TLSv1/TLSv1.1/TLSv1.2)
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:30,953
+--->SunJCE 1.8: SunJCE Provider (implements RSA, DES, Triple DES, AES, Blowfish, ARCFOUR, RC2, PBE, Diffie-Hellman, HMAC)
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:30,953
+--->SunJGSS 1.8: Sun (Kerberos v5, SPNEGO)
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:30,953
+--->SunSASL 1.8: Sun SASL provider(implements client mechanisms for: DIGEST-MD5, GSSAPI, EXTERNAL, PLAIN, CRAM-MD5, NTLM; server mechanis                                        ms for: DIGEST-MD5, GSSAPI, CRAM-MD5, NTLM)
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:30,954
+--->XMLDSig 1.8: XMLDSig (DOM XMLSignatureFactory; DOM KeyInfoFactory; C14N 1.0, C14N 1.1, Exclusive C14N, Base64, Enveloped, XPath, XPat                                        h2, XSLT TransformServices)
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:30,954
+--->SunPCSC 1.8: Sun PC/SC provider
+
+main INFO com.vodafone.global.er.generated.CatalogApiStub 2016-08-03 16:56:31,070
+--->ER delegate connection URL: http://localhost:8080/delegates/CatalogApi
+
+main DEBUG org.apache.commons.httpclient.methods.GetMethod 2016-08-03 16:56:31,140
+--->enter GetMethod(String)
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,140
+--->HttpMethodBase.addRequestHeader(Header)
+
+main DEBUG org.apache.commons.httpclient.methods.EntityEnclosingMethod 2016-08-03 16:56:31,192
+--->enter EntityEnclosingMethod.setRequestBody(InputStream)
+
+main DEBUG org.apache.commons.httpclient.methods.PostMethod 2016-08-03 16:56:31,193
+--->enter PostMethod.clearRequestBody()
+
+main DEBUG org.apache.commons.httpclient.methods.EntityEnclosingMethod 2016-08-03 16:56:31,193
+--->enter EntityEnclosingMethod.clearRequestBody()
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:31,193
+--->enter HttpClient.executeMethod(HttpMethod)
+
+main DEBUG org.apache.commons.httpclient.HttpClient 2016-08-03 16:56:31,194
+--->enter HttpClient.executeMethod(HostConfiguration,HttpMethod,HttpState)
+
+main DEBUG org.apache.commons.httpclient.MultiThreadedHttpConnectionManager 2016-08-03 16:56:31,194
+--->enter HttpConnectionManager.getConnection(HostConfiguration, long)
+
+main DEBUG org.apache.commons.httpclient.MultiThreadedHttpConnectionManager 2016-08-03 16:56:31,195
+--->HttpConnectionManager.getConnection:  config = HostConfiguration[host=localhost, protocol=http:80, port=8080], timeout = 0
+
+main DEBUG org.apache.commons.httpclient.MultiThreadedHttpConnectionManager 2016-08-03 16:56:31,196
+--->enter HttpConnectionManager.ConnectionPool.getHostPool(HostConfiguration)
+
+main DEBUG org.apache.commons.httpclient.MultiThreadedHttpConnectionManager 2016-08-03 16:56:31,200
+--->enter HttpConnectionManager.ConnectionPool.getHostPool(HostConfiguration)
+
+main DEBUG org.apache.commons.httpclient.MultiThreadedHttpConnectionManager 2016-08-03 16:56:31,200
+--->Allocating new connection, hostConfig=HostConfiguration[host=localhost, protocol=http:80, port=8080]
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,233
+--->HttpConnection.setSoTimeout(0)
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,234
+--->enter HttpConnection.open()
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,291
+--->enter HttpMethodBase.execute(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,291
+--->Execute loop try 1
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,292
+--->enter HttpMethodBase.processRequest(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,292
+--->Attempt number 1 to process request
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,292
+--->enter HttpMethodBase.writeRequest(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,293
+--->enter HttpMethodBase.writeRequestLine(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,293
+--->enter HttpMethodBase.generateRequestLine(HttpConnection, String, String, String, String)
+
+main DEBUG httpclient.wire 2016-08-03 16:56:31,300
+--->>> "POST /delegates/CatalogApi HTTP/1.1[\r][\n]"
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,301
+--->enter HttpConnection.print(String)
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,306
+--->enter HttpConnection.write(byte[])
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,307
+--->enter HttpConnection.write(byte[], int, int)
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,307
+--->enter HttpMethodBase.writeRequestHeaders(HttpState,HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.methods.ExpectContinueMethod 2016-08-03 16:56:31,307
+--->enter ExpectContinueMethod.addRequestHeaders(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,308
+--->enter HttpMethodBase.addRequestHeaders(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,308
+--->enter HttpMethodBase.addUserAgentRequestHeaders(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,309
+--->enter HttpMethodBase.addHostRequestHeader(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,309
+--->Adding Host request header
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,309
+--->enter HttpMethodBase.addCookieRequestHeader(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.HttpState 2016-08-03 16:56:31,331
+--->enter HttpState.getCookies()
+
+main DEBUG org.apache.commons.httpclient.cookie.CookieSpec 2016-08-03 16:56:31,332
+--->enter CookieSpecBase.match(String, int, String, boolean, Cookie[])
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,332
+--->enter HttpMethodBase.addAuthorizationRequestHeader(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,333
+--->enter HttpMethodBase.addProxyAuthorizationRequestHeader(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,333
+--->enter HttpMethodBase.addProxyConnectionHeader(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.methods.EntityEnclosingMethod 2016-08-03 16:56:31,333
+--->enter HttpMethodBase.addContentLengthRequestHeader(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.methods.EntityEnclosingMethod 2016-08-03 16:56:31,334
+--->enter EntityEnclosingMethod.getRequestContentLength()
+
+main DEBUG org.apache.commons.httpclient.methods.PostMethod 2016-08-03 16:56:31,334
+--->enter PostMethod.hasRequestContent()
+
+main DEBUG org.apache.commons.httpclient.methods.EntityEnclosingMethod 2016-08-03 16:56:31,334
+--->enter EntityEnclosingMethod.hasRequestContent()
+
+main DEBUG org.apache.commons.httpclient.methods.PostMethod 2016-08-03 16:56:31,335
+--->enter PostMethod.renerateRequestBody()
+
+main DEBUG org.apache.commons.httpclient.methods.EntityEnclosingMethod 2016-08-03 16:56:31,335
+--->enter EntityEnclosingMethod.renerateRequestBody()
+
+main DEBUG org.apache.commons.httpclient.methods.EntityEnclosingMethod 2016-08-03 16:56:31,335
+--->enter EntityEnclosingMethod.bufferContent()
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,336
+--->HttpMethodBase.addRequestHeader(Header)
+
+main DEBUG httpclient.wire 2016-08-03 16:56:31,337
+--->>> "Content-Type: application/octet-stream[\r][\n]"
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,338
+--->enter HttpConnection.print(String)
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,338
+--->enter HttpConnection.write(byte[])
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,338
+--->enter HttpConnection.write(byte[], int, int)
+
+main DEBUG httpclient.wire 2016-08-03 16:56:31,340
+--->>> "User-Agent: Jakarta Commons-HttpClient/2.0final[\r][\n]"
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,340
+--->enter HttpConnection.print(String)
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,341
+--->enter HttpConnection.write(byte[])
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,341
+--->enter HttpConnection.write(byte[], int, int)
+
+main DEBUG httpclient.wire 2016-08-03 16:56:31,342
+--->>> "Host: localhost:8080[\r][\n]"
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,342
+--->enter HttpConnection.print(String)
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,342
+--->enter HttpConnection.write(byte[])
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,342
+--->enter HttpConnection.write(byte[], int, int)
+
+main DEBUG httpclient.wire 2016-08-03 16:56:31,343
+--->>> "Content-Length: 306[\r][\n]"
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,344
+--->enter HttpConnection.print(String)
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,344
+--->enter HttpConnection.write(byte[])
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,344
+--->enter HttpConnection.write(byte[], int, int)
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,344
+--->enter HttpConnection.writeLine()
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,345
+--->enter HttpConnection.write(byte[])
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,345
+--->enter HttpConnection.write(byte[], int, int)
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,345
+--->enter HttpConnection.flushRequestOutputStream()
+
+main DEBUG httpclient.wire 2016-08-03 16:56:31,346
+--->>> "[\r][\n]"
+
+main DEBUG org.apache.commons.httpclient.methods.EntityEnclosingMethod 2016-08-03 16:56:31,347
+--->enter EntityEnclosingMethod.writeRequestBody(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.methods.PostMethod 2016-08-03 16:56:31,347
+--->enter PostMethod.hasRequestContent()
+
+main DEBUG org.apache.commons.httpclient.methods.EntityEnclosingMethod 2016-08-03 16:56:31,347
+--->enter EntityEnclosingMethod.hasRequestContent()
+
+main DEBUG org.apache.commons.httpclient.methods.EntityEnclosingMethod 2016-08-03 16:56:31,348
+--->enter EntityEnclosingMethod.getRequestContentLength()
+
+main DEBUG org.apache.commons.httpclient.methods.PostMethod 2016-08-03 16:56:31,348
+--->enter PostMethod.hasRequestContent()
+
+main DEBUG org.apache.commons.httpclient.methods.EntityEnclosingMethod 2016-08-03 16:56:31,348
+--->enter EntityEnclosingMethod.hasRequestContent()
+
+main DEBUG org.apache.commons.httpclient.methods.EntityEnclosingMethod 2016-08-03 16:56:31,349
+--->Using buffered request body
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,349
+--->enter HttpConnection.getRequestOutputStream()
+
+main DEBUG httpclient.wire 2016-08-03 16:56:31,354
+--->>> "[0xfffd][0xfffd][0x0][0x5]sr[0x0][0x11]java.util.HashMap[0x5][0x7][0xfffd][0xfffd][0xfffd][0x16]`[0xfffd][0x3][0x0][0x2]F[0x0][\n                                        ]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:31,355
+--->>> "loadFactorI[0x0][0x9]thresholdxp?@[0x0][0x0][0x0][0x0][0x0][0xc]w[0x8][0x0][0x0][0x0][0x10][0x0][0x0][0x0][0x3]t[0x0][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:31,359
+--->>> "methodNamet[0x0][0xb]getPackage2t[0x0][0x2]idt[0x0][0xe]p_idvod1_e_780t[0x0][0x6]localesr[0x0][0x10]java.util.Locale~[0xfffd][0x1                                        1]`[0xfffd]0[0xfffd][0xfffd][0x3][0x0][0x6]I[0x0][0x8]hashcodeL[0x0][0x7]countryt[0x0][0x12]Ljava/lang/String;L[0x0][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:31,361
+--->>> "extensionsq[0x0]~[0x0][0x8]L[0x0][0x8]languageq[0x0]~[0x0][0x8]L[0x0][0x6]scriptq[0x0]~[0x0][0x8]L[0x0][0x7]variantq[0x0]~[0x0][0                                        x8]xp[0xfffd][0xfffd][0xfffd][0xfffd]t[0x0][0x2]HUt[0x0][0x0]t[0x0][0x2]huq[0x0]~[0x0][0xb]q[0x0]~[0x0][0xb]xx"
+
+main DEBUG org.apache.commons.httpclient.methods.EntityEnclosingMethod 2016-08-03 16:56:31,362
+--->Request body sent
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,362
+--->enter HttpConnection.flushRequestOutputStream()
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,362
+--->enter HttpMethodBase.readResponse(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:31,363
+--->enter HttpMethodBase.readStatusLine(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:31,363
+--->enter HttpConnection.readLine()
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:31,371
+--->enter HttpParser.readLine()
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:31,371
+--->enter HttpParser.readRawLine()
+
+main DEBUG httpclient.wire 2016-08-03 16:56:35,894
+---><< "HTTP/1.1 200 OK[\r][\n]"
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:35,895
+--->enter HttpMethodBase.readResponseHeaders(HttpState,HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:35,895
+--->enter HttpConnection.getResponseInputStream()
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:35,896
+--->enter HeaderParser.parseHeaders(HttpConnection, HeaderGroup)
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:35,896
+--->enter HttpParser.readLine()
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:35,896
+--->enter HttpParser.readRawLine()
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:35,898
+--->enter HttpParser.readLine()
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:35,898
+--->enter HttpParser.readRawLine()
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:35,899
+--->enter HttpParser.readLine()
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:35,900
+--->enter HttpParser.readRawLine()
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:35,901
+--->enter HttpParser.readLine()
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:35,901
+--->enter HttpParser.readRawLine()
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:35,902
+--->enter HttpParser.readLine()
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:35,902
+--->enter HttpParser.readRawLine()
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:35,905
+--->enter HttpParser.readLine()
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:35,905
+--->enter HttpParser.readRawLine()
+
+main DEBUG httpclient.wire 2016-08-03 16:56:35,906
+---><< "Connection: keep-alive[\r][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:35,906
+---><< "X-Powered-By: Undertow/1[\r][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:35,907
+---><< "Server: WildFly/9[\r][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:35,907
+---><< "Transfer-Encoding: chunked[\r][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:35,908
+---><< "Date: Wed, 03 Aug 2016 14:56:35 GMT[\r][\n]"
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:35,909
+--->enter HttpMethodBase.processResponseHeaders(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.methods.GetMethod 2016-08-03 16:56:35,909
+--->enter GetMethod.readResponseBody(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:35,909
+--->enter HttpMethodBase.readResponseBody(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:35,909
+--->enter HttpMethodBase.readResponseBody(HttpState, HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:35,910
+--->enter HttpConnection.getResponseInputStream()
+
+main DEBUG org.apache.commons.httpclient.HeaderElement 2016-08-03 16:56:35,917
+--->enter HeaderElement.parse(String)
+
+main DEBUG org.apache.commons.httpclient.HeaderElement 2016-08-03 16:56:35,918
+--->enter HeaderElement.parsePair(char[], int, int)
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:35,918
+--->HttpConnection.getSoTimeout()
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:35,919
+--->enter HttpConnection.isResponseAvailable(int)
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,304
+---><< "3"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,305
+---><< "1"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,305
+---><< "4"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,306
+---><< "f"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,306
+---><< "[\r]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,306
+---><< "[\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,323
+---><< "[0xfffd][0xfffd][0x0][0x5]sr[0x0]Bcom.vizzavi.ecommerce.business.catalog.internal.CatalogPackageImpl&[0xfffd][0x18][0xfffd][0x14]                                        [0xfffd]I0[0x2][0x0][0x0]xr[0x0]5com.vizzavi.ecommerce.business.catalog.CatalogPackage[0xfffd][0x0][0xfffd][0xfffd][0xfffd][0x1d][0xfffd]                                        [0xc][0x2][0x0]HZ[0x0][0x18]childServicesAreInParentZ[0x0][0x19]hasBalanceImpactsWithDateZ[0x0][0xc]hasParentSubZ[0x0][0x1c]hasParentSubS                                        uspendedResProvZ[0x0][0x16]hasPricePointsWithDateZ[0x0][0x11]hasPromosWithDateZ[0x0][0x12]hasTaxRateWithDateZ[0x0][0x10]isGoodwillCreditZ                                        [0x0][0xb]mACEPackageC[0x0][\r]mActiveStatusZ[0x0][0x19]mDataVoiceTariffInclusiveZ[0x0][0x16]mDisallowCancellationsZ[0x0][0x10]mDisallowP                                        rerateZ[0x0][0xf]mDynamicDefaultZ[0x0][0x10]mExpressPurchaseZ[0x0][0x10]mHasMicroServiceZ[0x0][0xb]mIsOriginalD[0x0][\r]mNominalValueZ[0x                                        0][0xe]mParentPackageZ[0x0][0x10]mPricePointOrderI[0x0][0x9]mPriorityZ[0x0][0xf]mReceiptingFlagZ[0x0][0xb]mRefundableZ[0x0][0xc]mReserveO                                        nlyZ[0x0][0x14]mRevenueShareByUsageZ[0x0][\r]mSuperPackageZ[0x0][0x7]mUpSellZ[0x0][0x17]mUpsellDiscountProratedZ[0x0][0x1c]mUseBeingDepro                                        visionedStatusZ[0x0][0x13]mUseRateCardServiceI[0x0][0xf]parentSubStatusL[0x0][0x12]childPackageIdListt[0x0][0x10]Ljava/util/List;L[0x0][0                                        xc]descriptionst[0x0][0xf]Ljava/util/Map;L[0x0][0x1c]disallowDuplicateSubPurchaset[0x0][0x12]Ljava/lang/String;L[0x0][0xe]isPackageModelt                                        [0x0][0x13]Ljava/lang/Boolean;L[0x0][0x19]kpiPackageProductCategoryq[0x0]~[0x0][0x4]L[0x0][0xe]kpiPackageTypeq[0x0]~[0x0][0x4]L[0x0][0x6]                                        logoIdq[0x0]~[0x0][0x4]L[0x0][\r]mCustomFieldsq[0x0]~[0x0][0x3]L[0x0][0x1d]mDefaultPartnerProvisioningIdq[0x0]~[0x0][0x4]L[0x0][0xc]mDesc                                        riptionq[0x0]~[0x0][0x4]L[0x0][0x16]mDynamicProtectedValueq[0x0]~[0x0][0x4]L[0x0][0x3]mIdq[0x0]~[0x0][0x4]L[0x0][0x4]mKeyt[0x0][0x10]Ljav                                        a/lang/Long;L[0x0][0x5]mNameq[0x0]~[0x0][0x4]L[0x0][0x19]mNonRefundableDescriptionq[0x0]~[0x0][0x4]L[0x0][0x15]mNotificationCategoryq[0x0                                        ]~[0x0][0x4]L[0x0][\r]mPackageClassq[0x0]~[0x0][0x4]L[0x0][0xc]mPackageTypeq[0x0]~[0x0][0x4]L[0x0][0x10]mParentPackageIdq[0x0]~[0x0][0x4]                                        L[0x0][0xf]mPaymentContentt[0x0]7Lcom/vizzavi/ecommerce/business/catalog/PaymentContent;L[0x0][0xb]mPricePointt[0x0]3Lcom/vizzavi/ecommer                                        ce/business/catalog/PricePoint;L[0x0][0xc]mPricePointst[0x0]4Lcom/vizzavi/ecommerce/business/catalog/PricePoints;L[0x0][\r]mPricingText1q                                        [0x0]~[0x0][0x4]L[0x0][\r]mPricingText2q[0x0]~[0x0][0x4]L[0x0][0xb]mPromoCodest[0x0][0x13]Ljava/util/HashMap;L[0x0][0xe]mProtectedTypeq[0                                        x0]~[0x0][0x4]L[0x0][0xf]mPurchaseMethodq[0x0]~[0x0][0x4]L[0x0][0x12]mRateCardServiceIdq[0x0]~[0x0][0x4]L[0x0][0xb]mSalesModelq[0x0]~[0x0                                        ][0x4]L[0x0][0x9]mServicesq[0x0]~[0x0][0x3]L[0x0][0x8]mTaxCodeq[0x0]~[0x0][0x4]L[0x0][0x4]mUrlq[0x0]~[0x0][0x4]L[0x0][0x1d]mUserGroupComp                                        arisonAtRenewalq[0x0]~[0x0][0x4]L[0x0][0x5]namesq[0x0]~[0x0][0x3]L[0x0][0xb]parentSubIdq[0x0]~[0x0][0x4]L[0x0][0xe]partnerInfoMapq[0x0]~[                                        0x0][0x3]L[0x0][0x9]priceplant[0x0]2Lcom/vizzavi/ecommerce/business/catalog/Priceplan;L[0x0][0xc]pricingText1q[0x0]~[0x0][0x4]L[0x0][0x10                                        ]pricingTextList1q[0x0]~[0x0][0x3]L[0x0][0x10]pricingTextList2q[0x0]~[0x0][0x3]L[0x0]#servicesNotInPackageFairUsagePolicyq[0x0]~[0x0][0x4                                        ]xp[0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0                                        ][0x0][0x0][0x0][0x0][0x0][0x0][0x1][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0]psr[0x0][0x11]java.util.HashMap[0x5][0x7][0xff                                        fd][0xfffd][0xfffd][0x16]`[0xfffd][0x3][0x0][0x2]F[0x0][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,327
+---><< "loadFactorI[0x0][0x9]thresholdxp?@[0x0][0x0][0x0][0x0][0x0][0xc]w[0x8][0x0][0x0][0x0][0x10][0x0][0x0][0x0][0x1]t[0x0][0x7]default                                        t[0x0][0x19]RedMozi film megtekint[0xfffd][0xfffd]sxt[0x0][0x0]sr[0x0][0x11]java.lang.Boolean[0xfffd] r[0xfffd][0xfffd][0xfffd][0xfffd][0                                        xfffd][0x2][0x0][0x1]Z[0x0][0x5]valuexp[0x0]t[0x0][0x0]q[0x0]~[0x0][0x11]q[0x0]~[0x0][0x11]sq[0x0]~[0x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0                                        xc]w[0x8][0x0][0x0][0x0][0x10][0x0][0x0][0x0][0x1]t[0x0][0x7]TaxCodet[0x0][0x3]TAXxpt[0x0]9Megtekinthet[0xfffd][0xfffd] film a RedMozival                                        , brutt[0xfffd][0xfffd] 780 forint[0xfffd][0xfffd]rt!q[0x0]~[0x0][0x11]t[0x0][0xe]p_idvod1_e_780pq[0x0]~[0x0][0x10]q[0x0]~[0x0][0x11]ppt[                                        0x0][0x5]Eventt[0x0][0x0]sr[0x0]5com.vizzavi.ecommerce.business.catalog.PaymentContent[0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd]`[\                                        n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,328
+---><< "[0x2][0x0][0x8]J[0x0][0x3]keyL[0x0][0x8]categoryq[0x0]~[0x0][0x4]L[0x0][0xb]descriptionq[0x0]~[0x0][0x4]L[0x0][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,339
+---><< "itemVolumeq[0x0]~[0x0][0x4]L[0x0][0x8]merchantq[0x0]~[0x0][0x4]L[0x0][0x13]merchantDescriptionq[0x0]~[0x0][0x4]L[0x0][0x9]promoti                                        onq[0x0]~[0x0][0x4]L[0x0][0xb]serviceTypeq[0x0]~[0x0][0x4]xp[0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0]t[0x0][0x0]t[0x0][0xfffd]package:p_id                                        vod1_e_780_TAX_1_1_10040_999_999_*_*_*_false_false_*,VFLRMU13_4,content:p_idvod1_e_780_TAX_vfl_idvod1_e_780_999_999_*_999_999,VFL0_4t[0x0                                        ][0x0]t[0x0][0x0]t[0x0][0x0]t[0x0][0x0]t[0x0][0x0]psr[0x0]?com.vizzavi.ecommerce.business.catalog.internal.PricePointsImpl_u[0x10][0xfffd                                        ][0xfffd][0xfffd]z[0xfffd][0x2][0x0][0x0]xr[0x0]2com.vizzavi.ecommerce.business.catalog.PricePoints{Gu'C[0xfffd][0xfffd]e[0x2][0x0][0x2]L                                        [0x0][0x12]mPricePointMapByIdq[0x0]~[0x0][0x3]L[0x0][0x19]mPricePointMapByPackageIdq[0x0]~[0x0][0x3]xr[0x0][0x13]java.util.ArrayListx[0xf                                        ffd][0xfffd][0x1d][0xfffd][0xfffd]a[0xfffd][0x3][0x0][0x1]I[0x0][0x4]sizexp[0x0][0x0][0x0][0x1]w[0x4][0x0][0x0][0x0][0x1]sr[0x0]>com.vizz                                        avi.ecommerce.business.catalog.internal.PricePointImpl[0xfffd][0x9[0xfffd]7b[0xfffd][0xfffd][0x2][0x0][0x0]xr[0x0]1com.vizzavi.ecommerce.                                        business.catalog.PricePointj([0xfffd]6[0xfffd]c[0xfffd][0xfffd][0x2][0x0]FZ[0x0][0x11]alignWithExternalZ[0x0][0x14]alwaysValidateMsisdnI[                                        0x0][0xe]fairUsageLimitI[0x0][0xf]fairUsagePeriodZ[0x0][0x16]hideForPurchaseOptionsZ[0x0][0x1b]includeServiceForPackageFUPZ[0x0][0x10]isZ                                        eroCostIgnoreZ[0x0][0x17]linkedByTrialPricepointD[0x0][0xf]mAccessDurationZ[0x0][0xf]mBasePricePointZ[0x0][\r]mCancellationZ[0x0][0x16]mD                                        uplicateSubscriptionI[0x0][0x10]mExtensionPeriodJ[0x0][0x10]mFixedRecurrenceZ[0x0][0x19]mFixedRecurringPricePointZ[0x0][0xf]mForcedPurcha                                        seZ[0x0][0x9]mHistoricZ[0x0][0xb]mIsArchivedZ[0x0][0xb]mIsDiscountZ[0x0][0xb]mIsOriginalZ[0x0][\r]mIsVolumeTypeI[0x0][\r]mMinSubPeriodI[0                                        x0][0x6]mOrderD[0x0][0xf]mPenaltyChargesD[0x0][0xf]mRateWithoutTaxZ[0x0][0xb]mReceiptingZ[0x0][0xc]mReserveOnlyD[0x0][\r]mStandardRateD[0                                        x0][0x11]offFootPrintPriceD[0x0][0x10]onFootPrintPriceI[0x0][\r]recurrenceDayI[0x0][0x1d]renewalsUntilLinkedPricepointJ[0x0][0x9]usageTim                                        eZ[0x0][0xf]useStaticValuesL[0x0][0x19]ROUND_NTH_EXPRESS_PATTERNq[0x0]~[0x0][0x4]L[0x0][0x13]fairUsagePeriodUnitq[0x0]~[0x0][0x4]L[0x0][0                                        xb]gracePeriodt[0x0]3Lcom/vizzavi/ecommerce/business/common/PeriodValue;[[0x0][0x9]mBalancest[0x0]:[Lcom/vizzavi/ecommerce/business/selfc                                        are/ResourceBalance;L[0x0][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,342
+---><< "mContentIdq[0x0]~[0x0][0x4]L[0x0][\r]mCustomFieldsq[0x0]~[0x0][0x3]L[0x0][0x5]mGlidq[0x0]~[0x0][0x4]L[0x0][0x3]mIdq[0x0]~[0x0][0x                                        4]L[0x0][0x8]mImpactst[0x0]@Lcom/vizzavi/ecommerce/business/catalog/internal/BalanceImpacts;L[0x0][0x10]mInteractiveFlagq[0x0]~[0x0][0x4]                                        L[0x0][0x4]mKeyq[0x0]~[0x0][0x6]L[0x0][0x15]mMonthEndSubscriptionq[0x0]~[0x0][0x4]L[0x0][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,343
+---><< "mPackageIdq[0x0]~[0x0][0x4]L[0x0][0xf]mPaymentHandlerq[0x0]~[0x0][0x4]L[0x0][0xf]mPricePointTiert[0x0]@Lcom/vizzavi/ecommerce/bus                                        iness/catalog/internal/PricePointTier;L[0x0][0x11]mPricepointIdLinkq[0x0]~[0x0][0x4]L[0x0][\r]mPricingText1q[0x0]~[0x0][0x4]L[0x0][\r]mPr                                        icingText2q[0x0]~[0x0][0x4]L[0x0][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,353
+---><< "mPromoTextq[0x0]~[0x0][0x4]L[0x0][0xc]mProtectedFkq[0x0]~[0x0][0x4]L[0x0][0x13]mPurchaseExpiryDatet[0x0][0x10]Ljava/util/Date;L[0                                        x0][0x18]mPurchaseFixedExpiryDateq[0x0]~[0x0]/L[0x0][0x12]mPurchaseStartDateq[0x0]~[0x0]/L[0x0][0x14]mReceiptingAttributeq[0x0]~[0x0][0x4                                        ]L[0x0][0x4]mTaxt[0x0],Lcom/vizzavi/ecommerce/business/catalog/Tax;L[0x0][0x4]packt[0x0]7Lcom/vizzavi/ecommerce/business/catalog/CatalogP                                        ackage;L[0x0][0x10]pricingTextList1q[0x0]~[0x0][0x3]L[0x0][0x10]pricingTextList2q[0x0]~[0x0][0x3]L[0x0][0x18]pricingTextTemplateName1q[0x                                        0]~[0x0][0x4]L[0x0][0x18]pricingTextTemplateName2q[0x0]~[0x0][0x4]L[0x0][0x1e]pricingTextTemplateNameRoamingq[0x0]~[0x0][0x4]L[0x0][0xe]r                                        etryFrequencyq[0x0]~[0x0]+L[0x0][0x10]suspensionPeriodq[0x0]~[0x0]+L[0x0][0x15]translatedPricingTextq[0x0]~[0x0][0x4]L[0x0][0x16]translat                                        edPricingText1q[0x0]~[0x0][0x4]L[0x0][0x16]translatedPricingText2q[0x0]~[0x0][0x4]xr[0x0]6com.vizzavi.ecommerce.business.common.RatingAtt                                        ributes[0xfffd][0x6][0xfffd][0x14][0xfffd] )"[0x2][0x0]GZ[0x0][0x11]cancellationUsageZ[0x0][\r]enableReIssueZ[0x0][0x13]expressPurchaseFl                                        agZ[0x0][0x11]hasRenewalPreRateZ[0x0][0x12]includeUnavailableZ[0x0][0xf]interactiveFlagI[0x0][0x8]mChannelI[0x0][0xf]mChargingMethodI[0x0                                        ][0xb]mDeviceTypeZ[0x0]!mDiscardHiddenInactivePricepointsZ[0x0]!mDiscardMiddleAdvancedPricepointsI[0x0][0x9]mDurationD[0x0][0xb]mEventUni                                        tsZ[0x0][0x1a]mHasHistoricPricePointFlagZ[0x0][0x14]mInForcePurchaseFlowZ[0x0][0x17]mIsForNextPaymentAmountZ[0x0][\r]mIsForRenewalZ[0x0][                                        0x16]mIsMatchTrialPromoCodeZ[0x0][0x18]mLinkedByTrialPricepointD[0x0][0x11]mNextCycleDisountI[0x0]$mPPtRenewalCounterToLinkedPricepointI[                                        0x0][0xc]mPaymentTypeZ[0x0][0x9]mPreOrderD[0x0][0x8]mPreRateI[0x0][\r]mPremiumLevelZ[0x0][0x1c]mSubPurchaseTransactionTrialI[0x0]$mSubRen                                        ewalCounterToLinkedPricepointD[0x0][0x8]mTaxRateZ[0x0][0x1b]overrideDisallowPreRateFlagZ[0x0][0x13]preRatePriceIsGrossZ[0x0][0x12]reIssue                                        FlagPresentD[0x0][0xe]renewalPreRateL[0x0][0xe]extIdentifier1q[0x0]~[0x0][0x4]L[0x0][0xe]extIdentifier2q[0x0]~[0x0][0x4]L[0x0][0xe]extIde                                        ntifier3q[0x0]~[0x0][0x4]L[0x0][0xc]mAffiliateIDq[0x0]~[0x0][0x4]L[0x0][\r]mAggregatorIdq[0x0]~[0x0][0x4]L[0x0][0x8]mAssetIDq[0x0]~[0x0][                                        0x4]L[0x0][0x7]mBearerq[0x0]~[0x0][0x4][[0x0][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,356
+---><< "mBearerIdst[0x0][0x13][Ljava/lang/String;L[0x0][0x10]mContentCategoryq[0x0]~[0x0][0x4]L[0x0][0xc]mContentNameq[0x0]~[0x0][0x4]L[0                                        x0][0xe]mEventDateTimet[0x0][0x14]Ljava/util/Calendar;L[0x0][0x11]mHistoryStartDateq[0x0]~[0x0]4L[0x0][0xc]mInvoiceTextq[0x0]~[0x0][0x4]L                                        [0x0][0x11]mLinkPricepointIdq[0x0]~[0x0][0x4]L[0x0][\r]mMerchantNameq[0x0]~[0x0][0x4]L[0x0][0xf]mMultiUsageModet[0x0]1Lcom/vizzavi/ecomme                                        rce/resources/PropertyDataInt;L[0x0][0x17]mNetworkCodeMatchMethodq[0x0]~[0x0]5L[0x0][0x13]mPartnerContactInfoq[0x0]~[0x0][0x4]L[0x0][\r]m                                        PartnerEmailq[0x0]~[0x0][0x4]L[0x0][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,359
+---><< "mPartnerIdq[0x0]~[0x0][0x4]L[0x0][0xc]mPartnerNameq[0x0]~[0x0][0x4]L[0x0][0xb]mPartnerUrlq[0x0]~[0x0][0x4]L[0x0][0x13]mPaymentInf                                        ormationq[0x0]~[0x0][0x4]L[0x0][0xc]mProductCodeq[0x0]~[0x0][0x4][[0x0][0xb]mPromoCodesq[0x0]~[0x0]3L[0x0][\r]mPromoPrecodeq[0x0]~[0x0][0                                        x4]L[0x0][0x10]mPromoUniqueCodeq[0x0]~[0x0][0x4]L[0x0][0x11]mReceipientMsisdnq[0x0]~[0x0][0x4]L[0x0][0x1c]mRefuseUsageWhenProvisioningt[0                                        x0]2Lcom/vizzavi/ecommerce/resources/PropertyDataBool;L[0x0][0xf]mShortPackageIdq[0x0]~[0x0][0x4]L[0x0][0x17]mSubRenewalPricepointIdq[0x0                                        ]~[0x0][0x4]L[0x0][0xb]mSupplierIdq[0x0]~[0x0][0x4]L[0x0][0x7]mTariffq[0x0]~[0x0][0x4]L[0x0][0x8]mTaxCodeq[0x0]~[0x0][0x4]L[0x0][0x10]mTa                                        xRateAsDoublet[0x0][0x12]Ljava/lang/Double;L[0x0][0x9]mTierNameq[0x0]~[0x0][0x4]L[0x0][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,371
+---><< "mUserGroupq[0x0]~[0x0][0x4][[0x0][0xb]mUserGroupsq[0x0]~[0x0]3L[0x0][0x9]mVendorIdq[0x0]~[0x0][0x4]xr[0x0]4com.vizzavi.ecommerce.                                        business.common.BaseAttributes[0x14]K[0x17][0x18][0xc][0xfffd]m[0xfffd][0x2][0x0][0xc]Z[0x0][0x17]mHasActiveSubscriptionsL[0x0][0xe]mAcce                                        ssChannelq[0x0]~[0x0][0x4]L[0x0][0x14]mActiveSubscriptionsq[0x0]~[0x0][0x2]L[0x0][0x6]mCsrIdq[0x0]~[0x0][0x4]L[0x0][0x9]mDeviceIDq[0x0]~[                                        0x0][0x4]L[0x0][0xf]mExternalField1q[0x0]~[0x0][0x4]L[0x0][0xf]mExternalField2q[0x0]~[0x0][0x4]L[0x0][0x10]mExternalTransIdq[0x0]~[0x0][0                                        x4]L[0x0][0xf]mLanguageLocalet[0x0][0x12]Ljava/util/Locale;L[0x0][0x6]mLocalq[0x0]~[0x0]9L[0x0][0x7]mMsisdnq[0x0]~[0x0][0x4]L[0x0][0x10]m                                        PurchaseChannelq[0x0]~[0x0][0x4]xp[0x0]ppppppppppp[0x0][0x0][0x0][0x0][0x0][0x1][0x0][0x0][0x3][0xfffd][0x0][0x0][0x0][0x1][0x0][0x0][0x3                                        ][0xfffd][0x0][0x0][0x0][0x0][0x0][0x1][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x1][0x0][0x0][0x0][0x0][0x0][0x0][0x                                        0][0x0][0x0][0xfffd][0xfffd][0xfffd][0xfffd][0x0][0x0]'8[0x0][0xfffd][0xfffd][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x3][0xfffd][0x0][0                                        xfffd][0xfffd][0xfffd][0xfffd]?[0xfffd]G[0xfffd][0x14]z[0xfffd]H[0x0][0x0][0x0][0xfffd][0xfffd][0x0][0x0][0x0][0x0][0x0][0x0]ppppppt[0x0]                                        [0x1]*ur[0x0][0x13][Ljava.lang.String;[0xfffd][0xfffd]V[0xfffd][0xfffd][0x1d]{G[0x2][0x0][0x0]xp[0x0][0x0][0x0][0x1]q[0x0]~[0x0];ppppppps                                        r[0x0]/com.vizzavi.ecommerce.resources.PropertyDataInt\c{[0xfffd]([0x9][0xfffd]%[0x2][0x0][0x2]I[0x0][0xb]mDefaultValI[0x0][0x4]mValxr[0x                                        0],com.vizzavi.ecommerce.resources.PropertyData[0xfffd][0xfffd][0xfffd]N-[0xfffd]b%[0x2][0x0][0x1]I[0x0][0x5]mTypexp[0x0][0x0][0x0][0x2][                                        0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd]sq[0x0]~[0x0]>[0x0][0x0][0x0][0x2][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd]                                        [0xfffd][0xfffd][0xfffd]pppppppuq[0x0]~[0x0]<[0x0][0x0][0x0][0x1]t[0x0][0x1]*pppsr[0x0]0com.vizzavi.ecommerce.resources.PropertyDataBool[                                        0xfffd][0xfffd]]([0xfffd]U_[0xfffd][0x2][0x0][0x2]I[0x0][0xb]mDefaultValI[0x0][0x4]mValxq[0x0]~[0x0]?[0x0][0x0][0x0][0x1][0xfffd][0xfffd]                                        [0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd]ppt[0x0][0x1]*q[0x0]~[0x0]Ft[0x0][0x6]idvod1ppt[0x0][0x1]*uq[0x0]~[0x0]<[0x0][0x0][0x0][0                                        x1]q[0x0]~[0x0]Fp[0x0][0x0][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0x0][0x0][0x0][0x0][0xfffd][0xfffd][0x0][0x0]                                        [0x0][0x0][0x0][0x0][0x0][0x0][0x1][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0                                        x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0]@[0xfffd]1b[0xfffd][0xfffd]}V[0x0][0x0][0xfffd][0xfffd][0x0][0x0                                        ][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0xfffd][0xfffd][0xfffd][0xfffd][0xf                                        ffd][0xfffd][0xfffd][0xfffd][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0]pt[0x0][0x6]Day(s)pur[0x0]:[Lcom.vizzavi.ecommerce.business.self                                        care.ResourceBalance;\[0xfffd]QEk/[0xfffd][0xfffd][0x2][0x0][0x0]xp[0x0][0x0][0x0][0x2]sr[0x0]7com.vizzavi.ecommerce.business.selfcare.Re                                        sourceBalance[0xfffd][0x5][0xfffd]\[0xfffd][0xfffd]![0xfffd][0x2][0x0][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,372
+---><< "J[0x0][0xc]balanceObjIdD[0x0][0x8]mBalanceJ[0x0][0x13]mSubscriptionIdLongI[0x0][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,372
+---><< "mThresholdJ[0x0][\r]resourceObjIdL[0x0][0x15]mOldestSubscriptionIdq[0x0]~[0x0][0x4]L[0x0][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,383
+---><< "mPackageIdq[0x0]~[0x0][0x4]L[0x0][0x4]mRest[0x0]8Lcom/vizzavi/ecommerce/business/common/ChargingResource;L[0x0][0xf]mSubscription                                        Idq[0x0]~[0x0][0x4]L[0x0][0xc]subscriptiont[0x0]6Lcom/vizzavi/ecommerce/business/selfcare/Subscription;xp[0x0][0x0][0x0][0x0][0x0][0x0][0                                        x0][0x0]@[0xfffd]1b[0xfffd][0xfffd]}V[0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0x0][0x0][0x0][0x0][0x0][0x0][0x0][                                        0x0][0x0][0x0][0x0][0x0]ppsr[0x0]6com.vizzavi.ecommerce.business.common.ChargingResourceo`[0xfffd][0xfffd]U[0xfffd]l^[0x2][0x0][0x6]I[0x0                                        ][0x4]codeI[0x0][0x9]countryIdJ[0x0][0x2]idL[0x0][0xb]descriptionq[0x0]~[0x0][0x4]L[0x0][0x4]nameq[0x0]~[0x0][0x4]L[0x0][0x13]resourceBal                                        anceListq[0x0]~[0x0][0x2]xp[0x0][0x10][0xfffd][0x3][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0]pt[0x0][0xf]Tartalom Kredi                                        tpppsq[0x0]~[0x0]M[0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0]@[0xfffd]1b[0xfffd][0xfffd]}V[0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0                                        xfffd][0xfffd][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0]ppsq[0x0]~[0x0]Q[0x0][0x0][0x1]\[0x0][0x0][0x0][0x0][0x0][0x0][                                        0x0][0x0][0x0][0x0][0x0][0x0]pt[0x0][0x3]HUFpppq[0x0]~[0x0]Fsq[0x0]~[0x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0x0]w[0x8][0x0][0x0][0x0][0x10][                                        0x0][0x0][0x0][0x0]xq[0x0]~[0x0][0x11]t[0x0]@package:p_idvod1_e_780_TAX_1_1_10040_999_999_*_*_*_false_false_*sr[0x0]>com.vizzavi.ecommerc                                        e.business.catalog.internal.BalanceImpacts[0x11][0xfffd][0xfffd][0xfffd]8[0xfffd]6[0xfffd][0x2][0x0][0x0]xq[0x0]~[0x0]'[0x0][0x0][0x0][0x                                        2]w[0x4][0x0][0x0][0x0][0x2]sr[0x0]=com.vizzavi.ecommerce.business.catalog.internal.BalanceImpact;[0xfffd]Qg[0xfffd][0xfffd]tL[0x2][0x0][                                        0x8]D[0x0][0xc]mFixedAmountI[0x0][0x16]mNotificationThresholdD[0x0][\r]mScaledAmountL[0x0][0x4]mKeyq[0x0]~[0x0][0x6]L[0x0][0x15]mPriceCha                                        ngeStartDateq[0x0]~[0x0]/L[0x0][0x9]mResourceq[0x0]~[0x0]NL[0x0][0x5]mTypeq[0x0]~[0x0][0x4]L[0x0][0x3]pptq[0x0]~[0x0][0x8]xp@[0xfffd]1b[0                                        xfffd][0xfffd]}V[0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0]ppq[0x0]~[0x0]Rppsq[0x0]~[0x0][@[0xfffd]1b[0xfffd][0xfffd]}V[                                        0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0]ppq[0x0]~[0x0]Uppxt[0x0][0x4]NONEpt[0x0][0x4]NULLq[0x0]~[0x0][0x19]q[0x0]~[0x0                                        ]_sr[0x0]>com.vizzavi.ecommerce.business.catalog.internal.PricePointTier[0xfffd]4[0x3][0xfffd][0xfffd][0xfffd][0xfffd]z[0x2][0x0][0x6]L[0                                        x0][0xe]balanceImpactsq[0x0]~[0x0]-L[0x0][0x4]mKeyq[0x0]~[0x0][0x6]L[0x0][0xc]pricingModelq[0x0]~[0x0][0x4]L[0x0][0x10]promotionalPriceq[                                        0x0]~[0x0]7L[0x0][0x1a]promotionalPricingTextListq[0x0]~[0x0][0x3]L[0x0][0x4]tierq[0x0]~[0x0][0x4]xpq[0x0]~[0x0]Zppppq[0x0]~[0x0][0xf]t[0                                        x0][0x0]t[0x0][0x0]t[0x0][0x0]t[0x0][0x0]ppppq[0x0]~[0x0]_ppsq[0x0]~[0x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0xc]w[0x8][0x0][0x0][0x0][0x10][                                        0x0][0x0][0x0][0x1]q[0x0]~[0x0][0xf]q[0x0]~[0x0]cxsq[0x0]~[0x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0xc]w[0x8][0x0][0x0][0x0][0x10][0x0][0x0][                                        0x0][0x1]q[0x0]~[0x0][0xf]q[0x0]~[0x0]dxpppppt[0x0][0x0]ppxsq[0x0]~[0x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0xc]w[0x8][0x0][0x0][0x0][0x10][0                                        x0][0x0][0x0][0x1]q[0x0]~[0x0]Xq[0x0]~[0x0]:xpt[0x0][0x0]t[0x0][0x0]pq[0x0]~[0x0][0x11]q[0x0]~[0x0][0x11]q[0x0]~[0x0][0x11]q[0x0]~[0x0][0                                        x11]sq[0x0]~[0x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0xc]w[0x8][0x0][0x0][0x0][0x10][0x0][0x0][0x0][0x1]t[0x0][0x10]vfl_idvod1_e_780sr[0x0]Bc                                        om.vizzavi.ecommerce.business.catalog.internal.CatalogServiceImpl[0xfffd]([0xfffd]jP[0xfffd][0xfffd][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,388
+---><< "[0x2][0x0][0x0]xr[0x0]5com.vizzavi.ecommerce.business.catalog.CatalogService[0x4] ![0xfffd][0xfffd][0xfffd][0xfffd]N[0x2][0x0]HZ[                                        0x0][0x16]mExpiredPackageServiceD[0x0][0x11]mFixedUsageAmountZ[0x0][0x1a]mGlobalHandlerNotificationZ[0x0][0x17]mGlobalHandlerProvisionZ[0                                        x0][0xb]mHasDynamicZ[0x0][0xb]mHasExpressZ[0x0][0x10]mHasSuperPackageI[0x0][0x19]mHighVolumeInterfaceLevelZ[0x0][0x11]mIsDefaultServiceZ[                                        0x0][\r]mMicroServiceZ[0x0][0x11]mProvisionOnUsageZ[0x0][0x15]mReIssuePermittedFlagZ[0x0][0xb]mRefundableZ[0x0][0xc]mReserveOnlyZ[0x0][0x                                        1f]mReturnAllCatalogueServicesInfoZ[0x0][0x17]mReturnTrialOptionsOnlyZ[0x0][0x15]mServiceShareOverrideZ[0x0][0x13]mUniqueServiceClassZ[0x                                        0] mUsageAllowedBeingProvisionedSubZ[0x0][0xc]mUseRateCardL[0x0][0xc]descriptionsq[0x0]~[0x0][0x3]L[0x0][0x12]mBandRevenueSharesq[0x0]~[0                                        x0][0x3]L[0x0][\r]mChargeableByq[0x0]~[0x0][0x4]L[0x0][0x10]mContentCategoryq[0x0]~[0x0][0x4]L[0x0][0xc]mContentItemq[0x0]~[0x0][0x4]L[0x                                        0][0x13]mContentSubCategoryq[0x0]~[0x0][0x4]L[0x0][\r]mCustomFieldsq[0x0]~[0x0][0x3]L[0x0][0x9]mDealNameq[0x0]~[0x0][0x4]L[0x0][0x12]mDel                                        iveryMechanismq[0x0]~[0x0][0x4]L[0x0][0xc]mDescriptionq[0x0]~[0x0][0x4]L[0x0][0x14]mDistributionChannelq[0x0]~[0x0][0x4]L[0x0][0x16]mExte                                        rnalServPricePlanq[0x0]~[0x0][0x4]L[0x0][0x3]mIdq[0x0]~[0x0][0x4]L[0x0][0xe]mIndirectValueq[0x0]~[0x0][0x4]L[0x0][0x14]mIndirectValueF"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,987
+---><< "ormatq[0x0]~[0x0][0x4]L[0x0][0x10]mInternalPartnert[0x0]0Lcom/vizzavi/ecommerce/business/catalog/Partner;L[0x0][0x4]mKeyq[0x0]~[0                                        x0][0x6]L[0x0][0x5]mNameq[0x0]~[0x0][0x4]L[0x0][0x19]mNonRefundableDescriptionq[0x0]~[0x0][0x4]L[0x0][0x15]mNotificationCategoryq[0x0]~[0                                        x0][0x4]L[0x0][0xb]mPackageIdsq[0x0]~[0x0][0x2]L[0x0][0xf]mPaymentContentq[0x0]~[0x0][0x7]L[0x0][0xb]mPricePointq[0x0]~[0x0][0x8]L[0x0][0                                        xc]mPricePointsq[0x0]~[0x0][0x9]L[0x0][\r]mPricingText1q[0x0]~[0x0][0x4]L[0x0][\r]mPricingText2q[0x0]~[0x0][0x4]L[0x0][0x10]mProductCateg                                        oryq[0x0]~[0x0][0x4]L[0x0][\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:36,997
+---><< "mProductFkq[0x0]~[0x0][0x6]L[0x0][0x16]mProductSelfRegulationq[0x0]~[0x0][0x4]L[0x0][0x14]mProductSubCategory1q[0x0]~[0x0][0x4]L[                                        0x0][0x14]mProductSubCategory2q[0x0]~[0x0][0x4]L[0x0][0x16]mProductWholesalePriceq[0x0]~[0x0][0x4]L[0x0][0xb]mPromoValueq[0x0]~[0x0][0x4]                                        L[0x0][0x11]mPromoValueFormatq[0x0]~[0x0][0x4]L[0x0][0xb]mProvSystemq[0x0]~[0x0][0x4]L[0x0][0x8]mProvTagq[0x0]~[0x0][0x4]L[0x0][0x11]mRat                                        eCardPartnerst[0x0]9Lcom/vizzavi/ecommerce/business/catalog/RateCardPartners;L[0x0][0x1d]mRevSharePartnerForPackageMapq[0x0]~[0x0][0x3]L[                                        0x0][0x1d]mRevSharePartnerPurchaseChMapq[0x0]~[0x0][0x3]L[0x0][0xb]mSalesModelq[0x0]~[0x0][0x4]L[0x0][0x10]mServiceCategoryq[0x0]~[0x0][0                                        x4]L[0x0][\r]mServiceClassq[0x0]~[0x0][0x4]L[0x0][0xc]mServiceTypeq[0x0]~[0x0][0x4]L[0x0][0x10]mSuperPackageIdsq[0x0]~[0x0][0x2]L[0x0][0x                                        8]mTaxCodeq[0x0]~[0x0][0x4]L[0x0][0x4]mUrlq[0x0]~[0x0][0x4]L[0x0][0x8]mUsageIdq[0x0]~[0x0][0x4]L[0x0][0x5]namesq[0x0]~[0x0][0x3]L[0x0][0x                                        8]packagest[0x0][0xf]Ljava/util/Set;L[0x0][0x9]priceplanq[0x0]~[0x0][0xb]L[0x0][0x10]pricingTextList1q[0x0]~[0x0][0x3]L[0x0][0x10]pricing                                        TextList2q[0x0]~[0x0][0x3]xp[0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x3][0xfffd][0x0][0x0][0x0][                                        0x0][0x1][0x0][0x1][0x0][0x0][0x0][0x0][0x0]sq[0x0]~[0x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0xc]w[0x8][0x0][0x0][0x0][0x10][0x0][0x0][0x0][0                                        x1]q[0x0]~[0x0][0xf]t[0x0]9Megtekinthet[0xfffd][0xfffd] film a RedMozival, brutt[0xfffd][0xfffd] 780 forint[0xfffd][0xfffd]rt!xpt[0x0][0x                                        b]Not Definedq[0x0]~[0x0][0x11]q[0x0]~[0x0][0x11]q[0x0]~[0x0][0x11]sq[0x0]~[0x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0xc]w[0x8][0x0][0x0][0x0]                                        [0x10][0x0][0x0][0x0][0x1]t[0x0][0x7]TaxCodet[0x0][0x3]TAXxpq[0x0]~[0x0][0x11]q[0x0]~[0x0]uppq[0x0]~[0x0]mq[0x0]~[0x0][0x11]q[0x0]~[0x0][                                        0x11]ppt[0x0][0x19]RedMozi film megtekint[0xfffd][0xfffd]sq[0x0]~[0x0][0x11]q[0x0]~[0x0][0x11]psq[0x0]~[0x0][0x1c][0x0][0x0][0x0][0x0][0x                                        0][0x0][0x0][0x0]t[0x0][0x0]t[0x0][0x0]t[0x0][0x0]t[0x0][0x0]t[0x0][0x0]t[0x0][0x0]t[0x0][0x0]psq[0x0]~[0x0]%[0x0][0x0][0x0][0x1]w[0x4][0                                        x0][0x0][0x0][0x1]sq[0x0]~[0x0])[0x0]ppppppppppp[0x0][0x0][0x0][0x0][0x0][0x1][0x0][0x0][0x3][0xfffd][0x0][0x0][0x3][0xfffd][0x0][0x0][0x                                        3][0xfffd][0x0][0x0][0x0][0x0][0x3][0xfffd][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x1][0x0][0x0][0x0][0x0][0x0][0x0                                        ][0x0][0x0][0x0][0xfffd][0xfffd][0xfffd][0xfffd][0x0][0x0][0x3][0xfffd][0x0][0xfffd][0xfffd][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x3]                                        [0xfffd][0x0][0xfffd][0xfffd][0xfffd][0xfffd]?[0xfffd]G[0xfffd][0x14]z[0xfffd]H[0x0][0x0][0x0][0xfffd][0xfffd][0x0][0x0][0x0][0x0][0x0][0                                        x0]ppppppt[0x0][0x1]*uq[0x0]~[0x0]<[0x0][0x0][0x0][0x1]q[0x0]~[0x0][0xfffd]pppppppsq[0x0]~[0x0]>[0x0][0x0][0x0][0x2][0xfffd][0xfffd][0xff                                        fd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd]sq[0x0]~[0x0]>[0x0][0x0][0x0][0x2][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xf                                        ffd]pppppppuq[0x0]~[0x0]<[0x0][0x0][0x0][0x1]t[0x0][0x1]*pppsq[0x0]~[0x0]D[0x0][0x0][0x0][0x1][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0x                                        fffd][0xfffd][0xfffd]ppq[0x0]~[0x0]Fq[0x0]~[0x0]Ft[0x0][0x6]idvod1ppt[0x0][0x1]*uq[0x0]~[0x0]<[0x0][0x0][0x0][0x1]q[0x0]~[0x0]Fp[0x0][0x0                                        ][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0x0][0x0][0x0][0x0][0xfffd][0xfffd][0x0][0x0][0x0][0x0][0x0][0x0][0x0][                                        0x0][0x1][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x                                        0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0xfffd][0xfffd][0x0][0x0][0x0][0x0][0x0                                        ][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0x                                        fffd][0xfffd][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0]pq[0x0]~[0x0]Jpuq[0x0]~[0x0]K[0x0][0x0][0x0][0x1]sq[0x0]~[0x0]M[0x0][0x0][0x0][                                        0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0xfffd][0x0][0x0                                        ][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0]ppsq[0x0]~[0x0]Q[0x0][0x10][0xfffd][0x3][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][                                        0x0][0x0][0x0]pt[0x0][0xf]Tartalom Kreditpppq[0x0]~[0x0]msq[0x0]~[0x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0x0]w[0x8][0x0][0x0][0x0][0x10][0x0                                        ][0x0][0x0][0x0]xq[0x0]~[0x0][0x11]t[0x0]=content:p_idvod1_e_780_TAX_vfl_idvod1_e_780_999_999_*_999_999sq[0x0]~[0x0]Y[0x0][0x0][0x0][0x1]                                        w[0x4][0x0][0x0][0x0][0x1]sq[0x0]~[0x0][[0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0x0][0                                        x0]ppq[0x0]~[0x0][0xfffd]ppxt[0x0][0x4]NONEpq[0x0]~[0x0]_q[0x0]~[0x0][0x19]q[0x0]~[0x0]_sq[0x0]~[0x0]`q[0x0]~[0x0][0xfffd]ppppq[0x0]~[0x0                                        ][0xf]t[0x0][0x0]t[0x0][0x0]t[0x0][0x0]t[0x0][0x0]pppppppsq[0x0]~[0x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0xc]w[0x8][0x0][0x0][0x0][0x10][0x0                                        ][0x0][0x0][0x1]q[0x0]~[0x0][0xf]q[0x0]~[0x0][0xfffd]xsq[0x0]~[0x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0xc]w[0x8][0x0][0x0][0x0][0x10][0x0][0                                        x0][0x0][0x1]q[0x0]~[0x0][0xf]q[0x0]~[0x0][0xfffd]xpppppt[0x0][0x0]ppxsq[0x0]~[0x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0xc]w[0x8][0x0][0x0][0                                        x0][0x10][0x0][0x0][0x0][0x1]q[0x0]~[0x0][0xfffd]q[0x0]~[0x0][0xfffd]xpq[0x0]~[0x0][0x11]q[0x0]~[0x0][0x11]q[0x0]~[0x0][0x11]pq[0x0]~[0x0                                        ][0x11]q[0x0]~[0x0][0x11]q[0x0]~[0x0][0x11]q[0x0]~[0x0][0x11]q[0x0]~[0x0][0x11]q[0x0]~[0x0][0x11]q[0x0]~[0x0][0x11]t[0x0][0x3]N/Apsq[0x0]                                        ~[0x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0x0]w[0x8][0x0][0x0][0x0][0x10][0x0][0x0][0x0][0x0]xsq[0x0]~[0x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0x                                        0]w[0x8][0x0][0x0][0x0][0x10][0x0][0x0][0x0][0x0]xq[0x0]~[0x0][0x11]q[0x0]~[0x0][0x11]pq[0x0]~[0x0][0x11]ppq[0x0]~[0x0][0x11]q[0x0]~[0x0]                                        [0x11]sq[0x0]~[0x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0xc]w[0x8][0x0][0x0][0x0][0x10][0x0][0x0][0x0][0x1]q[0x0]~[0x0][0xf]q[0x0]~[0x0]zxpppp                                        xpppsq[0x0]~[0x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0xc]w[0x8][0x0][0x0][0x0][0x10][0x0][0x0][0x0][0x1]q[0x0]~[0x0][0xf]q[0x0]~[0x0][0x10]xp                                        sq[0x0]~[0x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0xc]w[0x8][0x0][0x0][0x0][0x10][0x0][0x0][0x0][0x1]q[0x0]~[0x0][0xf]t[0x0][0x0]xppsq[0x0]~[0                                        x0][\r]?@[0x0][0x0][0x0][0x0][0x0][0xc]w[0x8][0x0][0x0][0x0][0x10][0x0][0x0][0x0][0x1]q[0x0]~[0x0][0xf]q[0x0]~[0x0]jxsq[0x0]~[0x0][\r]?@[                                        0x0][0x0][0x0][0x0][0x0][0xc]w[0x8][0x0][0x0][0x0][0x10][0x0][0x0][0x0][0x1]q[0x0]~[0x0][0xf]q[0x0]~[0x0]kxp"
+
+main DEBUG com.vodafone.global.er.generated.CatalogApiStub 2016-08-03 16:56:37,065
+--->Reading the Object from stream took 676 ms.
+
+main DEBUG com.vodafone.global.er.generated.CatalogApiStub 2016-08-03 16:56:37,065
+--->Result object type: com.vizzavi.ecommerce.business.catalog.internal.CatalogPackageImpl
+
+main DEBUG httpclient.wire 2016-08-03 16:56:37,066
+---><< "[\r]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:37,067
+---><< "[\n]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:37,067
+---><< "0"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:37,068
+---><< "[\r]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:37,068
+---><< "[\n]"
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:37,068
+--->enter HeaderParser.parseHeaders(HttpConnection, HeaderGroup)
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:37,068
+--->enter HttpParser.readLine()
+
+main DEBUG org.apache.commons.httpclient.HttpParser 2016-08-03 16:56:37,069
+--->enter HttpParser.readRawLine()
+
+main DEBUG httpclient.wire 2016-08-03 16:56:37,069
+---><< "[\r]"
+
+main DEBUG httpclient.wire 2016-08-03 16:56:37,069
+---><< "[\n]"
+
+main DEBUG org.apache.commons.httpclient.HttpMethodBase 2016-08-03 16:56:37,070
+--->Should NOT close connection in response to Connection: keep-alive
+
+
+main DEBUG org.apache.commons.httpclient.HttpConnection 2016-08-03 16:56:37,070
+--->enter HttpConnection.releaseConnection()
+
+main DEBUG org.apache.commons.httpclient.MultiThreadedHttpConnectionManager 2016-08-03 16:56:37,070
+--->enter HttpConnectionManager.releaseConnection(HttpConnection)
+
+main DEBUG org.apache.commons.httpclient.MultiThreadedHttpConnectionManager 2016-08-03 16:56:37,075
+--->Freeing connection, hostConfig=HostConfiguration[host=localhost, protocol=http:80, port=8080]
+
+main DEBUG org.apache.commons.httpclient.MultiThreadedHttpConnectionManager 2016-08-03 16:56:37,076
+--->enter HttpConnectionManager.ConnectionPool.getHostPool(HostConfiguration)
+
+main DEBUG org.apache.commons.httpclient.MultiThreadedHttpConnectionManager 2016-08-03 16:56:37,077
+--->Notifying no-one, there are no waiting threads
+
+main DEBUG com.vodafone.global.er.generated.CatalogApiStub 2016-08-03 16:56:37,077
+--->Releasing http connection
+
+main DEBUG hu.psipka.vodafone.er.bulk.ResultWriter 2016-08-03 16:56:37,078
+--->Result printer property :msisdn,task,result,error
+
+ER Bulk Processor Finished...
+
+devadm@ah1vltestdb:/opt/er/er_bulk_er96 TST$ more work/proxytest-getpackage.txt.processed
+null,GETPACKAGE,false,false
+
+ 

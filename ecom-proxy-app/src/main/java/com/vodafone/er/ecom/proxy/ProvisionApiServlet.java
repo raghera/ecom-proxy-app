@@ -1,6 +1,8 @@
 package com.vodafone.er.ecom.proxy;
 
+import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.provision.ProvisionApi;
+import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.util.ExceptionAdapter;
@@ -12,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Optional;
+
+import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_UPDATE_SERVICE_STATUS1;
 
 public class ProvisionApiServlet extends AbstractEcomServlet {
 	
@@ -80,8 +85,17 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
             boolean result = false;        
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
+
+            final Optional<Boolean> shouldProxy =
+                    PropertyService.getPropertyAsBoolean(PROP_UPDATE_SERVICE_STATUS1.value(), true);
             try {
-                result = getProvisionApiDelegate(locale).updateServiceStatus(provisioningId,serviceStatus,provisioningStatus);
+
+                if (shouldProxy.isPresent() && shouldProxy.get()) {
+                    result = getProvisionApiDelegate(locale).updateServiceStatus(provisioningId, serviceStatus, provisioningStatus);
+                } else {
+                    result = EcomApiFactory.getProvisionApi(locale).updateServiceStatus(provisioningId,serviceStatus,provisioningStatus);
+
+                }
             }
             catch (Exception e1) {                
                 oos.writeObject( new ExceptionAdapter(e1));
