@@ -3,12 +3,12 @@ package com.vodafone.er.ecom.proxy.constants;
 /**
  * Created by Ravi Aghera
  */
-public enum EcomConstantsEnum {
+public enum EcomAppEnum {
     CLIENT_ID("ecom-proxy-application");
 
     private final String value;
 
-    EcomConstantsEnum(String value) {
+    EcomAppEnum(String value) {
         this.value = value;
     }
 

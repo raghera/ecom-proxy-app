@@ -25,11 +25,8 @@ public class PropertyService {
 
     static {
         try {
-            InputStream in = PropertyService.class.getClassLoader().getResourceAsStream("env.properties");
-
-            System.out.println("Input stream " + in);
+            final InputStream in = PropertyService.class.getClassLoader().getResourceAsStream("env.properties");
             properties.load(in);
-
         } catch (IOException ioEx) {
             log.warn("Unable to load properties from file system - could not find propertyFileName: " + propertyFileName
                     + " Will use system defaults."

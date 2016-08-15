@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-import static com.vodafone.er.ecom.proxy.constants.EcomConstantsEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.constants.EcomAppEnum.CLIENT_ID;
 
 @Component
 public class CatalogApiService {

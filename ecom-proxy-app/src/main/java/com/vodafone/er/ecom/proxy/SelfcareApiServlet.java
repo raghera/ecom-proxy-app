@@ -22,7 +22,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getSelfcareApi;
-import static com.vodafone.er.ecom.proxy.constants.EcomConstantsEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.constants.EcomAppEnum.CLIENT_ID;
 import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_GET_SUBSCRIPTIONS2;
 
 public class SelfcareApiServlet extends AbstractEcomServlet {

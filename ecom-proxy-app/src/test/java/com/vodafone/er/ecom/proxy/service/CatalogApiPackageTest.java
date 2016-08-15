@@ -15,7 +15,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.Locale;
 
-import static com.vodafone.er.ecom.proxy.constants.EcomConstantsEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.constants.EcomAppEnum.CLIENT_ID;
 import static com.vodafone.er.ecom.proxy.data.builder.CatalogPackageDataBuilder.aCatalogPackage;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
