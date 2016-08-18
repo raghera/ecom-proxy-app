@@ -20,7 +20,8 @@
         <junit.version>4.12</junit.version>
         <assertj.version>3.5.2</assertj.version>
         <spring.version>4.3.1.RELEASE</spring.version>
-        <hiberante.version>4.3.10.Final</hiberante.version>
+        <!--<hiberante.version>4.3.10.Final</hiberante.version>-->
+        <hiberante.version>3.6.0.Final</hiberante.version>
         <guava.version>19.0</guava.version>
         <mockito.version>1.9.5</mockito.version>
         <powermock.version>1.6.5</powermock.version>
@@ -127,7 +128,12 @@
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
-
+            <!-- https://mvnrepository.com/artifact/javassist/javassist -->
+            <dependency>
+                <groupId>javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>3.12.0.GA</version>
+            </dependency>
             <!--Test dependencies -->
             <dependency>
                 <groupId>org.powermock</groupId>

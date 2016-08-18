@@ -46,7 +46,7 @@ public class PropertyService {
     public static Optional<Boolean> getPropertyAsBoolean(String key, boolean defaultValue) {
         final String value = properties.getProperty(key, String.valueOf(defaultValue));
 
-        if(value != null) {
+        if(value == null) {
             return Optional.empty();
         }
         final Boolean boolValue = Boolean.parseBoolean(value);

@@ -1,30 +1,21 @@
 package com.vodafone.er.ecom.proxy;
 
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Locale;
+import com.vizzavi.ecommerce.business.charging.*;
+import com.vizzavi.ecommerce.business.common.EcomApiFactory;
+import com.vizzavi.ecommerce.business.common.EcommerceException;
+import com.vodafone.global.er.data.ERLogDataImpl;
+import com.vodafone.global.er.util.ExceptionAdapter;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.SystemException;
+import java.io.*;
+import java.util.HashMap;
+import java.util.Locale;
 
-import org.apache.log4j.Logger;
-
-import com.vizzavi.ecommerce.business.charging.ChargingApi;
-import com.vizzavi.ecommerce.business.charging.PromoCodeAttributes;
-import com.vizzavi.ecommerce.business.charging.PromoCodeValidation;
-import com.vizzavi.ecommerce.business.charging.UsageAttributes;
-import com.vizzavi.ecommerce.business.charging.UsageAuthorization;
 //import com.vodafone.global.er.AbstractEcomServlet;
-import com.vodafone.global.er.data.ERLogDataImpl;
-import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 //import com.vodafone.global.er.delegate.DelegateFactory;
-import com.vodafone.global.er.util.ExceptionAdapter;
 
 public class ChargingApiServlet extends AbstractEcomServlet {
 
@@ -494,8 +485,8 @@ public class ChargingApiServlet extends AbstractEcomServlet {
         }
     }
 
-	private ChargingApi getChargingApiDelegate(Locale locale) {
-		return DecouplingApiFactory.getChargingApi(locale, clientId);
+	private ChargingApi getChargingApiDelegate(Locale locale) throws EcommerceException {
+//		return DecouplingApiFactory.getChargingApi(locale, clientId);
+        return EcomApiFactory.getChargingApi(locale);
 	}
-
 }

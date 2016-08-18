@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -55,8 +54,13 @@ public class CatalogApiService {
     }
 
     private CatalogPackage processCatalogPackage(final Locale locale, final CatalogPackage catalogPackage) {
+
+        //TODO - Changed everything to 13-12
+
         //populate missing service data
+        /*
         for(CatalogService service : catalogPackage.getServiceArray()) {
+
 
             final CatalogService returnedService = getCatalogService(locale, service.getId());
             service.setPricePoints(returnedService.getPricePoints());
@@ -92,19 +96,20 @@ public class CatalogApiService {
                 packagePricePoint.setBalances(resourceBalances.toArray(new ResourceBalance[resourceBalances.size()]));
             });
         }
-
+ */
         return catalogPackage;
     }
 
     public void processPricePointBalanceImpacts(PricePoint pricePoint) {
-        BalanceImpact[] origBalanceImpacts = pricePoint.getAllBalanceImpacts().getBalanceImpacts();
-        List<ResourceBalance> resourceBalances = new ArrayList<>();
-        for(BalanceImpact balanceImpact : origBalanceImpacts) {
-            ResourceBalance resourceBalance = new ResourceBalance(balanceImpact.getResource(), balanceImpact.getFixedAmount());
-            resourceBalance.getResource().setName(balanceImpact.getResource().getName());
-            resourceBalances.add(resourceBalance);
-        }
-        pricePoint.setBalances(resourceBalances.toArray(new ResourceBalance[resourceBalances.size()]));
+        //TODO commented below after change to 13-12
+//        BalanceImpact[] origBalanceImpacts = pricePoint.getAllBalanceImpacts().getBalanceImpacts();
+//        List<ResourceBalance> resourceBalances = new ArrayList<>();
+//        for(BalanceImpact balanceImpact : origBalanceImpacts) {
+//            ResourceBalance resourceBalance = new ResourceBalance(balanceImpact.getResource(), balanceImpact.getFixedAmount());
+//            resourceBalance.getResource().setName(balanceImpact.getResource().getName());
+//            resourceBalances.add(resourceBalance);
+//        }
+//        pricePoint.setBalances(resourceBalances.toArray(new ResourceBalance[resourceBalances.size()]));
     }
 
     private List<ResourceBalance> processBalanceImpacts(List<BalanceImpact> balanceImpacts) {
@@ -129,8 +134,10 @@ public class CatalogApiService {
             String packageId = CatalogUtil.getPackageIdFromServicePricepoint(pricePoint.getId());
 
             pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()));
-            pricePoint.setPackageId(packageId);
-            pricePoint.setContentId(catalogService.getId());
+            //TODO commented 2 lines below after change to 13-12
+//            pricePoint.setPackageId(packageId);
+//            pricePoint.setContentId(catalogService.getId());
+
 //            catalogService.setPackageId(packageId);
         });
 

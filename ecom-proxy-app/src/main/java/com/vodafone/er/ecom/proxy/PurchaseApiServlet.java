@@ -3,6 +3,7 @@ package com.vodafone.er.ecom.proxy;
 import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
 import com.vizzavi.ecommerce.business.charging.*;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
+import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
@@ -89,13 +90,14 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
                ModifyTariffAttributes modifyTariffAttributes = (ModifyTariffAttributes) requestPayload.get("modifyTariffAttributes");
                modifyTariffHandler(locale, resp  ,msisdn  ,modifyTariffAttributes );
          }
-           if (methodName.equals("goodwillCredit9")) {               
-
-        	   GoodwillCreditAttributes goodwillCreditAttributes = (GoodwillCreditAttributes) requestPayload.get("goodwillCreditAttributes");
-        	   goodwillCreditHandler(locale, resp  ,msisdn  ,goodwillCreditAttributes );
-
-           }
-           
+//           if (methodName.equals("goodwillCredit9")) {
+//        	   String msisdn = (String) requestPayload.get("msisdn");
+//        	   String partnerId = (String) requestPayload.get("partnerId");
+//        	   String merchantId = (String) requestPayload.get("merchantId");
+//        	   String packageId = (String) requestPayload.get("packageId");
+//        	   double preRate =  ((Double) requestPayload.get("preRate")).doubleValue();
+//        	   goodwillCreditHandler(locale, resp  ,clientId  ,msisdn  ,partnerId  ,merchantId  ,packageId  ,preRate );
+//           }
        }
        catch (Exception e) {         
           try
@@ -114,7 +116,7 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
 
     public void purchasePackageMsisdnHandler(Locale locale, HttpServletResponse resp ,String clientApplicationId  ,String msisdn  ,String packageId  ,PurchaseAttributes purchaseAttributes ) {
         ObjectOutputStream oos = null;
-        try {            
+        try {
             PurchaseAuthorization result = null;
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
@@ -443,55 +445,58 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
         }
     }
 
-    //CR - Add Invoice Text to goodwill credit request - consolidated attributes into GoodwillCreditAttributes class
-    public void goodwillCreditHandler(Locale locale, HttpServletResponse resp , String msisdn  , GoodwillCreditAttributes goodwillCreditAttributes ) {
-        ObjectOutputStream oos = null;
-        try {            
-            GoodwillCreditAuthorization result = null;
-            oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
-            try {
-                result = getPurchaseApiDelegate(locale).goodwillCredit(msisdn,goodwillCreditAttributes);
-                
-            }
-            catch (Exception e1) {
-                // Commit the transaction here as it will be committed in doPost anyway but we need to commit
-                // before sending a response.
-                
-                oos.writeObject( new ExceptionAdapter(e1));
-                oos.flush();
-                return;
-            }
-            // send response
-            resp.setStatus(HttpServletResponse.SC_OK);
-            oos.writeObject(result);
-            oos.flush();
-        } catch (Exception e2) {
-            try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
-        }
-        finally {
-            if (oos != null) {
-                try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
-            }
-        }
-    }
+    //TODO Commented after move to 13-12 base
 
-	private PurchaseApi getPurchaseApiDelegate(Locale locale) {
-		return DecouplingApiFactory.getPurchaseApi(locale, clientId);
+    //CR - Add Invoice Text to goodwill credit request - consolidated attributes into GoodwillCreditAttributes class
+//    public void goodwillCreditHandler(Locale locale, HttpServletResponse resp , String msisdn  , GoodwillCreditAttributes goodwillCreditAttributes ) {
+//        ObjectOutputStream oos = null;
+//        try {
+//            GoodwillCreditAuthorization result = null;
+//            oos = new ObjectOutputStream (
+//                               new BufferedOutputStream (resp.getOutputStream()));
+//            try {
+//                result = getPurchaseApiDelegate(locale).goodwillCredit(msisdn,goodwillCreditAttributes);
+//
+//            }
+//            catch (Exception e1) {
+//                // Commit the transaction here as it will be committed in doPost anyway but we need to commit
+//                // before sending a response.
+//
+//                oos.writeObject( new ExceptionAdapter(e1));
+//                oos.flush();
+//                return;
+//            }
+//            // send response
+//            resp.setStatus(HttpServletResponse.SC_OK);
+//            oos.writeObject(result);
+//            oos.flush();
+//        } catch (Exception e2) {
+//            try{
+//              log(e2.getMessage(), e2);
+//              oos = new ObjectOutputStream (
+//                   new BufferedOutputStream (resp.getOutputStream()));
+//              oos.writeObject( new ExceptionAdapter(e2));
+//              oos.flush();
+//             }catch(IOException excep)
+//             {
+//              log.error(excep.getMessage(),excep);
+//             }
+//        }
+//        finally {
+//            if (oos != null) {
+//                try{
+//                   oos.close();
+//                   }catch(IOException excep1)
+//                    {
+//                        log.error(excep1.getMessage(),excep1);
+//                    }
+//            }
+//        }
+//    }
+
+	private PurchaseApi getPurchaseApiDelegate(Locale locale) throws EcommerceException {
+//		return DecouplingApiFactory.getPurchaseApi(locale, clientId);
+        return EcomApiFactory.getPurchaseApi(locale);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.vodafone.er.ecom.proxy;
 
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
+import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vizzavi.ecommerce.business.provision.ProvisionApi;
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.global.er.data.ERLogDataImpl;
@@ -91,7 +92,7 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
             try {
 
                 if (shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = getProvisionApiDelegate(locale).updateServiceStatus(provisioningId, serviceStatus, provisioningStatus);
+                    result = DecouplingApiFactory.getProvisionApi(locale, clientId).updateServiceStatus(provisioningId, serviceStatus, provisioningStatus);
                 } else {
                     result = EcomApiFactory.getProvisionApi(locale).updateServiceStatus(provisioningId,serviceStatus,provisioningStatus);
 
@@ -130,8 +131,9 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
         }
     }
 
-    private ProvisionApi getProvisionApiDelegate(Locale locale) {
-		return DecouplingApiFactory.getProvisionApi(locale, clientId);
+    private ProvisionApi getProvisionApiDelegate(Locale locale) throws EcommerceException {
+//		return DecouplingApiFactory.getProvisionApi(locale, clientId);
+        return EcomApiFactory.getProvisionApi(locale);
 	}
 
 	public void updateServiceStatusHandler(Locale locale, HttpServletResponse resp ,String provisioningId  ,int serviceStatus  ,int provisioningStatus  ,String provisioningTag ) {
@@ -141,7 +143,7 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = DecouplingApiFactory.getProvisionApi(locale, clientId).updateServiceStatus(provisioningId,serviceStatus,provisioningStatus,provisioningTag);
+                result = getProvisionApiDelegate(locale).updateServiceStatus(provisioningId,serviceStatus,provisioningStatus,provisioningTag);
             }
             catch (Exception e1) {                
                 oos.writeObject( new ExceptionAdapter(e1));

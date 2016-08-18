@@ -57,7 +57,8 @@ public class SelfcareApiService {
                 purchasedServices.add(purchasedService);
             });
 
-            subscription.setPurcServiceList(purchasedServices);
+            //TODO Commented after move to 13-12
+//            subscription.setPurcServiceList(purchasedServices);
 
         });
 
