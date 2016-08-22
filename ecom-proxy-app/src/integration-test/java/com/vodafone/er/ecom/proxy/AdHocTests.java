@@ -1,18 +1,21 @@
 package com.vodafone.er.ecom.proxy;
 
+import com.vizzavi.ecommerce.business.catalog.CatalogApi;
+import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
 import com.vizzavi.ecommerce.business.charging.AccountValidationAuthorization;
 import com.vizzavi.ecommerce.business.charging.ChargingApi;
 import com.vizzavi.ecommerce.business.charging.PurchaseApi;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vizzavi.ecommerce.business.common.ResponseStatus;
-import com.vizzavi.ecommerce.business.selfcare.*;
+import com.vizzavi.ecommerce.business.selfcare.CustcareApi;
+import com.vizzavi.ecommerce.business.selfcare.SelfcareApi;
+import com.vizzavi.ecommerce.business.selfcare.UserGroup;
+import com.vizzavi.ecommerce.business.selfcare.ValidateMsisdnAttributes;
 import org.junit.Test;
 
 import java.util.Locale;
 
-import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getSelfcareApi;
-import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -26,11 +29,14 @@ public class AdHocTests {
     SelfcareApi mSelfcareApi = EcomApiFactory.getSelfcareApi(Locale.UK);
     ChargingApi mChargingApi = EcomApiFactory.getChargingApi(Locale.UK);
     CustcareApi mCustcareApi = EcomApiFactory.getCustcareApi(Locale.UK);
+    CatalogApi mCatalogApi = EcomApiFactory.getCatalogApi(Locale.UK);
+
 
     PurchaseApi purchaseApi = EcomApiFactory.getPurchaseApi(Locale.UK);
     SelfcareApi selfcareApi = EcomApiFactory.getSelfcareApi(Locale.UK);
     ChargingApi chargingApi = EcomApiFactory.getChargingApi(Locale.UK);
     CustcareApi custcareApi = EcomApiFactory.getCustcareApi(Locale.UK);
+    CatalogApi catalogApi = EcomApiFactory.getCatalogApi(Locale.UK);
 
     String clientId = "AdhocTestClient";
 
@@ -38,9 +44,17 @@ public class AdHocTests {
     }
 
     @Test
-    public void testValidateMsisdnAllUserGroupsAccepted() throws Exception {
-        String msisdn = "88887772P" + System.currentTimeMillis();
+    public void simpleGetPackage2() {
 
+        CatalogPackage pack = catalogApi.getPackage("pAlt");
+        assertNotNull(pack);
+
+    }
+
+    @Test
+    public void testValidateMsisdnAllUserGroupsAccepted() throws Exception
+    {
+        String msisdn = "88887772P" + System.currentTimeMillis();
         System.out.println("*************************************************************************************");
         System.out.println("********************************testValidateMsisdnAllUserGroupsAccepted************************************");
         System.out.println("********************************MUST BE RUN WITH DEMO VALIDATION HANDLER************************************");
@@ -77,25 +91,14 @@ public class AdHocTests {
         System.out.println("ACCOUNT VALIDATION ALL UGS= " + accountValidation);
     }
 
-    private Subscription getSubscription(String clientid, String msisdn)
-    {
-        Subscription sub = null;
+    @Test
+    public void testUserGroup() throws Exception {
+        UserGroup userGroup = new UserGroup();
+        userGroup.setName("director");
 
-        try
-        {
-            SubscriptionFilter subFilter = EcomApiFactory.getSubscriptionFilter();
-            Subscription[] subs = getSelfcareApi(Locale.UK).getSubscriptions(clientid, msisdn, 0, subFilter);
+        userGroup.hashCode();
 
-            if(subs!= null && subs.length > 0)
-                sub = subs[0];
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-            fail("Unhandled exception " + e.getMessage());
-        }
 
-        return sub;
     }
 
 }

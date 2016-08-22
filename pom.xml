@@ -20,8 +20,8 @@
         <junit.version>4.12</junit.version>
         <assertj.version>3.5.2</assertj.version>
         <spring.version>4.3.1.RELEASE</spring.version>
-        <!--<hiberante.version>4.3.10.Final</hiberante.version>-->
-        <hiberante.version>3.6.0.Final</hiberante.version>
+        <hiberante.version>4.3.10.Final</hiberante.version>
+        <!--<hiberante.version>3.6.0.Final</hiberante.version>-->
         <guava.version>19.0</guava.version>
         <mockito.version>1.9.5</mockito.version>
         <powermock.version>1.6.5</powermock.version>
@@ -57,11 +57,6 @@
         <!--</dependency>-->
         <!--<dependency>-->
         <!--<groupId>com.vodafone.er</groupId>-->
-        <!--<artifactId>DECOUPLING_common</artifactId>-->
-        <!--<version>${er.decoupling.common.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.vodafone.er</groupId>-->
         <!--<artifactId>DECOUPLING_client</artifactId>-->
         <!--<version>${er.decoupling.client.version}</version>-->
         <!--</dependency>-->
@@ -71,6 +66,15 @@
             <artifactId>assertj-core</artifactId>
             <version>${assertj.version}</version>
             <scope>test</scope>
+        </dependency>
+
+
+        <!-- All these Required if using JAXB 1 otherwise remove if using JAXB 2-->
+
+        <dependency>
+            <groupId>com.vodafone.er</groupId>
+            <artifactId>DECOUPLING_common</artifactId>
+            <version>${er.decoupling.common.version}</version>
         </dependency>
 
     </dependencies>

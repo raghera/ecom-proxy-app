@@ -128,6 +128,12 @@
         <dependency>
             <groupId>com.vodafone.er</groupId>
             <artifactId>DECOUPLING_common</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.vodafone.er</groupId>
@@ -160,11 +166,10 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
-        <dependency>
-            <groupId>javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.12.0.GA</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>javassist</groupId>-->
+            <!--<artifactId>javassist</artifactId>-->
+        <!--</dependency>-->
 
         <!--Test dependencies-->
         <dependency>
@@ -245,26 +250,101 @@
             <artifactId>jbossall-client</artifactId>
             <version>3.2.3</version>
             <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.logging</groupId>
+                    <artifactId>jboss-logging-</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.jboss</groupId>
             <artifactId>jboss-common-core</artifactId>
             <version>2.0.5.GA</version>
             <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>jboss</groupId>
+                    <artifactId>jboss-common-logging-spi</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jboss.logging</groupId>
+                    <artifactId>jboss-logging-</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/jboss/jboss-common -->
+        <!--<dependency>-->
+            <!--<groupId>jboss</groupId>-->
+            <!--<artifactId>jboss-common</artifactId>-->
+            <!--<version>4.0.2</version>-->
+            <!--<scope>runtime</scope>-->
+        <!--</dependency>-->
+
         <!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
-        <dependency>
-            <groupId>org.jboss.logging</groupId>
-            <artifactId>jboss-logging</artifactId>
-            <version>3.3.0.Final</version>
-            <scope>runtime</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.jboss.logging</groupId>-->
+            <!--<artifactId>jboss-logging</artifactId>-->
+            <!--<version>3.3.0.Final</version>-->
+            <!--<scope>runtime</scope>-->
+        <!--</dependency>-->
         <!-- <dependency>
             <groupId>org.jboss.security</groupId>
             <artifactId>jbosssx-client</artifactId>
             <version>2.0.4.SP3</version>
             <scope>runtime</scope>
         </dependency> -->
+
+        <!--<dependency>-->
+            <!--<groupId>local-javax-xml</groupId>-->
+            <!--<artifactId>jaxb-api</artifactId>-->
+            <!--<version>1.0.1</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/lib/jaxb-api.jar</systemPath>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>local-javax-xml</groupId>-->
+            <!--<artifactId>jaxb-impl</artifactId>-->
+            <!--<version>1.0.5</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/lib/jaxb-impl.jar</systemPath>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>local-javax-xml</groupId>-->
+            <!--<artifactId>jaxb-libs</artifactId>-->
+            <!--<version>1.0.5</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/lib/jaxb-libs.jar</systemPath>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>local-javax-xml</groupId>-->
+            <!--<artifactId>jaxp-api</artifactId>-->
+            <!--<version>1.3</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/lib/jaxp-api.jar</systemPath>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>local-javax-xml</groupId>-->
+            <!--<artifactId>xsdlib</artifactId>-->
+            <!--<version>1.0</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/lib/xsdlib.jar</systemPath>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>local-javax-xml</groupId>-->
+            <!--<artifactId>jaxb-xjc</artifactId>-->
+            <!--<version>1.0.5</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/lib/jaxb-xjc.jar</systemPath>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>local-javax-xml</groupId>-->
+            <!--<artifactId>relaxng</artifactId>-->
+            <!--<version>1.0</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/lib/relaxngDatatype.jar</systemPath>-->
+        <!--</dependency>-->
+
     </dependencies>
 
     <build>

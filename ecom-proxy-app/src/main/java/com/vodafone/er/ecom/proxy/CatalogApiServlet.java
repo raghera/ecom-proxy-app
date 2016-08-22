@@ -3,7 +3,6 @@ package com.vodafone.er.ecom.proxy;
 import com.vizzavi.ecommerce.business.catalog.*;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
-import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.er.ecom.proxy.service.CatalogApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
@@ -19,15 +18,14 @@ import java.util.*;
 
 import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_GET_PACKAGES2;
 import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_GET_SERVICE1;
+import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 
 public class CatalogApiServlet extends AbstractEcomServlet {
 
 	private static final long	serialVersionUID	= -6442503512252653351L;
-	//CR1231
-    //private static LWLogger log = LWSupportFactoryImpl.getInstance().getLogger(CatalogApiServlet.class);
     private static Logger log = Logger.getLogger(CatalogApiServlet.class);
 
-    private CatalogApiService processor;
+    private CatalogApiService service = new CatalogApiService();
 
     @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
@@ -199,22 +197,16 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             CatalogService result = null;
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
-            final Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_GET_SERVICE1.value(), true);
-            try {
 
+            final Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_SERVICE1.value(), true);
+            try {
                 //TODO remove and configure through Spring.
                 //TODO make this configurable
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    processor = new CatalogApiService();
-                    result = processor.getCatalogService(locale, id);
-
+                    result = service.getCatalogService(locale, id);
                 } else {
                     result = EcomApiFactory.getCatalogApi(locale).getService(id);
                 }
-
-//                result = DecouplingApiFactory.getCatalogApi(locale, clientId).getService(id);
-//                result = new CatalogApiService(locale, clientId).processCatalogService(result);
-
             }
             catch (Exception e1) {
                 oos.writeObject( new ExceptionAdapter(e1));
@@ -262,12 +254,12 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                                new BufferedOutputStream (resp.getOutputStream()));
 
             final Optional<Boolean> shouldProxy =
-                    PropertyService.getPropertyAsBoolean(PROP_GET_PACKAGES2.value(), true);
+                    getPropertyAsBoolean(PROP_GET_PACKAGES2.value(), true);
             try {
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
                     //TODO remove and configure through Spring.
-                    processor = new CatalogApiService();
-                    result = processor.getCatalogPackage(locale, id);
+                    service = new CatalogApiService();
+                    result = service.getCatalogPackage(locale, id);
                 } else {
                     result = EcomApiFactory.getCatalogApi(locale).getPackage(id);
                 }
