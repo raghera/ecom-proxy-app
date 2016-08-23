@@ -63,20 +63,20 @@ public class GetServiceIT {
         softly.assertThat(catalogService.getPricePoints().get(0).isPromo() ).as(" catalogService.getPricePoints().get(0).isPromo()" ).isFalse() ;
         softly.assertThat(catalogService.getPricePoints().get(0).getAccessDevice() ).as(" catalogService.getPricePoints().get(0).getAccessDevice()" ).isEqualTo(999) ;
 // com.vizzavi.ecommerce.business.common.ChargingResource
-//        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts()).as("catalogService.getPricePoints().get(0).getAllBalanceImpacts()").isNotNull();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getKey() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getKey()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getId() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getId()" ).isEqualTo("826");
-//        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getType() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getType()" ).isEqualTo("CREDIT");
-//        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getRate() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getRate()" ).isEqualTo(new Double(2.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getPriceChangeStartDate() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getPriceChangeStartDate()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getFixedAmount() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getFixedAmount()" ).isEqualTo(new Double(2.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getScaledAmount() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getScaledAmount()" ).isEqualTo(new Double(0.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getNotificationThreshold() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getNotificationThreshold()" ).isEqualTo(0) ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getPricePoint() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getPricePoint()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).isCurrency() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).isCurrency()" ).isTrue() ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).isResource() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).isResource()" ).isFalse() ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getServiceIdentifier() ).as(" catalogService.getPricePoints().get(0).getServiceIdentifier()" ).isEqualTo("content:pAlt_TAX_sAlt_1_999_*_999_999");
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPackageIdentifier() ).as(" catalogService.getPricePoints().get(0).getPackageIdentifier()" ).isEqualTo("package:pAlt_TAX_999_999_999_999_1_*_*_*_false_false_*");
+        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts()).as("catalogService.getPricePoints().get(0).getAllBalanceImpacts()").isNotNull();
+        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getKey() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getKey()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getId() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getId()" ).isEqualTo("826");
+        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getType() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getType()" ).isEqualTo("CREDIT");
+        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getRate() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getRate()" ).isEqualTo(new Double(2.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getPriceChangeStartDate() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getPriceChangeStartDate()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getFixedAmount() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getFixedAmount()" ).isEqualTo(new Double(2.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getScaledAmount() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getScaledAmount()" ).isEqualTo(new Double(0.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getNotificationThreshold() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getNotificationThreshold()" ).isEqualTo(0) ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getPricePoint() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).getPricePoint()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).isCurrency() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).isCurrency()" ).isTrue() ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).isResource() ).as(" catalogService.getPricePoints().get(0).getAllBalanceImpacts().get(0).isResource()" ).isFalse() ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getServiceIdentifier() ).as(" catalogService.getPricePoints().get(0).getServiceIdentifier()" ).isEqualTo("content:pAlt_TAX_sAlt_1_999_*_999_999");
+        softly.assertThat(catalogService.getPricePoints().get(0).getPackageIdentifier() ).as(" catalogService.getPricePoints().get(0).getPackageIdentifier()" ).isEqualTo("package:pAlt_TAX_999_999_999_999_1_*_*_*_false_false_*");
         softly.assertThat(catalogService.getPricePoints().get(0).isPreOrder() ).as(" catalogService.getPricePoints().get(0).isPreOrder()" ).isFalse() ;
         softly.assertThat(catalogService.getPricePoints().get(0).getTaxRate() ).as(" catalogService.getPricePoints().get(0).getTaxRate()" ).isEqualTo(new Double(0.175)) ;
         softly.assertThat(catalogService.getPricePoints().get(0).getTaxCode() ).as(" catalogService.getPricePoints().get(0).getTaxCode()" ).isEqualTo("TAX");
@@ -92,6 +92,7 @@ public class GetServiceIT {
 
         //TODO
         softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpacts()).as("catalogService.getPricePoints().get(0).getBalanceImpacts() is null").isNotNull();
+
 //        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpacts()[0].getName() ).as(" catalogService.getPricePoints().get(0).getBalanceImpacts()[0].getName()" ).isEqualTo("GBP");
 //        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpacts()[0].isCurrency() ).as(" catalogService.getPricePoints().get(0).getBalanceImpacts()[0].isCurrency()" ).isTrue() ;
 //        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpacts()[0].isResource() ).as(" catalogService.getPricePoints().get(0).getBalanceImpacts()[0].isResource()" ).isFalse() ;
@@ -106,19 +107,19 @@ public class GetServiceIT {
 // com.vizzavi.ecommerce.business.common.ChargingResource
 
         //TODO List should not be empty
-//        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList()" ).isNotNull();
-//
-//        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getKey() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getKey()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getId() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getId()" ).isEqualTo("826");
-//        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getType() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getType()" ).isEqualTo("CREDIT");
-//        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getRate() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getRate()" ).isEqualTo(new Double(2.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getPriceChangeStartDate() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getPriceChangeStartDate()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getFixedAmount() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getFixedAmount()" ).isEqualTo(new Double(2.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getScaledAmount() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getScaledAmount()" ).isEqualTo(new Double(0.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getNotificationThreshold() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getNotificationThreshold()" ).isEqualTo(0) ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getPricePoint() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getPricePoint()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).isCurrency() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).isCurrency()" ).isTrue() ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).isResource() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).isResource()" ).isFalse() ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList()" ).isNotNull();
+
+        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getKey() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getKey()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getId() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getId()" ).isEqualTo("826");
+        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getType() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getType()" ).isEqualTo("CREDIT");
+        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getRate() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getRate()" ).isEqualTo(new Double(2.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getPriceChangeStartDate() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getPriceChangeStartDate()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getFixedAmount() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getFixedAmount()" ).isEqualTo(new Double(2.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getScaledAmount() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getScaledAmount()" ).isEqualTo(new Double(0.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getNotificationThreshold() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getNotificationThreshold()" ).isEqualTo(0) ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getPricePoint() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).getPricePoint()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).isCurrency() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).isCurrency()" ).isTrue() ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).isResource() ).as(" catalogService.getPricePoints().get(0).getBalanceImpactList().get(0).isResource()" ).isFalse() ;
         softly.assertThat(catalogService.getPricePoints().get(0).getGlid() ).as(" catalogService.getPricePoints().get(0).getGlid()" ).isNullOrEmpty();
         softly.assertThat(catalogService.getPricePoints().get(0).getGlid() ).as(" catalogService.getPricePoints().get(0).getGlid()" ).isEqualTo("");
         softly.assertThat(catalogService.getPricePoints().get(0).getContentId() ).as(" catalogService.getPricePoints().get(0).getContentId()" ).isEqualTo("sAlt");
@@ -175,8 +176,8 @@ public class GetServiceIT {
 //        softly.assertThat(catalogService.getPricePoints().get(0).getResourceBalances()[0].getOldestSubscriptionId() ).as(" catalogService.getPricePoints().get(0).getResourceBalances()[0].getOldestSubscriptionId()" ).isNull();
 //        softly.assertThat(catalogService.getPricePoints().get(0).getResourceBalances()[0].getSubscription() ).as(" catalogService.getPricePoints().get(0).getResourceBalances()[0].getSubscription()" ).isNull();
 //        softly.assertThat(catalogService.getPricePoints().get(0).getResourceBalances()[0].getBalance() ).as(" catalogService.getPricePoints().get(0).getResourceBalances()[0].getBalance()" ).isEqualTo(new Double(2.0)) ;
-        softly.assertThat(catalogService.getPricePoints().get(0).getCustomResourceBalances() ).as(" catalogService.getPricePoints().get(0).getCustomResourceBalances()" ).isNull();
-        softly.assertThat(catalogService.getPricePoints().get(0).isAlwaysValidateMsisdn() ).as(" catalogService.getPricePoints().get(0).isAlwaysValidateMsisdn()" ).isFalse() ;
+//        softly.assertThat(catalogService.getPricePoints().get(0).getCustomResourceBalances() ).as(" catalogService.getPricePoints().get(0).getCustomResourceBalances()" ).isNull();
+//        softly.assertThat(catalogService.getPricePoints().get(0).isAlwaysValidateMsisdn() ).as(" catalogService.getPricePoints().get(0).isAlwaysValidateMsisdn()" ).isFalse() ;
 // com.vizzavi.ecommerce.business.common.ChargingResource
 
 
@@ -191,34 +192,34 @@ public class GetServiceIT {
 //        softly.assertThat(catalogService.getPricePoints().get(0).getBalances()[0].getBalance() ).as(" catalogService.getPricePoints().get(0).getBalances()[0].getBalance()" ).isEqualTo(new Double(2.0)) ;
 
         softly.assertThat(catalogService.getPricePoints().get(0).getRenewalsUntilLinkedPricepoint() ).as(" catalogService.getPricePoints().get(0).getRenewalsUntilLinkedPricepoint()" ).isEqualTo(-1) ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getStandardRateWithoutTax() ).as(" catalogService.getPricePoints().get(0).getStandardRateWithoutTax()" ).isEqualTo(new Double(2.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).isVolumeType() ).as(" catalogService.getPricePoints().get(0).isVolumeType()" ).isFalse() ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getKey() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getKey()" ).isNull();
-//// com.vizzavi.ecommerce.business.common.ChargingResource
-//
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts()" ).isNotNull();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getKey() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getKey()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getId() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getId()" ).isEqualTo("826");
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getType() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getType()" ).isEqualTo("CREDIT");
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getRate() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getRate()" ).isEqualTo(new Double(2.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getPriceChangeStartDate() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getPriceChangeStartDate()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getFixedAmount() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getFixedAmount()" ).isEqualTo(new Double(2.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getScaledAmount() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getScaledAmount()" ).isEqualTo(new Double(0.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getNotificationThreshold() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getNotificationThreshold()" ).isEqualTo(0) ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getPricePoint() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getPricePoint()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).isCurrency() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).isCurrency()" ).isTrue() ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).isResource() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).isResource()" ).isFalse() ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPricingModel() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPricingModel()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPromotionalPrice() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPromotionalPrice()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPromotionalPricingText() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPromotionalPricingText()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getTier() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getTier()" ).isEqualTo("default");
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].isDefaultPPT() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].isDefaultPPT()" ).isTrue() ;
-//        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPromotionalPricingTextList() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPromotionalPricingTextList()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getProtectedFk() ).as(" catalogService.getPricePoints().get(0).getProtectedFk()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getmPricingText1() ).as(" catalogService.getPricePoints().get(0).getmPricingText1()" ).isNullOrEmpty();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getmPricingText1() ).as(" catalogService.getPricePoints().get(0).getmPricingText1()" ).isEqualTo("");
-//        softly.assertThat(catalogService.getPricePoints().get(0).getmPricingText2() ).as(" catalogService.getPricePoints().get(0).getmPricingText2()" ).isNullOrEmpty();
-//        softly.assertThat(catalogService.getPricePoints().get(0).getmPricingText2() ).as(" catalogService.getPricePoints().get(0).getmPricingText2()" ).isEqualTo("");
+        softly.assertThat(catalogService.getPricePoints().get(0).getStandardRateWithoutTax() ).as(" catalogService.getPricePoints().get(0).getStandardRateWithoutTax()" ).isEqualTo(new Double(2.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(0).isVolumeType() ).as(" catalogService.getPricePoints().get(0).isVolumeType()" ).isFalse() ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getKey() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getKey()" ).isNull();
+// com.vizzavi.ecommerce.business.common.ChargingResource
+
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts()" ).isNotNull();
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getKey() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getKey()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getId() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getId()" ).isEqualTo("826");
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getType() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getType()" ).isEqualTo("CREDIT");
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getRate() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getRate()" ).isEqualTo(new Double(2.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getPriceChangeStartDate() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getPriceChangeStartDate()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getFixedAmount() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getFixedAmount()" ).isEqualTo(new Double(2.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getScaledAmount() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getScaledAmount()" ).isEqualTo(new Double(0.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getNotificationThreshold() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getNotificationThreshold()" ).isEqualTo(0) ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getPricePoint() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).getPricePoint()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).isCurrency() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).isCurrency()" ).isTrue() ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).isResource() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getBalanceImpacts().get(0).isResource()" ).isFalse() ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPricingModel() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPricingModel()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPromotionalPrice() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPromotionalPrice()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPromotionalPricingText() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPromotionalPricingText()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getTier() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getTier()" ).isEqualTo("default");
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].isDefaultPPT() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].isDefaultPPT()" ).isTrue() ;
+        softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPromotionalPricingTextList() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPromotionalPricingTextList()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(0).getProtectedFk() ).as(" catalogService.getPricePoints().get(0).getProtectedFk()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(0).getmPricingText1() ).as(" catalogService.getPricePoints().get(0).getmPricingText1()" ).isNullOrEmpty();
+        softly.assertThat(catalogService.getPricePoints().get(0).getmPricingText1() ).as(" catalogService.getPricePoints().get(0).getmPricingText1()" ).isEqualTo("");
+        softly.assertThat(catalogService.getPricePoints().get(0).getmPricingText2() ).as(" catalogService.getPricePoints().get(0).getmPricingText2()" ).isNullOrEmpty();
+        softly.assertThat(catalogService.getPricePoints().get(0).getmPricingText2() ).as(" catalogService.getPricePoints().get(0).getmPricingText2()" ).isEqualTo("");
 // com.vizzavi.ecommerce.business.catalog.internal.PricePointTier
 // com.vizzavi.ecommerce.business.common.ChargingResource
 // java.util.HashMap
@@ -324,19 +325,19 @@ public class GetServiceIT {
         softly.assertThat(catalogService.getPricePoints().get(1).isPromo() ).as(" catalogService.getPricePoints().get(1).isPromo()" ).isFalse() ;
         softly.assertThat(catalogService.getPricePoints().get(1).getAccessDevice() ).as(" catalogService.getPricePoints().get(1).getAccessDevice()" ).isEqualTo(999) ;
 // com.vizzavi.ecommerce.business.common.ChargingResource
-//        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getKey() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getKey()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getId() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getId()" ).isEqualTo("1100035");
-//        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getType() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getType()" ).isEqualTo("CREDIT");
-//        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getRate() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getRate()" ).isEqualTo(new Double(1.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getPriceChangeStartDate() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getPriceChangeStartDate()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getFixedAmount() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getFixedAmount()" ).isEqualTo(new Double(1.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getScaledAmount() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getScaledAmount()" ).isEqualTo(new Double(0.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getNotificationThreshold() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getNotificationThreshold()" ).isEqualTo(0) ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getPricePoint() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getPricePoint()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).isCurrency() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).isCurrency()" ).isFalse() ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).isResource() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).isResource()" ).isTrue() ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getServiceIdentifier() ).as(" catalogService.getPricePoints().get(1).getServiceIdentifier()" ).isEqualTo("content:pAlt_TAX_sAlt_999_999_*_999_999");
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPackageIdentifier() ).as(" catalogService.getPricePoints().get(1).getPackageIdentifier()" ).isEqualTo("package:pAlt_TAX_999_999_999_999_999_*_*_*_false_false_*");
+        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getKey() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getKey()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getId() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getId()" ).isEqualTo("1100035");
+        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getType() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getType()" ).isEqualTo("CREDIT");
+        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getRate() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getRate()" ).isEqualTo(new Double(1.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getPriceChangeStartDate() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getPriceChangeStartDate()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getFixedAmount() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getFixedAmount()" ).isEqualTo(new Double(1.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getScaledAmount() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getScaledAmount()" ).isEqualTo(new Double(0.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getNotificationThreshold() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getNotificationThreshold()" ).isEqualTo(0) ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getPricePoint() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).getPricePoint()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).isCurrency() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).isCurrency()" ).isFalse() ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).isResource() ).as(" catalogService.getPricePoints().get(1).getAllBalanceImpacts().get(0).isResource()" ).isTrue() ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getServiceIdentifier() ).as(" catalogService.getPricePoints().get(1).getServiceIdentifier()" ).isEqualTo("content:pAlt_TAX_sAlt_999_999_*_999_999");
+        softly.assertThat(catalogService.getPricePoints().get(1).getPackageIdentifier() ).as(" catalogService.getPricePoints().get(1).getPackageIdentifier()" ).isEqualTo("package:pAlt_TAX_999_999_999_999_999_*_*_*_false_false_*");
         softly.assertThat(catalogService.getPricePoints().get(1).isPreOrder() ).as(" catalogService.getPricePoints().get(1).isPreOrder()" ).isFalse() ;
         softly.assertThat(catalogService.getPricePoints().get(1).getTaxRate() ).as(" catalogService.getPricePoints().get(1).getTaxRate()" ).isEqualTo(new Double(0.175)) ;
         softly.assertThat(catalogService.getPricePoints().get(1).getTaxCode() ).as(" catalogService.getPricePoints().get(1).getTaxCode()" ).isEqualTo("TAX");
@@ -364,17 +365,17 @@ public class GetServiceIT {
 //        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpacts()[0].getCountryId() ).as(" catalogService.getPricePoints().get(1).getBalanceImpacts()[0].getCountryId()" ).isEqualTo(0) ;
 //        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpacts()[0].getCode() ).as(" catalogService.getPricePoints().get(1).getBalanceImpacts()[0].getCode()" ).isEqualTo(1100035) ;
 // com.vizzavi.ecommerce.business.common.ChargingResource
-//        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getKey() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getKey()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getId() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getId()" ).isEqualTo("1100035");
-//        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getType() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getType()" ).isEqualTo("CREDIT");
-//        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getRate() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getRate()" ).isEqualTo(new Double(1.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getPriceChangeStartDate() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getPriceChangeStartDate()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getFixedAmount() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getFixedAmount()" ).isEqualTo(new Double(1.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getScaledAmount() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getScaledAmount()" ).isEqualTo(new Double(0.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getNotificationThreshold() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getNotificationThreshold()" ).isEqualTo(0) ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getPricePoint() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getPricePoint()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).isCurrency() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).isCurrency()" ).isFalse() ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).isResource() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).isResource()" ).isTrue() ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getKey() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getKey()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getId() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getId()" ).isEqualTo("1100035");
+        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getType() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getType()" ).isEqualTo("CREDIT");
+        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getRate() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getRate()" ).isEqualTo(new Double(1.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getPriceChangeStartDate() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getPriceChangeStartDate()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getFixedAmount() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getFixedAmount()" ).isEqualTo(new Double(1.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getScaledAmount() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getScaledAmount()" ).isEqualTo(new Double(0.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getNotificationThreshold() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getNotificationThreshold()" ).isEqualTo(0) ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getPricePoint() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).getPricePoint()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).isCurrency() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).isCurrency()" ).isFalse() ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).isResource() ).as(" catalogService.getPricePoints().get(1).getBalanceImpactList().get(0).isResource()" ).isTrue() ;
         softly.assertThat(catalogService.getPricePoints().get(1).getGlid() ).as(" catalogService.getPricePoints().get(1).getGlid()" ).isNullOrEmpty();
         softly.assertThat(catalogService.getPricePoints().get(1).getGlid() ).as(" catalogService.getPricePoints().get(1).getGlid()" ).isEqualTo("");
         softly.assertThat(catalogService.getPricePoints().get(1).getContentId() ).as(" catalogService.getPricePoints().get(1).getContentId()" ).isEqualTo("sAlt");
@@ -454,33 +455,33 @@ public class GetServiceIT {
 //        softly.assertThat(catalogService.getPricePoints().get(1).getBalances()[0].getOldestSubscriptionId() ).as(" catalogService.getPricePoints().get(1).getBalances()[0].getOldestSubscriptionId()" ).isNull();
 //        softly.assertThat(catalogService.getPricePoints().get(1).getBalances()[0].getSubscription() ).as(" catalogService.getPricePoints().get(1).getBalances()[0].getSubscription()" ).isNull();
 //        softly.assertThat(catalogService.getPricePoints().get(1).getBalances()[0].getBalance() ).as(" catalogService.getPricePoints().get(1).getBalances()[0].getBalance()" ).isEqualTo(new Double(1.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getRenewalsUntilLinkedPricepoint() ).as(" catalogService.getPricePoints().get(1).getRenewalsUntilLinkedPricepoint()" ).isEqualTo(-1) ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getStandardRateWithoutTax() ).as(" catalogService.getPricePoints().get(1).getStandardRateWithoutTax()" ).isEqualTo(new Double(1.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).isVolumeType() ).as(" catalogService.getPricePoints().get(1).isVolumeType()" ).isFalse() ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getKey() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getKey()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(1).getRenewalsUntilLinkedPricepoint() ).as(" catalogService.getPricePoints().get(1).getRenewalsUntilLinkedPricepoint()" ).isEqualTo(-1) ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getStandardRateWithoutTax() ).as(" catalogService.getPricePoints().get(1).getStandardRateWithoutTax()" ).isEqualTo(new Double(1.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(1).isVolumeType() ).as(" catalogService.getPricePoints().get(1).isVolumeType()" ).isFalse() ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getKey() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getKey()" ).isNull();
 // com.vizzavi.ecommerce.business.common.ChargingResource
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getKey() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getKey()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getId() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getId()" ).isEqualTo("1100035");
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getType() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getType()" ).isEqualTo("CREDIT");
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getRate() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getRate()" ).isEqualTo(new Double(1.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getPriceChangeStartDate() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getPriceChangeStartDate()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getFixedAmount() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getFixedAmount()" ).isEqualTo(new Double(1.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getScaledAmount() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getScaledAmount()" ).isEqualTo(new Double(0.0)) ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getNotificationThreshold() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getNotificationThreshold()" ).isEqualTo(0) ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getPricePoint() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getPricePoint()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).isCurrency() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).isCurrency()" ).isFalse() ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).isResource() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).isResource()" ).isTrue() ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPricingModel() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPricingModel()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPromotionalPrice() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPromotionalPrice()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPromotionalPricingText() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPromotionalPricingText()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getTier() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getTier()" ).isEqualTo("default");
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].isDefaultPPT() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].isDefaultPPT()" ).isTrue() ;
-//        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPromotionalPricingTextList() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPromotionalPricingTextList()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(1).getProtectedFk() ).as(" catalogService.getPricePoints().get(1).getProtectedFk()" ).isNull();
-//        softly.assertThat(catalogService.getPricePoints().get(1).getmPricingText1() ).as(" catalogService.getPricePoints().get(1).getmPricingText1()" ).isNullOrEmpty();
-//        softly.assertThat(catalogService.getPricePoints().get(1).getmPricingText1() ).as(" catalogService.getPricePoints().get(1).getmPricingText1()" ).isEqualTo("");
-//        softly.assertThat(catalogService.getPricePoints().get(1).getmPricingText2() ).as(" catalogService.getPricePoints().get(1).getmPricingText2()" ).isNullOrEmpty();
-//        softly.assertThat(catalogService.getPricePoints().get(1).getmPricingText2() ).as(" catalogService.getPricePoints().get(1).getmPricingText2()" ).isEqualTo("");
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getKey() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getKey()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getId() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getId()" ).isEqualTo("1100035");
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getType() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getType()" ).isEqualTo("CREDIT");
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getRate() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getRate()" ).isEqualTo(new Double(1.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getPriceChangeStartDate() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getPriceChangeStartDate()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getFixedAmount() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getFixedAmount()" ).isEqualTo(new Double(1.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getScaledAmount() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getScaledAmount()" ).isEqualTo(new Double(0.0)) ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getNotificationThreshold() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getNotificationThreshold()" ).isEqualTo(0) ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getPricePoint() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).getPricePoint()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).isCurrency() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).isCurrency()" ).isFalse() ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).isResource() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getBalanceImpacts().get(0).isResource()" ).isTrue() ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPricingModel() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPricingModel()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPromotionalPrice() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPromotionalPrice()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPromotionalPricingText() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPromotionalPricingText()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getTier() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getTier()" ).isEqualTo("default");
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].isDefaultPPT() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].isDefaultPPT()" ).isTrue() ;
+        softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPromotionalPricingTextList() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPromotionalPricingTextList()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(1).getProtectedFk() ).as(" catalogService.getPricePoints().get(1).getProtectedFk()" ).isNull();
+        softly.assertThat(catalogService.getPricePoints().get(1).getmPricingText1() ).as(" catalogService.getPricePoints().get(1).getmPricingText1()" ).isNullOrEmpty();
+        softly.assertThat(catalogService.getPricePoints().get(1).getmPricingText1() ).as(" catalogService.getPricePoints().get(1).getmPricingText1()" ).isEqualTo("");
+        softly.assertThat(catalogService.getPricePoints().get(1).getmPricingText2() ).as(" catalogService.getPricePoints().get(1).getmPricingText2()" ).isNullOrEmpty();
+        softly.assertThat(catalogService.getPricePoints().get(1).getmPricingText2() ).as(" catalogService.getPricePoints().get(1).getmPricingText2()" ).isEqualTo("");
 // com.vizzavi.ecommerce.business.catalog.internal.PricePointTier
 // com.vizzavi.ecommerce.business.common.ChargingResource
 // java.util.HashMap

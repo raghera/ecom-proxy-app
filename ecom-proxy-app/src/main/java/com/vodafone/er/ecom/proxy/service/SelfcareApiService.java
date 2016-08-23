@@ -31,7 +31,7 @@ public class SelfcareApiService {
     public Subscription [] process(final Subscription [] subscriptions) {
         final List<Subscription> subsList = Arrays.asList(subscriptions);
 
-//        populatePurchasedServices(subsList);
+        populatePurchasedServices(subsList);
 
         //Currently nothing required
         return subscriptions;
@@ -58,7 +58,7 @@ public class SelfcareApiService {
             });
 
             //TODO Commented after move to 13-12
-//            subscription.setPurcServiceList(purchasedServices);
+            subscription.setPurcServiceList(purchasedServices);
 
         });
 

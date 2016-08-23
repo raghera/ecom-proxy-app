@@ -242,7 +242,6 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
                 } else {
                     result = EcomApiFactory.getSelfcareApi(locale).getSubscriptions(clientId,msisdn,device,filter);
                 }
-
             }
             catch (Exception e1) {                
                 oos.writeObject( new ExceptionAdapter(e1));
