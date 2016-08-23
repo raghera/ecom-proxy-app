@@ -51,8 +51,6 @@ public class UpdateServiceStatusIT {
 
         assertThat(result).as("provisionApi.updateServiceStatus()").isTrue();
 
-
-
     }
 
 }

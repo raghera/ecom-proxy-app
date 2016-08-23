@@ -237,6 +237,9 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
 
             try {
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    filter.setIncludeModifyTxns(true);
+                    filter.setIncludePaymentTxns(true);
+                    filter.setIncludeRefundTxns(true);
                     result = DecouplingApiFactory.getSelfcareApi(locale, CLIENT_ID.getValue()).getSubscriptions(clientId, msisdn, device, filter);
                     result = new SelfcareApiService(locale).process(result);
                 } else {

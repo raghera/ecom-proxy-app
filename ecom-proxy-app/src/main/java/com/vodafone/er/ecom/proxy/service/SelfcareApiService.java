@@ -4,9 +4,9 @@ import com.vizzavi.ecommerce.business.catalog.CatalogApi;
 import com.vizzavi.ecommerce.business.catalog.CatalogService;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
-import com.vizzavi.ecommerce.business.selfcare.PurchasedService;
-import com.vizzavi.ecommerce.business.selfcare.SelfcareApi;
-import com.vizzavi.ecommerce.business.selfcare.Subscription;
+import com.vizzavi.ecommerce.business.selfcare.*;
+import com.vodafone.er.ecom.proxy.constants.EcomAppEnum;
+import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -26,15 +26,32 @@ public class SelfcareApiService {
     //TODO initialize in Spring
     public SelfcareApiService(Locale locale) throws EcommerceException {
         selfcareApi = EcomApiFactory.getSelfcareApi(locale);
+        catalogApi = DecouplingApiFactory.getCatalogApi(locale, EcomAppEnum.CLIENT_ID.getValue());
     }
 
     public Subscription [] process(final Subscription [] subscriptions) {
         final List<Subscription> subsList = Arrays.asList(subscriptions);
 
-        populatePurchasedServices(subsList);
+        subsList.forEach(subcription -> populateSubscriptionTransactions(subcription));
+
+        //Don't think these are currently required.
+//        populatePurchasedServices(subsList);
 
         //Currently nothing required
         return subscriptions;
+
+    }
+    public void populateSubscriptionTransactions(Subscription subscription) {
+        List<Transaction> resultList = new ArrayList<>();
+
+        subscription.getPaymentTransactions().forEach(paymentTxn -> resultList.add(paymentTxn));
+        subscription.getModifyTransactions().forEach(modifyTxn -> resultList.add(modifyTxn));
+        if(subscription.getRefundTransactions() != null) {
+            subscription.getRefundTransactions()
+                    .forEach(refundTxn -> resultList.add(refundTxn));
+        }
+
+        subscription.setTransactions(resultList);
 
     }
 
