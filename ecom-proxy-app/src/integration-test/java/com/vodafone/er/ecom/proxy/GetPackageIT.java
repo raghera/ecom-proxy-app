@@ -28,7 +28,7 @@ public class GetPackageIT {
         CatalogPackage pack = getCatalogApi().getPackage("pAlt");
         assertNotNull(pack);
 
-        /*
+//        /*
 
         softly.assertThat(pack.getName() ).as(" pack.getName()" ).isEqualTo("2 Usage Alternative Payment Pkg");
         softly.assertThat(pack.getResource() ).as(" pack.getResource()" ).isNull();
@@ -1630,9 +1630,9 @@ public class GetPackageIT {
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getRenewalsUntilLinkedPricepoint() ).as(" pack.getServices().get(0).getPricePoints().get(0).getRenewalsUntilLinkedPricepoint()" ).isEqualTo(-1) ;
 
 
-*/
+//*/
 
-///*   PART 2 BELOW THIS LINE =======================================================================
+/*   PART 2 BELOW THIS LINE =======================================================================
 
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getStandardRateWithoutTax() ).as(" pack.getServices().get(0).getPricePoints().get(0).getStandardRateWithoutTax()" ).isEqualTo(new Double(2.0)) ;
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).isVolumeType() ).as(" pack.getServices().get(0).getPricePoints().get(0).isVolumeType()" ).isFalse() ;
@@ -2051,7 +2051,7 @@ public class GetPackageIT {
         softly.assertThat(pack.getPricePoint() ).as(" pack.getPricePoint()" ).isNull();
         softly.assertThat(pack.getDescription() ).as(" pack.getDescription()" ).isEqualTo("");
         softly.assertThat(pack.isActive() ).as(" pack.isActive()" ).isTrue() ;
-//*/
+*/
         softly.assertAll();
 
     }

@@ -1,5 +1,6 @@
 package com.vodafone.er.ecom.proxy.server;
 
+import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import org.apache.log4j.*;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AllowSymLinkAliasChecker;
@@ -9,12 +10,13 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
+import java.util.Optional;
 import java.util.Properties;
 
 public class EcomProxyJetty9Server {
 
-    private int JETTY_PORT = 8888;
-    private String JETTY_HOST = "localhost";
+    private static final int JETTY_PORT = 8888;
+    private static final String JETTY_HOST = "localhost";
     private static final String WAR_PATH = "./ecom-proxy-app/target/ecom-proxy-app.war";
     private static final String CONTEXT_PATH = "/delegates";
 
@@ -29,12 +31,10 @@ public class EcomProxyJetty9Server {
 
         System.out.println("ER host " + props.getProperty("er.server.host"));
         System.out.println("ER port " + props.getProperty("er.server.port"));
-        System.out.println("EPA host " + props.getProperty("ecom.proxy.host"));
-        System.out.println("EPA port " + props.getProperty("ecom.proxy.port"));
 
 
-        String host = props.getProperty("ecom.proxy.host");
-        int port = Integer.valueOf(props.getProperty("ecom.proxy.port"));
+        final Optional<String> host = PropertyService.getProperty("ecom.server.host", "127.0.0.1");
+        final Optional<String> port = PropertyService.getProperty("ecom.server.host", "8094");
 
         Logger.getRootLogger().setLevel(Level.DEBUG);
         Logger.getLogger("com.vodafone").setLevel(Level.DEBUG);
@@ -46,7 +46,7 @@ public class EcomProxyJetty9Server {
 
         Logger.getLogger("org.eclipse").setLevel(Level.ERROR);
 
-        Server server = new Server(8888);
+        Server server = new Server(JETTY_PORT);
 
         ContextHandler contextHandler = new ContextHandler();
         contextHandler.setContextPath("/delegates");

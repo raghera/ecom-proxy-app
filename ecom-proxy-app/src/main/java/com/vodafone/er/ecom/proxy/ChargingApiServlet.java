@@ -4,6 +4,7 @@ import com.vizzavi.ecommerce.business.charging.*;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vodafone.global.er.data.ERLogDataImpl;
+import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.util.ExceptionAdapter;
 import org.apache.log4j.Logger;
 
@@ -13,6 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Optional;
+
+import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_USAGE_AUTH1;
+import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 
 //import com.vodafone.global.er.AbstractEcomServlet;
 //import com.vodafone.global.er.delegate.DelegateFactory;
@@ -113,7 +118,13 @@ public class ChargingApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getChargingApiDelegate(locale).usageAuth(clientApplicationId,msisdn,serviceId,usageAttributes);
+
+                final Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_USAGE_AUTH1.value(), true);
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    result = DecouplingApiFactory.getChargingApi(locale, clientApplicationId).usageAuth(clientApplicationId,msisdn,serviceId,usageAttributes);
+                } else {
+                    result = getChargingApiDelegate(locale).usageAuth(clientApplicationId, msisdn, serviceId, usageAttributes);
+                }
             }
             catch (Exception e1) {                
                 oos.writeObject( new ExceptionAdapter(e1));
@@ -486,7 +497,6 @@ public class ChargingApiServlet extends AbstractEcomServlet {
     }
 
 	private ChargingApi getChargingApiDelegate(Locale locale) throws EcommerceException {
-//		return DecouplingApiFactory.getChargingApi(locale, clientId);
         return EcomApiFactory.getChargingApi(locale);
 	}
 }

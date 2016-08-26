@@ -1,0 +1,61 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+
+	<welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+	<display-name>Ecom Proxy Server Web Application</display-name>
+	<servlet>
+		<servlet-name>CatalogApiServlet</servlet-name>
+		<servlet-class>com.vodafone.er.ecom.proxy.CatalogApiServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>PurchaseApiServlet</servlet-name>
+		<servlet-class>com.vodafone.er.ecom.proxy.PurchaseApiServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ChargingApiServlet</servlet-name>
+		<servlet-class>com.vodafone.er.ecom.proxy.ChargingApiServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>SelfcareApiServlet</servlet-name>
+		<servlet-class>com.vodafone.er.ecom.proxy.SelfcareApiServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ProvisionApiServlet</servlet-name>
+		<servlet-class>com.vodafone.er.ecom.proxy.ProvisionApiServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>CustcareApiServlet</servlet-name>
+		<servlet-class>com.vodafone.er.ecom.proxy.CustcareApiServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CatalogApiServlet</servlet-name>
+		<url-pattern>/CatalogApi</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SelfcareApiServlet</servlet-name>
+		<url-pattern>/SelfcareApi</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PurchaseApiServlet</servlet-name>
+		<url-pattern>/PurchaseApi</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ChargingApiServlet</servlet-name>
+		<url-pattern>/ChargingApi</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ProvisionApiServlet</servlet-name>
+		<url-pattern>/ProvisionApi</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CustcareApiServlet</servlet-name>
+		<url-pattern>/CustcareApi</url-pattern>
+	</servlet-mapping>
+
+</web-app>
