@@ -1,18 +1,17 @@
 package com.vodafone.er.ecom.proxy.service;
 
 import com.vizzavi.ecommerce.business.catalog.CatalogApi;
+import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
 import com.vizzavi.ecommerce.business.catalog.CatalogService;
-import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vizzavi.ecommerce.business.selfcare.*;
-import com.vodafone.er.ecom.proxy.constants.EcomAppEnum;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
+import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
+
+import static com.vodafone.er.ecom.proxy.constants.EcomAppEnum.CLIENT_ID;
 
 /**
  * Created by Ravi Aghera
@@ -22,26 +21,52 @@ public class SelfcareApiService {
 
     private SelfcareApi selfcareApi;
     private CatalogApi catalogApi;
+    private CatalogApiService catalogApiService;
 
-    //TODO initialize in Spring
     public SelfcareApiService(Locale locale) throws EcommerceException {
-        selfcareApi = EcomApiFactory.getSelfcareApi(locale);
-        catalogApi = DecouplingApiFactory.getCatalogApi(locale, EcomAppEnum.CLIENT_ID.getValue());
+        selfcareApi = DecouplingApiFactory.getSelfcareApi(locale, CLIENT_ID.getValue());
+        catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.getValue());
+        catalogApiService = new CatalogApiService();
     }
 
-    public Subscription [] process(final Subscription [] subscriptions) {
+    //call getSubscriptions instead where possible.
+    public Optional<Subscription> getSubscription(Locale locale, String msisdn, String subId) throws EcommerceException {
+//        Subscription sub = selfcareApi.getSubscription(CLIENT_ID.getValue(), msisdn, 0, subId);
+        SubscriptionFilter filter = new SubscriptionFilterImpl();
+        filter.setSubscriptionId(subId);
+        Subscription [] subs = getSubscriptions(locale, msisdn, CLIENT_ID.getValue(), 0, filter);
+        if(subs == null || subs.length != 1) {
+            return Optional.empty();
+        }
+        process(locale, subs);
+
+        return Optional.of(subs[0]);
+    }
+
+    //This one returns transactions which getSubscription does not
+    public Subscription [] getSubscriptions(Locale locale, String clientId, String msisdn, int device, SubscriptionFilter filter)
+            throws EcommerceException{
+
+        filter.setIncludeModifyTxns(true);
+        filter.setIncludePaymentTxns(true);
+        filter.setIncludeRefundTxns(true);
+
+        Subscription [] subs = selfcareApi.getSubscriptions(clientId, msisdn, device, filter);
+        process(locale, subs);
+        return subs;
+    }
+
+    public Subscription [] process(Locale locale, final Subscription [] subscriptions) {
         final List<Subscription> subsList = Arrays.asList(subscriptions);
 
-        subsList.forEach(subcription -> populateSubscriptionTransactions(subcription));
+        subsList.forEach(subscription -> populateSubscriptionTransactions(locale, subscription));
 
-        //Don't think these are currently required.
+        //Currently nothing else required.
 //        populatePurchasedServices(subsList);
-
-        //Currently nothing required
         return subscriptions;
 
     }
-    public void populateSubscriptionTransactions(Subscription subscription) {
+    public void populateSubscriptionTransactions(Locale locale, Subscription subscription) {
         List<Transaction> resultList = new ArrayList<>();
 
         subscription.getPaymentTransactions().forEach(paymentTxn -> resultList.add(paymentTxn));
@@ -52,6 +77,10 @@ public class SelfcareApiService {
         }
 
         subscription.setTransactions(resultList);
+
+        final CatalogPackage pack = catalogApiService.getCatalogPackage(locale, subscription.getPackageId());
+        catalogApiService.populatePricePointInPackage(pack, subscription.getPackage().getPricePoint().getId());
+        subscription.setPackage(pack);
 
     }
 

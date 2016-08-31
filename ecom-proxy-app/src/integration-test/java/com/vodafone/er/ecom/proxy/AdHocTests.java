@@ -52,6 +52,30 @@ public class AdHocTests {
     }
 
     @Test
+    public void getServiceIdFromPricePointId() {
+        String serviceId1 = "content:BP001_TAX_B001_999_999_*_999_999";
+        String serviceId2 = "content:BP001_*_B001_999_999_*_999_999";
+
+        getServiceIdFromPpId(serviceId1);
+        getServiceIdFromPpId(serviceId2);
+
+    }
+    public void getServiceIdFromPpId(String ppId) {
+        int index = ppId.indexOf("_");
+        String result = ppId.substring(index+1);
+
+        index = result.indexOf("_");
+        result = result.substring(index+1);
+        System.out.println(result);
+
+        index = result.indexOf("_");
+        result = result.substring(0, index);
+
+        System.out.println(result);
+
+    }
+
+    @Test
     public void testValidateMsisdnAllUserGroupsAccepted() throws Exception
     {
         String msisdn = "88887772P" + System.currentTimeMillis();

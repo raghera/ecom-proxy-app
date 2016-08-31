@@ -125,8 +125,8 @@ public class CatalogApiService {
         final PricePoints origPpts = catalogService.getPricePoints();
         origPpts.forEach(pricePoint -> {
             //TODO currently does not need to go to the server but could add here for PricePoints
-//            PricePoint processedPricePoint = getPricePoint(locale, pricePoint.getId());
-            //For instance we can get the Tarriff info
+            PricePoint processedPricePoint = getPricePoint(locale, pricePoint.getId());
+            //For instance we can get the Tariff info
 
             String packageId = CatalogUtil.getPackageIdFromServicePricepoint(pricePoint.getId());
 
@@ -138,6 +138,13 @@ public class CatalogApiService {
         });
 
         return catalogService;
+    }
+
+    public void populatePricePointInPackage(CatalogPackage pack, String pricepointId) {
+        if(pack.getPricePoints() != null && !pack.getPricePoints().isEmpty()) {
+            PricePoint ppt = pack.getPricePoints().getPricePoint(pricepointId);
+            pack.setPricePoint(ppt);
+        }
     }
 
 }

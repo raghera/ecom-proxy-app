@@ -3,6 +3,7 @@ package com.vodafone.er.ecom.proxy;
 import com.vizzavi.ecommerce.business.catalog.*;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
+import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.er.ecom.proxy.service.CatalogApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
@@ -16,8 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.*;
 
-import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_GET_PACKAGES2;
-import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_GET_SERVICE1;
+import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.*;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 
 public class CatalogApiServlet extends AbstractEcomServlet {
@@ -566,7 +566,12 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getCatalogEcomClient(locale).findPackagesWithService(msisdn,serv,purchaseAttributes);
+                Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_FIND_PACKAGES_WITH_SERVICE9.value(), true);
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    result = DecouplingApiFactory.getCatalogApi(locale, clientId).findPackagesWithService(msisdn,serv,purchaseAttributes);
+                } else {
+                    result = getCatalogEcomClient(locale).findPackagesWithService(msisdn,serv,purchaseAttributes);
+                }
             }
             catch (Exception e1) {
                 oos.writeObject( new ExceptionAdapter(e1));

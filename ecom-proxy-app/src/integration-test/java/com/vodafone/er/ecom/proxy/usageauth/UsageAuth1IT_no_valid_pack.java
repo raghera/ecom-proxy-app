@@ -26,7 +26,7 @@ public class UsageAuth1IT_no_valid_pack {
     private SoftAssertions softly = new SoftAssertions();
 
     @Test
-    public void testGetService1UsageAuthResponse() throws Exception {
+    public void usageAuthAuthResponse() throws Exception {
         final String msisdn = String.valueOf(new Random().nextInt());
 
         final ChargingApi chargingApi = EcomApiFactory.getChargingApi(Locale.UK);

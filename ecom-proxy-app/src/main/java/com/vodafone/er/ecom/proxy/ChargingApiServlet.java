@@ -3,6 +3,8 @@ package com.vodafone.er.ecom.proxy;
 import com.vizzavi.ecommerce.business.charging.*;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
+import com.vodafone.er.ecom.proxy.properties.PropertyService;
+import com.vodafone.er.ecom.proxy.service.ChargingApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.util.ExceptionAdapter;
@@ -17,10 +19,8 @@ import java.util.Locale;
 import java.util.Optional;
 
 import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_USAGE_AUTH1;
+import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_USAGE_AUTH_RATE_CHARGE3;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
-
-//import com.vodafone.global.er.AbstractEcomServlet;
-//import com.vodafone.global.er.delegate.DelegateFactory;
 
 public class ChargingApiServlet extends AbstractEcomServlet {
 
@@ -121,7 +121,9 @@ public class ChargingApiServlet extends AbstractEcomServlet {
 
                 final Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_USAGE_AUTH1.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = DecouplingApiFactory.getChargingApi(locale, clientApplicationId).usageAuth(clientApplicationId,msisdn,serviceId,usageAttributes);
+                    ChargingApiService service = new ChargingApiService(locale);
+                    result = service.processUsageAuth(locale, clientApplicationId,msisdn,serviceId,usageAttributes);
+//                    result = DecouplingApiFactory.getChargingApi(locale, clientApplicationId).usageAuth(clientApplicationId,msisdn,serviceId,usageAttributes);
                 } else {
                     result = getChargingApiDelegate(locale).usageAuth(clientApplicationId, msisdn, serviceId, usageAttributes);
                 }
@@ -208,7 +210,12 @@ public class ChargingApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getChargingApiDelegate(locale).usageAuthRateCharge(clientApplicationId, msisdn, serviceId, usageAttributes);
+                Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_USAGE_AUTH_RATE_CHARGE3.value(), true);
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    result = DecouplingApiFactory.getChargingApi(locale, clientApplicationId).usageAuthRateCharge(clientApplicationId, msisdn, serviceId, usageAttributes);
+                } else {
+                    result = getChargingApiDelegate(locale).usageAuthRateCharge(clientApplicationId, msisdn, serviceId, usageAttributes);
+                }
             }
             catch (Exception e1) {                
                 oos.writeObject( new ExceptionAdapter(e1));

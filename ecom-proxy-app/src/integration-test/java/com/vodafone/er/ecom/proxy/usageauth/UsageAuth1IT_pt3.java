@@ -1345,6 +1345,7 @@ public class UsageAuth1IT_pt3 {
         softly.assertThat(usageAuth.getPricePoint().getGracePeriod() ).as(" usageAuth.getPricePoint().getGracePeriod()" ).isNull();
         softly.assertThat(usageAuth.getPricePoint().getRetryFrequency() ).as(" usageAuth.getPricePoint().getRetryFrequency()" ).isNull();
 
+        softly.assertAll();
 
     }
 
