@@ -432,27 +432,27 @@ public class UsageAuthRateCharge3IT_pt6 {
         softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).isTariff() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).isTariff()" ).isFalse() ;
         softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).isHideForPurchaseOptions() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).isHideForPurchaseOptions()" ).isFalse() ;
 // com.vizzavi.ecommerce.business.catalog.Tax
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getName() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getName()" ).isEqualTo("TAX");
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getKey() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getKey()" ).isNull();
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRate() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRate()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxCode() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxCode()" ).isEqualTo("TAX");
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getName() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getName()" ).isEqualTo("TAX");
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getKey() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getKey()" ).isNull();
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRate() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRate()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxCode() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxCode()" ).isEqualTo("TAX");
 //check size of list!
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().size()).as("usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().size()").isEqualTo(3);
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().size()).as("usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().size()").isEqualTo(3);
 //if the list is smaller than expected we can't continue, so do a hard assert
-        assertTrue(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().size() >= 3);
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(0).getValue() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(0).getKey() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
+//        assertTrue(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().size() >= 3);
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(0).getValue() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(0).getKey() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
 
 
 
         // java.util.Date
 // java.util.Date
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(1).getValue() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(1).getKey() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(1).getValue() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(1).getKey() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
 // java.util.Date
 // java.util.Date
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(2).getValue() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(2).getKey() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(2).getValue() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(2).getKey() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoints().get(2).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
 // java.util.Date
 // java.util.Date
 //check size of array!
@@ -1010,24 +1010,24 @@ public class UsageAuthRateCharge3IT_pt6 {
         softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().isTariff() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().isTariff()" ).isFalse() ;
         softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().isHideForPurchaseOptions() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().isHideForPurchaseOptions()" ).isFalse() ;
 // com.vizzavi.ecommerce.business.catalog.Tax
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getName() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getName()" ).isEqualTo("TAX");
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getKey() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getKey()" ).isNull();
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRate() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRate()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxCode() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxCode()" ).isEqualTo("TAX");
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getName() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getName()" ).isEqualTo("TAX");
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getKey() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getKey()" ).isNull();
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRate() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRate()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxCode() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxCode()" ).isEqualTo("TAX");
 //check size of list!
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().size()).as("usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().size()").isEqualTo(3);
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().size()).as("usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().size()").isEqualTo(3);
 //if the list is smaller than expected we can't continue, so do a hard assert
-        assertTrue(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().size() >= 3);
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(0).getValue() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(0).getKey() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
+//        assertTrue(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().size() >= 3);
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(0).getValue() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(0).getKey() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
 // java.util.Date
 // java.util.Date
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(1).getValue() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(1).getKey() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(1).getValue() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(1).getKey() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
 // java.util.Date
 // java.util.Date
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(2).getValue() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(2).getKey() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(2).getValue() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(2).getKey() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getPricePoint().getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
 // java.util.Date
 // java.util.Date
 //check size of array!

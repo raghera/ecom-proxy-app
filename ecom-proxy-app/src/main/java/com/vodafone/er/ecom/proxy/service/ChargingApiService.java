@@ -46,6 +46,17 @@ public class ChargingApiService {
         }
         return chargingApi;
     }
+    public UsageAuthorization processUsageAuthRateCharge(Locale locale, String clientId, String msisdn, String serviceId,
+                                                         UsageAttributes usageAttributes) throws EcommerceException {
+
+        UsageAuthorization usageAuth = getChargingApi(locale, clientId).usageAuthRateCharge(clientId, msisdn, serviceId, usageAttributes);
+        populateSubscription(locale, msisdn, usageAuth);
+        populateActiveSubscriptions(locale, msisdn, usageAuth);
+        populateUsageAuthServicePricePointFromSubscription(locale, msisdn, usageAuth);
+        populatePackageFromSubscription(usageAuth);
+
+        return usageAuth;
+    }
 
     public UsageAuthorization processUsageAuth(Locale locale, String clientId, String msisdn, String serviceId,UsageAttributes attributes)
             throws UsageAuthorizationException {

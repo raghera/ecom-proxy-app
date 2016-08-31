@@ -71,7 +71,7 @@ public class SelfcareApiService {
 
         subscription.getPaymentTransactions().forEach(paymentTxn -> resultList.add(paymentTxn));
         subscription.getModifyTransactions().forEach(modifyTxn -> resultList.add(modifyTxn));
-        if(subscription.getRefundTransactions() != null) {
+        if( subscription.getRefundTransactions() != null) {
             subscription.getRefundTransactions()
                     .forEach(refundTxn -> resultList.add(refundTxn));
         }

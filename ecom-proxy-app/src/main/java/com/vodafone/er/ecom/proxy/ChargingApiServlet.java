@@ -6,7 +6,6 @@ import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.er.ecom.proxy.service.ChargingApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
-import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.util.ExceptionAdapter;
 import org.apache.log4j.Logger;
 
@@ -212,7 +211,9 @@ public class ChargingApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_USAGE_AUTH_RATE_CHARGE3.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = DecouplingApiFactory.getChargingApi(locale, clientApplicationId).usageAuthRateCharge(clientApplicationId, msisdn, serviceId, usageAttributes);
+                    ChargingApiService service = new ChargingApiService(locale);
+                    result = service.processUsageAuthRateCharge(locale, clientApplicationId, msisdn, serviceId, usageAttributes);
+//                    result = DecouplingApiFactory.getChargingApi(locale, clientApplicationId).usageAuthRateCharge(clientApplicationId, msisdn, serviceId, usageAttributes);
                 } else {
                     result = getChargingApiDelegate(locale).usageAuthRateCharge(clientApplicationId, msisdn, serviceId, usageAttributes);
                 }

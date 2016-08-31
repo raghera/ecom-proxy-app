@@ -61,18 +61,13 @@ public class AdHocTests {
 
     }
     public void getServiceIdFromPpId(String ppId) {
-        int index = ppId.indexOf("_");
-        String result = ppId.substring(index+1);
-
-        index = result.indexOf("_");
-        result = result.substring(index+1);
-        System.out.println(result);
-
-        index = result.indexOf("_");
-        result = result.substring(0, index);
-
-        System.out.println(result);
-
+//            PaymentTxn txn = new PaymentTxn();
+//            List<RefundTxn> txns = new ArrayList<>();
+//            if (paymentTxns==null || paymentTxns.isEmpty())
+//                return txns;
+//            for (PaymentTxn txn: paymentTxns)       {
+//                    txns.addAll(txn.getRefundTransactions());
+//            }
     }
 
     @Test
