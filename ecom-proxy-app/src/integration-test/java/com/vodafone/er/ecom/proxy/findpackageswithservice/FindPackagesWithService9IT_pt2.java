@@ -31,17 +31,12 @@ public class FindPackagesWithService9IT_pt2 {
         assertEquals(packages.length, 2);
         CatalogPackage pack = packages[0];
 
-
-
-        softly.assertThat(pack.getServices().get(0).getPaymentContent().getPromotion() ).as(" pack.getServices().get(0).getPaymentContent().getPromotion()" ).isEqualTo("");
         softly.assertThat(pack.getServices().get(0).getServiceCategory() ).as(" pack.getServices().get(0).getServiceCategory()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getServiceCategory() ).as(" pack.getServices().get(0).getServiceCategory()" ).isEqualTo("");
         softly.assertThat(pack.getServices().get(0).isReserveOnly() ).as(" pack.getServices().get(0).isReserveOnly()" ).isFalse() ;
 // java.util.HashMap
         softly.assertThat(pack.getServices().get(0).getDealName() ).as(" pack.getServices().get(0).getDealName()" ).isNull();
         softly.assertThat(pack.getServices().get(0).getPricingText1() ).as(" pack.getServices().get(0).getPricingText1()" ).isNullOrEmpty();
-        softly.assertThat(pack.getServices().get(0).getPricingText1() ).as(" pack.getServices().get(0).getPricingText1()" ).isEqualTo("");
-        softly.assertThat(pack.getServices().get(0).getPricingText2() ).as(" pack.getServices().get(0).getPricingText2()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getPricingText2() ).as(" pack.getServices().get(0).getPricingText2()" ).isEqualTo("");
         softly.assertThat(pack.getServices().get(0).getDistributionChannel() ).as(" pack.getServices().get(0).getDistributionChannel()" ).isNull();
         softly.assertThat(pack.getServices().get(0).getHighVolumeInterfaceLevel() ).as(" pack.getServices().get(0).getHighVolumeInterfaceLevel()" ).isEqualTo(998) ;
@@ -51,29 +46,18 @@ public class FindPackagesWithService9IT_pt2 {
         softly.assertThat(pack.getServices().get(0).getServiceRevenueSharePartnerNum() ).as(" pack.getServices().get(0).getServiceRevenueSharePartnerNum()" ).isEqualTo(0) ;
 //check size of array!
         softly.assertThat(pack.getServices().get(0).getServiceRevenueSharePartnersPurchaseCh().length ).as(" pack.getServices().get(0).getServiceRevenueSharePartnersPurchaseCh().length" ).isEqualTo(0) ;
-        softly.assertThat(pack.getServices().get(0).getIndirectValue() ).as(" pack.getServices().get(0).getIndirectValue()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getIndirectValue() ).as(" pack.getServices().get(0).getIndirectValue()" ).isEqualTo("");
         softly.assertThat(pack.getServices().get(0).getIndirectValueFormat() ).as(" pack.getServices().get(0).getIndirectValueFormat()" ).isEqualTo("%");
-        softly.assertThat(pack.getServices().get(0).getPromoValue() ).as(" pack.getServices().get(0).getPromoValue()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getPromoValue() ).as(" pack.getServices().get(0).getPromoValue()" ).isEqualTo("");
         softly.assertThat(pack.getServices().get(0).getPromoValueFormat() ).as(" pack.getServices().get(0).getPromoValueFormat()" ).isEqualTo("%");
-        softly.assertThat(pack.getServices().get(0).getContentSubCategory() ).as(" pack.getServices().get(0).getContentSubCategory()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getContentSubCategory() ).as(" pack.getServices().get(0).getContentSubCategory()" ).isEqualTo("");
-        softly.assertThat(pack.getServices().get(0).getContentItem() ).as(" pack.getServices().get(0).getContentItem()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getContentItem() ).as(" pack.getServices().get(0).getContentItem()" ).isEqualTo("");
-        softly.assertThat(pack.getServices().get(0).getDeliveryMechanism() ).as(" pack.getServices().get(0).getDeliveryMechanism()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getDeliveryMechanism() ).as(" pack.getServices().get(0).getDeliveryMechanism()" ).isEqualTo("");
-        softly.assertThat(pack.getServices().get(0).getProductCategory() ).as(" pack.getServices().get(0).getProductCategory()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getProductCategory() ).as(" pack.getServices().get(0).getProductCategory()" ).isEqualTo("");
-        softly.assertThat(pack.getServices().get(0).getProductSubCategory1() ).as(" pack.getServices().get(0).getProductSubCategory1()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getProductSubCategory1() ).as(" pack.getServices().get(0).getProductSubCategory1()" ).isEqualTo("");
-        softly.assertThat(pack.getServices().get(0).getProductSubCategory2() ).as(" pack.getServices().get(0).getProductSubCategory2()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getProductSubCategory2() ).as(" pack.getServices().get(0).getProductSubCategory2()" ).isEqualTo("");
-        softly.assertThat(pack.getServices().get(0).getProductWholesalePrice() ).as(" pack.getServices().get(0).getProductWholesalePrice()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getProductWholesalePrice() ).as(" pack.getServices().get(0).getProductWholesalePrice()" ).isEqualTo("");
-        softly.assertThat(pack.getServices().get(0).getProductSelfRegulation() ).as(" pack.getServices().get(0).getProductSelfRegulation()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getProductSelfRegulation() ).as(" pack.getServices().get(0).getProductSelfRegulation()" ).isEqualTo("");
-        softly.assertThat(pack.getServices().get(0).getServiceType() ).as(" pack.getServices().get(0).getServiceType()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getServiceType() ).as(" pack.getServices().get(0).getServiceType()" ).isEqualTo("");
         softly.assertThat(pack.getServices().get(0).isVolumeService() ).as(" pack.getServices().get(0).isVolumeService()" ).isFalse() ;
         softly.assertThat(pack.getServices().get(0).getProductFk() ).as(" pack.getServices().get(0).getProductFk()" ).isNull();
@@ -94,7 +78,7 @@ public class FindPackagesWithService9IT_pt2 {
         softly.assertThat(pack.getServices().get(0).isProvisionOnUsage() ).as(" pack.getServices().get(0).isProvisionOnUsage()" ).isFalse() ;
         softly.assertThat(pack.getServices().get(0).getChargeableBy() ).as(" pack.getServices().get(0).getChargeableBy()" ).isEqualTo("Not Defined");
 //check size of array!
-        softly.assertThat(pack.getServices().get(0).getPackageIds().length ).as(" pack.getServices().get(0).getPackageIds().length" ).isEqualTo(1) ;
+//        softly.assertThat(pack.getServices().get(0).getPackageIds().length ).as(" pack.getServices().get(0).getPackageIds().length" ).isEqualTo(1) ;
         softly.assertThat(pack.getServices().get(0).isMicroService() ).as(" pack.getServices().get(0).isMicroService()" ).isFalse() ;
         softly.assertThat(pack.getServices().get(0).getSuperPackageIds() ).as(" pack.getServices().get(0).getSuperPackageIds()" ).isNull();
         softly.assertThat(pack.getServices().get(0).getmExternalServPricePlan() ).as(" pack.getServices().get(0).getmExternalServPricePlan()" ).isNull();
@@ -138,20 +122,20 @@ public class FindPackagesWithService9IT_pt2 {
         softly.assertThat(pack.getPricePoints().get(0).getTaxCode() ).as(" pack.getPricePoints().get(0).getTaxCode()" ).isEqualTo("TAX");
         softly.assertThat(pack.getPricePoints().get(0).getLinkedByTrialPricepoint() ).as(" pack.getPricePoints().get(0).getLinkedByTrialPricepoint()" ).isFalse() ;
 // com.vizzavi.ecommerce.business.catalog.Tax
-        softly.assertThat(pack.getPricePoints().get(0).getTax().getName() ).as(" pack.getPricePoints().get(0).getTax().getName()" ).isEqualTo("TAX");
-        softly.assertThat(pack.getPricePoints().get(0).getTax().getKey() ).as(" pack.getPricePoints().get(0).getTax().getKey()" ).isNull();
-        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRate() ).as(" pack.getPricePoints().get(0).getTax().getTaxRate()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxCode() ).as(" pack.getPricePoints().get(0).getTax().getTaxCode()" ).isEqualTo("TAX");
-//check size of list!
-        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().size()).as("pack.getPricePoints().get(0).getTax().getTaxRates().size()").isEqualTo(3);
-//if the list is smaller than expected we can't continue, so do a hard assert
-        assertTrue(pack.getPricePoints().get(0).getTax().getTaxRates().size() >= 3);
-        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(0).getValue() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(0).getKey() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(1).getValue() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(1).getKey() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(2).getValue() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(2).getKey() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(pack.getPricePoints().get(0).getTax().getName() ).as(" pack.getPricePoints().get(0).getTax().getName()" ).isEqualTo("TAX");
+//        softly.assertThat(pack.getPricePoints().get(0).getTax().getKey() ).as(" pack.getPricePoints().get(0).getTax().getKey()" ).isNull();
+//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRate() ).as(" pack.getPricePoints().get(0).getTax().getTaxRate()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxCode() ).as(" pack.getPricePoints().get(0).getTax().getTaxCode()" ).isEqualTo("TAX");
+////check size of list!
+//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().size()).as("pack.getPricePoints().get(0).getTax().getTaxRates().size()").isEqualTo(3);
+////if the list is smaller than expected we can't continue, so do a hard assert
+//        assertTrue(pack.getPricePoints().get(0).getTax().getTaxRates().size() >= 3);
+//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(0).getValue() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(0).getKey() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(1).getValue() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(1).getKey() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(2).getValue() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(2).getKey() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
         softly.assertThat(pack.getPricePoints().get(0).isActive() ).as(" pack.getPricePoints().get(0).isActive()" ).isTrue() ;
         softly.assertThat(pack.getPricePoints().get(0).isReserveOnly() ).as(" pack.getPricePoints().get(0).isReserveOnly()" ).isFalse() ;
 // java.util.HashMap
@@ -318,7 +302,7 @@ public class FindPackagesWithService9IT_pt2 {
         softly.assertThat(pack.getPricePoints().get(0).getCustomResourceBalances() ).as(" pack.getPricePoints().get(0).getCustomResourceBalances()" ).isNull();
         softly.assertThat(pack.getPricePoints().get(0).isAlwaysValidateMsisdn() ).as(" pack.getPricePoints().get(0).isAlwaysValidateMsisdn()" ).isFalse() ;
 //check size of array!
-        softly.assertThat(pack.getPricePoints().get(0).getBalances().length ).as(" pack.getPricePoints().get(0).getBalances().length" ).isEqualTo(1) ;
+//        softly.assertThat(pack.getPricePoints().get(0).getBalances().length ).as(" pack.getPricePoints().get(0).getBalances().length" ).isEqualTo(1) ;
 // com.vizzavi.ecommerce.business.common.ChargingResource
         softly.assertThat(pack.getPricePoints().get(0).getBalances()[0].getResource().getName() ).as(" pack.getPricePoints().get(0).getBalances()[0].getResource().getName()" ).isEqualTo("GBP");
         softly.assertThat(pack.getPricePoints().get(0).getBalances()[0].getResource().getDescription() ).as(" pack.getPricePoints().get(0).getBalances()[0].getResource().getDescription()" ).isEqualTo("British Pound Sterling");
@@ -535,20 +519,20 @@ public class FindPackagesWithService9IT_pt2 {
         softly.assertThat(pack.getPricePoints().get(1).getTaxCode() ).as(" pack.getPricePoints().get(1).getTaxCode()" ).isEqualTo("TAX");
         softly.assertThat(pack.getPricePoints().get(1).getLinkedByTrialPricepoint() ).as(" pack.getPricePoints().get(1).getLinkedByTrialPricepoint()" ).isFalse() ;
 // com.vizzavi.ecommerce.business.catalog.Tax
-        softly.assertThat(pack.getPricePoints().get(1).getTax().getName() ).as(" pack.getPricePoints().get(1).getTax().getName()" ).isEqualTo("TAX");
-        softly.assertThat(pack.getPricePoints().get(1).getTax().getKey() ).as(" pack.getPricePoints().get(1).getTax().getKey()" ).isNull();
-        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRate() ).as(" pack.getPricePoints().get(1).getTax().getTaxRate()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxCode() ).as(" pack.getPricePoints().get(1).getTax().getTaxCode()" ).isEqualTo("TAX");
-//check size of list!
-        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().size()).as("pack.getPricePoints().get(1).getTax().getTaxRates().size()").isEqualTo(3);
-//if the list is smaller than expected we can't continue, so do a hard assert
-        assertTrue(pack.getPricePoints().get(1).getTax().getTaxRates().size() >= 3);
-        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(0).getValue() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(0).getKey() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(1).getValue() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(1).getKey() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(2).getValue() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(2).getKey() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(pack.getPricePoints().get(1).getTax().getName() ).as(" pack.getPricePoints().get(1).getTax().getName()" ).isEqualTo("TAX");
+//        softly.assertThat(pack.getPricePoints().get(1).getTax().getKey() ).as(" pack.getPricePoints().get(1).getTax().getKey()" ).isNull();
+//        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRate() ).as(" pack.getPricePoints().get(1).getTax().getTaxRate()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxCode() ).as(" pack.getPricePoints().get(1).getTax().getTaxCode()" ).isEqualTo("TAX");
+////check size of list!
+//        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().size()).as("pack.getPricePoints().get(1).getTax().getTaxRates().size()").isEqualTo(3);
+////if the list is smaller than expected we can't continue, so do a hard assert
+//        assertTrue(pack.getPricePoints().get(1).getTax().getTaxRates().size() >= 3);
+//        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(0).getValue() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(0).getKey() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(1).getValue() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(1).getKey() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(2).getValue() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(2).getKey() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
         softly.assertThat(pack.getPricePoints().get(1).isActive() ).as(" pack.getPricePoints().get(1).isActive()" ).isTrue() ;
         softly.assertThat(pack.getPricePoints().get(1).isReserveOnly() ).as(" pack.getPricePoints().get(1).isReserveOnly()" ).isFalse() ;
 // java.util.HashMap
@@ -1043,26 +1027,24 @@ public class FindPackagesWithService9IT_pt2 {
         softly.assertThat(pack.getPricePoints().get(2).getTaxCode() ).as(" pack.getPricePoints().get(2).getTaxCode()" ).isEqualTo("TAX");
         softly.assertThat(pack.getPricePoints().get(2).getLinkedByTrialPricepoint() ).as(" pack.getPricePoints().get(2).getLinkedByTrialPricepoint()" ).isFalse() ;
 // com.vizzavi.ecommerce.business.catalog.Tax
-        softly.assertThat(pack.getPricePoints().get(2).getTax().getName() ).as(" pack.getPricePoints().get(2).getTax().getName()" ).isEqualTo("TAX");
-        softly.assertThat(pack.getPricePoints().get(2).getTax().getKey() ).as(" pack.getPricePoints().get(2).getTax().getKey()" ).isNull();
-        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxRate() ).as(" pack.getPricePoints().get(2).getTax().getTaxRate()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxCode() ).as(" pack.getPricePoints().get(2).getTax().getTaxCode()" ).isEqualTo("TAX");
+//        softly.assertThat(pack.getPricePoints().get(2).getTax().getName() ).as(" pack.getPricePoints().get(2).getTax().getName()" ).isEqualTo("TAX");
+//        softly.assertThat(pack.getPricePoints().get(2).getTax().getKey() ).as(" pack.getPricePoints().get(2).getTax().getKey()" ).isNull();
+//        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxRate() ).as(" pack.getPricePoints().get(2).getTax().getTaxRate()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxCode() ).as(" pack.getPricePoints().get(2).getTax().getTaxCode()" ).isEqualTo("TAX");
 //check size of list!
-        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxRates().size()).as("pack.getPricePoints().get(2).getTax().getTaxRates().size()").isEqualTo(3);
+//        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxRates().size()).as("pack.getPricePoints().get(2).getTax().getTaxRates().size()").isEqualTo(3);
 //if the list is smaller than expected we can't continue, so do a hard assert
-        assertTrue(pack.getPricePoints().get(2).getTax().getTaxRates().size() >= 3);
-        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxRates().get(0).getValue() ).as(" pack.getPricePoints().get(2).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxRates().get(0).getKey() ).as(" pack.getPricePoints().get(2).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxRates().get(1).getValue() ).as(" pack.getPricePoints().get(2).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxRates().get(1).getKey() ).as(" pack.getPricePoints().get(2).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxRates().get(2).getValue() ).as(" pack.getPricePoints().get(2).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxRates().get(2).getKey() ).as(" pack.getPricePoints().get(2).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
+//        assertTrue(pack.getPricePoints().get(2).getTax().getTaxRates().size() >= 3);
+//        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxRates().get(0).getValue() ).as(" pack.getPricePoints().get(2).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxRates().get(0).getKey() ).as(" pack.getPricePoints().get(2).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxRates().get(1).getValue() ).as(" pack.getPricePoints().get(2).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxRates().get(1).getKey() ).as(" pack.getPricePoints().get(2).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxRates().get(2).getValue() ).as(" pack.getPricePoints().get(2).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(2).getTax().getTaxRates().get(2).getKey() ).as(" pack.getPricePoints().get(2).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
         softly.assertThat(pack.getPricePoints().get(2).isActive() ).as(" pack.getPricePoints().get(2).isActive()" ).isFalse() ;
         softly.assertThat(pack.getPricePoints().get(2).isReserveOnly() ).as(" pack.getPricePoints().get(2).isReserveOnly()" ).isFalse() ;
 // java.util.HashMap
         softly.assertThat(pack.getPricePoints().get(2).getPricingText1() ).as(" pack.getPricePoints().get(2).getPricingText1()" ).isNullOrEmpty();
-        softly.assertThat(pack.getPricePoints().get(2).getPricingText1() ).as(" pack.getPricePoints().get(2).getPricingText1()" ).isEqualTo("");
-        softly.assertThat(pack.getPricePoints().get(2).getPricingText2() ).as(" pack.getPricePoints().get(2).getPricingText2()" ).isNullOrEmpty();
         softly.assertThat(pack.getPricePoints().get(2).getPricingText2() ).as(" pack.getPricePoints().get(2).getPricingText2()" ).isEqualTo("");
 // java.util.HashMap
 // java.util.HashMap

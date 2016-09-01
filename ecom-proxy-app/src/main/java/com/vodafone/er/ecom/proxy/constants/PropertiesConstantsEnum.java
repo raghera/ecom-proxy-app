@@ -5,7 +5,7 @@ package com.vodafone.er.ecom.proxy.constants;
  */
 public enum  PropertiesConstantsEnum {
     PROPERTIES_FILE_NAME("ecom-proxy-application"),
-    PROP_GET_PACKAGES2("proxy.getPackages2"),
+    PROP_GET_PACKAGE2("proxy.getPackage2"),
     PROP_GET_SERVICE1("proxy.getService1"),
     PROP_GET_SUBSCRIPTIONS2("proxy.getSubsciptions2"),
     PROP_PURCHASE_PACKAGE_MSISDN1("proxy.purchasePackageMsisdn1"),

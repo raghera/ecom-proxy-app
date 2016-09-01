@@ -254,7 +254,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                                new BufferedOutputStream (resp.getOutputStream()));
 
             final Optional<Boolean> shouldProxy =
-                    getPropertyAsBoolean(PROP_GET_PACKAGES2.value(), true);
+                    getPropertyAsBoolean(PROP_GET_PACKAGE2.value(), true);
             try {
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
                     //TODO remove and configure through Spring.
@@ -568,7 +568,9 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_FIND_PACKAGES_WITH_SERVICE9.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = DecouplingApiFactory.getCatalogApi(locale, clientId).findPackagesWithService(msisdn,serv,purchaseAttributes);
+                    CatalogApiService service = new CatalogApiService();
+                    result = service.processFindPackagesWithService(locale, msisdn,serv,purchaseAttributes);
+//                    result = DecouplingApiFactory.getCatalogApi(locale, clientId).findPackagesWithService(msisdn,serv,purchaseAttributes);
                 } else {
                     result = getCatalogEcomClient(locale).findPackagesWithService(msisdn,serv,purchaseAttributes);
                 }
