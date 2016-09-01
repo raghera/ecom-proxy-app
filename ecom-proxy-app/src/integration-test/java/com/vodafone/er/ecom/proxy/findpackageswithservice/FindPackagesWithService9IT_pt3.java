@@ -1,4 +1,4 @@
-package com.vodafone.er.ecom.proxy;
+package com.vodafone.er.ecom.proxy.findpackageswithservice;
 
 import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
 import com.vizzavi.ecommerce.business.catalog.CatalogService;

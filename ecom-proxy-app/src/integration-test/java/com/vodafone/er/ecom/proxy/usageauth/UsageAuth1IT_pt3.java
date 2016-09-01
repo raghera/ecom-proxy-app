@@ -253,20 +253,20 @@ public class UsageAuth1IT_pt3 {
         softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).isTariff() ).as(" usageAuth.getPackage().getPricePoints().get(2).isTariff()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).isHideForPurchaseOptions() ).as(" usageAuth.getPackage().getPricePoints().get(2).isHideForPurchaseOptions()" ).isFalse() ;
 // com.vizzavi.ecommerce.business.catalog.Tax
-        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getName() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getName()" ).isEqualTo("TAX");
-        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getKey() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getKey()" ).isNull();
+//        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getName() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getName()" ).isEqualTo("TAX");
+//        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getKey() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getKey()" ).isNull();
 //check size of list!
-        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().size()).as("usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().size()").isEqualTo(3);
+//        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().size()).as("usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().size()").isEqualTo(3);
 //if the list is smaller than expected we can't continue, so do a hard assert
-        assertTrue(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().size() >= 3);
-        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(0).getValue() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(0).getKey() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(1).getValue() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(1).getKey() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(2).getValue() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(2).getKey() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
-        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRate() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRate()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxCode() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxCode()" ).isEqualTo("TAX");
+//        assertTrue(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().size() >= 3);
+//        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(0).getValue() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(0).getKey() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(1).getValue() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(1).getKey() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(2).getValue() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(2).getKey() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRate() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxRate()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxCode() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTax().getTaxCode()" ).isEqualTo("TAX");
 //check size of array!
         softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getBalances().length ).as(" usageAuth.getPackage().getPricePoints().get(2).getBalances().length" ).isEqualTo(2) ;
 // com.vizzavi.ecommerce.business.common.ChargingResource
@@ -684,7 +684,7 @@ public class UsageAuth1IT_pt3 {
         softly.assertThat(usageAuth.getPackage().getServices().get(0).isReIssuePermittedFlag() ).as(" usageAuth.getPackage().getServices().get(0).isReIssuePermittedFlag()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getChargeableBy() ).as(" usageAuth.getPackage().getServices().get(0).getChargeableBy()" ).isEqualTo("Not Defined");
 //check size of array!
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPackageIds().length ).as(" usageAuth.getPackage().getServices().get(0).getPackageIds().length" ).isEqualTo(1) ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPackageIds().length ).as(" usageAuth.getPackage().getServices().get(0).getPackageIds().length" ).isEqualTo(1) ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).isMicroService() ).as(" usageAuth.getPackage().getServices().get(0).isMicroService()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getSuperPackageIds() ).as(" usageAuth.getPackage().getServices().get(0).getSuperPackageIds()" ).isNull();
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getmExternalServPricePlan() ).as(" usageAuth.getPackage().getServices().get(0).getmExternalServPricePlan()" ).isNull();
@@ -705,21 +705,14 @@ public class UsageAuth1IT_pt3 {
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getNotificationCategory() ).as(" usageAuth.getPackage().getServices().get(0).getNotificationCategory()" ).isNullOrEmpty();
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getNotificationCategory() ).as(" usageAuth.getPackage().getServices().get(0).getNotificationCategory()" ).isEqualTo("");
 // com.vizzavi.ecommerce.business.catalog.internal.PaymentContentImpl
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getKey() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getKey()" ).isEqualTo(new Long(0)) ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getDescription() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getDescription()" ).isNullOrEmpty();
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getDescription() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getDescription()" ).isEqualTo("");
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getCategory() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getCategory()" ).isNullOrEmpty();
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getCategory() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getCategory()" ).isEqualTo("");
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getMerchant() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getMerchant()" ).isNullOrEmpty();
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getMerchant() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getMerchant()" ).isEqualTo("");
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getMerchantDescription() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getMerchantDescription()" ).isNullOrEmpty();
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getMerchantDescription() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getMerchantDescription()" ).isEqualTo("");
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getItemVolume() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getItemVolume()" ).isNullOrEmpty();
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getItemVolume() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getItemVolume()" ).isEqualTo("");
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getServiceType() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getServiceType()" ).isNullOrEmpty();
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getServiceType() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getServiceType()" ).isEqualTo("");
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getPromotion() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getPromotion()" ).isNullOrEmpty();
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getPromotion() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getPromotion()" ).isEqualTo("");
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getKey() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getDescription() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getDescription()" ).isEqualTo("");
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getCategory() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getCategory()" ).isEqualTo("");
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getMerchant() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getMerchant()" ).isEqualTo("");
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getMerchantDescription() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getMerchantDescription()" ).isEqualTo("");
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getItemVolume() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getItemVolume()" ).isEqualTo("");
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getServiceType() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getServiceType()" ).isEqualTo("");
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPaymentContent().getPromotion() ).as(" usageAuth.getPackage().getServices().get(0).getPaymentContent().getPromotion()" ).isEqualTo("");
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getSalesModel() ).as(" usageAuth.getPackage().getServices().get(0).getSalesModel()" ).isEqualTo("Reseller");
         softly.assertThat(usageAuth.getPackage().getServices().get(0).isRefundable() ).as(" usageAuth.getPackage().getServices().get(0).isRefundable()" ).isTrue() ;
 //check size of list!
@@ -727,17 +720,17 @@ public class UsageAuth1IT_pt3 {
 //if the list is smaller than expected we can't continue, so do a hard assert
         assertTrue(usageAuth.getPackage().getServices().get(0).getPricePoints().size() >= 1);
 // com.vizzavi.ecommerce.business.common.ChargingResource
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getName() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getName()" ).isEqualTo("Credit Alert");
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getCode() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getCode()" ).isEqualTo(1100033) ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getDescription() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getDescription()" ).isNull();
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getCountryId() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getCountryId()" ).isEqualTo(0) ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getResourceName() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getResourceName()" ).isEqualTo("ChargingResource_1100033");
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isToken()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isUsageToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isUsageToken()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isPayToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isPayToken()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getResourceSymbol() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_1100033");
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isCurrency() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isCurrency()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isResource() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isResource()" ).isTrue() ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getName() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getName()" ).isEqualTo("Credit Alert");
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getCode() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getCode()" ).isEqualTo(1100033) ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getDescription() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getDescription()" ).isNull();
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getCountryId() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getCountryId()" ).isEqualTo(0) ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getResourceName() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getResourceName()" ).isEqualTo("ChargingResource_1100033");
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isToken()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isUsageToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isUsageToken()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isPayToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isPayToken()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getResourceSymbol() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_1100033");
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isCurrency() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isCurrency()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isResource() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResource().isResource()" ).isTrue() ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getKey() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getKey()" ).isNull();
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getId() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getId()" ).isEqualTo("content:BP001_TAX_B001_999_999_*_999_999");
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getDescription() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getDescription()" ).isEqualTo("Default (event) ");
@@ -813,17 +806,17 @@ public class UsageAuth1IT_pt3 {
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getAlternativeRate() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getAlternativeRate()" ).isEqualTo(new Double(1.175)) ;
 //check size of array!
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts().length ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts().length" ).isEqualTo(1) ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getName() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getName()" ).isEqualTo("Credit Alert");
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getCode() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getCode()" ).isEqualTo(1100033) ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getDescription() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getDescription()" ).isNull();
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getCountryId() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getCountryId()" ).isEqualTo(0) ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getResourceName() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getResourceName()" ).isEqualTo("ChargingResource_1100033");
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isToken()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isUsageToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isUsageToken()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isPayToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isPayToken()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getResourceSymbol() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_1100033");
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isCurrency() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isCurrency()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isResource() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isResource()" ).isTrue() ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getName() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getName()" ).isEqualTo("Credit Alert");
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getCode() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getCode()" ).isEqualTo(1100033) ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getDescription() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getDescription()" ).isNull();
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getCountryId() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getCountryId()" ).isEqualTo(0) ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getResourceName() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getResourceName()" ).isEqualTo("ChargingResource_1100033");
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isToken()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isUsageToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isUsageToken()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isPayToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isPayToken()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getResourceSymbol() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_1100033");
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isCurrency() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isCurrency()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isResource() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpacts()[0].isResource()" ).isTrue() ;
 //check size of list!
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpactList().size()).as("usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalanceImpactList().size()").isEqualTo(1);
 //if the list is smaller than expected we can't continue, so do a hard assert
@@ -900,20 +893,20 @@ public class UsageAuth1IT_pt3 {
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isTariff() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isTariff()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isHideForPurchaseOptions() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isHideForPurchaseOptions()" ).isFalse() ;
 // com.vizzavi.ecommerce.business.catalog.Tax
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getName() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getName()" ).isEqualTo("TAX");
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getKey() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getKey()" ).isNull();
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getName() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getName()" ).isEqualTo("TAX");
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getKey() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getKey()" ).isNull();
 //check size of list!
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().size()).as("usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().size()").isEqualTo(3);
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().size()).as("usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().size()").isEqualTo(3);
 //if the list is smaller than expected we can't continue, so do a hard assert
-        assertTrue(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().size() >= 3);
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(0).getValue() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(0).getKey() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(1).getValue() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(1).getKey() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(2).getValue() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(2).getKey() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRate() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRate()" ).isEqualTo(new Double(0.175)) ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxCode() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxCode()" ).isEqualTo("TAX");
+//        assertTrue(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().size() >= 3);
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(0).getValue() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(0).getKey() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(1).getValue() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(1).getKey() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(2).getValue() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(2).getKey() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRate() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxRate()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxCode() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTax().getTaxCode()" ).isEqualTo("TAX");
 //check size of array!
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalances().length ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getBalances().length" ).isEqualTo(1) ;
 // com.vizzavi.ecommerce.business.common.ChargingResource
@@ -1002,17 +995,17 @@ public class UsageAuth1IT_pt3 {
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getPackageIdentifier() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getPackageIdentifier()" ).isEqualTo("package:BP001_TAX_999_999_999_999_999_*_*_*_false_false_*");
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getServiceIdentifier() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getServiceIdentifier()" ).isEqualTo("content:BP001_TAX_B001_999_999_*_999_999");
 // com.vizzavi.ecommerce.business.common.ChargingResource
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getName() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getName()" ).isEqualTo("Credit Alert");
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getCode() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getCode()" ).isEqualTo(1100033) ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getDescription() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getDescription()" ).isNull();
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getCountryId() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getCountryId()" ).isEqualTo(0) ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getResourceName() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getResourceName()" ).isEqualTo("ChargingResource_1100033");
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isToken()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isUsageToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isUsageToken()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isPayToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isPayToken()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getResourceSymbol() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_1100033");
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isCurrency() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isCurrency()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isResource() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isResource()" ).isTrue() ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getName() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getName()" ).isEqualTo("Credit Alert");
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getCode() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getCode()" ).isEqualTo(1100033) ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getDescription() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getDescription()" ).isNull();
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getCountryId() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getCountryId()" ).isEqualTo(0) ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getResourceName() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getResourceName()" ).isEqualTo("ChargingResource_1100033");
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isToken()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isUsageToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isUsageToken()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isPayToken() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isPayToken()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getResourceSymbol() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_1100033");
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isCurrency() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isCurrency()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isResource() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getResourceField().isResource()" ).isTrue() ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getStandardRateWithoutTax() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getStandardRateWithoutTax()" ).isEqualTo(new Double(1.0)) ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isVolumeType() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isVolumeType()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isOriginal() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isOriginal()" ).isFalse() ;
@@ -1183,17 +1176,17 @@ public class UsageAuth1IT_pt3 {
         softly.assertThat(usageAuth.getResource().isResource() ).as(" usageAuth.getResource().isResource()" ).isTrue() ;
 // com.vizzavi.ecommerce.business.catalog.internal.PricePointImpl
 // com.vizzavi.ecommerce.business.common.ChargingResource
-        softly.assertThat(usageAuth.getPricePoint().getResource().getName() ).as(" usageAuth.getPricePoint().getResource().getName()" ).isEqualTo("Credit Alert");
-        softly.assertThat(usageAuth.getPricePoint().getResource().getCode() ).as(" usageAuth.getPricePoint().getResource().getCode()" ).isEqualTo(1100033) ;
-        softly.assertThat(usageAuth.getPricePoint().getResource().getDescription() ).as(" usageAuth.getPricePoint().getResource().getDescription()" ).isNull();
-        softly.assertThat(usageAuth.getPricePoint().getResource().getCountryId() ).as(" usageAuth.getPricePoint().getResource().getCountryId()" ).isEqualTo(0) ;
-        softly.assertThat(usageAuth.getPricePoint().getResource().getResourceName() ).as(" usageAuth.getPricePoint().getResource().getResourceName()" ).isEqualTo("ChargingResource_1100033");
-        softly.assertThat(usageAuth.getPricePoint().getResource().isToken() ).as(" usageAuth.getPricePoint().getResource().isToken()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPricePoint().getResource().isUsageToken() ).as(" usageAuth.getPricePoint().getResource().isUsageToken()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPricePoint().getResource().isPayToken() ).as(" usageAuth.getPricePoint().getResource().isPayToken()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPricePoint().getResource().getResourceSymbol() ).as(" usageAuth.getPricePoint().getResource().getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_1100033");
-        softly.assertThat(usageAuth.getPricePoint().getResource().isCurrency() ).as(" usageAuth.getPricePoint().getResource().isCurrency()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPricePoint().getResource().isResource() ).as(" usageAuth.getPricePoint().getResource().isResource()" ).isTrue() ;
+//        softly.assertThat(usageAuth.getPricePoint().getResource().getName() ).as(" usageAuth.getPricePoint().getResource().getName()" ).isEqualTo("Credit Alert");
+//        softly.assertThat(usageAuth.getPricePoint().getResource().getCode() ).as(" usageAuth.getPricePoint().getResource().getCode()" ).isEqualTo(1100033) ;
+//        softly.assertThat(usageAuth.getPricePoint().getResource().getDescription() ).as(" usageAuth.getPricePoint().getResource().getDescription()" ).isNull();
+//        softly.assertThat(usageAuth.getPricePoint().getResource().getCountryId() ).as(" usageAuth.getPricePoint().getResource().getCountryId()" ).isEqualTo(0) ;
+//        softly.assertThat(usageAuth.getPricePoint().getResource().getResourceName() ).as(" usageAuth.getPricePoint().getResource().getResourceName()" ).isEqualTo("ChargingResource_1100033");
+//        softly.assertThat(usageAuth.getPricePoint().getResource().isToken() ).as(" usageAuth.getPricePoint().getResource().isToken()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPricePoint().getResource().isUsageToken() ).as(" usageAuth.getPricePoint().getResource().isUsageToken()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPricePoint().getResource().isPayToken() ).as(" usageAuth.getPricePoint().getResource().isPayToken()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPricePoint().getResource().getResourceSymbol() ).as(" usageAuth.getPricePoint().getResource().getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_1100033");
+//        softly.assertThat(usageAuth.getPricePoint().getResource().isCurrency() ).as(" usageAuth.getPricePoint().getResource().isCurrency()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPricePoint().getResource().isResource() ).as(" usageAuth.getPricePoint().getResource().isResource()" ).isTrue() ;
         softly.assertThat(usageAuth.getPricePoint().getKey() ).as(" usageAuth.getPricePoint().getKey()" ).isNull();
         softly.assertThat(usageAuth.getPricePoint().getId() ).as(" usageAuth.getPricePoint().getId()" ).isEqualTo("content:BP001_TAX_B001_999_999_*_999_999");
         softly.assertThat(usageAuth.getPricePoint().getDescription() ).as(" usageAuth.getPricePoint().getDescription()" ).isEqualTo("Default (event) ");
@@ -1269,17 +1262,17 @@ public class UsageAuth1IT_pt3 {
         softly.assertThat(usageAuth.getPricePoint().getAlternativeRate() ).as(" usageAuth.getPricePoint().getAlternativeRate()" ).isEqualTo(new Double(1.0)) ;
 //check size of array!
         softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts().length ).as(" usageAuth.getPricePoint().getBalanceImpacts().length" ).isEqualTo(1) ;
-        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].getName() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].getName()" ).isEqualTo("Credit Alert");
-        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].getCode() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].getCode()" ).isEqualTo(1100033) ;
-        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].getDescription() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].getDescription()" ).isNull();
-        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].getCountryId() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].getCountryId()" ).isEqualTo(0) ;
-        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].getResourceName() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].getResourceName()" ).isEqualTo("ChargingResource_1100033");
-        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].isToken() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].isToken()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].isUsageToken() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].isUsageToken()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].isPayToken() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].isPayToken()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].getResourceSymbol() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_1100033");
-        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].isCurrency() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].isCurrency()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].isResource() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].isResource()" ).isTrue() ;
+//        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].getName() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].getName()" ).isEqualTo("Credit Alert");
+//        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].getCode() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].getCode()" ).isEqualTo(1100033) ;
+//        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].getDescription() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].getDescription()" ).isNull();
+//        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].getCountryId() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].getCountryId()" ).isEqualTo(0) ;
+//        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].getResourceName() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].getResourceName()" ).isEqualTo("ChargingResource_1100033");
+//        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].isToken() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].isToken()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].isUsageToken() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].isUsageToken()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].isPayToken() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].isPayToken()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].getResourceSymbol() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_1100033");
+//        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].isCurrency() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].isCurrency()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPricePoint().getBalanceImpacts()[0].isResource() ).as(" usageAuth.getPricePoint().getBalanceImpacts()[0].isResource()" ).isTrue() ;
 //check size of list!
         softly.assertThat(usageAuth.getPricePoint().getBalanceImpactList().size()).as("usageAuth.getPricePoint().getBalanceImpactList().size()").isEqualTo(1);
 //if the list is smaller than expected we can't continue, so do a hard assert

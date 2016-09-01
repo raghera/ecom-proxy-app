@@ -49,53 +49,55 @@ public class ChargingApiService {
     public UsageAuthorization processUsageAuthRateCharge(Locale locale, String clientId, String msisdn, String serviceId,
                                                          UsageAttributes usageAttributes) throws EcommerceException {
 
-        UsageAuthorization usageAuth = getChargingApi(locale, clientId).usageAuthRateCharge(clientId, msisdn, serviceId, usageAttributes);
-        populateSubscription(locale, msisdn, usageAuth);
-        populateActiveSubscriptions(locale, msisdn, usageAuth);
-        populateUsageAuthServicePricePointFromSubscription(locale, msisdn, usageAuth);
-        populatePackageFromSubscription(usageAuth);
-
+        UsageAuthorization usageAuth = getChargingApi(locale, clientId)
+                .usageAuthRateCharge(clientId, msisdn, serviceId, usageAttributes);
+        processUsageAuthResponse(locale, msisdn, usageAuth);
         return usageAuth;
     }
 
     public UsageAuthorization processUsageAuth(Locale locale, String clientId, String msisdn, String serviceId,UsageAttributes attributes)
             throws UsageAuthorizationException {
 
-        UsageAuthorization usageAuthorization = getChargingApi(locale, clientId)
+        UsageAuthorization usageAuth = getChargingApi(locale, clientId)
                 .usageAuth(clientId,msisdn,serviceId, attributes);
+        processUsageAuthResponse(locale, msisdn, usageAuth);
 
-        populateSubscription(locale, msisdn, usageAuthorization);
-        populateActiveSubscriptions(locale, msisdn, usageAuthorization);
-        populateUsageAuthServicePricePointFromSubscription(locale, msisdn, usageAuthorization);
-        populatePackageFromSubscription(usageAuthorization);
+        return usageAuth;
+    }
 
-        //TODO populate MatchingAttributes
-        //populateMatchingAttributes
-        usageAuthorization.getMatchingAttributes();
-
-        return usageAuthorization;
+    public void processUsageAuthResponse(Locale locale, String msisdn, UsageAuthorization usageAuth) {
+        if(usageAuth.isSuccess()) {
+            populateSubscription(locale, msisdn, usageAuth);
+            populateActiveSubscriptions(locale, msisdn, usageAuth);
+            populateUsageAuthServicePricePointFromSubscription(locale, msisdn, usageAuth);
+            populatePackageFromSubscription(usageAuth);
+            //TODO populate MatchingAttributes
+            //populateMatchingAttributes as they tend to be null
+//            usageAuth.getMatchingAttributes();
+        }
     }
 
     //finds the complete service pricepoint object from the subscription and replaces the one on the usageAuth
     public void populateUsageAuthServicePricePointFromSubscription(Locale locale, String msisdn, UsageAuthorization usageAuthorization) {
 
-//        PricePoint servicePp = catalogApiService.getPricePoint(locale, usageAuthorization.getServicePricePoint().getId());
-//        usageAuthorization.setPricePoint(servicePp);
-
-//TODO could get the Pricepoint from the Subscription as per below but need the ServiceId
+        //The existing content
         Optional<String> ppIdOpt = Optional.of(usageAuthorization.getServicePricePoint().getId());
+        Optional<Subscription> subOpt = Optional.of(usageAuthorization.getSubscription());
 
-        ppIdOpt.ifPresent(ppId -> {
-            //Find the full service object
-            List<CatalogService> services = usageAuthorization.getSubscription().getPackage().getServices();
-            Optional<CatalogService> foundService = services.stream()
-                    .filter(catalogService -> null != catalogService.getPricePoints().getPricePoint(ppId).getId())
-                    .findFirst();
-            foundService.ifPresent(service -> {
-                PricePoint foundPp = service.getPricePoints().getPricePoint(ppId);
-                usageAuthorization.setPricePoint(foundPp);
+        if(subOpt.isPresent() && null != subOpt.get().getPackage()) {
+
+            ppIdOpt.ifPresent(ppId -> {
+                //Find the full service object
+                List<CatalogService> services = subOpt.get().getPackage().getServices();
+                Optional<CatalogService> foundService = services.stream()
+                        .filter(catalogService -> null != catalogService.getPricePoints().getPricePoint(ppId).getId())
+                        .findFirst();
+                foundService.ifPresent(service -> {
+                    PricePoint foundPp = service.getPricePoints().getPricePoint(ppId);
+                    usageAuthorization.setPricePoint(foundPp);
+                });
             });
-        });
+        }
     }
 
     public void populatePackageFromSubscription(final UsageAuthorization usageAuthorization) {
