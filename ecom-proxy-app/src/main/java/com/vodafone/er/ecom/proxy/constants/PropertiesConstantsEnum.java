@@ -8,6 +8,7 @@ public enum  PropertiesConstantsEnum {
     PROP_GET_PACKAGE2("proxy.getPackage2"),
     PROP_GET_SERVICE1("proxy.getService1"),
     PROP_GET_SUBSCRIPTIONS2("proxy.getSubsciptions2"),
+    PROP_GET_SUBSCRIPTIONS18("proxy.getSubsciptions18"),
     PROP_PURCHASE_PACKAGE_MSISDN1("proxy.purchasePackageMsisdn1"),
     PROP_UPDATE_SERVICE_STATUS1("proxy.updateServiceStatus1"),
     PROP_USAGE_AUTH1("proxy.usageAuth1"),

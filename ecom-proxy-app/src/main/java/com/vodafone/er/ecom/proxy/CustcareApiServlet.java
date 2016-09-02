@@ -5,6 +5,7 @@ import com.vizzavi.ecommerce.business.charging.ModifyAuthorisation;
 import com.vizzavi.ecommerce.business.charging.SubscriptionAttributes;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.*;
+import com.vodafone.er.ecom.proxy.service.SelfcareApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.util.ExceptionAdapter;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
+import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_GET_SUBSCRIPTIONS18;
 import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD19;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 
@@ -1075,8 +1077,13 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getSelfcareApiDelegate(locale).getSubscriptions(clientId,msisdn,device,filter);
-                //hydrateSubscriptions(result);
+                Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_SUBSCRIPTIONS18.value(), true);;
+                if(shouldProxy.isPresent()) {
+                    SelfcareApiService service = new SelfcareApiService(locale);
+                    result = service.getSubscriptions(locale, clientId, msisdn, device, filter);
+                } else {
+                    result = getSelfcareApiDelegate(locale).getSubscriptions(clientId, msisdn, device, filter);
+                }
             }
             catch (Exception e1) {                
                  oos.writeObject( new ExceptionAdapter(e1));

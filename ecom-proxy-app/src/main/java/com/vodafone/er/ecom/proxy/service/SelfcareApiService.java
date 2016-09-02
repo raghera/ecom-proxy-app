@@ -23,6 +23,7 @@ public class SelfcareApiService {
     private CatalogApi catalogApi;
     private CatalogApiService catalogApiService;
 
+    //TODO Add a singleton way to obtain the ER Api code. DecouplingApiFactory just gives you a new one every time
     public SelfcareApiService(Locale locale) throws EcommerceException {
         selfcareApi = DecouplingApiFactory.getSelfcareApi(locale, CLIENT_ID.getValue());
         catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.getValue());
