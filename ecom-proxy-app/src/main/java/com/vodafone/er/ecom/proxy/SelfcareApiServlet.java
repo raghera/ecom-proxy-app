@@ -22,8 +22,8 @@ import java.util.Locale;
 import java.util.Optional;
 
 import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getSelfcareApi;
-import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_FIND_PACKAGES_WITH_SERVICE9;
 import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_GET_SUBSCRIPTIONS2;
+import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD4;
 
 public class SelfcareApiServlet extends AbstractEcomServlet {
 
@@ -326,7 +326,7 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_FIND_PACKAGES_WITH_SERVICE9.value(), true);
+                Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD4.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
                     result = DecouplingApiFactory.getSelfcareApi(locale, clientId).
                             modifySubscriptionChargingMethod(clientId,msisdn,deviceType,packageSubId,chargingMethod,csrId,reason);

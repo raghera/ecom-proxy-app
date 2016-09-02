@@ -6,6 +6,7 @@ import com.vizzavi.ecommerce.business.charging.SubscriptionAttributes;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.*;
 import com.vodafone.global.er.data.ERLogDataImpl;
+import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.util.ExceptionAdapter;
 import org.apache.log4j.Logger;
 
@@ -16,6 +17,10 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
+
+import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD19;
+import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 
 public class CustcareApiServlet extends AbstractEcomServlet {
 	
@@ -1109,11 +1114,17 @@ public class CustcareApiServlet extends AbstractEcomServlet {
     public void modifySubscriptionChargingMethodHandler(Locale locale, HttpServletResponse resp ,String clientId  ,String msisdn  ,int deviceType  ,String packageSubId  ,int chargingMethod ) {
         ObjectOutputStream oos = null;
         try {            
-            boolean result = false;        
+            boolean result;
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getSelfcareApiDelegate(locale).modifySubscriptionChargingMethod(clientId,msisdn,deviceType,packageSubId,chargingMethod);
+                Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD19.value(), true);
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    result = DecouplingApiFactory.getSelfcareApi(locale, clientId)
+                            .modifySubscriptionChargingMethod(clientId, msisdn, 0, packageSubId, chargingMethod);
+                } else {
+                    result = getSelfcareApiDelegate(locale).modifySubscriptionChargingMethod(clientId, msisdn, deviceType, packageSubId, chargingMethod);
+                }
             }
             catch (Exception e1) {                
                  oos.writeObject( new ExceptionAdapter(e1));
