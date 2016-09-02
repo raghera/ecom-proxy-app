@@ -216,9 +216,7 @@ public class GetServiceIT {
         softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].isDefaultPPT() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].isDefaultPPT()" ).isTrue() ;
         softly.assertThat(catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPromotionalPricingTextList() ).as(" catalogService.getPricePoints().get(0).getPricePointTiers()[0].getPromotionalPricingTextList()" ).isNull();
         softly.assertThat(catalogService.getPricePoints().get(0).getProtectedFk() ).as(" catalogService.getPricePoints().get(0).getProtectedFk()" ).isNull();
-        softly.assertThat(catalogService.getPricePoints().get(0).getmPricingText1() ).as(" catalogService.getPricePoints().get(0).getmPricingText1()" ).isNullOrEmpty();
         softly.assertThat(catalogService.getPricePoints().get(0).getmPricingText1() ).as(" catalogService.getPricePoints().get(0).getmPricingText1()" ).isEqualTo("");
-        softly.assertThat(catalogService.getPricePoints().get(0).getmPricingText2() ).as(" catalogService.getPricePoints().get(0).getmPricingText2()" ).isNullOrEmpty();
         softly.assertThat(catalogService.getPricePoints().get(0).getmPricingText2() ).as(" catalogService.getPricePoints().get(0).getmPricingText2()" ).isEqualTo("");
 // com.vizzavi.ecommerce.business.catalog.internal.PricePointTier
 // com.vizzavi.ecommerce.business.common.ChargingResource
@@ -479,8 +477,6 @@ public class GetServiceIT {
         softly.assertThat(catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPromotionalPricingTextList() ).as(" catalogService.getPricePoints().get(1).getPricePointTiers()[0].getPromotionalPricingTextList()" ).isNull();
         softly.assertThat(catalogService.getPricePoints().get(1).getProtectedFk() ).as(" catalogService.getPricePoints().get(1).getProtectedFk()" ).isNull();
         softly.assertThat(catalogService.getPricePoints().get(1).getmPricingText1() ).as(" catalogService.getPricePoints().get(1).getmPricingText1()" ).isNullOrEmpty();
-        softly.assertThat(catalogService.getPricePoints().get(1).getmPricingText1() ).as(" catalogService.getPricePoints().get(1).getmPricingText1()" ).isEqualTo("");
-        softly.assertThat(catalogService.getPricePoints().get(1).getmPricingText2() ).as(" catalogService.getPricePoints().get(1).getmPricingText2()" ).isNullOrEmpty();
         softly.assertThat(catalogService.getPricePoints().get(1).getmPricingText2() ).as(" catalogService.getPricePoints().get(1).getmPricingText2()" ).isEqualTo("");
 // com.vizzavi.ecommerce.business.catalog.internal.PricePointTier
 // com.vizzavi.ecommerce.business.common.ChargingResource
