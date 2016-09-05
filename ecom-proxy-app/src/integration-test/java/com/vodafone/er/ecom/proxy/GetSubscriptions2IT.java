@@ -2,9 +2,7 @@ package com.vodafone.er.ecom.proxy;
 
 import com.vizzavi.ecommerce.business.charging.PurchaseAttributes;
 import com.vizzavi.ecommerce.business.charging.PurchaseAuthorization;
-import com.vizzavi.ecommerce.business.common.DeviceType;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
-import com.vizzavi.ecommerce.business.selfcare.SelfcareApi;
 import com.vizzavi.ecommerce.business.selfcare.Subscription;
 import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
 import org.assertj.core.api.SoftAssertions;
@@ -19,22 +17,6 @@ import static org.junit.Assert.*;
 public class GetSubscriptions2IT {
 
     private SoftAssertions softly = new SoftAssertions();
-
-    @Test
-    public void testGetSubscription10() throws Exception {
-        final SelfcareApi selfcareApi = EcomApiFactory.getSelfcareApi(Locale.UK);
-        //Fails de-serialising ERSubcription
-        Subscription sub1 = selfcareApi.getSubscription("ecom-test","P1470128365670", DeviceType.WEB, "798");
-        assertNotNull(sub1);
-    }
-
-//    @Test
-//    public void testTransaction() throws Exception {
-//        SelfcareApi selfcareApi = EcomApiFactory.getSelfcareApi(Locale.UK);
-//        Transaction sub1 = selfcareApi.getTransaction("ecom-client", "798");
-//        assertNotNull(sub1);
-//    }
-
 
     @Test
     public void testGetSubsciptions2() throws Exception {
@@ -120,7 +102,7 @@ public class GetSubscriptions2IT {
         softly.assertThat(subscription1.getExtIdentifier1() ).as(" subscription1.getExtIdentifier1()" ).isNull();
         softly.assertThat(subscription1.getExtIdentifier2() ).as(" subscription1.getExtIdentifier2()" ).isNull();
         softly.assertThat(subscription1.getExtIdentifier3() ).as(" subscription1.getExtIdentifier3()" ).isNull();
-//        softly.assertThat(subscription1.getOptions() ).as(" subscription1.getOptions()" ).isNull(); //TODO Options.getPaymentId is null so NPE
+        softly.assertThat(subscription1.getOptions() ).as(" subscription1.getOptions()" ).isNull();
 //        softly.assertThat(subscription1.getSubscriptionIdLong() ).as(" subscription1.getSubscriptionIdLong()" ).isEqualTo(new Long(33)) ;
         softly.assertThat(subscription1.getMsisdn() ).as(" subscription1.getMsisdn()" ).isEqualTo("-1546597348");
         softly.assertThat(subscription1.getCsrId() ).as(" subscription1.getCsrId()" ).isNull();

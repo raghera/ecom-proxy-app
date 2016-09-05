@@ -35,6 +35,11 @@ public class CatalogApiService {
             return processCatalogPackage(locale, result);
     }
 
+    public CatalogPackage [] getCatalogPackages(final Locale locale) {
+        final CatalogPackage [] packArr = getCatalogApi(locale).getPackages();
+        return packArr;
+    }
+
     public CatalogService getCatalogService(final Locale locale, String serviceId) {
 //        catalogApi = getCatalogApi(locale);
         final CatalogService service = getCatalogApi(locale).getService(serviceId);
@@ -147,6 +152,10 @@ public class CatalogApiService {
     public CatalogPackage[] processFindPackagesWithService(Locale locale, String msisdn, CatalogService service, PurchaseAttributes purchaseAttributes)
             throws EcommerceException {
 
+        //TODO - Currently the below could result in performance degradation.
+        //If there are 100 packages in the response then calling getPackage 100 times.
+        //Caching of the packages locally will help this however.
+
         Optional<CatalogPackage[]> packArrOpt = Optional.of(getCatalogApi(locale).findPackagesWithService(msisdn, service, purchaseAttributes));
 
         packArrOpt.ifPresent( packArr -> {
@@ -157,7 +166,6 @@ public class CatalogApiService {
                     pack.setServices(returnedPack.getServices());
                     pack.setPricePoints(returnedPack.getPricePoints());
                 });
-
             });
         });
         return packArrOpt.get();
