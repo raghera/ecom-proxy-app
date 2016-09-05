@@ -24,6 +24,7 @@ import java.util.Optional;
 import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getSelfcareApi;
 import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_GET_SUBSCRIPTIONS2;
 import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD4;
+import static com.vodafone.global.er.endpoint.ApiNamesEnum.SELFCARE_API;
 
 public class SelfcareApiServlet extends AbstractEcomServlet {
 
@@ -48,7 +49,7 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
            Locale locale = (Locale)requestPayload.get("locale");
            methodName = (String) requestPayload.get("methodName");
            String clientId = (String) requestPayload.get("clientId");
-           log(clientId, locale, methodName, "SelfcareApi");
+           log(clientId, locale, methodName, SELFCARE_API.getValue());
            //CR 2199 - Add msisdn to context
            String msisdn = (String) requestPayload.get("msisdn");
            logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );

@@ -23,6 +23,7 @@ import java.util.Optional;
 import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_GET_SUBSCRIPTIONS18;
 import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD19;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
+import static com.vodafone.global.er.endpoint.ApiNamesEnum.CUSTCARE_API;
 
 public class CustcareApiServlet extends AbstractEcomServlet {
 	
@@ -46,12 +47,12 @@ public class CustcareApiServlet extends AbstractEcomServlet {
            Locale locale = (Locale)requestPayload.get("locale");
            String methodName = (String) requestPayload.get("methodName");
            String clientId = (String) requestPayload.get("clientId");
-           log(clientId, locale, methodName, "CustcareApi");
-           //CR 2199
-           String msisdn = (String) requestPayload.get("msisdn");
-           logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );;
 
-           if (methodName.equals("inactivateAccount2")) {               
+            log(clientId, locale, methodName, CUSTCARE_API.getValue());
+
+           String msisdn = (String) requestPayload.get("msisdn");
+           logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
+           if (methodName.equals("inactivateAccount2")) {
                  
                  String csrId = (String) requestPayload.get("csrId");
                  String reason = (String) requestPayload.get("reason");

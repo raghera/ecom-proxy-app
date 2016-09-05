@@ -20,6 +20,7 @@ import java.util.Optional;
 import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_USAGE_AUTH1;
 import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_USAGE_AUTH_RATE_CHARGE3;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
+import static com.vodafone.global.er.endpoint.ApiNamesEnum.CHARGING_API;
 
 public class ChargingApiServlet extends AbstractEcomServlet {
 
@@ -40,9 +41,9 @@ public class ChargingApiServlet extends AbstractEcomServlet {
            //for some reason this API uses clientApplicationId and the others use clientId
            String clientApplicationId = (String) requestPayload.get("clientApplicationId");
            String msisdn = (String) requestPayload.get("msisdn");
-           logRequest(new ERLogDataImpl(msisdn, clientApplicationId, methodName, locale.getCountry()) );;
-           //log(clientApplicationId, locale, methodName, "ChargingApi");
-           if (methodName.equals("usageAuth1")) {               
+           logRequest(new ERLogDataImpl(msisdn, clientApplicationId, methodName, locale.getCountry()) );
+           log(clientApplicationId, locale, methodName, CHARGING_API.getValue());
+           if (methodName.equals("usageAuth1")) {
                  //String msisdn = (String) requestPayload.get("msisdn");
                  String serviceId = (String) requestPayload.get("serviceId");
                  UsageAttributes usageAttributes = (UsageAttributes) requestPayload.get("usageAttributes");

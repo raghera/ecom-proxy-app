@@ -19,6 +19,7 @@ import java.util.*;
 
 import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.*;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
+import static com.vodafone.global.er.endpoint.ApiNamesEnum.CATALOG_API;
 
 public class CatalogApiServlet extends AbstractEcomServlet {
 
@@ -40,10 +41,12 @@ public class CatalogApiServlet extends AbstractEcomServlet {
            Locale locale = (Locale)requestPayload.get("locale");
            String methodName = (String) requestPayload.get("methodName");
            String clientId = (String) requestPayload.get("clientId");
-           log(clientId, locale, methodName, "CatalogApi");
            String msisdn = (String) requestPayload.get("msisdn");
 
+            log(clientId, locale, methodName, CATALOG_API.getValue());
            logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
+
+
            if (methodName.equals("getService1")) {
                  String id = (String) requestPayload.get("id");
                  getServiceHandler(locale, resp  ,id );

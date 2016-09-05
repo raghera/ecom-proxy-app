@@ -18,6 +18,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_UPDATE_SERVICE_STATUS1;
+import static com.vodafone.global.er.endpoint.ApiNamesEnum.PROVISION_API;
 
 public class ProvisionApiServlet extends AbstractEcomServlet {
 	
@@ -40,9 +41,9 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
            String clientId = (String) requestPayload.get("clientId");
            //CR 2199
            String msisdn = (String) requestPayload.get("msisdn");
-           log(clientId, locale, methodName, "ProvisionApi");
+           log(clientId, locale, methodName, PROVISION_API.getValue());
            logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
-           if (methodName.equals("updateServiceStatus1")) {               
+           if (methodName.equals("updateServiceStatus1")) {
                  String provisioningId = (String) requestPayload.get("provisioningId");
                 int serviceStatus =  ((Integer) requestPayload.get("serviceStatus")).intValue();
                 int provisioningStatus =  ((Integer) requestPayload.get("provisioningStatus")).intValue();

@@ -19,6 +19,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_PURCHASE_PACKAGE_MSISDN1;
+import static com.vodafone.global.er.endpoint.ApiNamesEnum.PURCHASE_API;
 
 public class PurchaseApiServlet extends AbstractEcomServlet {
 	
@@ -40,7 +41,7 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
            Locale locale = (Locale)requestPayload.get("locale");
            String methodName = (String) requestPayload.get("methodName");
            String clientId = (String) requestPayload.get("clientId");
-           log(clientId, locale, methodName, "PurchaseApi");
+           log(clientId, locale, methodName, PURCHASE_API.getValue());
            //CR 2199 Add msisdn to context
            final String msisdn = (String) requestPayload.get("msisdn");
            logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );

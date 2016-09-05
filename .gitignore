@@ -7,3 +7,5 @@ ecom-proxy-app/src/main/CVS/
 .gitignore
 src/main/webapp/WEB-INF/lib/
 logs-returned/
+logs/
+delegates.war/

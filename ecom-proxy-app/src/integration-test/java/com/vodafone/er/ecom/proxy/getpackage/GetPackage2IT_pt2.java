@@ -28,7 +28,6 @@ public class GetPackage2IT_pt2 {
         CatalogPackage pack = getCatalogApi().getPackage("pAlt");
         assertNotNull(pack);
 
-
         softly.assertThat(pack.getPricePoints().get(1).getTaxRateAsDouble() ).as(" pack.getPricePoints().get(1).getTaxRateAsDouble()" ).isNull();
         softly.assertThat(pack.getPricePoints().get(1).getAffiliateID() ).as(" pack.getPricePoints().get(1).getAffiliateID()" ).isNull();
         softly.assertThat(pack.getPricePoints().get(1).getPartnerId() ).as(" pack.getPricePoints().get(1).getPartnerId()" ).isNull();
