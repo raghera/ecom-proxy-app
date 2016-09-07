@@ -25,10 +25,22 @@ public class SelfcareApiService {
 
     //TODO Add a singleton way to obtain the ER Api code. DecouplingApiFactory just gives you a new one every time
     public SelfcareApiService(Locale locale) throws EcommerceException {
-        selfcareApi = DecouplingApiFactory.getSelfcareApi(locale, CLIENT_ID.getValue());
-        catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.getValue());
         catalogApiService = new CatalogApiService();
     }
+
+    public SelfcareApi getSelfcareApi(Locale locale) {
+        if(null == selfcareApi) {
+            selfcareApi = DecouplingApiFactory.getSelfcareApi(locale, CLIENT_ID.getValue());
+        }
+        return selfcareApi;
+    }
+    public CatalogApi getCatalogApi(Locale locale) {
+        if(null == catalogApi) {
+            catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.getValue());
+        }
+        return catalogApi;
+    }
+
 
     //call getSubscriptions instead where possible.
     public Optional<Subscription> getSubscription(Locale locale, String msisdn, String subId) throws EcommerceException {

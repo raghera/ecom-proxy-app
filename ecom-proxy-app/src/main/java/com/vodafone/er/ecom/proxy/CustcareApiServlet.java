@@ -5,9 +5,11 @@ import com.vizzavi.ecommerce.business.charging.ModifyAuthorisation;
 import com.vizzavi.ecommerce.business.charging.SubscriptionAttributes;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.*;
+import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.er.ecom.proxy.service.SelfcareApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
+import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
 import com.vodafone.global.er.util.ExceptionAdapter;
 import org.apache.log4j.Logger;
 
@@ -20,8 +22,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_GET_SUBSCRIPTIONS18;
-import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD19;
+import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.*;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.CUSTCARE_API;
 
@@ -488,7 +489,13 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getCustcareApiDelegate(locale).inactivateSubscription(clientId,msisdn,subscriptionId,csrId,reason);
+                Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean( PROP_GET_SUBSCRIPTION26.value(), true);
+                if(shouldProxy.isPresent()) {
+                    result = DecouplingApiFactory.getCustcareApi(locale, clientId)
+                            .inactivateSubscription(clientId, msisdn, subscriptionId, csrId, reason);
+                } else {
+                    result = getCustcareApiDelegate(locale).inactivateSubscription(clientId, msisdn, subscriptionId, csrId, reason);
+                }
             }
             catch (Exception e1) {                
                  oos.writeObject( new ExceptionAdapter(e1));
@@ -1078,7 +1085,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_SUBSCRIPTIONS18.value(), true);;
+                Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_SUBSCRIPTIONS18.value(), true);
                 if(shouldProxy.isPresent()) {
                     SelfcareApiService service = new SelfcareApiService(locale);
                     result = service.getSubscriptions(locale, clientId, msisdn, device, filter);
@@ -1426,8 +1433,16 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getSelfcareApiDelegate(locale).getSubscription(clientId,msisdn,deviceType,packageSubId);
-                //hydrateSubscription(result);
+                Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean( PROP_GET_SUBSCRIPTION26.value(), true);
+                if(shouldProxy.isPresent()) {
+                    SubscriptionFilter filter = new SubscriptionFilterImpl();
+                    filter.setSubscriptionId(packageSubId);
+                    SelfcareApiService service = new SelfcareApiService(locale);
+                    final Subscription [] subs = service.getSubscriptions(locale, clientId, msisdn, 0, filter);
+                    result = subs[0];
+                } else {
+                    result = getSelfcareApiDelegate(locale).getSubscription(clientId, msisdn, deviceType, packageSubId);
+                }
             }
             catch (Exception e1) {                
                  oos.writeObject( new ExceptionAdapter(e1));

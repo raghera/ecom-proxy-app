@@ -15,7 +15,12 @@ public enum  PropertiesConstantsEnum {
     PROP_USAGE_AUTH_RATE_CHARGE3("proxy.usageAuthRateCharge3"),
     PROP_FIND_PACKAGES_WITH_SERVICE9("proxy.findPackagesWithService9"),
     PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD4("proxy.modifySubscriptionChargingMethod4"),
-    PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD19("proxy.modifySubscriptionChargingMethod19");
+    PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD19("proxy.modifySubscriptionChargingMethod19"),
+    PROP_GET_SUBSCRIPTION26("proxy.getSubscription26"),
+    PROP_INACTIVATE_SUBSCRIPTION6("proxy.inactivateSubscription6");
+
+
+
 
     private final String value;
 
