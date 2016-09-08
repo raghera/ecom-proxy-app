@@ -121,9 +121,8 @@ public class ChargingApiServlet extends AbstractEcomServlet {
 
                 final Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_USAGE_AUTH1.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    ChargingApiService service = new ChargingApiService(locale);
+                    ChargingApiService service = new ChargingApiService();
                     result = service.processUsageAuth(locale, clientApplicationId,msisdn,serviceId,usageAttributes);
-//                    result = DecouplingApiFactory.getChargingApi(locale, clientApplicationId).usageAuth(clientApplicationId,msisdn,serviceId,usageAttributes);
                 } else {
                     result = getChargingApiDelegate(locale).usageAuth(clientApplicationId, msisdn, serviceId, usageAttributes);
                 }
@@ -212,9 +211,8 @@ public class ChargingApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_USAGE_AUTH_RATE_CHARGE3.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    ChargingApiService service = new ChargingApiService(locale);
+                    ChargingApiService service = new ChargingApiService();
                     result = service.processUsageAuthRateCharge(locale, clientApplicationId, msisdn, serviceId, usageAttributes);
-//                    result = DecouplingApiFactory.getChargingApi(locale, clientApplicationId).usageAuthRateCharge(clientApplicationId, msisdn, serviceId, usageAttributes);
                 } else {
                     result = getChargingApiDelegate(locale).usageAuthRateCharge(clientApplicationId, msisdn, serviceId, usageAttributes);
                 }
@@ -336,90 +334,6 @@ public class ChargingApiServlet extends AbstractEcomServlet {
             }
         }
     }
-
-//    public void usageAuthRateChargeHandler(Locale locale, HttpServletResponse resp ,String clientApplicationId  ,String msisdn  ,String serviceId  ,UsageAttributes usageAttributes  ,ServiceUsageInstance serviceUsageInstance ) {
-//        ObjectOutputStream oos = null;
-//        try {            
-//            UsageAuthorization result = null;
-//            oos = new ObjectOutputStream (
-//                               new BufferedOutputStream (resp.getOutputStream()));
-//            try {
-//                result = getChargingApiDelegate(locale).usageAuthRateCharge(clientApplicationId,msisdn,serviceId,usageAttributes,serviceUsageInstance);
-//            }
-//            catch (Exception e1) {                
-//                oos.writeObject( new ExceptionAdapter(e1));
-//                oos.flush();
-//                return;
-//            }
-//            // send response
-//            resp.setStatus(HttpServletResponse.SC_OK);
-//            oos.writeObject(result);
-//            oos.flush();
-//        } catch (Exception e2) {
-//            try{
-//              log(e2.getMessage(), e2);
-//              oos = new ObjectOutputStream (
-//                   new BufferedOutputStream (resp.getOutputStream()));
-//              oos.writeObject( new ExceptionAdapter(e2));
-//              oos.flush();
-//             }catch(IOException excep)
-//             {
-//              log.error(excep.getMessage(),excep);
-//             }
-//        }
-//        finally {
-//            if (oos != null) {
-//                try{
-//                   oos.close();
-//                   }catch(IOException excep1)
-//                    {
-//                        log.error(excep1.getMessage(),excep1);
-//                    }
-//            }
-//        }
-//    }
-
-//    public void usageAuthRateHandler(Locale locale, HttpServletResponse resp ,String clientApplicationId  ,String msisdn  ,String serviceId  ,UsageAttributes usageAttributes  ,ServiceUsageInstance serviceUsageInstance ) {
-//        ObjectOutputStream oos = null;
-//        try {            
-//            UsageAuthorization result = null;
-//            oos = new ObjectOutputStream (
-//                               new BufferedOutputStream (resp.getOutputStream()));
-//            try {
-//                result = getChargingApiDelegate(locale).usageAuthRate(clientApplicationId,msisdn,serviceId,usageAttributes,serviceUsageInstance);
-//            }
-//            catch (Exception e1) {                
-//                oos.writeObject( new ExceptionAdapter(e1));
-//                oos.flush();
-//                return;
-//            }
-//            // send response
-//            resp.setStatus(HttpServletResponse.SC_OK);
-//            oos.writeObject(result);
-//            oos.flush();
-//        } catch (Exception e2) {
-//            try{
-//              log(e2.getMessage(), e2);
-//              oos = new ObjectOutputStream (
-//                   new BufferedOutputStream (resp.getOutputStream()));
-//              oos.writeObject( new ExceptionAdapter(e2));
-//              oos.flush();
-//             }catch(IOException excep)
-//             {
-//              log.error(excep.getMessage(),excep);
-//             }
-//        }
-//        finally {
-//            if (oos != null) {
-//                try{
-//                   oos.close();
-//                   }catch(IOException excep1)
-//                    {
-//                        log.error(excep1.getMessage(),excep1);
-//                    }
-//            }
-//        }
-//    }
 
     public void usageCompleteHandler(Locale locale, HttpServletResponse resp ,String clientId  ,String reservationId  ,com.vodafone.global.er.business.charging.UsageCompleteAttributes att ) {
         ObjectOutputStream oos = null;

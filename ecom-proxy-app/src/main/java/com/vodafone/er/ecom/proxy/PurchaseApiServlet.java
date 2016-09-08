@@ -5,8 +5,8 @@ import com.vizzavi.ecommerce.business.charging.*;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
+import com.vodafone.er.ecom.proxy.service.PurchaseApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
-import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.util.ExceptionAdapter;
 import org.apache.log4j.Logger;
 
@@ -127,7 +127,8 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
 
             try {
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = DecouplingApiFactory.getPurchaseApi(locale, clientId).purchasePackage(clientApplicationId, msisdn, packageId, purchaseAttributes);
+                    PurchaseApiService service = new PurchaseApiService();
+                    result = service.purchasePackageMsisdn(locale, clientApplicationId, msisdn, packageId, purchaseAttributes);
                 } else {
                     result = EcomApiFactory.getPurchaseApi(locale).purchasePackageMsisdn(clientApplicationId,msisdn,packageId,purchaseAttributes);
                 }
@@ -446,57 +447,7 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
         }
     }
 
-    //TODO Commented after move to 13-12 base
-
-    //CR - Add Invoice Text to goodwill credit request - consolidated attributes into GoodwillCreditAttributes class
-//    public void goodwillCreditHandler(Locale locale, HttpServletResponse resp , String msisdn  , GoodwillCreditAttributes goodwillCreditAttributes ) {
-//        ObjectOutputStream oos = null;
-//        try {
-//            GoodwillCreditAuthorization result = null;
-//            oos = new ObjectOutputStream (
-//                               new BufferedOutputStream (resp.getOutputStream()));
-//            try {
-//                result = getPurchaseApiDelegate(locale).goodwillCredit(msisdn,goodwillCreditAttributes);
-//
-//            }
-//            catch (Exception e1) {
-//                // Commit the transaction here as it will be committed in doPost anyway but we need to commit
-//                // before sending a response.
-//
-//                oos.writeObject( new ExceptionAdapter(e1));
-//                oos.flush();
-//                return;
-//            }
-//            // send response
-//            resp.setStatus(HttpServletResponse.SC_OK);
-//            oos.writeObject(result);
-//            oos.flush();
-//        } catch (Exception e2) {
-//            try{
-//              log(e2.getMessage(), e2);
-//              oos = new ObjectOutputStream (
-//                   new BufferedOutputStream (resp.getOutputStream()));
-//              oos.writeObject( new ExceptionAdapter(e2));
-//              oos.flush();
-//             }catch(IOException excep)
-//             {
-//              log.error(excep.getMessage(),excep);
-//             }
-//        }
-//        finally {
-//            if (oos != null) {
-//                try{
-//                   oos.close();
-//                   }catch(IOException excep1)
-//                    {
-//                        log.error(excep1.getMessage(),excep1);
-//                    }
-//            }
-//        }
-//    }
-
 	private PurchaseApi getPurchaseApiDelegate(Locale locale) throws EcommerceException {
-//		return DecouplingApiFactory.getPurchaseApi(locale, clientId);
         return EcomApiFactory.getPurchaseApi(locale);
 	}
 

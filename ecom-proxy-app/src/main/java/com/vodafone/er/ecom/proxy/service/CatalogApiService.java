@@ -1,11 +1,14 @@
 package com.vodafone.er.ecom.proxy.service;
 
-import com.vizzavi.ecommerce.business.catalog.*;
+import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
+import com.vizzavi.ecommerce.business.catalog.CatalogService;
+import com.vizzavi.ecommerce.business.catalog.PricePoint;
+import com.vizzavi.ecommerce.business.catalog.PricePoints;
 import com.vizzavi.ecommerce.business.catalog.internal.BalanceImpact;
 import com.vizzavi.ecommerce.business.charging.PurchaseAttributes;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vizzavi.ecommerce.business.selfcare.ResourceBalance;
-import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
+import com.vodafone.er.ecom.proxy.api.ErApiManager;
 import com.vodafone.global.er.util.CatalogUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,42 +16,41 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getCatalogApi;
 import static com.vodafone.er.ecom.proxy.constants.EcomAppEnum.CLIENT_ID;
 
 @Component
 public class CatalogApiService {
     private Logger logger = LoggerFactory.getLogger(CatalogApiService.class);
 
-    private CatalogApi catalogApi;
+    private ErApiManager erApiManager;
 
-    public CatalogApi getCatalogApi(Locale locale) {
-        if (null == catalogApi) {
-            catalogApi = DecouplingApiFactory.getCatalogApi(locale , CLIENT_ID.getValue());
-        }
-        return catalogApi;
+    public CatalogApiService() {
+        erApiManager = new ErApiManager();
     }
+
 
     public CatalogPackage getCatalogPackage(final Locale locale, String packageId) {
         logger.info("calling catalogApi.getPackage with locale={}, client-id={}", locale, CLIENT_ID.getValue());
 //        catalogApi = getCatalogApi(locale);
-        final CatalogPackage result = getCatalogApi(locale).getPackage(packageId);
+        final CatalogPackage result = erApiManager.getCatalogApi(locale).getPackage(packageId);
             return processCatalogPackage(locale, result);
     }
 
     public CatalogPackage [] getCatalogPackages(final Locale locale) {
-        final CatalogPackage [] packArr = getCatalogApi(locale).getPackages();
+        final CatalogPackage [] packArr = erApiManager.getCatalogApi(locale).getPackages();
         return packArr;
     }
 
     public CatalogService getCatalogService(final Locale locale, String serviceId) {
 //        catalogApi = getCatalogApi(locale);
-        final CatalogService service = getCatalogApi(locale).getService(serviceId);
+        final CatalogService service = erApiManager.getCatalogApi(locale).getService(serviceId);
         return processCatalogService(locale, service);
     }
 
     public PricePoint getPricePoint(final Locale locale, final String pricePointId) {
 //        catalogApi = getCatalogApi(locale);
-        final PricePoint pricePoint = getCatalogApi(locale).getPricePoint(pricePointId);
+        final PricePoint pricePoint = erApiManager.getCatalogApi(locale).getPricePoint(pricePointId);
         return processPricePoint(pricePoint);
     }
 

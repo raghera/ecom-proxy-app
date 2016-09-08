@@ -9,7 +9,6 @@ import com.vodafone.global.er.business.selfcare.BalanceFilter;
 import com.vodafone.global.er.business.selfcare.MicroServiceStatus;
 import com.vodafone.global.er.business.selfcare.ParentTransaction;
 import com.vodafone.global.er.data.ERLogDataImpl;
-import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.util.ExceptionAdapter;
 import org.apache.log4j.Logger;
 
@@ -239,7 +238,7 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
             try {
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
                     //TODO move this into the SelfcareApiService
-                    SelfcareApiService service = new SelfcareApiService(locale);
+                    SelfcareApiService service = new SelfcareApiService();
                     result = service.getSubscriptions(locale, clientId, msisdn, device, filter);
                 } else {
                     result = EcomApiFactory.getSelfcareApi(locale).getSubscriptions(clientId,msisdn,device,filter);
@@ -329,8 +328,9 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD4.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = DecouplingApiFactory.getSelfcareApi(locale, clientId).
-                            modifySubscriptionChargingMethod(clientId,msisdn,deviceType,packageSubId,chargingMethod,csrId,reason);
+                    SelfcareApiService service = new SelfcareApiService();
+                    result = service.modifySubscriptionChargingMethod(locale, clientId, msisdn, deviceType,
+                            packageSubId, chargingMethod, csrId, reason);
                 } else {
                     result = getSelfcareApiDelegate(locale)
                             .modifySubscriptionChargingMethod(clientId,msisdn,deviceType,packageSubId,chargingMethod,csrId,reason);

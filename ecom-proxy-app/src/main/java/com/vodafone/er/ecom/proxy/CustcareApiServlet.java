@@ -491,6 +491,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean( PROP_GET_SUBSCRIPTION26.value(), true);
                 if(shouldProxy.isPresent()) {
+                    //TODO should go through a processor class
                     result = DecouplingApiFactory.getCustcareApi(locale, clientId)
                             .inactivateSubscription(clientId, msisdn, subscriptionId, csrId, reason);
                 } else {
@@ -1087,7 +1088,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_SUBSCRIPTIONS18.value(), true);
                 if(shouldProxy.isPresent()) {
-                    SelfcareApiService service = new SelfcareApiService(locale);
+                    SelfcareApiService service = new SelfcareApiService();
                     result = service.getSubscriptions(locale, clientId, msisdn, device, filter);
                 } else {
                     result = getSelfcareApiDelegate(locale).getSubscriptions(clientId, msisdn, device, filter);
@@ -1135,6 +1136,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD19.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    //TODO Should go through a processor class
                     result = DecouplingApiFactory.getSelfcareApi(locale, clientId)
                             .modifySubscriptionChargingMethod(clientId, msisdn, 0, packageSubId, chargingMethod);
                 } else {
@@ -1437,7 +1439,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 if(shouldProxy.isPresent()) {
                     SubscriptionFilter filter = new SubscriptionFilterImpl();
                     filter.setSubscriptionId(packageSubId);
-                    SelfcareApiService service = new SelfcareApiService(locale);
+                    SelfcareApiService service = new SelfcareApiService();
                     final Subscription [] subs = service.getSubscriptions(locale, clientId, msisdn, 0, filter);
                     result = subs[0];
                 } else {

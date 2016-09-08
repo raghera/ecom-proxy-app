@@ -6,7 +6,6 @@ import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.er.ecom.proxy.service.CatalogApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
-import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.translog.TransLogManagerFactory;
 import com.vodafone.global.er.util.ExceptionAdapter;
 import org.apache.log4j.Logger;
@@ -573,7 +572,6 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
                     CatalogApiService service = new CatalogApiService();
                     result = service.processFindPackagesWithService(locale, msisdn,serv,purchaseAttributes);
-//                    result = DecouplingApiFactory.getCatalogApi(locale, clientId).findPackagesWithService(msisdn,serv,purchaseAttributes);
                 } else {
                     result = getCatalogEcomClient(locale).findPackagesWithService(msisdn,serv,purchaseAttributes);
                 }
@@ -821,93 +819,6 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         }
     }
 
-//    public void getDRMObjectHandler(Locale locale, HttpServletResponse resp ,String drmid ) {
-//        ObjectOutputStream oos = null;
-//        try {
-//            DRMObject result = null;
-//            oos = new ObjectOutputStream (
-//                               new BufferedOutputStream (resp.getOutputStream()));
-//            try {
-//                result = getCatalogEcomClient(locale).getDRMObject(drmid);
-//            }
-//            catch (Exception e1) {
-//                oos.writeObject( new ExceptionAdapter(e1));
-//                oos.flush();
-//                return;
-//            }
-//            // send response
-//            resp.setStatus(HttpServletResponse.SC_OK);
-//            oos.writeObject(result);
-//            oos.flush();
-//        } catch (Exception e2) {
-//            try{
-//              log(e2.getMessage(), e2);
-//              oos = new ObjectOutputStream (
-//                   new BufferedOutputStream (resp.getOutputStream()));
-//              oos.writeObject( new ExceptionAdapter(e2));
-//              oos.flush();
-//             }catch(IOException excep)
-//             {
-//              log.error(excep.getMessage(),excep);
-//             }
-//        }
-//        finally {
-//            if (oos != null) {
-//                try{
-//                   oos.close();
-//                   }catch(IOException excep1)
-//                    {
-//                        log.error(excep1.getMessage(),excep1);
-//                    }
-//            }
-//        }
-//    }
-
-//    public void getDRMObjectsHandler(Locale locale, HttpServletResponse resp) {
-//        ObjectOutputStream oos = null;
-//        try {
-//            DRMObject[] result = null;
-//            oos = new ObjectOutputStream (
-//                               new BufferedOutputStream (resp.getOutputStream()));
-//            try {
-//                result = getCatalogEcomClient(locale).getDRMObjects();
-//            }
-//            catch (Exception e1) {
-//                oos.writeObject( new ExceptionAdapter(e1));
-//                oos.flush();
-//                return;
-//            }
-//            // send response
-//            resp.setStatus(HttpServletResponse.SC_OK);
-//            oos.writeObject(result);
-//            oos.flush();
-//        } catch (Exception e2) {
-//            try{
-//              log(e2.getMessage(), e2);
-//              oos = new ObjectOutputStream (
-//                   new BufferedOutputStream (resp.getOutputStream()));
-//              oos.writeObject( new ExceptionAdapter(e2));
-//              oos.flush();
-//             }catch(IOException excep)
-//             {
-//              log.error(excep.getMessage(),excep);
-//             }
-//        }
-//        finally {
-//            if (oos != null) {
-//                try{
-//                   oos.close();
-//                   }catch(IOException excep1)
-//                    {
-//                        log.error(excep1.getMessage(),excep1);
-//                    }
-//            }
-//        }
-//    }
-
-    private CatalogApi getCatalogDecouplingClient(Locale locale) {
-		return DecouplingApiFactory.getCatalogApi(locale, clientId);
-	}
 
 
 	public void findExpressPackagesByServiceIdHandler(Locale locale, HttpServletResponse resp ,String[] serviceId  ,boolean headline ) {

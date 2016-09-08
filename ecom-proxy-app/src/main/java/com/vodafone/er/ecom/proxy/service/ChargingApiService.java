@@ -2,7 +2,6 @@ package com.vodafone.er.ecom.proxy.service;
 
 import com.vizzavi.ecommerce.business.catalog.CatalogService;
 import com.vizzavi.ecommerce.business.catalog.PricePoint;
-import com.vizzavi.ecommerce.business.charging.ChargingApi;
 import com.vizzavi.ecommerce.business.charging.UsageAttributes;
 import com.vizzavi.ecommerce.business.charging.UsageAuthorization;
 import com.vizzavi.ecommerce.business.charging.UsageAuthorizationException;
@@ -10,7 +9,7 @@ import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vizzavi.ecommerce.business.selfcare.Subscription;
 import com.vizzavi.ecommerce.business.selfcare.SubscriptionFilter;
 import com.vizzavi.ecommerce.business.selfcare.SubscriptionStatus;
-import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
+import com.vodafone.er.ecom.proxy.api.ErApiManager;
 import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,25 +30,18 @@ public class ChargingApiService {
 
     private Logger logger = LoggerFactory.getLogger(CatalogApiService.class);
 
-    private ChargingApi chargingApi;
     private SelfcareApiService selfcareApiService;
-    private CatalogApiService catalogApiService;
+    private ErApiManager erApiManager;
 
-    public ChargingApiService(Locale locale) throws EcommerceException {
-        selfcareApiService = new SelfcareApiService(locale);
-        catalogApiService = new CatalogApiService();
+    public ChargingApiService() throws EcommerceException {
+        selfcareApiService = new SelfcareApiService();
+        erApiManager = new ErApiManager();
     }
 
-    public ChargingApi getChargingApi(Locale locale, String clientId) {
-        if (null == chargingApi) {
-            chargingApi = DecouplingApiFactory.getChargingApi(locale , clientId);
-        }
-        return chargingApi;
-    }
     public UsageAuthorization processUsageAuthRateCharge(Locale locale, String clientId, String msisdn, String serviceId,
                                                          UsageAttributes usageAttributes) throws EcommerceException {
 
-        UsageAuthorization usageAuth = getChargingApi(locale, clientId)
+        UsageAuthorization usageAuth = erApiManager.getChargingApi(locale, clientId)
                 .usageAuthRateCharge(clientId, msisdn, serviceId, usageAttributes);
         processUsageAuthResponse(locale, msisdn, usageAuth);
         return usageAuth;
@@ -58,7 +50,7 @@ public class ChargingApiService {
     public UsageAuthorization processUsageAuth(Locale locale, String clientId, String msisdn, String serviceId,UsageAttributes attributes)
             throws UsageAuthorizationException {
 
-        UsageAuthorization usageAuth = getChargingApi(locale, clientId)
+        UsageAuthorization usageAuth = erApiManager.getChargingApi(locale, clientId)
                 .usageAuth(clientId,msisdn,serviceId, attributes);
         processUsageAuthResponse(locale, msisdn, usageAuth);
 

@@ -4,8 +4,8 @@ import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vizzavi.ecommerce.business.provision.ProvisionApi;
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
+import com.vodafone.er.ecom.proxy.service.ProvisionApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
-import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 import com.vodafone.global.er.util.ExceptionAdapter;
 import org.apache.log4j.Logger;
 
@@ -93,7 +93,8 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
             try {
 
                 if (shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = DecouplingApiFactory.getProvisionApi(locale, clientId).updateServiceStatus(provisioningId, serviceStatus, provisioningStatus);
+                    ProvisionApiService service = new ProvisionApiService();
+                    result = service.updateServiceStatus(locale, provisioningId, serviceStatus, provisioningStatus);
                 } else {
                     result = EcomApiFactory.getProvisionApi(locale).updateServiceStatus(provisioningId,serviceStatus,provisioningStatus);
 
@@ -133,7 +134,6 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
     }
 
     private ProvisionApi getProvisionApiDelegate(Locale locale) throws EcommerceException {
-//		return DecouplingApiFactory.getProvisionApi(locale, clientId);
         return EcomApiFactory.getProvisionApi(locale);
 	}
 
