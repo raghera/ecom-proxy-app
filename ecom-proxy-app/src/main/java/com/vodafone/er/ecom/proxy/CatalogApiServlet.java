@@ -203,7 +203,6 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             final Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_SERVICE1.value(), true);
             try {
                 //TODO remove and configure through Spring.
-                //TODO make this configurable
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
                     result = service.getCatalogService(locale, id);
                 } else {

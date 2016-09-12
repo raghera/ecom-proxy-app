@@ -167,7 +167,14 @@ public class ChargingApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getChargingApiDelegate(locale).usageAuthRate(clientApplicationId,msisdn,serviceId,usageAttributes);
+                Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_USAGE_AUTH1.value(), true);
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    ChargingApiService service = new ChargingApiService();
+                    result = service.processUsageAuthRate(locale, clientApplicationId,msisdn,serviceId,usageAttributes);
+                } else {
+                    result = getChargingApiDelegate(locale)
+                            .usageAuthRate(clientApplicationId, msisdn, serviceId, usageAttributes);
+                }
             }
             catch (Exception e1) {                
                 oos.writeObject( new ExceptionAdapter(e1));

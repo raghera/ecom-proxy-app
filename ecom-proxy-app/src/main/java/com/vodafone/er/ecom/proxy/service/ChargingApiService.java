@@ -57,8 +57,21 @@ public class ChargingApiService {
         return usageAuth;
     }
 
+    public UsageAuthorization processUsageAuthRate(Locale locale, String clientId, String msisdn, String serviceId, UsageAttributes usageAttributes)
+            throws EcommerceException{
+
+        UsageAuthorization usageAuth = erApiManager.getChargingApi(locale, clientId)
+                .usageAuthRate(clientId, msisdn, serviceId, usageAttributes);
+
+        processUsageAuthResponse(locale, msisdn, usageAuth);
+
+        return usageAuth;
+
+    }
+
     public void processUsageAuthResponse(Locale locale, String msisdn, UsageAuthorization usageAuth) {
         if(usageAuth.isSuccess()) {
+            //TODO could combine populateSubscription & populateActiveSubscriptions - getAll in one
             populateSubscription(locale, msisdn, usageAuth);
             populateActiveSubscriptions(locale, msisdn, usageAuth);
             populateUsageAuthServicePricePointFromSubscription(locale, msisdn, usageAuth);
