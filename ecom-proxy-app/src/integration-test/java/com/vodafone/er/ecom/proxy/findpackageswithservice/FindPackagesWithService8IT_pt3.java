@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Ravi Aghera
  */
-public class FindPackagesWithService8_pt3 {
+public class FindPackagesWithService8IT_pt3 {
 
     private SoftAssertions softly = new SoftAssertions();
 

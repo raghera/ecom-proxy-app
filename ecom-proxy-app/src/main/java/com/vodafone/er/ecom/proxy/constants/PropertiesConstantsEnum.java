@@ -17,7 +17,9 @@ public enum  PropertiesConstantsEnum {
     PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD4("proxy.modifySubscriptionChargingMethod4"),
     PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD19("proxy.modifySubscriptionChargingMethod19"),
     PROP_GET_SUBSCRIPTION26("proxy.getSubscription26"),
-    PROP_INACTIVATE_SUBSCRIPTION6("proxy.inactivateSubscription6");
+    PROP_INACTIVATE_SUBSCRIPTION6("proxy.inactivateSubscription6"),
+    PROP_USAGE_AUTH_RATE2("proxy.usageAuthRate2"),
+    PROP_FIND_PACKAGES_WITH_SERVICE8("proxy.findPackagesWithService8");
 
 
 

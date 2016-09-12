@@ -18,6 +18,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_USAGE_AUTH1;
+import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_USAGE_AUTH_RATE2;
 import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_USAGE_AUTH_RATE_CHARGE3;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.CHARGING_API;
@@ -167,7 +168,7 @@ public class ChargingApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_USAGE_AUTH1.value(), true);
+                Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_USAGE_AUTH_RATE2.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
                     ChargingApiService service = new ChargingApiService();
                     result = service.processUsageAuthRate(locale, clientApplicationId,msisdn,serviceId,usageAttributes);

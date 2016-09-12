@@ -525,7 +525,14 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getCatalogEcomClient(locale).findPackagesWithService(null, serv, purchaseAttributes);
+                //Actually calls exactly the same api underneath as FPWS9
+                Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_FIND_PACKAGES_WITH_SERVICE8.value(), true);
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    CatalogApiService service = new CatalogApiService();
+                    result = service.processFindPackagesWithService(locale, null, serv, purchaseAttributes);
+                } else {
+                    result = getCatalogEcomClient(locale).findPackagesWithService(null, serv, purchaseAttributes);
+                }
             }
             catch (Exception e1) {
                 oos.writeObject( new ExceptionAdapter(e1));
