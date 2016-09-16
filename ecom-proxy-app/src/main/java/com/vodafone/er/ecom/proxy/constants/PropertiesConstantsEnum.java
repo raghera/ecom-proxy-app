@@ -4,6 +4,7 @@ package com.vodafone.er.ecom.proxy.constants;
  * Created by Ravi Aghera
  */
 public enum  PropertiesConstantsEnum {
+
     PROPERTIES_FILE_NAME("ecom-proxy-application"),
     PROP_GET_PACKAGE2("proxy.getPackage2"),
     PROP_GET_SERVICE1("proxy.getService1"),
@@ -19,10 +20,12 @@ public enum  PropertiesConstantsEnum {
     PROP_GET_SUBSCRIPTION26("proxy.getSubscription26"),
     PROP_INACTIVATE_SUBSCRIPTION6("proxy.inactivateSubscription6"),
     PROP_USAGE_AUTH_RATE2("proxy.usageAuthRate2"),
-    PROP_FIND_PACKAGES_WITH_SERVICE8("proxy.findPackagesWithService8");
-
-
-
+    PROP_FIND_PACKAGES_WITH_SERVICE8("proxy.findPackagesWithService8"),
+    PROP_FIND_PACKAGES_WITH_SERVICE7("proxy.findPackagesWithService7"),
+    PROP_GET_BASE_PRICES20("proxy.getBasePrices20"),
+    PROP_GET_PACKAGES5("proxy.getPackages5"),
+    PROP_GET_VERSION10("proxy.getVersion10"),
+    PROP_USAGE_COMPLETE4("proxy.usageComplete4");
 
     private final String value;
 

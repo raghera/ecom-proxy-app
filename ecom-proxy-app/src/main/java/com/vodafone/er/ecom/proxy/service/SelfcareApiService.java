@@ -24,7 +24,7 @@ public class SelfcareApiService {
     private CatalogApiService catalogApiService;
     private ErApiManager erApiManager;
 
-    public SelfcareApiService() throws EcommerceException {
+    public SelfcareApiService() {
         catalogApiService = new CatalogApiService();
         erApiManager = new ErApiManager();
     }
@@ -86,6 +86,7 @@ public class SelfcareApiService {
 
         subscription.setTransactions(resultList);
 
+        //populate the package correctly
         final CatalogPackage pack = catalogApiService.getCatalogPackage(locale, subscription.getPackageId());
         catalogApiService.populatePricePointInPackage(pack, subscription.getPackage().getPricePoint().getId());
         subscription.setPackage(pack);

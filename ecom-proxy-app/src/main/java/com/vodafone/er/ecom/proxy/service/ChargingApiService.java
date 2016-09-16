@@ -33,7 +33,7 @@ public class ChargingApiService {
     private SelfcareApiService selfcareApiService;
     private ErApiManager erApiManager;
 
-    public ChargingApiService() throws EcommerceException {
+    public ChargingApiService() {
         selfcareApiService = new SelfcareApiService();
         erApiManager = new ErApiManager();
     }
@@ -136,4 +136,19 @@ public class ChargingApiService {
             return;
         }
     }
+
+    public UsageAuthorization usageComplete(Locale locale, String eventReservationId, int deliveryStatus) throws EcommerceException {
+
+        //Cannot populate anything else here since there is no msisdn available
+        UsageAuthorization auth = erApiManager.getChargingApi(locale, CLIENT_ID.getValue())
+                .usageComplete(CLIENT_ID.getValue(), eventReservationId, deliveryStatus);
+
+        //Currently no msisdn is returned here
+//        Optional<String> msisdnOpt = Optional.of(auth.getSubscription().getMsisdn());
+//        msisdnOpt.ifPresent(msisdn -> processUsageAuthResponse(locale, msisdn, auth));
+
+        return auth;
+    }
+
+
 }

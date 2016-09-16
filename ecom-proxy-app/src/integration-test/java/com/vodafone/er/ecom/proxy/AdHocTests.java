@@ -1,7 +1,6 @@
 package com.vodafone.er.ecom.proxy;
 
 import com.vizzavi.ecommerce.business.catalog.CatalogApi;
-import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
 import com.vizzavi.ecommerce.business.charging.AccountValidationAuthorization;
 import com.vizzavi.ecommerce.business.charging.ChargingApi;
 import com.vizzavi.ecommerce.business.charging.PurchaseApi;
@@ -45,10 +44,8 @@ public class AdHocTests {
 
     @Test
     public void simpleGetPackage2() {
-
-        CatalogPackage pack = catalogApi.getPackage("pAlt");
-        assertNotNull(pack);
-
+//        CatalogPackage pack = catalogApi.getPackage("pAlt");
+//        assertNotNull(pack);
     }
 
     @Test

@@ -19,7 +19,6 @@ import static com.vodafone.er.ecom.proxy.constants.EcomAppEnum.CLIENT_ID;
  */
 public class ErApiManager {
 
-
     private ChargingApi chargingApi;
     private CatalogApi catalogApi;
     private SelfcareApi selfcareApi;

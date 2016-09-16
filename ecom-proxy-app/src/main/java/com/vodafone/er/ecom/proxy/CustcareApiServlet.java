@@ -5,7 +5,7 @@ import com.vizzavi.ecommerce.business.charging.ModifyAuthorisation;
 import com.vizzavi.ecommerce.business.charging.SubscriptionAttributes;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.*;
-import com.vodafone.er.ecom.proxy.properties.PropertyService;
+import com.vodafone.er.ecom.proxy.service.CustcareApiService;
 import com.vodafone.er.ecom.proxy.service.SelfcareApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
@@ -31,6 +31,8 @@ public class CustcareApiServlet extends AbstractEcomServlet {
 
 	private static final long	serialVersionUID	= 7283816389304078194L;
 	private static Logger log = Logger.getLogger(CustcareApiServlet.class);
+    private CustcareApiService custcareApiService = new CustcareApiService();
+    private SelfcareApiService selfcareApiService = new SelfcareApiService();
 
     protected SelfcareApi getSelfcareApiDelegate(Locale locale) throws Exception {
         return EcomApiFactory.getSelfcareApi(locale);
@@ -489,11 +491,9 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean( PROP_GET_SUBSCRIPTION26.value(), true);
+                Optional<Boolean> shouldProxy = getPropertyAsBoolean( PROP_INACTIVATE_SUBSCRIPTION6.value(), true);
                 if(shouldProxy.isPresent()) {
-                    //TODO should go through a processor class
-                    result = DecouplingApiFactory.getCustcareApi(locale, clientId)
-                            .inactivateSubscription(clientId, msisdn, subscriptionId, csrId, reason);
+                    result = custcareApiService.inactivateSubscription(locale, clientId, msisdn, subscriptionId, csrId, reason);
                 } else {
                     result = getCustcareApiDelegate(locale).inactivateSubscription(clientId, msisdn, subscriptionId, csrId, reason);
                 }
@@ -875,7 +875,15 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getCustcareApiDelegate(locale).getBasicAccount(clientId,msisdn,accessDevice);
+
+                Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_SUBSCRIPTIONS18.value(), true);
+                if(shouldProxy.isPresent()) {
+                    result = custcareApiService.getBasicAccount(locale, clientId,msisdn,accessDevice);
+                } else {
+                    result = getCustcareApiDelegate(locale).getBasicAccount(clientId,msisdn,accessDevice);
+                }
+
+
             }
             catch (Exception e1) {                
                  oos.writeObject( new ExceptionAdapter(e1));
@@ -1088,8 +1096,8 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_SUBSCRIPTIONS18.value(), true);
                 if(shouldProxy.isPresent()) {
-                    SelfcareApiService service = new SelfcareApiService();
-                    result = service.getSubscriptions(locale, clientId, msisdn, device, filter);
+
+                    result = selfcareApiService.getSubscriptions(locale, clientId, msisdn, device, filter);
                 } else {
                     result = getSelfcareApiDelegate(locale).getSubscriptions(clientId, msisdn, device, filter);
                 }
@@ -1435,12 +1443,11 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean( PROP_GET_SUBSCRIPTION26.value(), true);
+                Optional<Boolean> shouldProxy = getPropertyAsBoolean( PROP_GET_SUBSCRIPTION26.value(), true);
                 if(shouldProxy.isPresent()) {
                     SubscriptionFilter filter = new SubscriptionFilterImpl();
                     filter.setSubscriptionId(packageSubId);
-                    SelfcareApiService service = new SelfcareApiService();
-                    final Subscription [] subs = service.getSubscriptions(locale, clientId, msisdn, 0, filter);
+                    final Subscription [] subs = selfcareApiService.getSubscriptions(locale, clientId, msisdn, 0, filter);
                     result = subs[0];
                 } else {
                     result = getSelfcareApiDelegate(locale).getSubscription(clientId, msisdn, deviceType, packageSubId);

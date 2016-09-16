@@ -1,6 +1,7 @@
 package com.vodafone.er.ecom.proxy;
 
 import com.vizzavi.ecommerce.business.catalog.*;
+import com.vizzavi.ecommerce.business.charging.PurchaseAttributes;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
@@ -399,7 +400,12 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getCatalogEcomClient(locale).getPackages();
+                Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_GET_PACKAGES5.value(), true);
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    result = service.getPackages(locale);
+                } else {
+                    result = getCatalogEcomClient(locale).getPackages();
+                }
             }
             catch (Exception e1) {
                 oos.writeObject( new ExceptionAdapter(e1));
@@ -483,7 +489,13 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getCatalogEcomClient(locale).findPackagesWithService(catalogService);
+
+                Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_FIND_PACKAGES_WITH_SERVICE7.value(), true);
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    result = service.processFindPackagesWithService(locale, null, catalogService, new PurchaseAttributes());
+                } else {
+                    result = getCatalogEcomClient(locale).findPackagesWithService(catalogService);
+                }
             }
             catch (Exception e1) {
                 oos.writeObject( new ExceptionAdapter(e1));
@@ -622,7 +634,13 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getCatalogEcomClient(locale).getVersion();
+                Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_VERSION10.value(), true);
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    result = service.getVersion(locale);
+                } else {
+                    result = getCatalogEcomClient(locale).getVersion();
+                }
+
             }
             catch (Exception e1) {
                 oos.writeObject( new ExceptionAdapter(e1));
@@ -961,7 +979,12 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getCatalogEcomClient(locale).getBasePrices(serviceId);
+                Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_GET_BASE_PRICES20.value(), true);
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    result = service.getBasePrices(locale, serviceId);
+                } else {
+                    result = getCatalogEcomClient(locale).getBasePrices(serviceId);
+                }
             }
             catch (Exception e1) {
                 oos.writeObject( new ExceptionAdapter(e1));

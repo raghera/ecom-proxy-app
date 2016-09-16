@@ -17,9 +17,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Optional;
 
-import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_USAGE_AUTH1;
-import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_USAGE_AUTH_RATE2;
-import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_USAGE_AUTH_RATE_CHARGE3;
+import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.*;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.CHARGING_API;
 
@@ -28,6 +26,8 @@ public class ChargingApiServlet extends AbstractEcomServlet {
 	private static final long	serialVersionUID	= -3163007763179445975L;
 
 	private static Logger log = Logger.getLogger(ChargingApiServlet.class);
+
+    private ChargingApiService service = new ChargingApiService();
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
@@ -265,7 +265,12 @@ public class ChargingApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getChargingApiDelegate(locale).usageComplete(clientApplicationId,eventReservationId,deliveryStatus);
+                Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_USAGE_COMPLETE4.value(), true);
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    result = service.usageComplete(locale, eventReservationId, deliveryStatus);
+                } else {
+                    result = getChargingApiDelegate(locale).usageComplete(clientApplicationId, eventReservationId, deliveryStatus);
+                }
             }
             catch (Exception e1) {                
                 oos.writeObject( new ExceptionAdapter(e1));

@@ -9,6 +9,7 @@ import com.vizzavi.ecommerce.business.charging.PurchaseAttributes;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vizzavi.ecommerce.business.selfcare.ResourceBalance;
 import com.vodafone.er.ecom.proxy.api.ErApiManager;
+import com.vodafone.global.er.business.catalog.BasePrice;
 import com.vodafone.global.er.util.CatalogUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getCatalogApi;
 import static com.vodafone.er.ecom.proxy.constants.EcomAppEnum.CLIENT_ID;
 
 @Component
@@ -32,24 +32,16 @@ public class CatalogApiService {
 
     public CatalogPackage getCatalogPackage(final Locale locale, String packageId) {
         logger.info("calling catalogApi.getPackage with locale={}, client-id={}", locale, CLIENT_ID.getValue());
-//        catalogApi = getCatalogApi(locale);
         final CatalogPackage result = erApiManager.getCatalogApi(locale).getPackage(packageId);
             return processCatalogPackage(locale, result);
     }
 
-    public CatalogPackage [] getCatalogPackages(final Locale locale) {
-        final CatalogPackage [] packArr = erApiManager.getCatalogApi(locale).getPackages();
-        return packArr;
-    }
-
     public CatalogService getCatalogService(final Locale locale, String serviceId) {
-//        catalogApi = getCatalogApi(locale);
         final CatalogService service = erApiManager.getCatalogApi(locale).getService(serviceId);
         return processCatalogService(locale, service);
     }
 
     public PricePoint getPricePoint(final Locale locale, final String pricePointId) {
-//        catalogApi = getCatalogApi(locale);
         final PricePoint pricePoint = erApiManager.getCatalogApi(locale).getPricePoint(pricePointId);
         return processPricePoint(pricePoint);
     }
@@ -156,9 +148,11 @@ public class CatalogApiService {
 
         //TODO - Currently the below could result in performance degradation.
         //If there are 100 packages in the response then calling getPackage 100 times.
-        //Caching of the packages locally will help this however.
+        //Caching of the packages locally will help this although only if has been called before
 
-        Optional<CatalogPackage[]> packArrOpt = Optional.of(getCatalogApi(locale).findPackagesWithService(msisdn, service, purchaseAttributes));
+        Optional<CatalogPackage[]> packArrOpt =
+                Optional.of(erApiManager.getCatalogApi(locale)
+                        .findPackagesWithService(msisdn, service, purchaseAttributes));
 
         packArrOpt.ifPresent( packArr -> {
             List<CatalogPackage> packs = Arrays.asList(packArr);
@@ -172,5 +166,21 @@ public class CatalogApiService {
         });
         return packArrOpt.get();
     }
+
+    public BasePrice[] getBasePrices(Locale locale, String [] serviceIds) throws EcommerceException {
+        return erApiManager.getCatalogApi(locale)
+                .getBasePrices(serviceIds);
+    }
+
+    public CatalogPackage [] getPackages(Locale locale) {
+        return erApiManager.getCatalogApi(locale)
+                .getPackages();
+    }
+
+    public String getVersion(Locale locale) {
+        return erApiManager.getCatalogApi(locale)
+                .getVersion();
+    }
+
 }
 
