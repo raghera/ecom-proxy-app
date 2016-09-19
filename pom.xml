@@ -7,6 +7,12 @@
     <name>Ecom Proxy Application </name>
     <url>http://maven.apache.org</url>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.4.0.RELEASE</version>
+    </parent>
+
     <packaging>pom</packaging>
 
     <properties>
@@ -21,7 +27,6 @@
         <assertj.version>3.5.2</assertj.version>
         <spring.version>4.3.1.RELEASE</spring.version>
         <hiberante.version>4.3.10.Final</hiberante.version>
-        <!--<hiberante.version>3.6.0.Final</hiberante.version>-->
         <guava.version>19.0</guava.version>
         <mockito.version>1.9.5</mockito.version>
         <powermock.version>1.6.5</powermock.version>
@@ -67,7 +72,10 @@
             <version>${assertj.version}</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
         <!-- All these Required if using JAXB 1 otherwise remove if using JAXB 2-->
 

@@ -9,6 +9,17 @@
     </welcome-file-list>
 
 	<display-name>Ecom Proxy Server Web Application</display-name>
+
+    <!--Introduce Spring Framework-->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/epa-context.xml</param-value>
+	</context-param>
+	<listener>
+		<description>Spring contextloader</description>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
 	<servlet>
 		<servlet-name>CatalogApiServlet</servlet-name>
 		<servlet-class>com.vodafone.er.ecom.proxy.CatalogApiServlet</servlet-class>

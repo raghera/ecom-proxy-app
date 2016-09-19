@@ -31,8 +31,6 @@ public class UsageComplete4IT_pt1 {
         final UsageAuthorization result = EcomApiFactory.getChargingApi(Locale.UK)
                 .usageComplete("test-client-id", auth.getEventReservationId(), 1);
 
-
-
         softly.assertThat(result.getEventUnits() ).as(" result.getEventUnits()" ).isEqualTo(new Double(0.0)) ;
         softly.assertThat(result.getIsPreordered() ).as(" result.getIsPreordered()" ).isEqualTo(0) ;
         softly.assertThat(result.getStartDate() ).as(" result.getStartDate()" ).isNull();

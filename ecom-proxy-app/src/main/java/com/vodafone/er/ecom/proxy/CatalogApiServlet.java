@@ -10,6 +10,8 @@ import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.translog.TransLogManagerFactory;
 import com.vodafone.global.er.util.ExceptionAdapter;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -21,12 +23,14 @@ import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.*;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.CATALOG_API;
 
+@Component
 public class CatalogApiServlet extends AbstractEcomServlet {
 
 	private static final long	serialVersionUID	= -6442503512252653351L;
     private static Logger log = Logger.getLogger(CatalogApiServlet.class);
 
-    private CatalogApiService service = new CatalogApiService();
+    @Autowired
+    private CatalogApiService catalogApiService;
 
     @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
@@ -203,9 +207,8 @@ public class CatalogApiServlet extends AbstractEcomServlet {
 
             final Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_SERVICE1.value(), true);
             try {
-                //TODO remove and configure through Spring.
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = service.getCatalogService(locale, id);
+                    result = catalogApiService.getCatalogService(locale, id);
                 } else {
                     result = EcomApiFactory.getCatalogApi(locale).getService(id);
                 }
@@ -259,9 +262,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                     getPropertyAsBoolean(PROP_GET_PACKAGE2.value(), true);
             try {
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    //TODO remove and configure through Spring.
-                    service = new CatalogApiService();
-                    result = service.getCatalogPackage(locale, id);
+                    result = catalogApiService.getCatalogPackage(locale, id);
                 } else {
                     result = EcomApiFactory.getCatalogApi(locale).getPackage(id);
                 }
@@ -402,7 +403,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_GET_PACKAGES5.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = service.getPackages(locale);
+                    result = catalogApiService.getPackages(locale);
                 } else {
                     result = getCatalogEcomClient(locale).getPackages();
                 }
@@ -492,7 +493,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
 
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_FIND_PACKAGES_WITH_SERVICE7.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = service.processFindPackagesWithService(locale, null, catalogService, new PurchaseAttributes());
+                    result = catalogApiService.processFindPackagesWithService(locale, null, catalogService, new PurchaseAttributes());
                 } else {
                     result = getCatalogEcomClient(locale).findPackagesWithService(catalogService);
                 }
@@ -540,8 +541,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 //Actually calls exactly the same api underneath as FPWS9
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_FIND_PACKAGES_WITH_SERVICE8.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    CatalogApiService service = new CatalogApiService();
-                    result = service.processFindPackagesWithService(locale, null, serv, purchaseAttributes);
+                    result = catalogApiService.processFindPackagesWithService(locale, null, serv, purchaseAttributes);
                 } else {
                     result = getCatalogEcomClient(locale).findPackagesWithService(null, serv, purchaseAttributes);
                 }
@@ -588,8 +588,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_FIND_PACKAGES_WITH_SERVICE9.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    CatalogApiService service = new CatalogApiService();
-                    result = service.processFindPackagesWithService(locale, msisdn,serv,purchaseAttributes);
+                    result = catalogApiService.processFindPackagesWithService(locale, msisdn,serv,purchaseAttributes);
                 } else {
                     result = getCatalogEcomClient(locale).findPackagesWithService(msisdn,serv,purchaseAttributes);
                 }
@@ -636,7 +635,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_VERSION10.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = service.getVersion(locale);
+                    result = catalogApiService.getVersion(locale);
                 } else {
                     result = getCatalogEcomClient(locale).getVersion();
                 }
@@ -981,7 +980,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_GET_BASE_PRICES20.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = service.getBasePrices(locale, serviceId);
+                    result = catalogApiService.getBasePrices(locale, serviceId);
                 } else {
                     result = getCatalogEcomClient(locale).getBasePrices(serviceId);
                 }
