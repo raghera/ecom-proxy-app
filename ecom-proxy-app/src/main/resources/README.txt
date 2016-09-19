@@ -22,12 +22,16 @@ Once the deployment is complete the application server replaces delegates.war.do
 
 The above steps also work for deploying the ecom-proxy-app.war without being exploded.  Simply copy the .war file into the deployments folder mentioned.
 
+Undeploy:
+
+To undeploy the application having deployed it already simply remove the marker file delegates.war.deployed.
+The scanner will undeploy the application and you should see a new marker file called delegates.war.undeployed
 
 Verify Installation:
 
 By default this should run on port 8080
 
-Try going to <host><port>/delegates and you should see a Welcome page saying Ecom Proxy Application is running.
+Try going to http://<host><port>/delegates and you should see a Welcome page saying Ecom Proxy Application is running.
 
 You can now try sending a request to the server.
 
