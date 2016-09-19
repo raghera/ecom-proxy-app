@@ -30,7 +30,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
     private static Logger log = Logger.getLogger(CatalogApiServlet.class);
 
     @Autowired
-    private CatalogApiService catalogApiService;
+    private CatalogApiService catalogApiService = new CatalogApiService();
 
     @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
