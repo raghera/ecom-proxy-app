@@ -35,10 +35,6 @@ public class GetBasicAccount_IT {
          BasicAccount result = EcomApiFactory.getCustcareApi(Locale.UK)
                 .getBasicAccount(CLIENT_ID.getValue(), msisdn, 0);
         assertNotNull(result);
-//
-//        assertThat(result.getMsisdn()).isEqualTo(msisdn);
-//        assertThat(result.getAccountStatus()).isNotNull();
-//        assertThat(result.getAccountStatus().getName()).isEqualTo("OK");
 
         softly.assertThat(result.getName() ).as(" result.getName()" ).isNull();
         softly.assertThat(result.getCountry() ).as(" result.getCountry()" ).isEqualTo("GB");
@@ -46,8 +42,8 @@ public class GetBasicAccount_IT {
         softly.assertThat(result.getCountryId() ).as(" result.getCountryId()" ).isEqualTo(5) ;
         softly.assertThat(result.getErrorId() ).as(" result.getErrorId()" ).isNull();
         softly.assertThat(result.getErrorDescription() ).as(" result.getErrorDescription()" ).isNull();
-        softly.assertThat(result.getUserGroups() ).as(" result.getUserGroups()" ).isNull();
-        softly.assertThat(result.getMsisdn() ).as(" result.getMsisdn()" ).isEqualTo("116672411");
+        softly.assertThat(result.getUserGroups() ).as(" result.getUserGroups()" ).isNullOrEmpty();
+        softly.assertThat(result.getMsisdn() ).as(" result.getMsisdn()" ).isEqualTo(msisdn);
         softly.assertThat(result.getPaymentCardDetails() ).as(" result.getPaymentCardDetails()" ).isNull();
         softly.assertThat(result.getStatus() ).as(" result.getStatus()" ).isEqualTo(401) ;
         softly.assertThat(result.getSpendLimits() ).as(" result.getSpendLimits()" ).isNull();
@@ -62,14 +58,14 @@ public class GetBasicAccount_IT {
         softly.assertThat(result.getAccountValidationAuthorization() ).as(" result.getAccountValidationAuthorization()" ).isNull();
         softly.assertThat(result.getChildSpId() ).as(" result.getChildSpId()" ).isNull();
         softly.assertThat(result.getSpType() ).as(" result.getSpType()" ).isNull();
-        softly.assertThat(result.getUserGroupList() ).as(" result.getUserGroupList()" ).isNull();
+        softly.assertThat(result.getUserGroupList() ).as(" result.getUserGroupList()" ).isNullOrEmpty();
         softly.assertThat(result.getSuppressCourtesyNotifications() ).as(" result.getSuppressCourtesyNotifications()" ).isFalse() ;
 // com.vizzavi.ecommerce.business.common.ReasonCode
         softly.assertThat(result.getAccountStatus().getName() ).as(" result.getAccountStatus().getName()" ).isEqualTo("OK");
         softly.assertThat(result.getAccountStatus().getCode() ).as(" result.getAccountStatus().getCode()" ).isEqualTo(0) ;
         softly.assertThat(result.getAccountStatus().getSubCode() ).as(" result.getAccountStatus().getSubCode()" ).isEqualTo(0) ;
         softly.assertThat(result.getAccountStatus().getResourceName() ).as(" result.getAccountStatus().getResourceName()" ).isEqualTo("ReasonCode_0");
-        softly.assertThat(result.getUserGroupNames() ).as(" result.getUserGroupNames()" ).isNull();
+        softly.assertThat(result.getUserGroupNames() ).as(" result.getUserGroupNames()" ).isNullOrEmpty();
 // java.util.Locale
         softly.assertThat(result.getLocale().getLanguage() ).as(" result.getLocale().getLanguage()" ).isEqualTo("en");
         softly.assertThat(result.getLocale().getScript() ).as(" result.getLocale().getScript()" ).isNullOrEmpty();
@@ -85,7 +81,6 @@ public class GetBasicAccount_IT {
         softly.assertThat(result.getLocale().getDisplayCountry() ).as(" result.getLocale().getDisplayCountry()" ).isEqualTo("United Kingdom");
         softly.assertThat(result.getLocale().getDisplayVariant() ).as(" result.getLocale().getDisplayVariant()" ).isNullOrEmpty();
         softly.assertThat(result.getLocale().getDisplayName() ).as(" result.getLocale().getDisplayName()" ).isEqualTo("English (United Kingdom)");
-
 
         softly.assertAll();
 

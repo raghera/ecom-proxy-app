@@ -876,7 +876,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
 
-                Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_SUBSCRIPTIONS18.value(), true);
+                Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_BASE_PRICES20.value(), true);
                 if(shouldProxy.isPresent()) {
                     result = custcareApiService.getBasicAccount(locale, clientId,msisdn,accessDevice);
                 } else {

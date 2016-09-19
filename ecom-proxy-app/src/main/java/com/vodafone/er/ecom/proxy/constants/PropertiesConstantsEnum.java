@@ -25,7 +25,9 @@ public enum  PropertiesConstantsEnum {
     PROP_GET_BASE_PRICES20("proxy.getBasePrices20"),
     PROP_GET_PACKAGES5("proxy.getPackages5"),
     PROP_GET_VERSION10("proxy.getVersion10"),
-    PROP_USAGE_COMPLETE4("proxy.usageComplete4");
+    PROP_USAGE_COMPLETE4("proxy.usageComplete4"),
+    PROP_GET_BASIC_ACCOUNT15("proxy.getBasicAccount15"),
+    ;
 
     private final String value;
 
