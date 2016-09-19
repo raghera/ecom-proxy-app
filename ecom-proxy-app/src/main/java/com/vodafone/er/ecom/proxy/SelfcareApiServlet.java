@@ -21,8 +21,8 @@ import java.util.Locale;
 import java.util.Optional;
 
 import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getSelfcareApi;
-import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_GET_SUBSCRIPTIONS2;
-import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD4;
+import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.PROP_GET_SUBSCRIPTIONS2;
+import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD4;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.SELFCARE_API;
 
 public class SelfcareApiServlet extends AbstractEcomServlet {

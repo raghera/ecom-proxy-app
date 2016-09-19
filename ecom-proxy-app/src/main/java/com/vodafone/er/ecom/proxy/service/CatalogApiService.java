@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-import static com.vodafone.er.ecom.proxy.constants.EcomAppEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
 
 @Component
 public class CatalogApiService {

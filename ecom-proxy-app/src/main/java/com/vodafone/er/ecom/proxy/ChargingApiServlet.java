@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Optional;
 
-import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.*;
+import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.*;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.CHARGING_API;
 

@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Optional;
 
-import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_PURCHASE_PACKAGE_MSISDN1;
+import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.PROP_PURCHASE_PACKAGE_MSISDN1;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.PURCHASE_API;
 
 public class PurchaseApiServlet extends AbstractEcomServlet {

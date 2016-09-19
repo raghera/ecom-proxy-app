@@ -10,7 +10,7 @@ import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 
 import java.util.Locale;
 
-import static com.vodafone.er.ecom.proxy.constants.EcomAppEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
 
 /**
  * 1 uniform way to get the Decoupling ErApi's in a singleton way
@@ -59,15 +59,11 @@ public class ErApiManager {
         return catalogApi;
     }
 
-
     public ProvisionApi getProvisionApi(Locale locale) {
         if(null == provisionApi) {
             provisionApi = DecouplingApiFactory.getProvisionApi(locale, CLIENT_ID.getValue());
         }
         return provisionApi;
     }
-
-
-
 
 }

@@ -3,7 +3,7 @@ package com.vodafone.er.ecom.proxy;
 import com.vizzavi.ecommerce.business.charging.PurchaseAttributes;
 import com.vizzavi.ecommerce.business.charging.PurchaseAuthorization;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
-import com.vodafone.er.ecom.proxy.constants.EcomAppEnum;
+import com.vodafone.er.ecom.proxy.enums.EcomAppEnum;
 import org.junit.Test;
 
 import java.util.Random;

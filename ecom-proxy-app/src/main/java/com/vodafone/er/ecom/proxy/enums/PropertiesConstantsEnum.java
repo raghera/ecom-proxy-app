@@ -1,4 +1,4 @@
-package com.vodafone.er.ecom.proxy.constants;
+package com.vodafone.er.ecom.proxy.enums;
 
 /**
  * Created by Ravi Aghera

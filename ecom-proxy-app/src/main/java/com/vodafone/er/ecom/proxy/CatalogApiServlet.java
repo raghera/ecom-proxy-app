@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.*;
 
-import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.*;
+import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.*;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.CATALOG_API;
 

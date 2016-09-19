@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.util.Optional;
 import java.util.Properties;
 
-import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROPERTIES_FILE_NAME;
+import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.PROPERTIES_FILE_NAME;
 
 /**
  * Created by Ravi Aghera

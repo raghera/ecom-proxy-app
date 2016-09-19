@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Optional;
 
-import static com.vodafone.er.ecom.proxy.constants.PropertiesConstantsEnum.PROP_UPDATE_SERVICE_STATUS1;
+import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.PROP_UPDATE_SERVICE_STATUS1;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.PROVISION_API;
 
 public class ProvisionApiServlet extends AbstractEcomServlet {
