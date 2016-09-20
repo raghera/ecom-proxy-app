@@ -7,6 +7,7 @@ import com.vizzavi.ecommerce.business.provision.ProvisionApi;
 import com.vizzavi.ecommerce.business.selfcare.CustcareApi;
 import com.vizzavi.ecommerce.business.selfcare.SelfcareApi;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
+import org.springframework.stereotype.Component;
 
 import java.util.Locale;
 
@@ -17,6 +18,7 @@ import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
  *
  * Created by Ravi Aghera
  */
+@Component
 public class ErApiManager {
 
     private ChargingApi chargingApi;

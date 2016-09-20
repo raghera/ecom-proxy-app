@@ -871,12 +871,12 @@ public class CustcareApiServlet extends AbstractEcomServlet {
     public void getBasicAccountHandler(Locale locale, HttpServletResponse resp ,String clientId  ,String msisdn  ,int accessDevice ) {
         ObjectOutputStream oos = null;
         try {            
-            BasicAccount result = null;
+            BasicAccount result;
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
 
-                Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_BASE_PRICES20.value(), true);
+                Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_BASIC_ACCOUNT15.value(), true);
                 if(shouldProxy.isPresent()) {
                     result = custcareApiService.getBasicAccount(locale, clientId,msisdn,accessDevice);
                 } else {

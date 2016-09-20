@@ -27,7 +27,11 @@ public enum  PropertiesConstantsEnum {
     PROP_GET_VERSION10("proxy.getVersion10"),
     PROP_USAGE_COMPLETE4("proxy.usageComplete4"),
     PROP_GET_BASIC_ACCOUNT15("proxy.getBasicAccount15"),
-    ;
+    PROP_GET_TRANSACTIONS6("proxy.getTransactions6"),
+    PROP_GET_TRANSACTION17("proxy.getTransaction17"),
+    PROP_GET_SUBSCRIPTION10("proxy.getSubscription10"),
+    PROP_RENEW_PURCHASE_PACKAGE_MSISDN3("proxy.renewPurchasePackageMsisdn3");
+
 
     private final String value;
 

@@ -3,13 +3,10 @@ package com.vodafone.er.ecom.proxy.service;
 import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
 import com.vizzavi.ecommerce.business.catalog.CatalogService;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
-import com.vizzavi.ecommerce.business.selfcare.PurchasedService;
-import com.vizzavi.ecommerce.business.selfcare.Subscription;
-import com.vizzavi.ecommerce.business.selfcare.SubscriptionFilter;
-import com.vizzavi.ecommerce.business.selfcare.Transaction;
+import com.vizzavi.ecommerce.business.selfcare.*;
 import com.vodafone.er.ecom.proxy.api.ErApiManager;
 import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
@@ -18,7 +15,7 @@ import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
 /**
  * Created by Ravi Aghera
  */
-@Component
+@Service
 public class SelfcareApiService {
 
     private CatalogApiService catalogApiService;
@@ -29,11 +26,20 @@ public class SelfcareApiService {
         erApiManager = new ErApiManager();
     }
 
-    //call getSubscriptions instead where possible
     public Optional<Subscription> getSubscription(Locale locale, String msisdn, String subId) throws EcommerceException {
         SubscriptionFilter filter = new SubscriptionFilterImpl();
         filter.setSubscriptionId(subId);
-        Subscription [] subs = getSubscriptions(locale, msisdn, CLIENT_ID.getValue(), 0, filter);
+        Optional<Subscription> subs = getSubscription(locale, msisdn, 0, subId);
+        if(!subs.isPresent()) {
+            return Optional.empty();
+        }
+        return subs;
+    }
+
+    public Optional<Subscription> getSubscription(Locale locale, String msisdn, int deviceType, String subId) throws EcommerceException {
+        SubscriptionFilter filter = new SubscriptionFilterImpl();
+        filter.setSubscriptionId(subId);
+        Subscription [] subs = getSubscriptions(locale, msisdn, CLIENT_ID.getValue(), deviceType, filter);
         if(subs == null || subs.length != 1) {
             return Optional.empty();
         }
@@ -54,6 +60,26 @@ public class SelfcareApiService {
         processSubscriptionsResponse(locale, subs);
         return subs;
     }
+
+    public Transaction [] getTransactions(Locale locale, String clientId, String msisdn, int accessDevice, TransactionFilter filter) throws EcommerceException {
+        return erApiManager.getSelfcareApi(locale).getTransactions(clientId, msisdn, accessDevice, filter);
+    }
+
+    public Optional<Transaction> getTransaction(Locale locale, String clientId, TransactionFilter filter) throws EcommerceException {
+        Transaction [] results  = getTransactions(locale, clientId, null, 0, filter);
+        if(results == null || results.length != 1 ) {
+            return Optional.empty();
+        }
+
+        return Optional.of(results[0]);
+    }
+
+    public boolean modifySubscriptionChargingMethod(Locale locale, String clientId, String msisdn, int deviceType,
+                                                    String packageSubId, int chargingMethod, String csrId, String reason) throws Exception {
+        return erApiManager.getSelfcareApi(locale).modifySubscriptionChargingMethod(clientId,msisdn,deviceType,packageSubId,chargingMethod,csrId,reason);
+    }
+
+    //TODO move to a post-processor class
 
     public Subscription [] processSubscriptionsResponse(Locale locale, final Subscription [] subscriptions) {
         final List<Subscription> subsList = Arrays.asList(subscriptions);
@@ -116,12 +142,5 @@ public class SelfcareApiService {
             subscription.setPurcServiceList(purchasedServices);
 
         });
-
     }
-
-    public boolean modifySubscriptionChargingMethod(Locale locale, String clientId, String msisdn, int deviceType,
-                                                    String packageSubId, int chargingMethod, String csrId, String reason) throws Exception {
-        return erApiManager.getSelfcareApi(locale).modifySubscriptionChargingMethod(clientId,msisdn,deviceType,packageSubId,chargingMethod,csrId,reason);
-    }
-
 }

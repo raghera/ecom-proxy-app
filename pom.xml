@@ -106,9 +106,12 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
+                <artifactId>spring-framework-bom</artifactId>
                 <version>${spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
+
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>
@@ -168,10 +171,10 @@
             </dependency>
 
             <!--<dependency>-->
-                <!--<groupId>org.assertj</groupId>-->
-                <!--<artifactId>assertj-core</artifactId>-->
-                <!--<version>2.5.0</version>-->
-                <!--<scope>test</scope>-->
+            <!--<groupId>org.assertj</groupId>-->
+            <!--<artifactId>assertj-core</artifactId>-->
+            <!--<version>2.5.0</version>-->
+            <!--<scope>test</scope>-->
             <!--</dependency>-->
         </dependencies>
     </dependencyManagement>

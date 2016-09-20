@@ -3,7 +3,6 @@ package com.vodafone.er.ecom.proxy;
 import com.vizzavi.ecommerce.business.charging.BaseAuthorization;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.*;
-import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.er.ecom.proxy.service.SelfcareApiService;
 import com.vodafone.global.er.business.selfcare.BalanceFilter;
 import com.vodafone.global.er.business.selfcare.MicroServiceStatus;
@@ -21,8 +20,8 @@ import java.util.Locale;
 import java.util.Optional;
 
 import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getSelfcareApi;
-import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.PROP_GET_SUBSCRIPTIONS2;
-import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD4;
+import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.*;
+import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.SELFCARE_API;
 
 public class SelfcareApiServlet extends AbstractEcomServlet {
@@ -31,6 +30,8 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
 	//CR1231
     //private static LWLogger log = LWSupportFactoryImpl.getInstance().getLogger(SelfcareApiServlet.class);
 	private static Logger log = Logger.getLogger(SelfcareApiServlet.class);
+
+    private SelfcareApiService selfcareApiService = new SelfcareApiService();
 
     protected SelfcareApi getSelfcareApiDelegate(Locale locale) throws Exception {
         return getSelfcareApi(locale);
@@ -233,13 +234,11 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
                                new BufferedOutputStream (resp.getOutputStream()));
 
             final Optional<Boolean> shouldProxy =
-                    PropertyService.getPropertyAsBoolean(PROP_GET_SUBSCRIPTIONS2.value(), true);
+                    getPropertyAsBoolean(PROP_GET_SUBSCRIPTIONS2.value(), true);
 
             try {
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    //TODO move this into the SelfcareApiService
-                    SelfcareApiService service = new SelfcareApiService();
-                    result = service.getSubscriptions(locale, clientId, msisdn, device, filter);
+                    result = selfcareApiService.getSubscriptions(locale, clientId, msisdn, device, filter);
                 } else {
                     result = EcomApiFactory.getSelfcareApi(locale).getSubscriptions(clientId,msisdn,device,filter);
                 }
@@ -326,10 +325,9 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD4.value(), true);
+                Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_MODIFY_SUBSCRIPTION_CHARGING_METHOD4.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    SelfcareApiService service = new SelfcareApiService();
-                    result = service.modifySubscriptionChargingMethod(locale, clientId, msisdn, deviceType,
+                    result = selfcareApiService.modifySubscriptionChargingMethod(locale, clientId, msisdn, deviceType,
                             packageSubId, chargingMethod, csrId, reason);
                 } else {
                     result = getSelfcareApiDelegate(locale)
@@ -418,7 +416,13 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getSelfcareApiDelegate(locale).getTransactions(clientId,msisdn,accessDevice,filter);
+                Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_TRANSACTIONS6.value(), true);
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    result = selfcareApiService.getTransactions(locale, clientId,msisdn,accessDevice,filter);
+                } else {
+                    result = getSelfcareApiDelegate(locale).getTransactions(clientId,msisdn,accessDevice,filter);
+                }
+
             }
             catch (Exception e1) {                
                 oos.writeObject( new ExceptionAdapter(e1));
@@ -586,8 +590,12 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getSelfcareApiDelegate(locale).getSubscription(clientId,msisdn,deviceType,packageSubId);
-                //hydrateSubscription(result);
+                Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_SUBSCRIPTION10.value(), true);
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    selfcareApiService.getSubscription(locale, msisdn, deviceType, packageSubId);
+                } else {
+                    result = getSelfcareApiDelegate(locale).getSubscription(clientId, msisdn, deviceType, packageSubId);
+                }
             }
             catch (Exception e1) {                
                 oos.writeObject( new ExceptionAdapter(e1));
@@ -883,7 +891,15 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                                new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getSelfcareApiDelegate(locale).getTransaction(clientId,filter);
+                Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_TRANSACTION17.value(), true);
+                if(shouldProxy.isPresent()) {
+                    Optional<Transaction> resultOpt = selfcareApiService.getTransaction(locale, clientId, filter);
+                    if(resultOpt.isPresent()) {
+                        result = resultOpt.get();
+                    }
+                } else {
+                    result = getSelfcareApiDelegate(locale).getTransaction(clientId, filter);
+                }
             }
             catch (Exception e1) {                
                 oos.writeObject( new ExceptionAdapter(e1));

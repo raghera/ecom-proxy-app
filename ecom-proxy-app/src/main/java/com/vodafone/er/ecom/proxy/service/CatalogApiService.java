@@ -13,16 +13,18 @@ import com.vodafone.global.er.business.catalog.BasePrice;
 import com.vodafone.global.er.util.CatalogUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
 
-@Component
+@Service
 public class CatalogApiService {
     private Logger logger = LoggerFactory.getLogger(CatalogApiService.class);
 
+    @Autowired
     private ErApiManager erApiManager;
 
     public CatalogApiService() {
@@ -46,8 +48,22 @@ public class CatalogApiService {
         return processPricePoint(pricePoint);
     }
 
+    public BasePrice[] getBasePrices(Locale locale, String [] serviceIds) throws EcommerceException {
+        return erApiManager.getCatalogApi(locale)
+                .getBasePrices(serviceIds);
+    }
+
+    public CatalogPackage [] getPackages(Locale locale) {
+        return erApiManager.getCatalogApi(locale)
+                .getPackages();
+    }
+
+    public String getVersion(Locale locale) {
+        return erApiManager.getCatalogApi(locale)
+                .getVersion();
+    }
+
     private PricePoint processPricePoint(final PricePoint pricePoint) {
-        //TODO fill in any common gaps
         pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()));
         return pricePoint;
     }
@@ -90,7 +106,6 @@ public class CatalogApiService {
                 packagePricePoint.setBalances(resourceBalances.toArray(new ResourceBalance[resourceBalances.size()]));
             });
         }
-
         return catalogPackage;
     }
 
@@ -166,21 +181,4 @@ public class CatalogApiService {
         });
         return packArrOpt.get();
     }
-
-    public BasePrice[] getBasePrices(Locale locale, String [] serviceIds) throws EcommerceException {
-        return erApiManager.getCatalogApi(locale)
-                .getBasePrices(serviceIds);
-    }
-
-    public CatalogPackage [] getPackages(Locale locale) {
-        return erApiManager.getCatalogApi(locale)
-                .getPackages();
-    }
-
-    public String getVersion(Locale locale) {
-        return erApiManager.getCatalogApi(locale)
-                .getVersion();
-    }
-
 }
-

@@ -29,7 +29,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
 	private static final long	serialVersionUID	= -6442503512252653351L;
     private static Logger log = Logger.getLogger(CatalogApiServlet.class);
 
-    @Autowired
+    @Autowired //TODO get Spring DI to work
     private CatalogApiService catalogApiService = new CatalogApiService();
 
     @Override

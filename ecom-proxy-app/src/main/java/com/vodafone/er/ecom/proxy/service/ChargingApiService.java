@@ -13,7 +13,7 @@ import com.vodafone.er.ecom.proxy.api.ErApiManager;
 import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +25,7 @@ import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
 /**
  * Created by Ravi Aghera
  */
-@Component
+@Service
 public class ChargingApiService {
 
     private Logger logger = LoggerFactory.getLogger(CatalogApiService.class);

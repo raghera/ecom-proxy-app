@@ -13,14 +13,29 @@
     <!--Introduce Spring Framework-->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:/epa-context.xml</param-value>
+		<param-value>classpath:epa-context.xml</param-value>
 	</context-param>
 	<listener>
 		<description>Spring contextloader</description>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<servlet>
+    <!--<servlet>-->
+        <!--<servlet-name>dispatcher</servlet-name>-->
+        <!--<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
+        <!--<init-param>-->
+            <!--<param-name>contextConfigLocation</param-name>-->
+            <!--<param-value>WEB-INF/classes/epa-context.xml</param-value>-->
+        <!--</init-param>-->
+        <!--<load-on-startup>1</load-on-startup>-->
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>dispatcher</servlet-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <servlet>
 		<servlet-name>CatalogApiServlet</servlet-name>
 		<servlet-class>com.vodafone.er.ecom.proxy.CatalogApiServlet</servlet-class>
 	</servlet>

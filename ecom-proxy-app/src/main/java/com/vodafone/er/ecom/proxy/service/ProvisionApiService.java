@@ -1,12 +1,14 @@
 package com.vodafone.er.ecom.proxy.service;
 
 import com.vodafone.er.ecom.proxy.api.ErApiManager;
+import org.springframework.stereotype.Service;
 
 import java.util.Locale;
 
 /**
  * Created by Ravi Aghera
  */
+@Service
 public class ProvisionApiService {
 
     private ErApiManager erApiManager;
