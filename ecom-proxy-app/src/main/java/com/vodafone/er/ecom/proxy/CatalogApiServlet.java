@@ -4,14 +4,13 @@ import com.vizzavi.ecommerce.business.catalog.*;
 import com.vizzavi.ecommerce.business.charging.PurchaseAttributes;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
+import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.er.ecom.proxy.service.CatalogApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.translog.TransLogManagerFactory;
 import com.vodafone.global.er.util.ExceptionAdapter;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -23,93 +22,95 @@ import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.*;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.CATALOG_API;
 
-@Component
 public class CatalogApiServlet extends AbstractEcomServlet {
 
-	private static final long	serialVersionUID	= -6442503512252653351L;
+    private static final long	serialVersionUID	= -6442503512252653351L;
     private static Logger log = Logger.getLogger(CatalogApiServlet.class);
 
-    @Autowired //TODO get Spring DI to work
-    private CatalogApiService catalogApiService = new CatalogApiService();
+    private CatalogApiService catalogApiService;
+
+    public CatalogApiServlet() {
+        catalogApiService = ApplicationContextHolder.getContext().getBean(CatalogApiService.class);
+    }
 
     @Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 
-    	try {
-    		startTx();
-           ServletInputStream is = req.getInputStream();
-           ObjectInputStream ois = new ObjectInputStream(is);
-           @SuppressWarnings("unchecked")
-           HashMap<String, Serializable> requestPayload = (HashMap<String, Serializable>) ois.readObject();
+        try {
+            startTx();
+            ServletInputStream is = req.getInputStream();
+            ObjectInputStream ois = new ObjectInputStream(is);
+            @SuppressWarnings("unchecked")
+            HashMap<String, Serializable> requestPayload = (HashMap<String, Serializable>) ois.readObject();
 
-           Locale locale = (Locale)requestPayload.get("locale");
-           String methodName = (String) requestPayload.get("methodName");
-           String clientId = (String) requestPayload.get("clientId");
-           String msisdn = (String) requestPayload.get("msisdn");
+            Locale locale = (Locale)requestPayload.get("locale");
+            String methodName = (String) requestPayload.get("methodName");
+            String clientId = (String) requestPayload.get("clientId");
+            String msisdn = (String) requestPayload.get("msisdn");
 
             log(clientId, locale, methodName, CATALOG_API.getValue());
-           logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
+            logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
 
 
-           if (methodName.equals("getService1")) {
-                 String id = (String) requestPayload.get("id");
-                 getServiceHandler(locale, resp  ,id );
-           }
-           if (methodName.equals("getPackage2")) {
-                 String id = (String) requestPayload.get("id");
-                 getPackageHandler(locale, resp  ,id );
-           }
-           if (methodName.equals("getPackage3")) {
-                 String packageId = (String) requestPayload.get("packageId");
-                 String rateIdentifier = (String) requestPayload.get("rateIdentifier");
-                 getPackageHandler(locale, resp  ,packageId  ,rateIdentifier );
-           }
-           if (methodName.equals("getPackage4")) {
-                 String packageId = (String) requestPayload.get("packageId");
-                 String pricePointId = (String) requestPayload.get("pricePointId");
-                 String tierId = (String) requestPayload.get("tierId");
-                 getPackageHandler(locale, resp  ,packageId  ,pricePointId  ,tierId );
-           }
-           if (methodName.equals("getPackages5")) {
-                 getPackagesHandler(locale, resp );
-           }
-           if (methodName.equals("getServices6")) {
-                 getServicesHandler(locale, resp );
-           }
-           if (methodName.equals("findPackagesWithService7")) {
-                 CatalogService catalogService = (CatalogService) requestPayload.get("catalogService");
-                 findPackagesWithServiceHandler(locale, resp  ,catalogService );
-           }
-           if (methodName.equals("findPackagesWithService8")) {
-                 CatalogService serv = (CatalogService) requestPayload.get("serv");
-                 com.vizzavi.ecommerce.business.charging.PurchaseAttributes purchaseAttributes = (com.vizzavi.ecommerce.business.charging.PurchaseAttributes) requestPayload.get("purchaseAttributes");
-                 findPackagesWithServiceHandler(locale, resp  ,serv  ,purchaseAttributes );
-           }
-           if (methodName.equals("findPackagesWithService9")) {
-                 //String msisdn = (String) requestPayload.get("msisdn");
-                 CatalogService serv = (CatalogService) requestPayload.get("serv");
-                 com.vizzavi.ecommerce.business.charging.PurchaseAttributes purchaseAttributes = (com.vizzavi.ecommerce.business.charging.PurchaseAttributes) requestPayload.get("purchaseAttributes");
-                 findPackagesWithServiceHandler(locale, resp  ,msisdn  ,serv  ,purchaseAttributes );
-           }
-           if (methodName.equals("getVersion10")) {
-                 getVersionHandler(locale, resp );
-           }
-           if (methodName.equals("getPricePoint11")) {
-                 String pricePointId = (String) requestPayload.get("pricePointId");
-                 getPricePointHandler(locale, resp  ,pricePointId );
-           }
-           if (methodName.equals("getLocale12")) {
-                 getLocaleHandler(locale, resp );
-           }
-           if (methodName.equals("getTax13")) {
-                 String name = (String) requestPayload.get("name");
-                 getTaxHandler(locale, resp  ,name );
-           }
-           if (methodName.equals("checkPromotions14")) {
-                 //String msisdn = (String) requestPayload.get("msisdn");
-                 CatalogService service = (CatalogService) requestPayload.get("service");
-                 checkPromotionsHandler(locale, resp  ,msisdn  ,service );
-           }
+            if (methodName.equals("getService1")) {
+                String id = (String) requestPayload.get("id");
+                getServiceHandler(locale, resp  ,id );
+            }
+            if (methodName.equals("getPackage2")) {
+                String id = (String) requestPayload.get("id");
+                getPackageHandler(locale, resp  ,id );
+            }
+            if (methodName.equals("getPackage3")) {
+                String packageId = (String) requestPayload.get("packageId");
+                String rateIdentifier = (String) requestPayload.get("rateIdentifier");
+                getPackageHandler(locale, resp  ,packageId  ,rateIdentifier );
+            }
+            if (methodName.equals("getPackage4")) {
+                String packageId = (String) requestPayload.get("packageId");
+                String pricePointId = (String) requestPayload.get("pricePointId");
+                String tierId = (String) requestPayload.get("tierId");
+                getPackageHandler(locale, resp  ,packageId  ,pricePointId  ,tierId );
+            }
+            if (methodName.equals("getPackages5")) {
+                getPackagesHandler(locale, resp );
+            }
+            if (methodName.equals("getServices6")) {
+                getServicesHandler(locale, resp );
+            }
+            if (methodName.equals("findPackagesWithService7")) {
+                CatalogService catalogService = (CatalogService) requestPayload.get("catalogService");
+                findPackagesWithServiceHandler(locale, resp  ,catalogService );
+            }
+            if (methodName.equals("findPackagesWithService8")) {
+                CatalogService serv = (CatalogService) requestPayload.get("serv");
+                com.vizzavi.ecommerce.business.charging.PurchaseAttributes purchaseAttributes = (com.vizzavi.ecommerce.business.charging.PurchaseAttributes) requestPayload.get("purchaseAttributes");
+                findPackagesWithServiceHandler(locale, resp  ,serv  ,purchaseAttributes );
+            }
+            if (methodName.equals("findPackagesWithService9")) {
+                //String msisdn = (String) requestPayload.get("msisdn");
+                CatalogService serv = (CatalogService) requestPayload.get("serv");
+                com.vizzavi.ecommerce.business.charging.PurchaseAttributes purchaseAttributes = (com.vizzavi.ecommerce.business.charging.PurchaseAttributes) requestPayload.get("purchaseAttributes");
+                findPackagesWithServiceHandler(locale, resp  ,msisdn  ,serv  ,purchaseAttributes );
+            }
+            if (methodName.equals("getVersion10")) {
+                getVersionHandler(locale, resp );
+            }
+            if (methodName.equals("getPricePoint11")) {
+                String pricePointId = (String) requestPayload.get("pricePointId");
+                getPricePointHandler(locale, resp  ,pricePointId );
+            }
+            if (methodName.equals("getLocale12")) {
+                getLocaleHandler(locale, resp );
+            }
+            if (methodName.equals("getTax13")) {
+                String name = (String) requestPayload.get("name");
+                getTaxHandler(locale, resp  ,name );
+            }
+            if (methodName.equals("checkPromotions14")) {
+                //String msisdn = (String) requestPayload.get("msisdn");
+                CatalogService service = (CatalogService) requestPayload.get("service");
+                checkPromotionsHandler(locale, resp  ,msisdn  ,service );
+            }
 //           if (methodName.equals("getDRMObject15")) {
 //                 String drmid = (String) requestPayload.get("drmid");
 //                 getDRMObjectHandler(locale, resp  ,drmid );
@@ -117,84 +118,84 @@ public class CatalogApiServlet extends AbstractEcomServlet {
 //           if (methodName.equals("getDRMObjects16")) {
 //                 getDRMObjectsHandler(locale, resp );
 //           }
-           if (methodName.equals("findExpressPackagesByServiceId17")) {
-                 String[] serviceId = (String[]) requestPayload.get("serviceId");
+            if (methodName.equals("findExpressPackagesByServiceId17")) {
+                String[] serviceId = (String[]) requestPayload.get("serviceId");
                 boolean headline =  ((Boolean) requestPayload.get("headline")).booleanValue();
-                 findExpressPackagesByServiceIdHandler(locale, resp  ,serviceId  ,headline );
-           }
+                findExpressPackagesByServiceIdHandler(locale, resp  ,serviceId  ,headline );
+            }
 //           if (methodName.equals("getLocaleKey18")) {
 //                 getLocaleKeyHandler(locale, resp );
 //           }
-           if (methodName.equals("findExpressPackagesByServiceId19")) {
-                 String[] serviceId = (String[]) requestPayload.get("serviceId");
-                 //String msisdn = (String) requestPayload.get("msisdn");
-                 ExpressDisplayAttribute expressAttribute = (ExpressDisplayAttribute) requestPayload.get("expressAttribute");
-                 findExpressPackagesByServiceIdHandler(locale, resp  ,serviceId  ,msisdn  ,expressAttribute );
-           }
-           if (methodName.equals("getBasePrices20")) {
-                 String[] serviceId = (String[]) requestPayload.get("serviceId");
-                 getBasePricesHandler(locale, resp  ,serviceId );
-           }
-           if (methodName.equals("validateService21")) {
-                 String id = (String) requestPayload.get("id");
-                 validateServiceHandler(locale, resp  ,id );
-           }
-           if (methodName.equals("translatePricingText22")) {
-                 PricePoint[] pricePoints = (PricePoint[]) requestPayload.get("pricePoints");
-                 String templateName = (String) requestPayload.get("templateName");
-                 translatePricingTextHandler(locale, resp  ,pricePoints  ,templateName );
-           }
-           if (methodName.equals("translatePricingText23")) {
-                 PricePoint[] pricePoints = (PricePoint[]) requestPayload.get("pricePoints");
-                 String templateName = (String) requestPayload.get("templateName");
-                 String languageCode = (String) requestPayload.get("languageCode");
+            if (methodName.equals("findExpressPackagesByServiceId19")) {
+                String[] serviceId = (String[]) requestPayload.get("serviceId");
+                //String msisdn = (String) requestPayload.get("msisdn");
+                ExpressDisplayAttribute expressAttribute = (ExpressDisplayAttribute) requestPayload.get("expressAttribute");
+                findExpressPackagesByServiceIdHandler(locale, resp  ,serviceId  ,msisdn  ,expressAttribute );
+            }
+            if (methodName.equals("getBasePrices20")) {
+                String[] serviceId = (String[]) requestPayload.get("serviceId");
+                getBasePricesHandler(locale, resp  ,serviceId );
+            }
+            if (methodName.equals("validateService21")) {
+                String id = (String) requestPayload.get("id");
+                validateServiceHandler(locale, resp  ,id );
+            }
+            if (methodName.equals("translatePricingText22")) {
+                PricePoint[] pricePoints = (PricePoint[]) requestPayload.get("pricePoints");
+                String templateName = (String) requestPayload.get("templateName");
+                translatePricingTextHandler(locale, resp  ,pricePoints  ,templateName );
+            }
+            if (methodName.equals("translatePricingText23")) {
+                PricePoint[] pricePoints = (PricePoint[]) requestPayload.get("pricePoints");
+                String templateName = (String) requestPayload.get("templateName");
+                String languageCode = (String) requestPayload.get("languageCode");
                 int RoamingType =  ((Integer) requestPayload.get("RoamingType")).intValue();
-                 translatePricingTextHandler(locale, resp  ,pricePoints  ,templateName  ,languageCode  ,RoamingType );
-           }
-           if (methodName.equals("isUniquePromoPrecode24")) {
-                 String precode = (String) requestPayload.get("precode");
-                 isUniquePromoPrecodeHandler(locale, resp  ,precode );
-           }
-           if (methodName.equals("getTariff25")) {
-               String tariffName = (String) requestPayload.get("tariffName");
-               getTariffHandler(locale, resp  ,tariffName );
-           }
-           //MQC 5843
-           if (methodName.equals("findPackagesWithServiceEx26")) {
-               //String msisdn = (String) requestPayload.get("msisdn");
-               CatalogService serv = (CatalogService) requestPayload.get("serv");
-               com.vizzavi.ecommerce.business.charging.PurchaseAttributes purchaseAttributes = (com.vizzavi.ecommerce.business.charging.PurchaseAttributes) requestPayload.get("purchaseAttributes");
+                translatePricingTextHandler(locale, resp  ,pricePoints  ,templateName  ,languageCode  ,RoamingType );
+            }
+            if (methodName.equals("isUniquePromoPrecode24")) {
+                String precode = (String) requestPayload.get("precode");
+                isUniquePromoPrecodeHandler(locale, resp  ,precode );
+            }
+            if (methodName.equals("getTariff25")) {
+                String tariffName = (String) requestPayload.get("tariffName");
+                getTariffHandler(locale, resp  ,tariffName );
+            }
+            //MQC 5843
+            if (methodName.equals("findPackagesWithServiceEx26")) {
+                //String msisdn = (String) requestPayload.get("msisdn");
+                CatalogService serv = (CatalogService) requestPayload.get("serv");
+                com.vizzavi.ecommerce.business.charging.PurchaseAttributes purchaseAttributes = (com.vizzavi.ecommerce.business.charging.PurchaseAttributes) requestPayload.get("purchaseAttributes");
                 findPackagesWithServiceExHandler(locale, resp, msisdn, serv, purchaseAttributes);
             }
-           //CR1923 Partner Trading Limit
-           if (methodName.equals("getPartnerTradingLimits27")) {
-               getPartnerTradingLimitsHandler(locale, resp );
-           }
-           if (methodName.equals("getPartnerTradingLimit28")) {
-               String partnerId = (String) requestPayload.get("partnerId");
-               getPartnerTradingLimitHandler(locale, resp  ,partnerId );
-           }
-           if (methodName.equals("findPackagesByServiceIdOneStep29")) {
-               String[] serviceId = (String[]) requestPayload.get("serviceId");
-               //String msisdn = (String) requestPayload.get("msisdn");
+            //CR1923 Partner Trading Limit
+            if (methodName.equals("getPartnerTradingLimits27")) {
+                getPartnerTradingLimitsHandler(locale, resp );
+            }
+            if (methodName.equals("getPartnerTradingLimit28")) {
+                String partnerId = (String) requestPayload.get("partnerId");
+                getPartnerTradingLimitHandler(locale, resp  ,partnerId );
+            }
+            if (methodName.equals("findPackagesByServiceIdOneStep29")) {
+                String[] serviceId = (String[]) requestPayload.get("serviceId");
+                //String msisdn = (String) requestPayload.get("msisdn");
                 findPackagesByServiceIdOneStepHandler(locale, resp, serviceId, msisdn);
             }
-           if (methodName.equals("getOverallGoodwillCreditLimits35")) {
-                 getOverallGoodwillCreditLimitsHandler(locale, resp );
-           }
-       } catch (Exception e) {
-    		try	{
-    			ObjectOutputStream oostream = new ObjectOutputStream (new BufferedOutputStream (resp.getOutputStream()));
-    			oostream.writeObject( new ExceptionAdapter(e));
-    			oostream.flush();
-    		} catch(IOException ioe)	{
-    			log.error(ioe.getMessage(),ioe);
-    		}
-    	}	finally	{
-    		logResponse();
+            if (methodName.equals("getOverallGoodwillCreditLimits35")) {
+                getOverallGoodwillCreditLimitsHandler(locale, resp );
+            }
+        } catch (Exception e) {
+            try	{
+                ObjectOutputStream oostream = new ObjectOutputStream (new BufferedOutputStream (resp.getOutputStream()));
+                oostream.writeObject( new ExceptionAdapter(e));
+                oostream.flush();
+            } catch(IOException ioe)	{
+                log.error(ioe.getMessage(),ioe);
+            }
+        }	finally	{
+            logResponse();
 
-    		TransLogManagerFactory.getInstance().andFinally();
-    	}
+            TransLogManagerFactory.getInstance().andFinally();
+        }
     }
 
 
@@ -203,7 +204,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             CatalogService result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
 
             final Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_SERVICE1.value(), true);
             try {
@@ -224,24 +225,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -251,12 +252,12 @@ public class CatalogApiServlet extends AbstractEcomServlet {
     }
 
     //Actually calls decoupling api and not the Ecom
-	public void getPackageHandler(final Locale locale, final HttpServletResponse resp, String id) {
+    public void getPackageHandler(final Locale locale, final HttpServletResponse resp, String id) {
         ObjectOutputStream oos = null;
         try {
             CatalogPackage result;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
 
             final Optional<Boolean> shouldProxy =
                     getPropertyAsBoolean(PROP_GET_PACKAGE2.value(), true);
@@ -266,7 +267,6 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 } else {
                     result = EcomApiFactory.getCatalogApi(locale).getPackage(id);
                 }
-
             }
             catch (Exception e1) {
                 oos.writeObject( new ExceptionAdapter(e1));
@@ -279,42 +279,42 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
 
 
-	/**
-	 *
-	 * @param locale
-	 * @param resp
-	 * @param packageId
-	 * @param rateIdentifier (not used)
-	 */
-	public void getPackageHandler(Locale locale, HttpServletResponse resp ,String packageId  ,String rateIdentifier ) {
+    /**
+     *
+     * @param locale
+     * @param resp
+     * @param packageId
+     * @param rateIdentifier (not used)
+     */
+    public void getPackageHandler(Locale locale, HttpServletResponse resp ,String packageId  ,String rateIdentifier ) {
         ObjectOutputStream oos = null;
         try {
             CatalogPackage result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 result = getCatalogEcomClient(locale).getPackage(packageId);
             }
@@ -329,35 +329,35 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
 
     @SuppressWarnings("deprecation")
-	public void getPackageHandler(Locale locale, HttpServletResponse resp ,String packageId  ,String pricePointId  ,String tierId ) {
+    public void getPackageHandler(Locale locale, HttpServletResponse resp ,String packageId  ,String pricePointId  ,String tierId ) {
         ObjectOutputStream oos = null;
         try {
             CatalogPackage result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 result = getCatalogEcomClient(locale).getPackage(packageId,pricePointId,tierId);
             }
@@ -372,24 +372,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -399,7 +399,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             CatalogPackage[] result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_GET_PACKAGES5.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
@@ -419,24 +419,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -446,7 +446,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             CatalogService[] result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 result = getCatalogEcomClient(locale).getServices();
             }
@@ -461,24 +461,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -488,7 +488,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             CatalogPackage[] result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
 
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_FIND_PACKAGES_WITH_SERVICE7.value(), true);
@@ -509,24 +509,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -536,7 +536,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             CatalogPackage[] result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 //Actually calls exactly the same api underneath as FPWS9
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_FIND_PACKAGES_WITH_SERVICE8.value(), true);
@@ -557,24 +557,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -584,7 +584,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             CatalogPackage[] result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_FIND_PACKAGES_WITH_SERVICE9.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
@@ -604,24 +604,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -631,7 +631,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             String result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_VERSION10.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
@@ -652,34 +652,34 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
 
-	public void getPricePointHandler(Locale locale, HttpServletResponse resp ,String pricePointId ) {
+    public void getPricePointHandler(Locale locale, HttpServletResponse resp ,String pricePointId ) {
         ObjectOutputStream oos = null;
         try {
             PricePoint result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 result = getCatalogEcomClient(locale).getPricePoint(pricePointId);
             }
@@ -694,24 +694,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -721,7 +721,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             java.util.Locale result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 result = getCatalogEcomClient(locale).getLocale();
             }
@@ -736,24 +736,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -763,7 +763,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             Tax result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 result = getCatalogEcomClient(locale).getTax(name);
             }
@@ -778,24 +778,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -805,7 +805,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             PromotionsResult result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 result = getCatalogEcomClient(locale).checkPromotions(msisdn,service);
             }
@@ -820,36 +820,36 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
 
 
 
-	public void findExpressPackagesByServiceIdHandler(Locale locale, HttpServletResponse resp ,String[] serviceId  ,boolean headline ) {
+    public void findExpressPackagesByServiceIdHandler(Locale locale, HttpServletResponse resp ,String[] serviceId  ,boolean headline ) {
         ObjectOutputStream oos = null;
         try {
             Map<String, ExpressData> result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 result = getCatalogEcomClient(locale).findExpressPackagesByServiceId(serviceId,headline);
             }
@@ -865,24 +865,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -934,7 +934,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             Map<String, ExpressData> result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 result = getCatalogEcomClient(locale).findExpressPackagesByServiceId(serviceId,msisdn,expressAttribute);
             }
@@ -949,24 +949,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -976,7 +976,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             com.vodafone.global.er.business.catalog.BasePrice[] result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_GET_BASE_PRICES20.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
@@ -996,24 +996,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -1023,7 +1023,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             boolean result = false;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 result = getCatalogEcomClient(locale).validateService(id);
             }
@@ -1038,24 +1038,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -1065,7 +1065,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             String result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
 //                result = getCatalogEcomClient(locale).translatePricingText(pricePoints,templateName);
 //                result = new PricingToolCatalogApiFacade(locale, false).translatePricingText(pricePoints,templateName);
@@ -1081,24 +1081,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -1108,7 +1108,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             String result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 result = getCatalogEcomClient(locale).translatePricingText(pricePoints,templateName,languageCode,RoamingType);
                 //result = new PricingToolCatalogApiFacade(locale, false).translatePricingText(pricePoints,templateName,languageCode,RoamingType);
@@ -1125,24 +1125,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -1152,7 +1152,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             boolean result = false;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 result = getCatalogEcomClient(locale).isUniquePromoPrecode(precode);
             }
@@ -1167,24 +1167,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -1194,7 +1194,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             Tariff result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 result = getCatalogEcomClient(locale).getTariff(tariffName);
             }
@@ -1209,24 +1209,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -1274,7 +1274,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             PartnerTradingLimit[] result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 result = getCatalogEcomClient(locale).getPartnerTradingLimits();
             }
@@ -1289,24 +1289,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -1317,7 +1317,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             PartnerTradingLimit result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 result = getCatalogEcomClient(locale).getPartnerTradingLimit(partnerId);
             }
@@ -1332,24 +1332,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -1360,7 +1360,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             Map<String, OneStepData> result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
                 result = getCatalogEcomClient(locale).findPackagesByServiceIdOneStep(serviceId,msisdn);
             }
@@ -1376,24 +1376,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }
@@ -1403,9 +1403,9 @@ public class CatalogApiServlet extends AbstractEcomServlet {
         try {
             OverallGoodwillCreditLimits result = null;
             oos = new ObjectOutputStream (
-                               new BufferedOutputStream (resp.getOutputStream()));
+                    new BufferedOutputStream (resp.getOutputStream()));
             try {
-				result = getCatalogEcomClient(locale).getOverallGoodwillCreditLimits();
+                result = getCatalogEcomClient(locale).getOverallGoodwillCreditLimits();
             }
             catch (Exception e1) {
                 oos.writeObject( new ExceptionAdapter(e1));
@@ -1418,24 +1418,24 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.flush();
         } catch (Exception e2) {
             try{
-              log(e2.getMessage(), e2);
-              oos = new ObjectOutputStream (
-                   new BufferedOutputStream (resp.getOutputStream()));
-              oos.writeObject( new ExceptionAdapter(e2));
-              oos.flush();
-             }catch(IOException excep)
-             {
-              log.error(excep.getMessage(),excep);
-             }
+                log(e2.getMessage(), e2);
+                oos = new ObjectOutputStream (
+                        new BufferedOutputStream (resp.getOutputStream()));
+                oos.writeObject( new ExceptionAdapter(e2));
+                oos.flush();
+            }catch(IOException excep)
+            {
+                log.error(excep.getMessage(),excep);
+            }
         }
         finally {
             if (oos != null) {
                 try{
-                   oos.close();
-                   }catch(IOException excep1)
-                    {
-                        log.error(excep1.getMessage(),excep1);
-                    }
+                    oos.close();
+                }catch(IOException excep1)
+                {
+                    log.error(excep1.getMessage(),excep1);
+                }
             }
         }
     }

@@ -3,6 +3,7 @@ package com.vodafone.er.ecom.proxy;
 import com.vizzavi.ecommerce.business.charging.*;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
+import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.er.ecom.proxy.service.ChargingApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
@@ -27,9 +28,13 @@ public class ChargingApiServlet extends AbstractEcomServlet {
 
 	private static Logger log = Logger.getLogger(ChargingApiServlet.class);
 
-    private ChargingApiService service = new ChargingApiService();
+    private ChargingApiService chargingApiService;
 
-	@Override
+    public ChargingApiServlet() {
+        chargingApiService = ApplicationContextHolder.getContext().getBean(ChargingApiService.class);
+    }
+
+    @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
        try {
     	   startTx();
@@ -122,8 +127,7 @@ public class ChargingApiServlet extends AbstractEcomServlet {
 
                 final Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_USAGE_AUTH1.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    ChargingApiService service = new ChargingApiService();
-                    result = service.processUsageAuth(locale, clientApplicationId,msisdn,serviceId,usageAttributes);
+                    result = chargingApiService.processUsageAuth(locale, clientApplicationId,msisdn,serviceId,usageAttributes);
                 } else {
                     result = getChargingApiDelegate(locale).usageAuth(clientApplicationId, msisdn, serviceId, usageAttributes);
                 }
@@ -170,8 +174,7 @@ public class ChargingApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_USAGE_AUTH_RATE2.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    ChargingApiService service = new ChargingApiService();
-                    result = service.processUsageAuthRate(locale, clientApplicationId,msisdn,serviceId,usageAttributes);
+                    result = chargingApiService.processUsageAuthRate(locale, clientApplicationId,msisdn,serviceId,usageAttributes);
                 } else {
                     result = getChargingApiDelegate(locale)
                             .usageAuthRate(clientApplicationId, msisdn, serviceId, usageAttributes);
@@ -219,8 +222,7 @@ public class ChargingApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_USAGE_AUTH_RATE_CHARGE3.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    ChargingApiService service = new ChargingApiService();
-                    result = service.processUsageAuthRateCharge(locale, clientApplicationId, msisdn, serviceId, usageAttributes);
+                    result = chargingApiService.processUsageAuthRateCharge(locale, clientApplicationId, msisdn, serviceId, usageAttributes);
                 } else {
                     result = getChargingApiDelegate(locale).usageAuthRateCharge(clientApplicationId, msisdn, serviceId, usageAttributes);
                 }
@@ -267,7 +269,7 @@ public class ChargingApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_USAGE_COMPLETE4.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = service.usageComplete(locale, eventReservationId, deliveryStatus);
+                    result = chargingApiService.usageComplete(locale, eventReservationId, deliveryStatus);
                 } else {
                     result = getChargingApiDelegate(locale).usageComplete(clientApplicationId, eventReservationId, deliveryStatus);
                 }

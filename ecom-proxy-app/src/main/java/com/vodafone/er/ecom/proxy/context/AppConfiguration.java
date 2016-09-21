@@ -1,4 +1,4 @@
-package com.vodafone.er.ecom.proxy.spring.config;
+package com.vodafone.er.ecom.proxy.context;
 
 /**
  * Created by Ravi Aghera

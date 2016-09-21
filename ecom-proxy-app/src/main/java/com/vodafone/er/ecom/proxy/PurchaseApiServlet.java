@@ -4,6 +4,7 @@ import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
 import com.vizzavi.ecommerce.business.charging.*;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
+import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
 import com.vodafone.er.ecom.proxy.service.PurchaseApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.util.ExceptionAdapter;
@@ -29,8 +30,11 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
     //private static LWLogger log = LWSupportFactoryImpl.getInstance().getLogger(PurchaseApiServlet.class);
     private static Logger log = Logger.getLogger(PurchaseApiServlet.class);
 
-    private PurchaseApiService purchaseApiService = new PurchaseApiService();
+    private PurchaseApiService purchaseApiService;
 
+    public PurchaseApiServlet() {
+        purchaseApiService = ApplicationContextHolder.getContext().getBean(PurchaseApiService.class);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {

@@ -13,6 +13,7 @@ import com.vodafone.er.ecom.proxy.api.ErApiManager;
 import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -30,12 +31,12 @@ public class ChargingApiService {
 
     private Logger logger = LoggerFactory.getLogger(CatalogApiService.class);
 
+    @Autowired
     private SelfcareApiService selfcareApiService;
+    @Autowired
     private ErApiManager erApiManager;
 
     public ChargingApiService() {
-        selfcareApiService = new SelfcareApiService();
-        erApiManager = new ErApiManager();
     }
 
     public UsageAuthorization processUsageAuthRateCharge(Locale locale, String clientId, String msisdn, String serviceId,

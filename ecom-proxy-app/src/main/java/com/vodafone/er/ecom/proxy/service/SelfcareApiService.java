@@ -6,6 +6,7 @@ import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vizzavi.ecommerce.business.selfcare.*;
 import com.vodafone.er.ecom.proxy.api.ErApiManager;
 import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -18,12 +19,14 @@ import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
 @Service
 public class SelfcareApiService {
 
+    @Autowired
     private CatalogApiService catalogApiService;
+
+    @Autowired
     private ErApiManager erApiManager;
 
     public SelfcareApiService() {
         catalogApiService = new CatalogApiService();
-        erApiManager = new ErApiManager();
     }
 
     public Optional<Subscription> getSubscription(Locale locale, String msisdn, String subId) throws EcommerceException {

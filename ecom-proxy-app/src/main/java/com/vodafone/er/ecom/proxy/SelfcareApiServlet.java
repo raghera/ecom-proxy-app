@@ -3,6 +3,7 @@ package com.vodafone.er.ecom.proxy;
 import com.vizzavi.ecommerce.business.charging.BaseAuthorization;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.*;
+import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
 import com.vodafone.er.ecom.proxy.service.SelfcareApiService;
 import com.vodafone.global.er.business.selfcare.BalanceFilter;
 import com.vodafone.global.er.business.selfcare.MicroServiceStatus;
@@ -31,7 +32,11 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
     //private static LWLogger log = LWSupportFactoryImpl.getInstance().getLogger(SelfcareApiServlet.class);
 	private static Logger log = Logger.getLogger(SelfcareApiServlet.class);
 
-    private SelfcareApiService selfcareApiService = new SelfcareApiService();
+    private SelfcareApiService selfcareApiService;
+
+    public SelfcareApiServlet() {
+        selfcareApiService = ApplicationContextHolder.getContext().getBean(SelfcareApiService.class);
+    }
 
     protected SelfcareApi getSelfcareApiDelegate(Locale locale) throws Exception {
         return getSelfcareApi(locale);

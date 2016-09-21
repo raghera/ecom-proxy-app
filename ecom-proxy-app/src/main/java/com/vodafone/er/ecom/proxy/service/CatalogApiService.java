@@ -27,11 +27,6 @@ public class CatalogApiService {
     @Autowired
     private ErApiManager erApiManager;
 
-    public CatalogApiService() {
-        erApiManager = new ErApiManager();
-    }
-
-
     public CatalogPackage getCatalogPackage(final Locale locale, String packageId) {
         logger.info("calling catalogApi.getPackage with locale={}, client-id={}", locale, CLIENT_ID.getValue());
         final CatalogPackage result = erApiManager.getCatalogApi(locale).getPackage(packageId);

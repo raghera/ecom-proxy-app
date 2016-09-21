@@ -3,6 +3,7 @@ package com.vodafone.er.ecom.proxy.service;
 import com.vizzavi.ecommerce.business.charging.PurchaseAttributes;
 import com.vizzavi.ecommerce.business.charging.PurchaseAuthorization;
 import com.vodafone.er.ecom.proxy.api.ErApiManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Locale;
@@ -13,7 +14,8 @@ import java.util.Locale;
 @Service
 public class PurchaseApiService {
 
-    private ErApiManager erApiManager = new ErApiManager();
+    @Autowired
+    private ErApiManager erApiManager;
 
     public PurchaseAuthorization purchasePackageMsisdn(Locale locale, String clientId, String msisdn,
                                                        String packageId, PurchaseAttributes purchaseAttributes) throws Exception {

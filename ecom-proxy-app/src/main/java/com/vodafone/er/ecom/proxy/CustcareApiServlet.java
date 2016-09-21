@@ -5,6 +5,7 @@ import com.vizzavi.ecommerce.business.charging.ModifyAuthorisation;
 import com.vizzavi.ecommerce.business.charging.SubscriptionAttributes;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.*;
+import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
 import com.vodafone.er.ecom.proxy.service.CustcareApiService;
 import com.vodafone.er.ecom.proxy.service.SelfcareApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
@@ -31,8 +32,14 @@ public class CustcareApiServlet extends AbstractEcomServlet {
 
 	private static final long	serialVersionUID	= 7283816389304078194L;
 	private static Logger log = Logger.getLogger(CustcareApiServlet.class);
-    private CustcareApiService custcareApiService = new CustcareApiService();
-    private SelfcareApiService selfcareApiService = new SelfcareApiService();
+
+    private CustcareApiService custcareApiService;
+    private SelfcareApiService selfcareApiService;
+
+    public CustcareApiServlet() {
+        custcareApiService = ApplicationContextHolder.getContext().getBean(CustcareApiService.class);
+        selfcareApiService = ApplicationContextHolder.getContext().getBean(SelfcareApiService.class);
+    }
 
     protected SelfcareApi getSelfcareApiDelegate(Locale locale) throws Exception {
         return EcomApiFactory.getSelfcareApi(locale);

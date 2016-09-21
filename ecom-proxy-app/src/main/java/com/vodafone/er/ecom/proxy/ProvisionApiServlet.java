@@ -3,6 +3,7 @@ package com.vodafone.er.ecom.proxy;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vizzavi.ecommerce.business.provision.ProvisionApi;
+import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.er.ecom.proxy.service.ProvisionApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
@@ -24,9 +25,13 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
 	
 	private static final long	serialVersionUID	= 7730131820760083128L;
 	private static Logger log = Logger.getLogger(ProvisionApiServlet.class);
-	
- 
-    
+
+    private ProvisionApiService provisionApiService;
+
+    public ProvisionApiServlet() {
+        provisionApiService = ApplicationContextHolder.getContext().getBean(ProvisionApiService.class);
+    }
+
     @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
        try {
@@ -93,8 +98,7 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
             try {
 
                 if (shouldProxy.isPresent() && shouldProxy.get()) {
-                    ProvisionApiService service = new ProvisionApiService();
-                    result = service.updateServiceStatus(locale, provisioningId, serviceStatus, provisioningStatus);
+                    result = provisionApiService.updateServiceStatus(locale, provisioningId, serviceStatus, provisioningStatus);
                 } else {
                     result = EcomApiFactory.getProvisionApi(locale).updateServiceStatus(provisioningId,serviceStatus,provisioningStatus);
 

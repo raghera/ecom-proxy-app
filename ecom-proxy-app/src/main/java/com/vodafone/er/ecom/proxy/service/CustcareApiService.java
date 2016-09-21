@@ -3,6 +3,7 @@ package com.vodafone.er.ecom.proxy.service;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vizzavi.ecommerce.business.selfcare.BasicAccount;
 import com.vodafone.er.ecom.proxy.api.ErApiManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Locale;
@@ -13,11 +14,12 @@ import java.util.Locale;
 @Service
 public class CustcareApiService {
 
+    @Autowired
     private ErApiManager erApiManager;
 
-    public CustcareApiService() {
-        erApiManager = new ErApiManager();
-    }
+//    public CustcareApiService() {
+//        erApiManager = new ErApiManager();
+//    }
 
     public boolean inactivateSubscription(Locale locale, String clientId, String msisdn, String subscriptionId, String csrId, String reason) throws Exception {
         return erApiManager.getCustcareApi(locale)
