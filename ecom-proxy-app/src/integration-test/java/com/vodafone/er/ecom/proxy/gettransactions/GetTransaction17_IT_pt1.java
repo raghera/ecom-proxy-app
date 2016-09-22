@@ -10,14 +10,12 @@ import com.vizzavi.ecommerce.business.selfcare.Transaction;
 import com.vizzavi.ecommerce.business.selfcare.TransactionFilter;
 import com.vodafone.global.er.subscriptionmanagement.TransactionFilterImpl;
 import org.assertj.core.api.SoftAssertions;
-import org.junit.Test;
+import org.junit.Ignore;
 
 import java.util.Locale;
 import java.util.Random;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Ravi Aghera
@@ -26,7 +24,8 @@ public class GetTransaction17_IT_pt1 {
 
     private SoftAssertions softly = new SoftAssertions();
 
-    @Test
+    @Ignore(value = "Ignored because this cannot be translated to Decoupling")
+//    @Test
     public void getTransaction17() throws EcommerceException {
 
         final String msisdn = String.valueOf(new Random().nextInt());
@@ -40,7 +39,8 @@ public class GetTransaction17_IT_pt1 {
 
         TransactionFilter filter = new TransactionFilterImpl();
         filter.setTransactionIdLong(auth.getTransactionIdLong());
-        Transaction transaction = EcomApiFactory.getSelfcareApi(Locale.UK).getTransaction("test", filter);
+        Transaction transaction = EcomApiFactory.getSelfcareApi(Locale.UK)
+                .getTransaction("test", filter);
         assertNotNull(transaction);
 
         System.out.println("PurchaseTrans: " + transaction.getType());
