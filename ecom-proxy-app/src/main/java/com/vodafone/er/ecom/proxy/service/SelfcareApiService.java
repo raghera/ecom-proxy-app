@@ -49,10 +49,6 @@ public class SelfcareApiService {
 
     public Subscription [] getSubscriptions(Locale locale, String clientId, String msisdn, int device, SubscriptionFilter filter)
             throws EcommerceException{
-//        filter.setIncludeModifyTxns(true);
-//        filter.setIncludePaymentTxns(true);
-//        filter.setIncludeRefundTxns(true);
-
         Subscription [] subs = erApiManager.getSelfcareApi(locale).getSubscriptions(clientId, msisdn, device, filter);
         processSubscriptionsResponse(locale, subs);
         return subs;

@@ -10,7 +10,7 @@ import com.vizzavi.ecommerce.business.selfcare.Transaction;
 import com.vizzavi.ecommerce.business.selfcare.TransactionFilter;
 import com.vodafone.global.er.subscriptionmanagement.TransactionFilterImpl;
 import org.assertj.core.api.SoftAssertions;
-import org.junit.Test;
+import org.junit.Ignore;
 
 import java.util.Locale;
 import java.util.Random;
@@ -24,7 +24,8 @@ public class GetTransaction17_IT_pt2 {
 
     private SoftAssertions softly = new SoftAssertions();
 
-    @Test
+    @Ignore(value = "Ignored because this cannot be translated to Decoupling")
+//    @Test
     public void getTransaction17() throws EcommerceException {
         final String msisdn = String.valueOf(new Random().nextInt());
         String packageId = "pAlt__X__package:pAlt_TAX_3_2_999_999_999_*_*";
