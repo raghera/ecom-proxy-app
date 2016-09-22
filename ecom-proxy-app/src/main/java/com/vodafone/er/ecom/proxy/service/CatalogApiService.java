@@ -82,9 +82,7 @@ public class CatalogApiService {
                 if(ppt.getReceiptingAttribute() != null && ppt.getReceiptingAttribute().equals("NULL")) {
                     ppt.setReceiptingAttribute(null);
                 }
-
                 processPricePointBalanceImpacts(ppt);
-
             });
 
             //Populate PackagePricepoint Attributes

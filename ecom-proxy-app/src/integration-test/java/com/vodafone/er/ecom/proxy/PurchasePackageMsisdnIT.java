@@ -14,13 +14,12 @@ import static org.junit.Assert.assertTrue;
 
 public class PurchasePackageMsisdnIT {
 
-    SoftAssertions softly = new SoftAssertions();
+    private SoftAssertions softly = new SoftAssertions();
 
     @Test
     public void testPurchasePackageMsisdn1() throws Exception {
 
         final String msisdn = String.valueOf(new Random().nextInt());
-        System.out.println("Using msisdn=" + msisdn);
 
         PurchaseAuthorization auth = EcomApiFactory.getPurchaseApi(Locale.UK).purchasePackageMsisdn("test", msisdn, "pAlt__X__package:pAlt_TAX_3_2_999_999_999_*_*", new PurchaseAttributes());
         assertNotNull(auth);

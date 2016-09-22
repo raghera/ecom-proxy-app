@@ -25,10 +25,6 @@ public class SelfcareApiService {
     @Autowired
     private ErApiManager erApiManager;
 
-    public SelfcareApiService() {
-        catalogApiService = new CatalogApiService();
-    }
-
     public Optional<Subscription> getSubscription(Locale locale, String msisdn, String subId) throws EcommerceException {
         SubscriptionFilter filter = new SubscriptionFilterImpl();
         filter.setSubscriptionId(subId);
@@ -42,22 +38,20 @@ public class SelfcareApiService {
     public Optional<Subscription> getSubscription(Locale locale, String msisdn, int deviceType, String subId) throws EcommerceException {
         SubscriptionFilter filter = new SubscriptionFilterImpl();
         filter.setSubscriptionId(subId);
-        Subscription [] subs = getSubscriptions(locale, msisdn, CLIENT_ID.getValue(), deviceType, filter);
+        Subscription [] subs = getSubscriptions(locale, CLIENT_ID.getValue(), msisdn, deviceType, filter);
         if(subs == null || subs.length != 1) {
             return Optional.empty();
         }
-        processSubscriptionsResponse(locale, subs);
+//        processSubscriptionsResponse(locale, subs);
 
         return Optional.of(subs[0]);
     }
 
-    //This one returns transactions which getSubscription does not
     public Subscription [] getSubscriptions(Locale locale, String clientId, String msisdn, int device, SubscriptionFilter filter)
             throws EcommerceException{
-
-        filter.setIncludeModifyTxns(true);
-        filter.setIncludePaymentTxns(true);
-        filter.setIncludeRefundTxns(true);
+//        filter.setIncludeModifyTxns(true);
+//        filter.setIncludePaymentTxns(true);
+//        filter.setIncludeRefundTxns(true);
 
         Subscription [] subs = erApiManager.getSelfcareApi(locale).getSubscriptions(clientId, msisdn, device, filter);
         processSubscriptionsResponse(locale, subs);
@@ -69,12 +63,7 @@ public class SelfcareApiService {
     }
 
     public Optional<Transaction> getTransaction(Locale locale, String clientId, TransactionFilter filter) throws EcommerceException {
-        Transaction [] results  = getTransactions(locale, clientId, null, 0, filter);
-        if(results == null || results.length != 1 ) {
-            return Optional.empty();
-        }
-
-        return Optional.of(results[0]);
+        return Optional.of(erApiManager.getSelfcareApi(locale).getTransaction(clientId, filter));
     }
 
     public boolean modifySubscriptionChargingMethod(Locale locale, String clientId, String msisdn, int deviceType,
@@ -82,7 +71,7 @@ public class SelfcareApiService {
         return erApiManager.getSelfcareApi(locale).modifySubscriptionChargingMethod(clientId,msisdn,deviceType,packageSubId,chargingMethod,csrId,reason);
     }
 
-    //TODO move to a post-processor class
+    //TODO move below to a post-processor class
 
     public Subscription [] processSubscriptionsResponse(Locale locale, final Subscription [] subscriptions) {
         final List<Subscription> subsList = Arrays.asList(subscriptions);

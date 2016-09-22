@@ -36,9 +36,6 @@ public class ChargingApiService {
     @Autowired
     private ErApiManager erApiManager;
 
-    public ChargingApiService() {
-    }
-
     public UsageAuthorization processUsageAuthRateCharge(Locale locale, String clientId, String msisdn, String serviceId,
                                                          UsageAttributes usageAttributes) throws EcommerceException {
 

@@ -17,6 +17,9 @@ public class PurchaseApiService {
     @Autowired
     private ErApiManager erApiManager;
 
+    @Autowired
+    private CatalogApiService catalogApiService;
+
     public PurchaseAuthorization purchasePackageMsisdn(Locale locale, String clientId, String msisdn,
                                                        String packageId, PurchaseAttributes purchaseAttributes) throws Exception {
         return erApiManager.getPurchaseApi(locale, clientId)
@@ -25,8 +28,9 @@ public class PurchaseApiService {
 
     public PurchaseAuthorization renewPurchasePackageMsisdn(Locale locale, String clientId, String msisdn, String subId,
                                                             PurchaseAttributes attributes) throws Exception {
-        return erApiManager.getPurchaseApi(locale, clientId).
-                renewPurchasePackageMsisdn(clientId, msisdn, subId, attributes);
+        return erApiManager.getPurchaseApi(locale, clientId)
+                .renewPurchasePackageMsisdn(clientId, msisdn, subId, attributes);
+
     }
 
 }

@@ -1103,7 +1103,9 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_SUBSCRIPTIONS18.value(), true);
                 if(shouldProxy.isPresent()) {
-
+                    filter.setIncludeModifyTxns(true);
+                    filter.setIncludePaymentTxns(true);
+                    filter.setIncludeRefundTxns(true);
                     result = selfcareApiService.getSubscriptions(locale, clientId, msisdn, device, filter);
                 } else {
                     result = getSelfcareApiDelegate(locale).getSubscriptions(clientId, msisdn, device, filter);
@@ -1454,6 +1456,9 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 if(shouldProxy.isPresent()) {
                     SubscriptionFilter filter = new SubscriptionFilterImpl();
                     filter.setSubscriptionId(packageSubId);
+                    filter.setIncludeModifyTxns(true);
+                    filter.setIncludePaymentTxns(true);
+                    filter.setIncludeRefundTxns(true);
                     final Subscription [] subs = selfcareApiService.getSubscriptions(locale, clientId, msisdn, 0, filter);
                     result = subs[0];
                 } else {

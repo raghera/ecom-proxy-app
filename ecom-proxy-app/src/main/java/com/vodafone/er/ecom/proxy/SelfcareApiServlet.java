@@ -243,6 +243,9 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
 
             try {
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    filter.setIncludeModifyTxns(true);
+                    filter.setIncludePaymentTxns(true);
+                    filter.setIncludeRefundTxns(true);
                     result = selfcareApiService.getSubscriptions(locale, clientId, msisdn, device, filter);
                 } else {
                     result = EcomApiFactory.getSelfcareApi(locale).getSubscriptions(clientId,msisdn,device,filter);
@@ -597,7 +600,12 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_SUBSCRIPTION10.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    selfcareApiService.getSubscription(locale, msisdn, deviceType, packageSubId);
+                    Optional<Subscription> subOpt = selfcareApiService.getSubscription(locale, msisdn, deviceType, packageSubId);
+                    if(subOpt.isPresent()) {
+                        result = subOpt.get();
+                    } else {
+                        log.warn("Empty Response from SelfcareApi.getSubscriptions");
+                    }
                 } else {
                     result = getSelfcareApiDelegate(locale).getSubscription(clientId, msisdn, deviceType, packageSubId);
                 }

@@ -17,10 +17,6 @@ public class CustcareApiService {
     @Autowired
     private ErApiManager erApiManager;
 
-//    public CustcareApiService() {
-//        erApiManager = new ErApiManager();
-//    }
-
     public boolean inactivateSubscription(Locale locale, String clientId, String msisdn, String subscriptionId, String csrId, String reason) throws Exception {
         return erApiManager.getCustcareApi(locale)
                 .inactivateSubscription(clientId, msisdn, subscriptionId, csrId, reason);
