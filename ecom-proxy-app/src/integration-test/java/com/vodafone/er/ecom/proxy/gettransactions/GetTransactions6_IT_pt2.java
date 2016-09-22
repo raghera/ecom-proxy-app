@@ -40,7 +40,7 @@ public class GetTransactions6_IT_pt2 {
         Transaction[] transactions = EcomApiFactory.getSelfcareApi(Locale.UK).getTransactions("test", msisdn, 0, new TransactionFilterImpl());
         assertNotNull(transactions);
         assertEquals(2, transactions.length);
-        
+
         Transaction purchaseTrans = null;
         Transaction usageTrans = null;
 

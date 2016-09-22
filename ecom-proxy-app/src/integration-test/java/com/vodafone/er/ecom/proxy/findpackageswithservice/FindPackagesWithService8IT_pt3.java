@@ -383,7 +383,7 @@ public class FindPackagesWithService8IT_pt3 {
         softly.assertThat(pack.getPricePoints().get(2).getRetryFrequency() ).as(" pack.getPricePoints().get(2).getRetryFrequency()" ).isNull();
         softly.assertThat(pack.getPricePoints().get(2).getSuspensionPeriod() ).as(" pack.getPricePoints().get(2).getSuspensionPeriod()" ).isNull();
         softly.assertThat(pack.getPricePoints().get(2).isGraceSuspensionRetryFrequencyUndefined() ).as(" pack.getPricePoints().get(2).isGraceSuspensionRetryFrequencyUndefined()" ).isTrue() ;
-        softly.assertThat(pack.getPricePoints().get(2).getTranslatedPricingText() ).as(" pack.getPricePoints().get(2).getTranslatedPricingText()" ).isNull();
+        softly.assertThat(pack.getPricePoints().get(2).getTranslatedPricingText() ).as(" pack.getPricePoints().get(2).getTranslatedPricingText()" ).isNullOrEmpty();
         softly.assertThat(pack.getPricePoints().get(2).getFairUsageLimit() ).as(" pack.getPricePoints().get(2).getFairUsageLimit()" ).isEqualTo(-1) ;
         softly.assertThat(pack.getPricePoints().get(2).getFairUsagePeriod() ).as(" pack.getPricePoints().get(2).getFairUsagePeriod()" ).isEqualTo(-1) ;
         softly.assertThat(pack.getPricePoints().get(2).getFairUsagePeriodUnit() ).as(" pack.getPricePoints().get(2).getFairUsagePeriodUnit()" ).isEqualTo("Day(s)");
@@ -705,8 +705,8 @@ public class FindPackagesWithService8IT_pt3 {
         softly.assertThat(pack.getProtectedType() ).as(" pack.getProtectedType()" ).isNullOrEmpty();
         softly.assertThat(pack.getDynamicProtectedValue() ).as(" pack.getDynamicProtectedValue()" ).isNullOrEmpty();
         softly.assertThat(pack.getPurchaseMethod() ).as(" pack.getPurchaseMethod()" ).isNullOrEmpty();
-        softly.assertThat(pack.getKpiPackageProductCategory() ).as(" pack.getKpiPackageProductCategory()" ).isNull();
-        softly.assertThat(pack.getKpiPackageType() ).as(" pack.getKpiPackageType()" ).isNull();
+        softly.assertThat(pack.getKpiPackageProductCategory() ).as(" pack.getKpiPackageProductCategory()" ).isNullOrEmpty();
+        softly.assertThat(pack.getKpiPackageType() ).as(" pack.getKpiPackageType()" ).isNullOrEmpty();
 //check size of array!
         softly.assertThat(pack.getPricingModels().length ).as(" pack.getPricingModels().length" ).isEqualTo(0) ;
         softly.assertThat(pack.isExpressPurchase() ).as(" pack.isExpressPurchase()" ).isFalse() ;
@@ -718,9 +718,9 @@ public class FindPackagesWithService8IT_pt3 {
         softly.assertThat(pack.getACEPackage() ).as(" pack.getACEPackage()" ).isFalse() ;
         softly.assertThat(pack.isUpSell() ).as(" pack.isUpSell()" ).isFalse() ;
 // java.util.HashMap
-        softly.assertThat(pack.getLogoId() ).as(" pack.getLogoId()" ).isNull();
+        softly.assertThat(pack.getLogoId() ).as(" pack.getLogoId()" ).isNullOrEmpty();
 // java.util.HashMap
-        softly.assertThat(pack.getPartnerInfo() ).as(" pack.getPartnerInfo()" ).isNull();
+        softly.assertThat(pack.getPartnerInfo() ).as(" pack.getPartnerInfo()" ).isNullOrEmpty();
         softly.assertThat(pack.getIsPackageModel() ).as(" pack.getIsPackageModel()" ).isFalse() ;
         softly.assertThat(pack.isParentPackage() ).as(" pack.isParentPackage()" ).isFalse() ;
         softly.assertThat(pack.getChildPackages() ).as(" pack.getChildPackages()" ).isNull();
@@ -735,7 +735,7 @@ public class FindPackagesWithService8IT_pt3 {
         softly.assertThat(pack.isDataVoiceTariffInclusive() ).as(" pack.isDataVoiceTariffInclusive()" ).isFalse() ;
         softly.assertThat(pack.getNominalValue() ).as(" pack.getNominalValue()" ).isEqualTo(new Double(0.0)) ;
         softly.assertThat(pack.isUseBeingDeprovisionedStatus() ).as(" pack.isUseBeingDeprovisionedStatus()" ).isFalse() ;
-        softly.assertThat(pack.getDisallowDuplicateSubPurchase() ).as(" pack.getDisallowDuplicateSubPurchase()" ).isNull();
+        softly.assertThat(pack.getDisallowDuplicateSubPurchase() ).as(" pack.getDisallowDuplicateSubPurchase()" ).isNullOrEmpty();
         softly.assertThat(pack.getNoActivePricepoints() ).as(" pack.getNoActivePricepoints()" ).isEqualTo(2) ;
         softly.assertThat(pack.isHasBalanceImpactsWithDate() ).as(" pack.isHasBalanceImpactsWithDate()" ).isFalse() ;
         softly.assertThat(pack.isHasPricePointsWithDate() ).as(" pack.isHasPricePointsWithDate()" ).isFalse() ;
@@ -745,7 +745,7 @@ public class FindPackagesWithService8IT_pt3 {
         softly.assertThat(pack.getPromoCodeMapSize() ).as(" pack.getPromoCodeMapSize()" ).isEqualTo(0) ;
         softly.assertThat(pack.getActiveStatusAsString() ).as(" pack.getActiveStatusAsString()" ).isEqualTo("ACTIVE");
         softly.assertThat(pack.isUseRateCardService() ).as(" pack.isUseRateCardService()" ).isFalse() ;
-        softly.assertThat(pack.getRateCardServiceId() ).as(" pack.getRateCardServiceId()" ).isNull();
+        softly.assertThat(pack.getRateCardServiceId() ).as(" pack.getRateCardServiceId()" ).isNullOrEmpty();
         softly.assertThat(pack.isUserGroupCalendarPricePointPackage() ).as(" pack.isUserGroupCalendarPricePointPackage()" ).isFalse() ;
         softly.assertThat(pack.isUpsellDiscountProrated() ).as(" pack.isUpsellDiscountProrated()" ).isFalse() ;
         softly.assertThat(pack.isDisallowPrerate() ).as(" pack.isDisallowPrerate()" ).isFalse() ;
@@ -951,9 +951,9 @@ public class FindPackagesWithService8IT_pt3 {
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).isTrial() ).as(" pack.getServices().get(0).getPricePoints().get(0).isTrial()" ).isFalse() ;
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getGlid() ).as(" pack.getServices().get(0).getPricePoints().get(0).getGlid()" ).isNullOrEmpty();
 // java.util.HashMap
-        softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getPricepointIdLink() ).as(" pack.getServices().get(0).getPricePoints().get(0).getPricepointIdLink()" ).isNull();
+        softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getPricepointIdLink() ).as(" pack.getServices().get(0).getPricePoints().get(0).getPricepointIdLink()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).isPreview() ).as(" pack.getServices().get(0).getPricePoints().get(0).isPreview()" ).isFalse() ;
-        softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getInteractiveFlag() ).as(" pack.getServices().get(0).getPricePoints().get(0).getInteractiveFlag()" ).isNull();
+        softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getInteractiveFlag() ).as(" pack.getServices().get(0).getPricePoints().get(0).getInteractiveFlag()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).isForcedPurchase() ).as(" pack.getServices().get(0).getPricePoints().get(0).isForcedPurchase()" ).isFalse() ;
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).isSubscriptionDuplicate() ).as(" pack.getServices().get(0).getPricePoints().get(0).isSubscriptionDuplicate()" ).isFalse() ;
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getFixedExpiryDate() ).as(" pack.getServices().get(0).getPricePoints().get(0).getFixedExpiryDate()" ).isNull();
@@ -986,7 +986,7 @@ public class FindPackagesWithService8IT_pt3 {
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getRetryFrequency() ).as(" pack.getServices().get(0).getPricePoints().get(0).getRetryFrequency()" ).isNull();
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getSuspensionPeriod() ).as(" pack.getServices().get(0).getPricePoints().get(0).getSuspensionPeriod()" ).isNull();
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).isGraceSuspensionRetryFrequencyUndefined() ).as(" pack.getServices().get(0).getPricePoints().get(0).isGraceSuspensionRetryFrequencyUndefined()" ).isTrue() ;
-        softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getTranslatedPricingText() ).as(" pack.getServices().get(0).getPricePoints().get(0).getTranslatedPricingText()" ).isNull();
+        softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getTranslatedPricingText() ).as(" pack.getServices().get(0).getPricePoints().get(0).getTranslatedPricingText()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getFairUsageLimit() ).as(" pack.getServices().get(0).getPricePoints().get(0).getFairUsageLimit()" ).isEqualTo(-1) ;
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getFairUsagePeriod() ).as(" pack.getServices().get(0).getPricePoints().get(0).getFairUsagePeriod()" ).isEqualTo(-1) ;
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getFairUsagePeriodUnit() ).as(" pack.getServices().get(0).getPricePoints().get(0).getFairUsagePeriodUnit()" ).isEqualTo("Day(s)");

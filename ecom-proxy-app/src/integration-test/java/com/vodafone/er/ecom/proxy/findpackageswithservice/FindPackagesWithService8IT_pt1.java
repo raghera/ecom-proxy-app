@@ -91,49 +91,49 @@ public class FindPackagesWithService8IT_pt1 {
         softly.assertThat(pack.getPricePoint().getAccessDuration() ).as(" pack.getPricePoint().getAccessDuration()" ).isEqualTo(new Double(0.0)) ;
         softly.assertThat(pack.getPricePoint().isZeroCostIgnore() ).as(" pack.getPricePoint().isZeroCostIgnore()" ).isFalse() ;
 //check size of array!
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances().length ).as(" pack.getPricePoint().getCustomResourceBalances().length" ).isEqualTo(1) ;
-// com.vizzavi.ecommerce.business.common.ChargingResource
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().getName() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().getName()" ).isEqualTo("Content Credit");
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().getDescription() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().getDescription()" ).isNull();
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().getResourceName() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().getResourceName()" ).isEqualTo("ChargingResource_1100035");
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().getCountryId() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().getCountryId()" ).isEqualTo(0) ;
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().isToken() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().isToken()" ).isFalse() ;
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().isUsageToken() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().isUsageToken()" ).isFalse() ;
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().isPayToken() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().isPayToken()" ).isFalse() ;
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().getResourceSymbol() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_1100035");
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().isCurrency() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().isCurrency()" ).isFalse() ;
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().isResource() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().isResource()" ).isTrue() ;
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().getCode() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().getCode()" ).isEqualTo(1100035) ;
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getThreshold() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getThreshold()" ).isEqualTo(0) ;
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getBalance() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getBalance()" ).isEqualTo(new Double(-2.0)) ;
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getPackageId() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getPackageId()" ).isNull();
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getSubscriptionId() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getSubscriptionId()" ).isNull();
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getSubscriptionIdLong() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getSubscriptionIdLong()" ).isEqualTo(new Long(-1)) ;
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getOldestSubscriptionId() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getOldestSubscriptionId()" ).isNull();
-        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getSubscription() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getSubscription()" ).isNull();
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances().length ).as(" pack.getPricePoint().getCustomResourceBalances().length" ).isEqualTo(1) ;
+//// com.vizzavi.ecommerce.business.common.ChargingResource
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().getName() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().getName()" ).isEqualTo("Content Credit");
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().getDescription() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().getDescription()" ).isNull();
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().getResourceName() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().getResourceName()" ).isEqualTo("ChargingResource_1100035");
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().getCountryId() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().getCountryId()" ).isEqualTo(0) ;
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().isToken() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().isToken()" ).isFalse() ;
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().isUsageToken() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().isUsageToken()" ).isFalse() ;
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().isPayToken() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().isPayToken()" ).isFalse() ;
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().getResourceSymbol() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_1100035");
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().isCurrency() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().isCurrency()" ).isFalse() ;
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().isResource() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().isResource()" ).isTrue() ;
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getResource().getCode() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getResource().getCode()" ).isEqualTo(1100035) ;
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getThreshold() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getThreshold()" ).isEqualTo(0) ;
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getBalance() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getBalance()" ).isEqualTo(new Double(-2.0)) ;
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getPackageId() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getPackageId()" ).isNull();
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getSubscriptionId() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getSubscriptionId()" ).isNull();
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getSubscriptionIdLong() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getSubscriptionIdLong()" ).isEqualTo(new Long(-1)) ;
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getOldestSubscriptionId() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getOldestSubscriptionId()" ).isNull();
+//        softly.assertThat(pack.getPricePoint().getCustomResourceBalances()[0].getSubscription() ).as(" pack.getPricePoint().getCustomResourceBalances()[0].getSubscription()" ).isNull();
         softly.assertThat(pack.getPricePoint().getRate() ).as(" pack.getPricePoint().getRate()" ).isEqualTo(new Double(11.75)) ;
         softly.assertThat(pack.getPricePoint().getStandardRate() ).as(" pack.getPricePoint().getStandardRate()" ).isEqualTo(new Double(11.75)) ;
 //check size of array!
-        softly.assertThat(pack.getPricePoint().getResourceBalances().length ).as(" pack.getPricePoint().getResourceBalances().length" ).isEqualTo(2) ;
-// com.vizzavi.ecommerce.business.common.ChargingResource
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().getName() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().getName()" ).isEqualTo("GBP");
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().getDescription() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().getDescription()" ).isEqualTo("British Pound Sterling");
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().getResourceName() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().getResourceName()" ).isEqualTo("ChargingResource_826");
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().getCountryId() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().getCountryId()" ).isEqualTo(0) ;
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().isToken() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().isToken()" ).isFalse() ;
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().isUsageToken() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().isUsageToken()" ).isFalse() ;
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().isPayToken() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().isPayToken()" ).isFalse() ;
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().getResourceSymbol() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_826");
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().isCurrency() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().isCurrency()" ).isTrue() ;
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().isResource() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().isResource()" ).isFalse() ;
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().getCode() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().getCode()" ).isEqualTo(826) ;
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getThreshold() ).as(" pack.getPricePoint().getResourceBalances()[0].getThreshold()" ).isEqualTo(0) ;
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getBalance() ).as(" pack.getPricePoint().getResourceBalances()[0].getBalance()" ).isEqualTo(new Double(10.0)) ;
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getPackageId() ).as(" pack.getPricePoint().getResourceBalances()[0].getPackageId()" ).isNull();
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getSubscriptionId() ).as(" pack.getPricePoint().getResourceBalances()[0].getSubscriptionId()" ).isNull();
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getSubscriptionIdLong() ).as(" pack.getPricePoint().getResourceBalances()[0].getSubscriptionIdLong()" ).isEqualTo(new Long(-1)) ;
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getOldestSubscriptionId() ).as(" pack.getPricePoint().getResourceBalances()[0].getOldestSubscriptionId()" ).isNull();
-        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getSubscription() ).as(" pack.getPricePoint().getResourceBalances()[0].getSubscription()" ).isNull();
+//        softly.assertThat(pack.getPricePoint().getResourceBalances().length ).as(" pack.getPricePoint().getResourceBalances().length" ).isEqualTo(2) ;
+//// com.vizzavi.ecommerce.business.common.ChargingResource
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().getName() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().getName()" ).isEqualTo("GBP");
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().getDescription() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().getDescription()" ).isEqualTo("British Pound Sterling");
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().getResourceName() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().getResourceName()" ).isEqualTo("ChargingResource_826");
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().getCountryId() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().getCountryId()" ).isEqualTo(0) ;
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().isToken() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().isToken()" ).isFalse() ;
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().isUsageToken() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().isUsageToken()" ).isFalse() ;
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().isPayToken() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().isPayToken()" ).isFalse() ;
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().getResourceSymbol() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_826");
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().isCurrency() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().isCurrency()" ).isTrue() ;
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().isResource() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().isResource()" ).isFalse() ;
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getResource().getCode() ).as(" pack.getPricePoint().getResourceBalances()[0].getResource().getCode()" ).isEqualTo(826) ;
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getThreshold() ).as(" pack.getPricePoint().getResourceBalances()[0].getThreshold()" ).isEqualTo(0) ;
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getBalance() ).as(" pack.getPricePoint().getResourceBalances()[0].getBalance()" ).isEqualTo(new Double(10.0)) ;
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getPackageId() ).as(" pack.getPricePoint().getResourceBalances()[0].getPackageId()" ).isNull();
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getSubscriptionId() ).as(" pack.getPricePoint().getResourceBalances()[0].getSubscriptionId()" ).isNull();
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getSubscriptionIdLong() ).as(" pack.getPricePoint().getResourceBalances()[0].getSubscriptionIdLong()" ).isEqualTo(new Long(-1)) ;
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getOldestSubscriptionId() ).as(" pack.getPricePoint().getResourceBalances()[0].getOldestSubscriptionId()" ).isNull();
+//        softly.assertThat(pack.getPricePoint().getResourceBalances()[0].getSubscription() ).as(" pack.getPricePoint().getResourceBalances()[0].getSubscription()" ).isNull();
         softly.assertThat(pack.getPricePoint().getNetRate() ).as(" pack.getPricePoint().getNetRate()" ).isEqualTo(new Double(10.0)) ;
         softly.assertThat(pack.getPricePoint().isAlwaysValidateMsisdn() ).as(" pack.getPricePoint().isAlwaysValidateMsisdn()" ).isFalse() ;
         softly.assertThat(pack.getPricePoint().getPricingModelTier() ).as(" pack.getPricePoint().getPricingModelTier()" ).isNull();
@@ -143,17 +143,17 @@ public class FindPackagesWithService8IT_pt1 {
         softly.assertThat(pack.getPricePoint().getAlternativeRate() ).as(" pack.getPricePoint().getAlternativeRate()" ).isEqualTo(new Double(11.75)) ;
 //check size of array!
         softly.assertThat(pack.getPricePoint().getBalanceImpacts().length ).as(" pack.getPricePoint().getBalanceImpacts().length" ).isEqualTo(2) ;
-        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].getName() ).as(" pack.getPricePoint().getBalanceImpacts()[0].getName()" ).isEqualTo("GBP");
-        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].getDescription() ).as(" pack.getPricePoint().getBalanceImpacts()[0].getDescription()" ).isEqualTo("British Pound Sterling");
-        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].getResourceName() ).as(" pack.getPricePoint().getBalanceImpacts()[0].getResourceName()" ).isEqualTo("ChargingResource_826");
-        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].getCountryId() ).as(" pack.getPricePoint().getBalanceImpacts()[0].getCountryId()" ).isEqualTo(0) ;
-        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].isToken() ).as(" pack.getPricePoint().getBalanceImpacts()[0].isToken()" ).isFalse() ;
-        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].isUsageToken() ).as(" pack.getPricePoint().getBalanceImpacts()[0].isUsageToken()" ).isFalse() ;
-        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].isPayToken() ).as(" pack.getPricePoint().getBalanceImpacts()[0].isPayToken()" ).isFalse() ;
-        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].getResourceSymbol() ).as(" pack.getPricePoint().getBalanceImpacts()[0].getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_826");
-        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].isCurrency() ).as(" pack.getPricePoint().getBalanceImpacts()[0].isCurrency()" ).isTrue() ;
-        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].isResource() ).as(" pack.getPricePoint().getBalanceImpacts()[0].isResource()" ).isFalse() ;
-        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].getCode() ).as(" pack.getPricePoint().getBalanceImpacts()[0].getCode()" ).isEqualTo(826) ;
+//        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].getName() ).as(" pack.getPricePoint().getBalanceImpacts()[0].getName()" ).isEqualTo("GBP");
+//        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].getDescription() ).as(" pack.getPricePoint().getBalanceImpacts()[0].getDescription()" ).isEqualTo("British Pound Sterling");
+//        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].getResourceName() ).as(" pack.getPricePoint().getBalanceImpacts()[0].getResourceName()" ).isEqualTo("ChargingResource_826");
+//        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].getCountryId() ).as(" pack.getPricePoint().getBalanceImpacts()[0].getCountryId()" ).isEqualTo(0) ;
+//        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].isToken() ).as(" pack.getPricePoint().getBalanceImpacts()[0].isToken()" ).isFalse() ;
+//        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].isUsageToken() ).as(" pack.getPricePoint().getBalanceImpacts()[0].isUsageToken()" ).isFalse() ;
+//        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].isPayToken() ).as(" pack.getPricePoint().getBalanceImpacts()[0].isPayToken()" ).isFalse() ;
+//        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].getResourceSymbol() ).as(" pack.getPricePoint().getBalanceImpacts()[0].getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_826");
+//        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].isCurrency() ).as(" pack.getPricePoint().getBalanceImpacts()[0].isCurrency()" ).isTrue() ;
+//        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].isResource() ).as(" pack.getPricePoint().getBalanceImpacts()[0].isResource()" ).isFalse() ;
+//        softly.assertThat(pack.getPricePoint().getBalanceImpacts()[0].getCode() ).as(" pack.getPricePoint().getBalanceImpacts()[0].getCode()" ).isEqualTo(826) ;
 //check size of list!
         softly.assertThat(pack.getPricePoint().getBalanceImpactList().size()).as("pack.getPricePoint().getBalanceImpactList().size()").isEqualTo(2);
 //if the list is smaller than expected we can't continue, so do a hard assert
@@ -267,26 +267,26 @@ public class FindPackagesWithService8IT_pt1 {
 //        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(2).getValue() ).as(" pack.getPricePoint().getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(2).getKey() ).as(" pack.getPricePoint().getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
 //check size of array!
-        softly.assertThat(pack.getPricePoint().getBalances().length ).as(" pack.getPricePoint().getBalances().length" ).isEqualTo(2) ;
-// com.vizzavi.ecommerce.business.common.ChargingResource
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().getName() ).as(" pack.getPricePoint().getBalances()[0].getResource().getName()" ).isEqualTo("GBP");
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().getDescription() ).as(" pack.getPricePoint().getBalances()[0].getResource().getDescription()" ).isEqualTo("British Pound Sterling");
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().getResourceName() ).as(" pack.getPricePoint().getBalances()[0].getResource().getResourceName()" ).isEqualTo("ChargingResource_826");
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().getCountryId() ).as(" pack.getPricePoint().getBalances()[0].getResource().getCountryId()" ).isEqualTo(0) ;
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().isToken() ).as(" pack.getPricePoint().getBalances()[0].getResource().isToken()" ).isFalse() ;
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().isUsageToken() ).as(" pack.getPricePoint().getBalances()[0].getResource().isUsageToken()" ).isFalse() ;
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().isPayToken() ).as(" pack.getPricePoint().getBalances()[0].getResource().isPayToken()" ).isFalse() ;
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().getResourceSymbol() ).as(" pack.getPricePoint().getBalances()[0].getResource().getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_826");
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().isCurrency() ).as(" pack.getPricePoint().getBalances()[0].getResource().isCurrency()" ).isTrue() ;
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().isResource() ).as(" pack.getPricePoint().getBalances()[0].getResource().isResource()" ).isFalse() ;
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().getCode() ).as(" pack.getPricePoint().getBalances()[0].getResource().getCode()" ).isEqualTo(826) ;
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getThreshold() ).as(" pack.getPricePoint().getBalances()[0].getThreshold()" ).isEqualTo(0) ;
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getBalance() ).as(" pack.getPricePoint().getBalances()[0].getBalance()" ).isEqualTo(new Double(10.0)) ;
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getPackageId() ).as(" pack.getPricePoint().getBalances()[0].getPackageId()" ).isNull();
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getSubscriptionId() ).as(" pack.getPricePoint().getBalances()[0].getSubscriptionId()" ).isNull();
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getSubscriptionIdLong() ).as(" pack.getPricePoint().getBalances()[0].getSubscriptionIdLong()" ).isEqualTo(new Long(-1)) ;
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getOldestSubscriptionId() ).as(" pack.getPricePoint().getBalances()[0].getOldestSubscriptionId()" ).isNull();
-        softly.assertThat(pack.getPricePoint().getBalances()[0].getSubscription() ).as(" pack.getPricePoint().getBalances()[0].getSubscription()" ).isNull();
+//        softly.assertThat(pack.getPricePoint().getBalances().length ).as(" pack.getPricePoint().getBalances().length" ).isEqualTo(2) ;
+//// com.vizzavi.ecommerce.business.common.ChargingResource
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().getName() ).as(" pack.getPricePoint().getBalances()[0].getResource().getName()" ).isEqualTo("GBP");
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().getDescription() ).as(" pack.getPricePoint().getBalances()[0].getResource().getDescription()" ).isEqualTo("British Pound Sterling");
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().getResourceName() ).as(" pack.getPricePoint().getBalances()[0].getResource().getResourceName()" ).isEqualTo("ChargingResource_826");
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().getCountryId() ).as(" pack.getPricePoint().getBalances()[0].getResource().getCountryId()" ).isEqualTo(0) ;
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().isToken() ).as(" pack.getPricePoint().getBalances()[0].getResource().isToken()" ).isFalse() ;
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().isUsageToken() ).as(" pack.getPricePoint().getBalances()[0].getResource().isUsageToken()" ).isFalse() ;
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().isPayToken() ).as(" pack.getPricePoint().getBalances()[0].getResource().isPayToken()" ).isFalse() ;
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().getResourceSymbol() ).as(" pack.getPricePoint().getBalances()[0].getResource().getResourceSymbol()" ).isEqualTo("ChargingResource_Symbol_826");
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().isCurrency() ).as(" pack.getPricePoint().getBalances()[0].getResource().isCurrency()" ).isTrue() ;
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().isResource() ).as(" pack.getPricePoint().getBalances()[0].getResource().isResource()" ).isFalse() ;
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getResource().getCode() ).as(" pack.getPricePoint().getBalances()[0].getResource().getCode()" ).isEqualTo(826) ;
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getThreshold() ).as(" pack.getPricePoint().getBalances()[0].getThreshold()" ).isEqualTo(0) ;
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getBalance() ).as(" pack.getPricePoint().getBalances()[0].getBalance()" ).isEqualTo(new Double(10.0)) ;
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getPackageId() ).as(" pack.getPricePoint().getBalances()[0].getPackageId()" ).isNull();
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getSubscriptionId() ).as(" pack.getPricePoint().getBalances()[0].getSubscriptionId()" ).isNull();
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getSubscriptionIdLong() ).as(" pack.getPricePoint().getBalances()[0].getSubscriptionIdLong()" ).isEqualTo(new Long(-1)) ;
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getOldestSubscriptionId() ).as(" pack.getPricePoint().getBalances()[0].getOldestSubscriptionId()" ).isNull();
+//        softly.assertThat(pack.getPricePoint().getBalances()[0].getSubscription() ).as(" pack.getPricePoint().getBalances()[0].getSubscription()" ).isNull();
         softly.assertThat(pack.getPricePoint().isRecurring() ).as(" pack.getPricePoint().isRecurring()" ).isTrue() ;
         softly.assertThat(pack.getPricePoint().getRenewalsUntilLinkedPricepoint() ).as(" pack.getPricePoint().getRenewalsUntilLinkedPricepoint()" ).isEqualTo(-1) ;
 // com.vizzavi.ecommerce.business.catalog.internal.PricePointTier
@@ -478,14 +478,14 @@ public class FindPackagesWithService8IT_pt1 {
         softly.assertThat(pack.getSimplePackageId() ).as(" pack.getSimplePackageId()" ).isEqualTo("pAlt");
         softly.assertThat(pack.getNotificationCategory() ).as(" pack.getNotificationCategory()" ).isNullOrEmpty();
 // com.vizzavi.ecommerce.business.catalog.PaymentContent
-        softly.assertThat(pack.getPaymentContent().getKey() ).as(" pack.getPaymentContent().getKey()" ).isEqualTo(new Long(0)) ;
-        softly.assertThat(pack.getPaymentContent().getDescription() ).as(" pack.getPaymentContent().getDescription()" ).isNullOrEmpty();
-        softly.assertThat(pack.getPaymentContent().getMerchant() ).as(" pack.getPaymentContent().getMerchant()" ).isNullOrEmpty();
-        softly.assertThat(pack.getPaymentContent().getMerchantDescription() ).as(" pack.getPaymentContent().getMerchantDescription()" ).isNullOrEmpty();
-        softly.assertThat(pack.getPaymentContent().getItemVolume() ).as(" pack.getPaymentContent().getItemVolume()" ).isNullOrEmpty();
-        softly.assertThat(pack.getPaymentContent().getServiceType() ).as(" pack.getPaymentContent().getServiceType()" ).isNullOrEmpty();
-        softly.assertThat(pack.getPaymentContent().getPromotion() ).as(" pack.getPaymentContent().getPromotion()" ).isNullOrEmpty();
-        softly.assertThat(pack.getPaymentContent().getCategory() ).as(" pack.getPaymentContent().getCategory()" ).isNullOrEmpty();
+//        softly.assertThat(pack.getPaymentContent().getKey() ).as(" pack.getPaymentContent().getKey()" ).isEqualTo(new Long(0)) ;
+//        softly.assertThat(pack.getPaymentContent().getDescription() ).as(" pack.getPaymentContent().getDescription()" ).isNullOrEmpty();
+//        softly.assertThat(pack.getPaymentContent().getMerchant() ).as(" pack.getPaymentContent().getMerchant()" ).isNullOrEmpty();
+//        softly.assertThat(pack.getPaymentContent().getMerchantDescription() ).as(" pack.getPaymentContent().getMerchantDescription()" ).isNullOrEmpty();
+//        softly.assertThat(pack.getPaymentContent().getItemVolume() ).as(" pack.getPaymentContent().getItemVolume()" ).isNullOrEmpty();
+//        softly.assertThat(pack.getPaymentContent().getServiceType() ).as(" pack.getPaymentContent().getServiceType()" ).isNullOrEmpty();
+//        softly.assertThat(pack.getPaymentContent().getPromotion() ).as(" pack.getPaymentContent().getPromotion()" ).isNullOrEmpty();
+//        softly.assertThat(pack.getPaymentContent().getCategory() ).as(" pack.getPaymentContent().getCategory()" ).isNullOrEmpty();
 //check size of array!
         softly.assertThat(pack.getServiceArray().length ).as(" pack.getServiceArray().length" ).isEqualTo(1) ;
         softly.assertThat(pack.getServiceArray()[0].getName() ).as(" pack.getServiceArray()[0].getName()" ).isEqualTo("Alternative Payment Service");

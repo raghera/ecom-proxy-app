@@ -5,6 +5,7 @@ import com.vizzavi.ecommerce.business.catalog.CatalogService;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vizzavi.ecommerce.business.selfcare.*;
 import com.vodafone.er.ecom.proxy.api.ErApiManager;
+import com.vodafone.er.ecom.proxy.processor.CatalogApiProcessor;
 import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class SelfcareApiService {
 
     @Autowired
     private CatalogApiService catalogApiService;
+    @Autowired
+    private CatalogApiProcessor catalogApiProcessor;
 
     @Autowired
     private ErApiManager erApiManager;
@@ -102,7 +105,7 @@ public class SelfcareApiService {
 
         //populate the package correctly
         final CatalogPackage pack = catalogApiService.getCatalogPackage(locale, subscription.getPackageId());
-        catalogApiService.populatePricePointInPackage(pack, subscription.getPackage().getPricePoint().getId());
+        catalogApiProcessor.populatePricePointInPackage(pack, subscription.getPackage().getPricePoint().getId());
         subscription.setPackage(pack);
 
     }

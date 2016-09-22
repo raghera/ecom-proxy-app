@@ -32,7 +32,6 @@ public enum  PropertiesConstantsEnum {
     PROP_GET_SUBSCRIPTION10("proxy.getSubscription10"),
     PROP_RENEW_PURCHASE_PACKAGE_MSISDN3("proxy.renewPurchasePackageMsisdn3");
 
-
     private final String value;
 
     PropertiesConstantsEnum (String value) {
