@@ -14,70 +14,133 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-import static org.apache.axis2.i18n.MessagesConstants.locale;
-
 /**
  * Created by Ravi Aghera
  */
 @Component
-public class CatalogApiProcessor implements ResponseEnricher<RequestResult<CatalogPackage>> {
+public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<T>>> {
+//public class CatalogApiProcessor<T> implements PostProcessor<T> {
 
     @Autowired
     private CatalogApiService catalogApiService;
 
-    public RequestResult<CatalogPackage> process(Locale locale, String msisdn, RequestResult<CatalogPackage> result) {
-        if(result.getResponse() instanceof CatalogPackage) {
-            processCatalogPackage(locale, result.getResponse());
+    //Routes requests to process method
+    @Override
+    public RequestResult<List<T>> process(RequestResult<List<T>> result) {
+
+        if(!result.getResponse().isEmpty()  && result.getResponse().get(0) instanceof CatalogPackage) {
+            List<CatalogPackage> packages = (List<CatalogPackage>) result.getResponse();
+            processCatalogPackages(result.getLocale(), packages);
+        } else if (!result.getResponse().isEmpty() && result.getResponse().get(0) instanceof CatalogService) {
+            List<CatalogService> services = (List<CatalogService>) result.getResponse();
+            processCatalogService(result.getLocale(), services);
+        } else if (!result.getResponse().isEmpty()  && result.getResponse().get(0) instanceof PricePoint) {
+            List<PricePoint> pricePoints = (List<PricePoint>) result.getResponse();
+            processPricePoint(pricePoints);
         }
-        //PostProcess
-        return null;
+        return result;
     }
 
-    public PricePoint processPricePoint(final PricePoint pricePoint) {
-        pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()));
-        return pricePoint;
+//    @Override
+//    public List<T> process(Locale locale, String msisdn, List<T> results) {
+//        if(!results.isEmpty() && results.get(0) instanceof CatalogPackage) {
+//            processCatalogPackages(locale, (List<CatalogPackage>)results);
+//        } else if (!results.isEmpty() && results.get(0) instanceof CatalogService) {
+//            processCatalogService(locale, (List<CatalogService>)results);
+//        } else if (!results.isEmpty()  && results.get(0) instanceof PricePoint) {
+//            processPricePoint((List<PricePoint>) results);
+//        }
+//
+//        return results;
+//
+//    }
+
+    public List<PricePoint> processPricePoint(final List<PricePoint> pricePoints) {
+        pricePoints.forEach(pricePoint ->
+            pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()))
+        );
+
+        return pricePoints;
     }
 
-    public CatalogPackage processCatalogPackage(final Locale locale, final CatalogPackage catalogPackage) {
-        //populate missing service data
-        for(CatalogService service : catalogPackage.getServiceArray()) {
+    public List<CatalogPackage> processCatalogPackages(final Locale locale, final List<CatalogPackage> packages) {
+        packages.forEach( catalogPackage -> {
+            //populate missing service data
+            for (CatalogService service : catalogPackage.getServiceArray()) {
 
-            final CatalogService returnedService = catalogApiService.getCatalogService(locale, service.getId());
-            service.setPricePoints(returnedService.getPricePoints());
-            service.getPricePoints().forEach(ppt -> {
+                final CatalogService returnedService = catalogApiService.getCatalogService(locale, service.getId());
+                service.setPricePoints(returnedService.getPricePoints());
+                service.getPricePoints().forEach(ppt -> {
 
-                //Populate Service Pricepoint data
-                final PricePoint processedPricePoint = catalogApiService.getPricePoint(locale, ppt.getId());
-                ppt.setPackageId(catalogPackage.getSimplePackageId());
-                ppt.setTaxCode(processedPricePoint.getTaxCode());
-                ppt.setContentId(service.getId());
-                ppt.setTariff(processedPricePoint.getTariff());
+                    //Populate Service Pricepoint data
+                    final PricePoint processedPricePoint = catalogApiService.getPricePoint(locale, ppt.getId());
+                    ppt.setPackageId(catalogPackage.getSimplePackageId());
+                    ppt.setTaxCode(processedPricePoint.getTaxCode());
+                    ppt.setContentId(service.getId());
+                    ppt.setTariff(processedPricePoint.getTariff());
 
-                //Should be fixed on core
-                if(ppt.getReceiptingAttribute() != null && ppt.getReceiptingAttribute().equals("NULL")) {
-                    ppt.setReceiptingAttribute(null);
-                }
-                processPricePointBalanceImpacts(ppt);
+                    //Should be fixed on core
+                    if (ppt.getReceiptingAttribute() != null && ppt.getReceiptingAttribute().equals("NULL")) {
+                        ppt.setReceiptingAttribute(null);
+                    }
+                    processPricePointBalanceImpacts(ppt);
+                });
+
+                //Populate PackagePricepoint Attributes
+                catalogPackage.getPricePoints().forEach(packagePricePoint -> {
+
+                    final PricePoint processedPricePoint = catalogApiService.getPricePoint(locale, packagePricePoint.getId());
+
+                    packagePricePoint.setPackageId(catalogPackage.getSimplePackageId());
+                    packagePricePoint.setTaxCode(processedPricePoint.getTaxCode());
+                    packagePricePoint.setTariff(processedPricePoint.getTariff());
+
+                    final BalanceImpact[] balanceImpacts = packagePricePoint.getAllBalanceImpacts().getBalanceImpacts();
+                    final List<ResourceBalance> resourceBalances = processBalanceImpacts(Arrays.asList(balanceImpacts));
+                    packagePricePoint.setBalances(resourceBalances.toArray(new ResourceBalance[resourceBalances.size()]));
+                });
+            }
+        });
+        return packages;
+    }
+
+    //Takes a service and populates what is missing but required.
+    public List<CatalogService> processCatalogService(final Locale locale, final List<CatalogService> catalogServices) {
+
+        catalogServices.forEach(catalogService -> {
+            //Go through the pricepoints, deduce the packageId and populate.
+            final PricePoints origPpts = catalogService.getPricePoints();
+            origPpts.forEach(pricePoint -> {
+                //TODO currently does not need to go to the server but could add here for PricePoints
+//            PricePoint processedPricePoint = catalogApiService.getPricePoint(locale, pricePoint.getId());
+                //For instance we can get the Tariff info
+
+                String packageId = CatalogUtil.getPackageIdFromServicePricepoint(pricePoint.getId());
+
+                pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()));
+                pricePoint.setPackageId(packageId);
+                pricePoint.setContentId(catalogService.getId());
+//            catalogService.setPackageId(packageId);
             });
+        });
 
-            //Populate PackagePricepoint Attributes
-            catalogPackage.getPricePoints().forEach(packagePricePoint -> {
-
-                final PricePoint processedPricePoint = catalogApiService.getPricePoint(locale, packagePricePoint.getId());
-
-                packagePricePoint.setPackageId(catalogPackage.getSimplePackageId());
-                packagePricePoint.setTaxCode(processedPricePoint.getTaxCode());
-                packagePricePoint.setTariff(processedPricePoint.getTariff());
-
-                final BalanceImpact[] balanceImpacts = packagePricePoint.getAllBalanceImpacts().getBalanceImpacts();
-                final List<ResourceBalance> resourceBalances = processBalanceImpacts(Arrays.asList(balanceImpacts));
-                packagePricePoint.setBalances(resourceBalances.toArray(new ResourceBalance[resourceBalances.size()]));
-            });
-        }
-        return catalogPackage;
+        return catalogServices;
     }
 
-    public void processPricePointBalanceImpacts(PricePoint pricePoint) {
+    //TODO potential performance degradation here.
+    public List<CatalogPackage> postProcessFindPackagesWithService(Locale locale, List<CatalogPackage> packs) {
+
+            packs.forEach(pack -> {
+                Optional<CatalogPackage> packOpt = Optional.of(catalogApiService.getCatalogPackage(locale, pack.getId()));
+                packOpt.ifPresent(returnedPack -> {
+                    pack.setServices(returnedPack.getServices());
+                    pack.setPricePoints(returnedPack.getPricePoints());
+                });
+            });
+        return packs;
+    }
+
+    private void processPricePointBalanceImpacts(PricePoint pricePoint) {
         BalanceImpact[] origBalanceImpacts = pricePoint.getAllBalanceImpacts().getBalanceImpacts();
         List<ResourceBalance> resourceBalances = new ArrayList<>();
         for(BalanceImpact balanceImpact : origBalanceImpacts) {
@@ -88,33 +151,13 @@ public class CatalogApiProcessor implements ResponseEnricher<RequestResult<Catal
         pricePoint.setBalances(resourceBalances.toArray(new ResourceBalance[resourceBalances.size()]));
     }
 
-    public List<ResourceBalance> processBalanceImpacts(List<BalanceImpact> balanceImpacts) {
+    private List<ResourceBalance> processBalanceImpacts(List<BalanceImpact> balanceImpacts) {
         List<ResourceBalance> resourceBalances = new ArrayList<>();
         balanceImpacts.forEach(balanceImpact -> {
             ResourceBalance resourceBalance = new ResourceBalance(balanceImpact.getResource(), balanceImpact.getFixedAmount());
             resourceBalances.add(resourceBalance);
         });
         return resourceBalances;
-    }
-
-    //Takes a service and populates what is missing but required.
-    public CatalogService processCatalogService(final Locale locale, final CatalogService catalogService) {
-
-        //Go through the pricepoints, deduce the packageId and populate.
-        final PricePoints origPpts = catalogService.getPricePoints();
-        origPpts.forEach(pricePoint -> {
-            //TODO currently does not need to go to the server but could add here for PricePoints
-//            PricePoint processedPricePoint = catalogApiService.getPricePoint(locale, pricePoint.getId());
-            //For instance we can get the Tariff info
-
-            String packageId = CatalogUtil.getPackageIdFromServicePricepoint(pricePoint.getId());
-
-            pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()));
-            pricePoint.setPackageId(packageId);
-            pricePoint.setContentId(catalogService.getId());
-//            catalogService.setPackageId(packageId);
-        });
-        return catalogService;
     }
 
     public void populatePricePointInPackage(CatalogPackage pack, String pricepointId) {
@@ -124,19 +167,6 @@ public class CatalogApiProcessor implements ResponseEnricher<RequestResult<Catal
         }
     }
 
-    //TODO potential performance degradation here.
-    public CatalogPackage[] postProcessFindPackagesWithService(Optional<CatalogPackage[]> packArrOpt) {
-        packArrOpt.ifPresent( packArr -> {
-            List<CatalogPackage> packs = Arrays.asList(packArr);
-            packs.forEach(pack -> {
-                Optional<CatalogPackage> packOpt = Optional.of(catalogApiService.getCatalogPackage(locale, pack.getId()));
-                packOpt.ifPresent(returnedPack -> {
-                    pack.setServices(returnedPack.getServices());
-                    pack.setPricePoints(returnedPack.getPricePoints());
-                });
-            });
-        });
-        return packArrOpt.get();
-    }
+
 
 }

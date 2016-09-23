@@ -1,47 +1,85 @@
 package com.vodafone.er.ecom.proxy.service;
 
+import com.google.common.collect.Lists;
 import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
 import com.vizzavi.ecommerce.business.catalog.CatalogService;
 import com.vizzavi.ecommerce.business.catalog.PricePoint;
 import com.vizzavi.ecommerce.business.charging.PurchaseAttributes;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vodafone.er.ecom.proxy.api.ErApiManager;
+import com.vodafone.er.ecom.proxy.domain.RequestResult;
 import com.vodafone.er.ecom.proxy.processor.CatalogApiProcessor;
+import com.vodafone.er.ecom.proxy.processor.PostProcessor;
 import com.vodafone.global.er.business.catalog.BasePrice;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
-
 @Service
 public class CatalogApiService {
-    private Logger logger = LoggerFactory.getLogger(CatalogApiService.class);
 
     @Autowired
     private ErApiManager erApiManager;
-
+    @Resource(name = "catalogApiProcessor")
+    private PostProcessor<RequestResult<List<?>>> postProcessor;
     @Autowired
-    CatalogApiProcessor catalogApiProcessor;
+    private CatalogApiProcessor<RequestResult> catalogApiProcessor;
 
     public CatalogPackage getCatalogPackage(final Locale locale, String packageId) {
-        logger.info("calling catalogApi.getPackage with locale={}, client-id={}", locale, CLIENT_ID.getValue());
-        final CatalogPackage result = erApiManager.getCatalogApi(locale).getPackage(packageId);
-            return catalogApiProcessor.processCatalogPackage(locale, result);
+        final Optional<CatalogPackage> resultOpt = Optional.of(erApiManager.getCatalogApi(locale).getPackage(packageId));
+        resultOpt.ifPresent( result -> postProcessor.process(new RequestResult.Builder<List<CatalogPackage>>()
+                .response(Lists.newArrayList(result))
+                .locale(locale)
+                .build())
+        );
+
+        return resultOpt.get();
     }
 
     public CatalogService getCatalogService(final Locale locale, String serviceId) {
-        final CatalogService service = erApiManager.getCatalogApi(locale).getService(serviceId);
-        return catalogApiProcessor.processCatalogService(locale, service);
+        final Optional<CatalogService> serviceOpt = Optional.of(erApiManager.getCatalogApi(locale).getService(serviceId));
+        serviceOpt.ifPresent(service -> postProcessor.process(new RequestResult.Builder<List<CatalogService>>()
+                .response(Lists.newArrayList(service))
+                .locale(locale)
+                .build())
+        );
+
+        return serviceOpt.get();
     }
 
     public PricePoint getPricePoint(final Locale locale, final String pricePointId) {
-        final PricePoint pricePoint = erApiManager.getCatalogApi(locale).getPricePoint(pricePointId);
-        return catalogApiProcessor.processPricePoint(pricePoint);
+        final Optional<PricePoint> ppOpt =
+                Optional.of(erApiManager.getCatalogApi(locale).getPricePoint(pricePointId));
+        ppOpt.ifPresent(pricePoint -> postProcessor.process(new RequestResult.Builder<List<PricePoint>>()
+                .response(Lists.newArrayList(pricePoint))
+                .locale(locale)
+                .build())
+        );
+
+        return ppOpt.get();
+    }
+
+    public CatalogPackage[] processFindPackagesWithService(Locale locale, String msisdn, CatalogService service, PurchaseAttributes purchaseAttributes) {
+        Optional<CatalogPackage[]> packArrOpt =
+                Optional.of(erApiManager.getCatalogApi(locale)
+                        .findPackagesWithService(msisdn, service, purchaseAttributes));
+
+        //TODO May not want to do the post-processing here
+//        catalogApiProcessor.postProcessFindPackagesWithService(locale, packArrOpt);
+
+        packArrOpt.ifPresent(catalogPackages -> {
+            postProcessor.process(new RequestResult.Builder<List<CatalogPackage>>()
+                    .response(Lists.newArrayList(catalogPackages))
+                    .locale(locale)
+                    .build());
+
+        });
+
+        return packArrOpt.get();
     }
 
     public BasePrice[] getBasePrices(Locale locale, String [] serviceIds) throws EcommerceException {
@@ -59,22 +97,12 @@ public class CatalogApiService {
                 .getVersion();
     }
 
-    public CatalogPackage[] processFindPackagesWithService(Locale locale, String msisdn, CatalogService service, PurchaseAttributes purchaseAttributes) {
-        Optional<CatalogPackage[]> packArrOpt =
-                Optional.of(erApiManager.getCatalogApi(locale)
-                        .findPackagesWithService(msisdn, service, purchaseAttributes));
-
-        //May not want to do the post-processing here
-        catalogApiProcessor.postProcessFindPackagesWithService(packArrOpt);
-        return packArrOpt.get();
-    }
-
 //    private PricePoint processPricePoint(final PricePoint pricePoint) {
 //        pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()));
 //        return pricePoint;
 //    }
 //
-//    private CatalogPackage processCatalogPackage(final Locale locale, final CatalogPackage catalogPackage) {
+//    private CatalogPackage processCatalogPackages(final Locale locale, final CatalogPackage catalogPackage) {
 //        //populate missing service data
 //        for(CatalogService service : catalogPackage.getServiceArray()) {
 //

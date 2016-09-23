@@ -1,16 +1,18 @@
 package com.vodafone.er.ecom.proxy.service;
 
-import com.vizzavi.ecommerce.business.catalog.PricePoint;
+import com.google.common.collect.Lists;
 import com.vizzavi.ecommerce.business.charging.PurchaseAttributes;
 import com.vizzavi.ecommerce.business.charging.PurchaseAuthorization;
-import com.vizzavi.ecommerce.business.common.EcommerceException;
-import com.vizzavi.ecommerce.business.selfcare.Subscription;
 import com.vodafone.er.ecom.proxy.api.ErApiManager;
+import com.vodafone.er.ecom.proxy.domain.RequestResult;
+import com.vodafone.er.ecom.proxy.processor.PostProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -21,6 +23,11 @@ import java.util.Optional;
 public class PurchaseApiService {
 
     private static final Logger logger = LoggerFactory.getLogger(PurchaseApiService.class);
+
+    //    @Autowired
+//    private PurchaseApiProcessor purchaseApiProcessor;
+    @Resource(name="purchaseApiProcessor")
+    private PostProcessor<RequestResult<List<PurchaseAuthorization>>> postProcessResult;
 
     @Autowired
     private ErApiManager erApiManager;
@@ -39,33 +46,17 @@ public class PurchaseApiService {
 
     public PurchaseAuthorization renewPurchasePackageMsisdn(Locale locale, String clientId, String msisdn, String subId,
                                                             PurchaseAttributes attributes) throws Exception {
-        PurchaseAuthorization auth = erApiManager.getPurchaseApi(locale, clientId)
-                .renewPurchasePackageMsisdn(clientId, msisdn, subId, attributes);
+        Optional<PurchaseAuthorization> authOpt = Optional.of(erApiManager.getPurchaseApi(locale, clientId)
+                .renewPurchasePackageMsisdn(clientId, msisdn, subId, attributes));
 
-        postProcessResult(locale, msisdn, auth);
-
-        return auth;
-
+        authOpt.ifPresent(auth ->
+                postProcessResult.process(new RequestResult.Builder<List<PurchaseAuthorization>>()
+                        .response(Lists.newArrayList(auth))
+                        .locale(locale)
+                        .msisdn(msisdn)
+                        .build()
+                )
+        );
+        return authOpt.get();
     }
-
-    public void postProcessResult(Locale locale, String msisdn, PurchaseAuthorization auth) {
-
-        Optional<Subscription> subOpt = null;
-        try {
-            subOpt = selfcareApiService.getSubscription(locale, msisdn , auth.getPackageSubscriptionId());
-        } catch (EcommerceException e) {
-            logger.warn("Postprocessing failed calling getSubscription(). Description: " + e.getErrorDescription());
-            return;
-        }
-
-        PricePoint existingPp = auth.getPricePoint();
-
-        subOpt.ifPresent(subscription -> {
-            auth.setPackage(subscription.getPackage());
-            auth.setPackageId(subscription.getPackageId());
-            auth.setPricePoint(subscription.getPricePoint());
-            auth.setPricePointId(subscription.getPricePoint().getId());
-        });
-    }
-
 }
