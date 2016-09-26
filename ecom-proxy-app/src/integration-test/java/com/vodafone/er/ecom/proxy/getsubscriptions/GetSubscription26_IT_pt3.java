@@ -140,7 +140,7 @@ public class GetSubscription26_IT_pt3 {
         softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getRetryFrequency() ).as(" usageAuth.getPackage().getPricePoints().get(2).getRetryFrequency()" ).isNull();
         softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getSuspensionPeriod() ).as(" usageAuth.getPackage().getPricePoints().get(2).getSuspensionPeriod()" ).isNull();
         softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).isGraceSuspensionRetryFrequencyUndefined() ).as(" usageAuth.getPackage().getPricePoints().get(2).isGraceSuspensionRetryFrequencyUndefined()" ).isTrue() ;
-        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTranslatedPricingText() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTranslatedPricingText()" ).isNull();
+        softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getTranslatedPricingText() ).as(" usageAuth.getPackage().getPricePoints().get(2).getTranslatedPricingText()" ).isNullOrEmpty();
         softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getFairUsageLimit() ).as(" usageAuth.getPackage().getPricePoints().get(2).getFairUsageLimit()" ).isEqualTo(-1) ;
         softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getFairUsagePeriod() ).as(" usageAuth.getPackage().getPricePoints().get(2).getFairUsagePeriod()" ).isEqualTo(-1) ;
         softly.assertThat(usageAuth.getPackage().getPricePoints().get(2).getFairUsagePeriodUnit() ).as(" usageAuth.getPackage().getPricePoints().get(2).getFairUsagePeriodUnit()" ).isEqualTo("Day(s)");
@@ -517,8 +517,8 @@ public class GetSubscription26_IT_pt3 {
         softly.assertThat(usageAuth.getPackage().getProtectedType() ).as(" usageAuth.getPackage().getProtectedType()" ).isNullOrEmpty();
         softly.assertThat(usageAuth.getPackage().getDynamicProtectedValue() ).as(" usageAuth.getPackage().getDynamicProtectedValue()" ).isNullOrEmpty();
         softly.assertThat(usageAuth.getPackage().getPurchaseMethod() ).as(" usageAuth.getPackage().getPurchaseMethod()" ).isNullOrEmpty();
-        softly.assertThat(usageAuth.getPackage().getKpiPackageProductCategory() ).as(" usageAuth.getPackage().getKpiPackageProductCategory()" ).isNull();
-        softly.assertThat(usageAuth.getPackage().getKpiPackageType() ).as(" usageAuth.getPackage().getKpiPackageType()" ).isNull();
+        softly.assertThat(usageAuth.getPackage().getKpiPackageProductCategory() ).as(" usageAuth.getPackage().getKpiPackageProductCategory()" ).isNullOrEmpty();
+        softly.assertThat(usageAuth.getPackage().getKpiPackageType() ).as(" usageAuth.getPackage().getKpiPackageType()" ).isNullOrEmpty();
 //check size of array!
         softly.assertThat(usageAuth.getPackage().getPricingModels().length ).as(" usageAuth.getPackage().getPricingModels().length" ).isEqualTo(0) ;
         softly.assertThat(usageAuth.getPackage().isExpressPurchase() ).as(" usageAuth.getPackage().isExpressPurchase()" ).isFalse() ;
@@ -530,9 +530,9 @@ public class GetSubscription26_IT_pt3 {
         softly.assertThat(usageAuth.getPackage().getACEPackage() ).as(" usageAuth.getPackage().getACEPackage()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().isUpSell() ).as(" usageAuth.getPackage().isUpSell()" ).isFalse() ;
 // java.util.HashMap
-        softly.assertThat(usageAuth.getPackage().getLogoId() ).as(" usageAuth.getPackage().getLogoId()" ).isNull();
+        softly.assertThat(usageAuth.getPackage().getLogoId() ).as(" usageAuth.getPackage().getLogoId()" ).isNullOrEmpty();
 // java.util.HashMap
-        softly.assertThat(usageAuth.getPackage().getPartnerInfo() ).as(" usageAuth.getPackage().getPartnerInfo()" ).isNull();
+        softly.assertThat(usageAuth.getPackage().getPartnerInfo() ).as(" usageAuth.getPackage().getPartnerInfo()" ).isNullOrEmpty();
         softly.assertThat(usageAuth.getPackage().getIsPackageModel() ).as(" usageAuth.getPackage().getIsPackageModel()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().isParentPackage() ).as(" usageAuth.getPackage().isParentPackage()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().getChildPackages() ).as(" usageAuth.getPackage().getChildPackages()" ).isNull();
@@ -547,7 +547,7 @@ public class GetSubscription26_IT_pt3 {
         softly.assertThat(usageAuth.getPackage().isDataVoiceTariffInclusive() ).as(" usageAuth.getPackage().isDataVoiceTariffInclusive()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().getNominalValue() ).as(" usageAuth.getPackage().getNominalValue()" ).isEqualTo(new Double(0.0)) ;
         softly.assertThat(usageAuth.getPackage().isUseBeingDeprovisionedStatus() ).as(" usageAuth.getPackage().isUseBeingDeprovisionedStatus()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPackage().getDisallowDuplicateSubPurchase() ).as(" usageAuth.getPackage().getDisallowDuplicateSubPurchase()" ).isNull();
+        softly.assertThat(usageAuth.getPackage().getDisallowDuplicateSubPurchase() ).as(" usageAuth.getPackage().getDisallowDuplicateSubPurchase()" ).isNullOrEmpty();
         softly.assertThat(usageAuth.getPackage().getNoActivePricepoints() ).as(" usageAuth.getPackage().getNoActivePricepoints()" ).isEqualTo(2) ;
         softly.assertThat(usageAuth.getPackage().isHasBalanceImpactsWithDate() ).as(" usageAuth.getPackage().isHasBalanceImpactsWithDate()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().isHasPricePointsWithDate() ).as(" usageAuth.getPackage().isHasPricePointsWithDate()" ).isFalse() ;
@@ -557,7 +557,7 @@ public class GetSubscription26_IT_pt3 {
         softly.assertThat(usageAuth.getPackage().getPromoCodeMapSize() ).as(" usageAuth.getPackage().getPromoCodeMapSize()" ).isEqualTo(0) ;
         softly.assertThat(usageAuth.getPackage().getActiveStatusAsString() ).as(" usageAuth.getPackage().getActiveStatusAsString()" ).isEqualTo("ACTIVE");
         softly.assertThat(usageAuth.getPackage().isUseRateCardService() ).as(" usageAuth.getPackage().isUseRateCardService()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPackage().getRateCardServiceId() ).as(" usageAuth.getPackage().getRateCardServiceId()" ).isNull();
+        softly.assertThat(usageAuth.getPackage().getRateCardServiceId() ).as(" usageAuth.getPackage().getRateCardServiceId()" ).isNullOrEmpty();
         softly.assertThat(usageAuth.getPackage().isUserGroupCalendarPricePointPackage() ).as(" usageAuth.getPackage().isUserGroupCalendarPricePointPackage()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().isUpsellDiscountProrated() ).as(" usageAuth.getPackage().isUpsellDiscountProrated()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().isDisallowPrerate() ).as(" usageAuth.getPackage().isDisallowPrerate()" ).isFalse() ;
@@ -675,9 +675,9 @@ public class GetSubscription26_IT_pt3 {
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isTrial() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isTrial()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getGlid() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getGlid()" ).isNullOrEmpty();
 // java.util.HashMap
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getPricepointIdLink() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getPricepointIdLink()" ).isNull();
+        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getPricepointIdLink() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getPricepointIdLink()" ).isNullOrEmpty();
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isPreview() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isPreview()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getInteractiveFlag() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getInteractiveFlag()" ).isNull();
+        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getInteractiveFlag() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getInteractiveFlag()" ).isNullOrEmpty();
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isForcedPurchase() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isForcedPurchase()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isSubscriptionDuplicate() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isSubscriptionDuplicate()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getFixedExpiryDate() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getFixedExpiryDate()" ).isNull();
@@ -710,7 +710,7 @@ public class GetSubscription26_IT_pt3 {
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getRetryFrequency() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getRetryFrequency()" ).isNull();
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getSuspensionPeriod() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getSuspensionPeriod()" ).isNull();
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isGraceSuspensionRetryFrequencyUndefined() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).isGraceSuspensionRetryFrequencyUndefined()" ).isTrue() ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTranslatedPricingText() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTranslatedPricingText()" ).isNull();
+        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTranslatedPricingText() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getTranslatedPricingText()" ).isNullOrEmpty();
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getFairUsageLimit() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getFairUsageLimit()" ).isEqualTo(-1) ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getFairUsagePeriod() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getFairUsagePeriod()" ).isEqualTo(-1) ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getFairUsagePeriodUnit() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(0).getFairUsagePeriodUnit()" ).isEqualTo("Day(s)");
@@ -1065,9 +1065,9 @@ public class GetSubscription26_IT_pt3 {
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).isTrial() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).isTrial()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getGlid() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getGlid()" ).isNullOrEmpty();
 // java.util.HashMap
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getPricepointIdLink() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getPricepointIdLink()" ).isNull();
+        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getPricepointIdLink() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getPricepointIdLink()" ).isNullOrEmpty();
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).isPreview() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).isPreview()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getInteractiveFlag() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getInteractiveFlag()" ).isNull();
+        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getInteractiveFlag() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getInteractiveFlag()" ).isNullOrEmpty();
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).isForcedPurchase() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).isForcedPurchase()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).isSubscriptionDuplicate() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).isSubscriptionDuplicate()" ).isFalse() ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getFixedExpiryDate() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getFixedExpiryDate()" ).isNull();
@@ -1100,7 +1100,7 @@ public class GetSubscription26_IT_pt3 {
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getRetryFrequency() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getRetryFrequency()" ).isNull();
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getSuspensionPeriod() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getSuspensionPeriod()" ).isNull();
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).isGraceSuspensionRetryFrequencyUndefined() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).isGraceSuspensionRetryFrequencyUndefined()" ).isTrue() ;
-        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getTranslatedPricingText() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getTranslatedPricingText()" ).isNull();
+        softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getTranslatedPricingText() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getTranslatedPricingText()" ).isNullOrEmpty();
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getFairUsageLimit() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getFairUsageLimit()" ).isEqualTo(-1) ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getFairUsagePeriod() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getFairUsagePeriod()" ).isEqualTo(-1) ;
         softly.assertThat(usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getFairUsagePeriodUnit() ).as(" usageAuth.getPackage().getServices().get(0).getPricePoints().get(1).getFairUsagePeriodUnit()" ).isEqualTo("Day(s)");

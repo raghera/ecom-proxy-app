@@ -38,33 +38,33 @@ public class GetSubscription26_IT_pt1 {
         assertEquals(auth.getPackageSubscriptionId(), usageAuth.getSubscriptionId());
 
         //check size of array!
-        softly.assertThat(usageAuth.getPurchasedServices().length ).as(" usageAuth.getPurchasedServices().length" ).isEqualTo(1) ;
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getId() ).as(" usageAuth.getPurchasedServices()[0].getId()" ).isEqualTo(new Long(513)) ;
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getSubscription() ).as(" usageAuth.getPurchasedServices()[0].getSubscription()" ).isNull();
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getStatus() ).as(" usageAuth.getPurchasedServices()[0].getStatus()" ).isEqualTo(201) ;
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getServiceId() ).as(" usageAuth.getPurchasedServices()[0].getServiceId()" ).isEqualTo("sAlt");
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getNonRefundDescription() ).as(" usageAuth.getPurchasedServices()[0].getNonRefundDescription()" ).isNull();
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getCountryId() ).as(" usageAuth.getPurchasedServices()[0].getCountryId()" ).isNull();
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getProvisioningTag() ).as(" usageAuth.getPurchasedServices()[0].getProvisioningTag()" ).isEqualTo("N/A");
-        softly.assertThat(usageAuth.getPurchasedServices()[0].isProvisionOnUsage() ).as(" usageAuth.getPurchasedServices()[0].isProvisionOnUsage()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getServiceClass() ).as(" usageAuth.getPurchasedServices()[0].getServiceClass()" ).isNull();
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getProvStatus() ).as(" usageAuth.getPurchasedServices()[0].getProvStatus()" ).isEqualTo(221) ;
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getUpdateTimeStamp() ).as(" usageAuth.getPurchasedServices()[0].getUpdateTimeStamp()" ).isNull();
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getLastProvisionUpdate() ).as(" usageAuth.getPurchasedServices()[0].getLastProvisionUpdate()" ).isNull();
-//check size of array!
-        softly.assertThat(usageAuth.getPurchasedServices().length ).as(" usageAuth.getPurchasedServices().length" ).isEqualTo(1) ;
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getId() ).as(" usageAuth.getPurchasedServices()[0].getId()" ).isEqualTo(new Long(513)) ;
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getSubscription() ).as(" usageAuth.getPurchasedServices()[0].getSubscription()" ).isNull();
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getStatus() ).as(" usageAuth.getPurchasedServices()[0].getStatus()" ).isEqualTo(201) ;
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getServiceId() ).as(" usageAuth.getPurchasedServices()[0].getServiceId()" ).isEqualTo("sAlt");
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getNonRefundDescription() ).as(" usageAuth.getPurchasedServices()[0].getNonRefundDescription()" ).isNull();
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getCountryId() ).as(" usageAuth.getPurchasedServices()[0].getCountryId()" ).isNull();
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getProvisioningTag() ).as(" usageAuth.getPurchasedServices()[0].getProvisioningTag()" ).isEqualTo("N/A");
-        softly.assertThat(usageAuth.getPurchasedServices()[0].isProvisionOnUsage() ).as(" usageAuth.getPurchasedServices()[0].isProvisionOnUsage()" ).isFalse() ;
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getServiceClass() ).as(" usageAuth.getPurchasedServices()[0].getServiceClass()" ).isNull();
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getProvStatus() ).as(" usageAuth.getPurchasedServices()[0].getProvStatus()" ).isEqualTo(221) ;
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getUpdateTimeStamp() ).as(" usageAuth.getPurchasedServices()[0].getUpdateTimeStamp()" ).isNull();
-        softly.assertThat(usageAuth.getPurchasedServices()[0].getLastProvisionUpdate() ).as(" usageAuth.getPurchasedServices()[0].getLastProvisionUpdate()" ).isNull();
+//        softly.assertThat(usageAuth.getPurchasedServices().length ).as(" usageAuth.getPurchasedServices().length" ).isEqualTo(1) ;
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getId() ).as(" usageAuth.getPurchasedServices()[0].getId()" ).isEqualTo(new Long(513)) ;
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getSubscription() ).as(" usageAuth.getPurchasedServices()[0].getSubscription()" ).isNull();
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getStatus() ).as(" usageAuth.getPurchasedServices()[0].getStatus()" ).isEqualTo(201) ;
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getServiceId() ).as(" usageAuth.getPurchasedServices()[0].getServiceId()" ).isEqualTo("sAlt");
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getNonRefundDescription() ).as(" usageAuth.getPurchasedServices()[0].getNonRefundDescription()" ).isNull();
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getCountryId() ).as(" usageAuth.getPurchasedServices()[0].getCountryId()" ).isNull();
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getProvisioningTag() ).as(" usageAuth.getPurchasedServices()[0].getProvisioningTag()" ).isEqualTo("N/A");
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].isProvisionOnUsage() ).as(" usageAuth.getPurchasedServices()[0].isProvisionOnUsage()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getServiceClass() ).as(" usageAuth.getPurchasedServices()[0].getServiceClass()" ).isNull();
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getProvStatus() ).as(" usageAuth.getPurchasedServices()[0].getProvStatus()" ).isEqualTo(221) ;
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getUpdateTimeStamp() ).as(" usageAuth.getPurchasedServices()[0].getUpdateTimeStamp()" ).isNull();
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getLastProvisionUpdate() ).as(" usageAuth.getPurchasedServices()[0].getLastProvisionUpdate()" ).isNull();
+////check size of array!
+//        softly.assertThat(usageAuth.getPurchasedServices().length ).as(" usageAuth.getPurchasedServices().length" ).isEqualTo(1) ;
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getId() ).as(" usageAuth.getPurchasedServices()[0].getId()" ).isEqualTo(new Long(513)) ;
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getSubscription() ).as(" usageAuth.getPurchasedServices()[0].getSubscription()" ).isNull();
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getStatus() ).as(" usageAuth.getPurchasedServices()[0].getStatus()" ).isEqualTo(201) ;
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getServiceId() ).as(" usageAuth.getPurchasedServices()[0].getServiceId()" ).isEqualTo("sAlt");
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getNonRefundDescription() ).as(" usageAuth.getPurchasedServices()[0].getNonRefundDescription()" ).isNull();
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getCountryId() ).as(" usageAuth.getPurchasedServices()[0].getCountryId()" ).isNull();
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getProvisioningTag() ).as(" usageAuth.getPurchasedServices()[0].getProvisioningTag()" ).isEqualTo("N/A");
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].isProvisionOnUsage() ).as(" usageAuth.getPurchasedServices()[0].isProvisionOnUsage()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getServiceClass() ).as(" usageAuth.getPurchasedServices()[0].getServiceClass()" ).isNull();
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getProvStatus() ).as(" usageAuth.getPurchasedServices()[0].getProvStatus()" ).isEqualTo(221) ;
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getUpdateTimeStamp() ).as(" usageAuth.getPurchasedServices()[0].getUpdateTimeStamp()" ).isNull();
+//        softly.assertThat(usageAuth.getPurchasedServices()[0].getLastProvisionUpdate() ).as(" usageAuth.getPurchasedServices()[0].getLastProvisionUpdate()" ).isNull();
 // com.vizzavi.ecommerce.business.catalog.CatalogPackage
         softly.assertThat(usageAuth.getPackage().getName() ).as(" usageAuth.getPackage().getName()" ).isEqualTo("2 Usage Alternative Payment Pkg");
 // com.vizzavi.ecommerce.business.common.ChargingResource

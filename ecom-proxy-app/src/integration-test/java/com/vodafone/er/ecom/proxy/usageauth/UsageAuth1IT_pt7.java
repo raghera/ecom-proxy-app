@@ -474,33 +474,20 @@ public class UsageAuth1IT_pt7 {
 //if the list is smaller than expected we can't continue, so do a hard assert
         assertTrue(usageAuth.getActiveSubscriptions().size() >= 1);
 //check size of array!
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices().length ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices().length" ).isEqualTo(1) ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getId() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getId()" ).isEqualTo(new Long(-1)) ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getSubscription() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getSubscription()" ).isNull();
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getNonRefundDescription() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getNonRefundDescription()" ).isNull();
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getCountryId() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getCountryId()" ).isNull();
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getProvisioningTag() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getProvisioningTag()" ).isEqualTo("N/A");
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].isProvisionOnUsage() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].isProvisionOnUsage()" ).isFalse() ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getServiceClass() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getServiceClass()" ).isNull();
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getUpdateTimeStamp() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getUpdateTimeStamp()" ).isNull();
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getStatus() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getStatus()" ).isEqualTo(201) ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getServiceId() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getServiceId()" ).isEqualTo("B001");
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getProvStatus() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getProvStatus()" ).isEqualTo(221) ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getLastProvisionUpdate() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getLastProvisionUpdate()" ).isNull();
-//check size of array!
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices().length ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices().length" ).isEqualTo(1) ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getId() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getId()" ).isEqualTo(new Long(-1)) ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getSubscription() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getSubscription()" ).isNull();
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getNonRefundDescription() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getNonRefundDescription()" ).isNull();
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getCountryId() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getCountryId()" ).isNull();
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getProvisioningTag() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getProvisioningTag()" ).isEqualTo("N/A");
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].isProvisionOnUsage() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].isProvisionOnUsage()" ).isFalse() ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getServiceClass() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getServiceClass()" ).isNull();
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getUpdateTimeStamp() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getUpdateTimeStamp()" ).isNull();
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getStatus() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getStatus()" ).isEqualTo(201) ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getServiceId() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getServiceId()" ).isEqualTo("B001");
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getProvStatus() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getProvStatus()" ).isEqualTo(221) ;
-        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getLastProvisionUpdate() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getLastProvisionUpdate()" ).isNull();
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices().length ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices().length" ).isEqualTo(1) ;
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getId() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getId()" ).isEqualTo(new Long(-1)) ;
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getSubscription() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getSubscription()" ).isNull();
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getNonRefundDescription() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getNonRefundDescription()" ).isNull();
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getCountryId() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getCountryId()" ).isNull();
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getProvisioningTag() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getProvisioningTag()" ).isEqualTo("N/A");
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].isProvisionOnUsage() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].isProvisionOnUsage()" ).isFalse() ;
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getServiceClass() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getServiceClass()" ).isNull();
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getUpdateTimeStamp() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getUpdateTimeStamp()" ).isNull();
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getStatus() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getStatus()" ).isEqualTo(201) ;
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getServiceId() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getServiceId()" ).isEqualTo("B001");
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getProvStatus() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getProvStatus()" ).isEqualTo(221) ;
+//        softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getLastProvisionUpdate() ).as(" usageAuth.getActiveSubscriptions().get(0).getPurchasedServices()[0].getLastProvisionUpdate()" ).isNull();
+////check size of array!
 // com.vizzavi.ecommerce.business.catalog.CatalogPackage
         softly.assertThat(usageAuth.getActiveSubscriptions().get(0).getPackage().getName() ).as(" usageAuth.getActiveSubscriptions().get(0).getPackage().getName()" ).isEqualTo("BP001");
 // com.vizzavi.ecommerce.business.common.ChargingResource
