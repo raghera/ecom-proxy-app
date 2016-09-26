@@ -114,7 +114,7 @@ public class UsageAuthRate2IT_pt1 {
         softly.assertThat(auth.getServicePricePoint().isTrial() ).as(" auth.getServicePricePoint().isTrial()" ).isFalse() ;
         softly.assertThat(auth.getServicePricePoint().getGlid() ).as(" auth.getServicePricePoint().getGlid()" ).isNullOrEmpty();
 // java.util.HashMap
-        softly.assertThat(auth.getServicePricePoint().getPricepointIdLink() ).as(" auth.getServicePricePoint().getPricepointIdLink()" ).isNull();
+        softly.assertThat(auth.getServicePricePoint().getPricepointIdLink() ).as(" auth.getServicePricePoint().getPricepointIdLink()" ).isNullOrEmpty();
         softly.assertThat(auth.getServicePricePoint().isPreview() ).as(" auth.getServicePricePoint().isPreview()" ).isFalse() ;
         softly.assertThat(auth.getServicePricePoint().getInteractiveFlag() ).as(" auth.getServicePricePoint().getInteractiveFlag()" ).isEqualTo("NONE");
         softly.assertThat(auth.getServicePricePoint().isForcedPurchase() ).as(" auth.getServicePricePoint().isForcedPurchase()" ).isFalse() ;
@@ -129,7 +129,7 @@ public class UsageAuthRate2IT_pt1 {
         softly.assertThat(auth.getServicePricePoint().getFixedRecurrence() ).as(" auth.getServicePricePoint().getFixedRecurrence()" ).isEqualTo(new Long(0)) ;
         softly.assertThat(auth.getServicePricePoint().isFixedRecurringPricePoint() ).as(" auth.getServicePricePoint().isFixedRecurringPricePoint()" ).isFalse() ;
         softly.assertThat(auth.getServicePricePoint().isReceipting() ).as(" auth.getServicePricePoint().isReceipting()" ).isFalse() ;
-        softly.assertThat(auth.getServicePricePoint().getReceiptingAttribute() ).as(" auth.getServicePricePoint().getReceiptingAttribute()" ).isEqualTo("NULL");
+        softly.assertThat(auth.getServicePricePoint().getReceiptingAttribute() ).as(" auth.getServicePricePoint().getReceiptingAttribute()" ).isNull();
         softly.assertThat(auth.getServicePricePoint().getOrder() ).as(" auth.getServicePricePoint().getOrder()" ).isEqualTo(0) ;
         softly.assertThat(auth.getServicePricePoint().getPaymentHandler() ).as(" auth.getServicePricePoint().getPaymentHandler()" ).isEqualTo("NULL");
 //check size of array!

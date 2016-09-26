@@ -41,20 +41,6 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
         return result;
     }
 
-//    @Override
-//    public List<T> process(Locale locale, String msisdn, List<T> results) {
-//        if(!results.isEmpty() && results.get(0) instanceof CatalogPackage) {
-//            processCatalogPackages(locale, (List<CatalogPackage>)results);
-//        } else if (!results.isEmpty() && results.get(0) instanceof CatalogService) {
-//            processCatalogService(locale, (List<CatalogService>)results);
-//        } else if (!results.isEmpty()  && results.get(0) instanceof PricePoint) {
-//            processPricePoint((List<PricePoint>) results);
-//        }
-//
-//        return results;
-//
-//    }
-
     public List<PricePoint> processPricePoint(final List<PricePoint> pricePoints) {
         pricePoints.forEach(pricePoint ->
             pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()))
@@ -129,7 +115,6 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
 
     //TODO potential performance degradation here.
     public List<CatalogPackage> postProcessFindPackagesWithService(Locale locale, List<CatalogPackage> packs) {
-
             packs.forEach(pack -> {
                 Optional<CatalogPackage> packOpt = Optional.of(catalogApiService.getCatalogPackage(locale, pack.getId()));
                 packOpt.ifPresent(returnedPack -> {

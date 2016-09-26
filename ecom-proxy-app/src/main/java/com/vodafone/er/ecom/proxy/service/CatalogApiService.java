@@ -68,12 +68,11 @@ public class CatalogApiService {
                 Optional.of(erApiManager.getCatalogApi(locale)
                         .findPackagesWithService(msisdn, service, purchaseAttributes));
 
-        //TODO May not want to do the post-processing here
-//        catalogApiProcessor.postProcessFindPackagesWithService(locale, packArrOpt);
-
-        packArrOpt.ifPresent(catalogPackages -> {
+        //TODO May not want to do the post-processing here due to performance
+        packArrOpt.ifPresent(packs -> {
+            catalogApiProcessor.postProcessFindPackagesWithService(locale, Lists.newArrayList(packs));
             postProcessor.process(new RequestResult.Builder<List<CatalogPackage>>()
-                    .response(Lists.newArrayList(catalogPackages))
+                    .response(Lists.newArrayList(packs))
                     .locale(locale)
                     .build());
 

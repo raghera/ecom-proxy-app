@@ -361,9 +361,9 @@ public class FindPackagesWithService8IT_pt4 {
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).isTrial() ).as(" pack.getServices().get(0).getPricePoints().get(1).isTrial()" ).isFalse() ;
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).getGlid() ).as(" pack.getServices().get(0).getPricePoints().get(1).getGlid()" ).isNullOrEmpty();
 // java.util.HashMap
-        softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).getPricepointIdLink() ).as(" pack.getServices().get(0).getPricePoints().get(1).getPricepointIdLink()" ).isNull();
+        softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).getPricepointIdLink() ).as(" pack.getServices().get(0).getPricePoints().get(1).getPricepointIdLink()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).isPreview() ).as(" pack.getServices().get(0).getPricePoints().get(1).isPreview()" ).isFalse() ;
-        softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).getInteractiveFlag() ).as(" pack.getServices().get(0).getPricePoints().get(1).getInteractiveFlag()" ).isNull();
+        softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).getInteractiveFlag() ).as(" pack.getServices().get(0).getPricePoints().get(1).getInteractiveFlag()" ).isNullOrEmpty();
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).isForcedPurchase() ).as(" pack.getServices().get(0).getPricePoints().get(1).isForcedPurchase()" ).isFalse() ;
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).isSubscriptionDuplicate() ).as(" pack.getServices().get(0).getPricePoints().get(1).isSubscriptionDuplicate()" ).isFalse() ;
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).getFixedExpiryDate() ).as(" pack.getServices().get(0).getPricePoints().get(1).getFixedExpiryDate()" ).isNull();

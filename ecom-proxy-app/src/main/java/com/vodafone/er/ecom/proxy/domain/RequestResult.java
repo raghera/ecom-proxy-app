@@ -23,6 +23,7 @@ public class RequestResult<T> {
     }
 
     private RequestResult(Builder builder) {
+        //Can only be Type T
         this.response = (T) builder.response;
         this.msisdn = builder.msisdn;
         this.locale = builder.locale;
