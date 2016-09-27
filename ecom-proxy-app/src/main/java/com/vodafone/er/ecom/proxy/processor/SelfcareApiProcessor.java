@@ -43,7 +43,7 @@ public class SelfcareApiProcessor<T> implements PostProcessor<RequestResult<List
 //        populatePurchasedServices(subsList);
         return subscriptions;
     }
-
+    //Sets the Subscription obj in the Transaction objects
     public void populateTransactions(Locale locale, Subscription subscription) {
         List<Transaction> resultList = new ArrayList<>();
 
