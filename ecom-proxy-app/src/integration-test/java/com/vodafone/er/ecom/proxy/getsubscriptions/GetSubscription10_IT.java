@@ -174,7 +174,7 @@ public class GetSubscription10_IT {
         softly.assertThat(result.getPackage().getPricePoint().getRetryFrequency() ).as(" result.getPackage().getPricePoint().getRetryFrequency()" ).isNull();
         softly.assertThat(result.getPackage().getPricePoint().getSuspensionPeriod() ).as(" result.getPackage().getPricePoint().getSuspensionPeriod()" ).isNull();
         softly.assertThat(result.getPackage().getPricePoint().isGraceSuspensionRetryFrequencyUndefined() ).as(" result.getPackage().getPricePoint().isGraceSuspensionRetryFrequencyUndefined()" ).isTrue() ;
-        softly.assertThat(result.getPackage().getPricePoint().getTranslatedPricingText() ).as(" result.getPackage().getPricePoint().getTranslatedPricingText()" ).isNull();
+        softly.assertThat(result.getPackage().getPricePoint().getTranslatedPricingText() ).as(" result.getPackage().getPricePoint().getTranslatedPricingText()" ).isNullOrEmpty();
         softly.assertThat(result.getPackage().getPricePoint().getFairUsageLimit() ).as(" result.getPackage().getPricePoint().getFairUsageLimit()" ).isEqualTo(-1) ;
         softly.assertThat(result.getPackage().getPricePoint().getFairUsagePeriod() ).as(" result.getPackage().getPricePoint().getFairUsagePeriod()" ).isEqualTo(-1) ;
         softly.assertThat(result.getPackage().getPricePoint().getFairUsagePeriodUnit() ).as(" result.getPackage().getPricePoint().getFairUsagePeriodUnit()" ).isEqualTo("Day(s)");
@@ -604,7 +604,7 @@ public class GetSubscription10_IT {
         softly.assertThat(result.getPricePoint().getRetryFrequency() ).as(" result.getPricePoint().getRetryFrequency()" ).isNull();
         softly.assertThat(result.getPricePoint().getSuspensionPeriod() ).as(" result.getPricePoint().getSuspensionPeriod()" ).isNull();
         softly.assertThat(result.getPricePoint().isGraceSuspensionRetryFrequencyUndefined() ).as(" result.getPricePoint().isGraceSuspensionRetryFrequencyUndefined()" ).isTrue() ;
-        softly.assertThat(result.getPricePoint().getTranslatedPricingText() ).as(" result.getPricePoint().getTranslatedPricingText()" ).isNull();
+        softly.assertThat(result.getPricePoint().getTranslatedPricingText() ).as(" result.getPricePoint().getTranslatedPricingText()" ).isNullOrEmpty();
         softly.assertThat(result.getPricePoint().getFairUsageLimit() ).as(" result.getPricePoint().getFairUsageLimit()" ).isEqualTo(-1) ;
         softly.assertThat(result.getPricePoint().getFairUsagePeriod() ).as(" result.getPricePoint().getFairUsagePeriod()" ).isEqualTo(-1) ;
         softly.assertThat(result.getPricePoint().getFairUsagePeriodUnit() ).as(" result.getPricePoint().getFairUsagePeriodUnit()" ).isEqualTo("Day(s)");

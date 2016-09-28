@@ -55,13 +55,15 @@ public class SelfcareApiProcessor<T> implements PostProcessor<RequestResult<List
             modifyTxn.setSubscription(subscription);
             resultList.add(modifyTxn);
         });
-        if(subscription.getRefundTransactions() != null) {
-            subscription.getRefundTransactions()
-                    .forEach(refundTxn -> {
-                        refundTxn.setSubscription(subscription);
-                        resultList.add(refundTxn);
-                    });
-        }
+        //TODO These are currently never being populated - so code below is pointless
+        //If Refunds are ever required in EPA then we can put this back.
+//        if(subscription.getRefundTransactions() != null) {
+//            subscription.getRefundTransactions()
+//                    .forEach(refundTxn -> {
+//                        refundTxn.setSubscription(subscription);
+//                        resultList.add(refundTxn);
+//                    });
+//        }
 
         subscription.setTransactions(resultList);
 

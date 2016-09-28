@@ -19,9 +19,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 
-/**
- * Copy of the Core Head Ecom Regression Test
- */
 public class AdHocTests {
 
     PurchaseApi mPurchaseApi = EcomApiFactory.getPurchaseApi(Locale.UK);
@@ -48,19 +45,6 @@ public class AdHocTests {
         //Refund Transaction test
         final String msisdn = String.valueOf(new Random().nextInt());
         String refundTransactionId = "";
-
-//        final PurchaseAuthorization auth = EcomApiFactory.getPurchaseApi(Locale.UK)
-//                .purchasePackageMsisdn("test", msisdn, "pAlt__X__package:pAlt_TAX_3_2_999_999_999_*_*", new PurchaseAttributes());
-//        assertNotNull(auth);
-//        assertTrue("Auth response is false", auth.isSuccess());
-//
-//        final PurchaseAuthorization auth2 = EcomApiFactory.getPurchaseApi(Locale.UK)
-//                .purchasePackageMsisdn("test", msisdn, "2PP_P001__X__package:2PP_P001_TAX_999_999_999_999_999_*_*_false_false", new PurchaseAttributes());
-//        assertNotNull(auth2);
-//        assertTrue("Auth2 response is false", auth2.isSuccess());
-//
-//        RefundAuthorization refundAuth = getCustcareApi(Locale.UK)
-//                .refundTransactionMonetary("test", msisdn, refundTransactionId, 1.0, null, new RefundAttributes());
 
         String packageId = "CM004";  // one of the few packages that is refundable
         String packagePricepointId = "CM004__X__package:CM004_TAX_2_2_10010_999_*_*";
@@ -91,25 +75,6 @@ public class AdHocTests {
 
         System.out.println("SubscriptionId: " + subscriptions[0].getRefundTransactions());
 
-    }
-
-    @Test
-    public void getServiceIdFromPricePointId() {
-        String serviceId1 = "content:BP001_TAX_B001_999_999_*_999_999";
-        String serviceId2 = "content:BP001_*_B001_999_999_*_999_999";
-
-        getServiceIdFromPpId(serviceId1);
-        getServiceIdFromPpId(serviceId2);
-
-    }
-    public void getServiceIdFromPpId(String ppId) {
-//            PaymentTxn txn = new PaymentTxn();
-//            List<RefundTxn> txns = new ArrayList<>();
-//            if (paymentTxns==null || paymentTxns.isEmpty())
-//                return txns;
-//            for (PaymentTxn txn: paymentTxns)       {
-//                    txns.addAll(txn.getRefundTransactions());
-//            }
     }
 
     @Test
@@ -158,7 +123,6 @@ public class AdHocTests {
         userGroup.setName("director");
 
         userGroup.hashCode();
-
 
     }
 

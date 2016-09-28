@@ -8,7 +8,6 @@ import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.RefundTxn;
 import com.vizzavi.ecommerce.business.selfcare.Subscription;
 import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
-import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
 import java.util.*;
@@ -22,8 +21,6 @@ import static org.junit.Assert.*;
  * Tests to check Transactions are retrieved correctly
  */
 public class GetSubscriptions2_modifyAndRefundTransactionIT {
-
-    private SoftAssertions softly = new SoftAssertions();
 
     @Test
     public void shouldGetSubsciptions2WithModifyTransactionRecord() throws Exception {
@@ -58,16 +55,14 @@ public class GetSubscriptions2_modifyAndRefundTransactionIT {
                                 subscription.getPackage().getSimplePackageId().equals("pAlt"))
                         .collect(Collectors.toList());
 
-
         assertEquals(1, subscriptionList.size());
 
         assertNotNull(subscriptionList.get(0).getModifyTransactions());
         assertEquals(1, subscriptionList.get(0).getModifyTransactions().size());
-
     }
 
     /**
-     * Currently this test just checks that there are no errors given this use case.
+     * Currently this test just checks that there are no errors given this refund use case.
      * The refund is not currently possible by clients of the EPA.
      * @throws Exception
      */
@@ -101,7 +96,7 @@ public class GetSubscriptions2_modifyAndRefundTransactionIT {
 
         assertNotNull(refundAuth);
         assertTrue(refundAuth.isSuccess());
-        System.out.println("TransactionId: " + refundAuth.getTransactionId());
+        System.out.println("refundTransactionId: " + refundAuth.getTransactionId());
 
         final Subscription[] subscriptions = getSelfcareApi(Locale.UK).getSubscriptions("test", msisdn, 0, new SubscriptionFilterImpl());
         assertNotNull(subscriptions);
@@ -111,12 +106,7 @@ public class GetSubscriptions2_modifyAndRefundTransactionIT {
 
         List<RefundTxn> refundTran1 = sub1.getRefundTransactions();
         System.out.println(refundTran1.size());
-
         //Currently RefundTransactions are not being returned.
-
-
-
-
     }
 
 }
