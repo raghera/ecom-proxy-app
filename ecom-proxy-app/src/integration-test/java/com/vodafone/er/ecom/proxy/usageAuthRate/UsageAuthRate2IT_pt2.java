@@ -120,11 +120,11 @@ public class UsageAuthRate2IT_pt2 {
 //        softly.assertThat(auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().size()).as("auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().size()").isEqualTo(3);
 ////if the list is smaller than expected we can't continue, so do a hard assert
 //        assertTrue(auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().size() >= 3);
-//        softly.assertThat(auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(0).getValue() ).as(" auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(0).value() ).as(" auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(0).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(0).getKey() ).as(" auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(1).getValue() ).as(" auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(1).value() ).as(" auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(1).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(1).getKey() ).as(" auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(2).getValue() ).as(" auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(2).value() ).as(" auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(2).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(2).getKey() ).as(" auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
 //check size of array!
         softly.assertThat(auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getBalances().length ).as(" auth.getPackage().getServiceArray()[0].getPricePoints().get(0).getBalances().length" ).isEqualTo(1) ;
@@ -590,11 +590,11 @@ public class UsageAuthRate2IT_pt2 {
 //        softly.assertThat(auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().size()).as("auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().size()").isEqualTo(3);
 ////if the list is smaller than expected we can't continue, so do a hard assert
 //        assertTrue(auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().size() >= 3);
-//        softly.assertThat(auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(0).getValue() ).as(" auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(0).value() ).as(" auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(0).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(0).getKey() ).as(" auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(1).getValue() ).as(" auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(1).value() ).as(" auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(1).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(1).getKey() ).as(" auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(2).getValue() ).as(" auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(2).value() ).as(" auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(2).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(2).getKey() ).as(" auth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
 //check size of array!
         softly.assertThat(auth.getPackage().getPricePoints().get(0).getBalances().length ).as(" auth.getPackage().getPricePoints().get(0).getBalances().length" ).isEqualTo(2) ;
@@ -1113,11 +1113,11 @@ public class UsageAuthRate2IT_pt2 {
 //        softly.assertThat(auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().size()).as("auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().size()").isEqualTo(3);
 ////if the list is smaller than expected we can't continue, so do a hard assert
 //        assertTrue(auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().size() >= 3);
-//        softly.assertThat(auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(0).getValue() ).as(" auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(0).value() ).as(" auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(0).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(0).getKey() ).as(" auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(1).getValue() ).as(" auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(1).value() ).as(" auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(1).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(1).getKey() ).as(" auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(2).getValue() ).as(" auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(2).value() ).as(" auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(2).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(2).getKey() ).as(" auth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
 //check size of array!
         softly.assertThat(auth.getPackage().getPricePoints().get(1).getBalances().length ).as(" auth.getPackage().getPricePoints().get(1).getBalances().length" ).isEqualTo(2) ;

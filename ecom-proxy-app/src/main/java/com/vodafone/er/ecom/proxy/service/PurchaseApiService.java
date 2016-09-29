@@ -6,8 +6,6 @@ import com.vizzavi.ecommerce.business.charging.PurchaseAuthorization;
 import com.vodafone.er.ecom.proxy.api.ErApiManager;
 import com.vodafone.er.ecom.proxy.domain.RequestResult;
 import com.vodafone.er.ecom.proxy.processor.PostProcessor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +20,6 @@ import java.util.Optional;
 @Service
 public class PurchaseApiService {
 
-    private static final Logger logger = LoggerFactory.getLogger(PurchaseApiService.class);
-
-    //    @Autowired
-//    private PurchaseApiProcessor purchaseApiProcessor;
     @Resource(name="purchaseApiProcessor")
     private PostProcessor<RequestResult<List<PurchaseAuthorization>>> postProcessResult;
 

@@ -48,7 +48,6 @@ public class SelfcareApiService {
         if(subs == null || subs.length != 1) {
             return Optional.empty();
         }
-//        processSubscriptionsResponse(locale, subs);
 
         return Optional.of(subs[0]);
     }
@@ -82,5 +81,4 @@ public class SelfcareApiService {
                                                     String packageSubId, int chargingMethod, String csrId, String reason) throws Exception {
         return erApiManager.getSelfcareApi(locale).modifySubscriptionChargingMethod(clientId,msisdn,deviceType,packageSubId,chargingMethod,csrId,reason);
     }
-
 }

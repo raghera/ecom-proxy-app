@@ -493,7 +493,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
 
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_FIND_PACKAGES_WITH_SERVICE7.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = catalogApiService.processFindPackagesWithService(locale, null, catalogService, new PurchaseAttributes());
+                    result = catalogApiService.findPackageWithService(locale, null, catalogService, new PurchaseAttributes());
                 } else {
                     result = getCatalogEcomClient(locale).findPackagesWithService(catalogService);
                 }
@@ -541,7 +541,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 //Actually calls exactly the same api underneath as FPWS9
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_FIND_PACKAGES_WITH_SERVICE8.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = catalogApiService.processFindPackagesWithService(locale, null, serv, purchaseAttributes);
+                    result = catalogApiService.findPackageWithService(locale, null, serv, purchaseAttributes);
                 } else {
                     result = getCatalogEcomClient(locale).findPackagesWithService(null, serv, purchaseAttributes);
                 }
@@ -588,7 +588,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_FIND_PACKAGES_WITH_SERVICE9.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = catalogApiService.processFindPackagesWithService(locale, msisdn,serv,purchaseAttributes);
+                    result = catalogApiService.findPackageWithService(locale, msisdn,serv,purchaseAttributes);
                 } else {
                     result = getCatalogEcomClient(locale).findPackagesWithService(msisdn,serv,purchaseAttributes);
                 }

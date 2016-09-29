@@ -8,6 +8,7 @@ import com.vizzavi.ecommerce.business.selfcare.Subscription;
 import com.vizzavi.ecommerce.business.selfcare.SubscriptionFilter;
 import com.vizzavi.ecommerce.business.selfcare.SubscriptionStatus;
 import com.vodafone.er.ecom.proxy.domain.RequestResult;
+import com.vodafone.er.ecom.proxy.exception.EpaServiceException;
 import com.vodafone.er.ecom.proxy.service.SelfcareApiService;
 import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.exception.EpaErrorMessageEnum.ERROR_FROM_CORE;
 
 /**
  * Created by Ravi Aghera
@@ -47,9 +49,7 @@ public class ChargingApiProcessor<T extends UsageAuthorization> implements PostP
 
         usageAuths.forEach(usageAuth -> {
             if(usageAuth.isSuccess()) {
-                //TODO could combine populateSubscription & populateActiveSubscriptions - getAll in one
                 populateSubscription(locale, msisdn, usageAuth);
-                populateActiveSubscriptions(locale, msisdn, usageAuth);
                 populateUsageAuthServicePricePointFromSubscription(locale, msisdn, usageAuth);
                 populatePackageFromSubscription(usageAuth);
                 //TODO populate MatchingAttributes
@@ -60,7 +60,7 @@ public class ChargingApiProcessor<T extends UsageAuthorization> implements PostP
     }
 
     //finds the complete service pricepoint object from the subscription and replaces the one on the usageAuth
-    public void populateUsageAuthServicePricePointFromSubscription(Locale locale, String msisdn, UsageAuthorization usageAuthorization) {
+    protected void populateUsageAuthServicePricePointFromSubscription(Locale locale, String msisdn, UsageAuthorization usageAuthorization) {
 
         //The existing content
         Optional<String> ppIdOpt = Optional.of(usageAuthorization.getServicePricePoint().getId());
@@ -82,11 +82,11 @@ public class ChargingApiProcessor<T extends UsageAuthorization> implements PostP
         }
     }
 
-    public void populatePackageFromSubscription(final UsageAuthorization usageAuthorization) {
+    protected void populatePackageFromSubscription(final UsageAuthorization usageAuthorization) {
         usageAuthorization.setPackage(usageAuthorization.getSubscription().getPackage());
     }
 
-    public void populateSubscription(Locale locale, String msisdn, UsageAuthorization usageAuthorization) {
+    protected void populateSubscription(Locale locale, String msisdn, UsageAuthorization usageAuthorization) {
         String subId = usageAuthorization.getPackageSubscriptionId();
         SubscriptionFilter filter = new SubscriptionFilterImpl();
         filter.setSubscriptionId(subId);
@@ -98,11 +98,12 @@ public class ChargingApiProcessor<T extends UsageAuthorization> implements PostP
             usageAuthorization.setSubscription(arr[0]);
         } catch (EcommerceException e) {
             logger.error("Could not get Subscription correctly using id: {}, with exception message: {}", subId, e);
-            return;
+            throw new EpaServiceException(ERROR_FROM_CORE, e);
         }
+        populateActiveSubscriptions(locale, msisdn, usageAuthorization);
     }
 
-    public void populateActiveSubscriptions(Locale locale, String msisdn, UsageAuthorization usageAuthorization) {
+    protected void populateActiveSubscriptions(Locale locale, String msisdn, UsageAuthorization usageAuthorization) {
         SubscriptionFilter activeFilter = new SubscriptionFilterImpl();
         activeFilter.setSubscriptionStatus(SubscriptionStatus.ACTIVE);
         try {
@@ -110,7 +111,7 @@ public class ChargingApiProcessor<T extends UsageAuthorization> implements PostP
             usageAuthorization.setActiveSubscriptions(Arrays.asList(activeSubs));
         } catch (EcommerceException e) {
             logger.error("Could not get Active Subscriptions.  Exception: {}", e );
-            return;
+            throw new EpaServiceException(ERROR_FROM_CORE, e);
         }
     }
 }

@@ -52,11 +52,11 @@ public class FindPackagesWithService8IT_pt2 {
 //        softly.assertThat(pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().size()).as("pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().size()").isEqualTo(3);
 ////if the list is smaller than expected we can't continue, so do a hard assert
 //        assertTrue(pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().size() >= 3);
-//        softly.assertThat(pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(0).getValue() ).as(" pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(0).value() ).as(" pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(0).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(0).getKey() ).as(" pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(1).getValue() ).as(" pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(1).value() ).as(" pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(1).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(1).getKey() ).as(" pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(2).getValue() ).as(" pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(2).value() ).as(" pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(2).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(2).getKey() ).as(" pack.getServiceArray()[0].getPricePoints().get(1).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
 //check size of array!
         softly.assertThat(pack.getServiceArray()[0].getPricePoints().get(1).getBalances().length ).as(" pack.getServiceArray()[0].getPricePoints().get(1).getBalances().length" ).isEqualTo(1) ;
@@ -467,11 +467,11 @@ public class FindPackagesWithService8IT_pt2 {
 //        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().size()).as("pack.getPricePoints().get(0).getTax().getTaxRates().size()").isEqualTo(3);
 ////if the list is smaller than expected we can't continue, so do a hard assert
 //        assertTrue(pack.getPricePoints().get(0).getTax().getTaxRates().size() >= 3);
-//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(0).getValue() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(0).value() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(0).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(0).getKey() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(1).getValue() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(1).value() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(1).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(1).getKey() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(2).getValue() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(2).value() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(2).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(2).getKey() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
 //check size of array!
         softly.assertThat(pack.getPricePoints().get(0).getBalances().length ).as(" pack.getPricePoints().get(0).getBalances().length" ).isEqualTo(1) ;
@@ -900,11 +900,11 @@ public class FindPackagesWithService8IT_pt2 {
 //        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().size()).as("pack.getPricePoints().get(1).getTax().getTaxRates().size()").isEqualTo(3);
 ////if the list is smaller than expected we can't continue, so do a hard assert
 //        assertTrue(pack.getPricePoints().get(1).getTax().getTaxRates().size() >= 3);
-//        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(0).getValue() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(0).value() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(0).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(0).getKey() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(1).getValue() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(1).value() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(1).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(1).getKey() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(2).getValue() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(2).value() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(2).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getPricePoints().get(1).getTax().getTaxRates().get(2).getKey() ).as(" pack.getPricePoints().get(1).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
 //check size of array!
         softly.assertThat(pack.getPricePoints().get(1).getBalances().length ).as(" pack.getPricePoints().get(1).getBalances().length" ).isEqualTo(2) ;

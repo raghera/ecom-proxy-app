@@ -86,11 +86,11 @@ public class FindPackagesWithService9IT_pt1 {
 //        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().size()).as("pack.getPricePoint().getTax().getTaxRates().size()").isEqualTo(3);
 //if the list is smaller than expected we can't continue, so do a hard assert
 //        assertTrue(pack.getPricePoint().getTax().getTaxRates().size() >= 3);
-//        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(0).getValue() ).as(" pack.getPricePoint().getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(0).value() ).as(" pack.getPricePoint().getTax().getTaxRates().get(0).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(0).getKey() ).as(" pack.getPricePoint().getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(1).getValue() ).as(" pack.getPricePoint().getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(1).value() ).as(" pack.getPricePoint().getTax().getTaxRates().get(1).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(1).getKey() ).as(" pack.getPricePoint().getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(2).getValue() ).as(" pack.getPricePoint().getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(2).value() ).as(" pack.getPricePoint().getTax().getTaxRates().get(2).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(2).getKey() ).as(" pack.getPricePoint().getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
         softly.assertThat(pack.getPricePoint().isActive() ).as(" pack.getPricePoint().isActive()" ).isTrue() ;
         softly.assertThat(pack.getPricePoint().isReserveOnly() ).as(" pack.getPricePoint().isReserveOnly()" ).isFalse() ;
@@ -526,11 +526,11 @@ public class FindPackagesWithService9IT_pt1 {
 //        softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().size()).as("pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().size()").isEqualTo(3);
 //if the list is smaller than expected we can't continue, so do a hard assert
 //        assertTrue(pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().size() >= 3);
-//        softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(0).getValue() ).as(" pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(0).value() ).as(" pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(0).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(0).getKey() ).as(" pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(1).getValue() ).as(" pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(1).value() ).as(" pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(1).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(1).getKey() ).as(" pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(2).getValue() ).as(" pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(2).value() ).as(" pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(2).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(2).getKey() ).as(" pack.getServices().get(0).getPricePoints().get(0).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).isActive() ).as(" pack.getServices().get(0).getPricePoints().get(0).isActive()" ).isTrue() ;
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(0).isReserveOnly() ).as(" pack.getServices().get(0).getPricePoints().get(0).isReserveOnly()" ).isFalse() ;
@@ -922,11 +922,11 @@ public class FindPackagesWithService9IT_pt1 {
 //        softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().size()).as("pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().size()").isEqualTo(3);
 ////if the list is smaller than expected we can't continue, so do a hard assert
 //        assertTrue(pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().size() >= 3);
-//        softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(0).getValue() ).as(" pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(0).value() ).as(" pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(0).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(0).getKey() ).as(" pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(1).getValue() ).as(" pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(1).value() ).as(" pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(1).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(1).getKey() ).as(" pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(2).getValue() ).as(" pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(2).value() ).as(" pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(2).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(2).getKey() ).as(" pack.getServices().get(0).getPricePoints().get(1).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).isActive() ).as(" pack.getServices().get(0).getPricePoints().get(1).isActive()" ).isTrue() ;
         softly.assertThat(pack.getServices().get(0).getPricePoints().get(1).isReserveOnly() ).as(" pack.getServices().get(0).getPricePoints().get(1).isReserveOnly()" ).isFalse() ;
