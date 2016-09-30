@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.enums.EpaClientEnum.CLIENT_ID;
 
 /**
  * Created by Ravi Aghera
@@ -34,7 +34,7 @@ public class ChargingApiService {
     public UsageAuthorization usageAuthRateCharge(Locale locale, String clientId, String msisdn, String serviceId,
                                                   UsageAttributes usageAttributes) throws EcommerceException {
         Optional<UsageAuthorization> usageAuthOpt =
-                Optional.of(erApiManager.getChargingApi(locale, clientId)
+                Optional.ofNullable(erApiManager.getChargingApi(locale, clientId)
                 .usageAuthRateCharge(clientId, msisdn, serviceId, usageAttributes));
         usageAuthOpt.ifPresent(usageAuth ->
                 postProcessor.process(new RequestResult.Builder<>()
@@ -44,14 +44,14 @@ public class ChargingApiService {
                         .build())
         );
 
-        return usageAuthOpt.get();
+        return usageAuthOpt.orElse(null);
     }
 
     public UsageAuthorization usageAuth(Locale locale, String clientId, String msisdn, String serviceId, UsageAttributes attributes)
             throws UsageAuthorizationException {
 
         Optional<UsageAuthorization> usageAuthOpt =
-                Optional.of(erApiManager.getChargingApi(locale, clientId)
+                Optional.ofNullable(erApiManager.getChargingApi(locale, clientId)
                 .usageAuth(clientId,msisdn,serviceId, attributes));
 
         usageAuthOpt.ifPresent(usageAuth ->
@@ -62,14 +62,14 @@ public class ChargingApiService {
                         .build())
         );
 
-        return usageAuthOpt.get();
+        return usageAuthOpt.orElse(null);
     }
 
     public UsageAuthorization usageAuthRate(Locale locale, String clientId, String msisdn, String serviceId, UsageAttributes usageAttributes)
             throws EcommerceException{
 
         Optional<UsageAuthorization> usageAuthOpt =
-                Optional.of(erApiManager.getChargingApi(locale, clientId)
+                Optional.ofNullable(erApiManager.getChargingApi(locale, clientId)
                 .usageAuthRate(clientId, msisdn, serviceId, usageAttributes));
 
         usageAuthOpt.ifPresent(usageAuth ->
@@ -80,19 +80,19 @@ public class ChargingApiService {
                         .build())
         );
 
-        return usageAuthOpt.get();
+        return usageAuthOpt.orElse(null);
     }
 
     public UsageAuthorization usageComplete(Locale locale, String eventReservationId, int deliveryStatus) throws EcommerceException {
 
         //Cannot populate anything else here since there is no msisdn available
-        UsageAuthorization auth = erApiManager.getChargingApi(locale, CLIENT_ID.getValue())
-                .usageComplete(CLIENT_ID.getValue(), eventReservationId, deliveryStatus);
+        Optional<UsageAuthorization> auth = Optional.ofNullable(erApiManager.getChargingApi(locale, CLIENT_ID.value())
+                .usageComplete(CLIENT_ID.value(), eventReservationId, deliveryStatus));
 
-        //Currently no msisdn is returned here
+        //Currently no msisdn is returned here so cannot populate anything else
 //        Optional<String> msisdnOpt = Optional.of(auth.getSubscription().getMsisdn());
 //        msisdnOpt.ifPresent(msisdn -> processUsageAuthResponse(locale, msisdn, auth));
 
-        return auth;
+        return auth.orElse(null);
     }
 }

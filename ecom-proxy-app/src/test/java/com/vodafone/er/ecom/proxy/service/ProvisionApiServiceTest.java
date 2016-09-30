@@ -22,13 +22,14 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class ProvisionApiServiceTest {
 
-    @InjectMocks
-    private ProvisionApiService provisionApiService;
-
     @Mock
     private ErApiManager erApiManager;
     @Mock
     private ProvisionApiDecouplingImpl provisionApi;
+
+    @InjectMocks
+    private ProvisionApiService provisionApiService;
+
 
     @Test
     public void shouldUpdateSuccessfully() throws Exception {

@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.enums.EpaClientEnum.CLIENT_ID;
 
 /**
  * Created by Ravi Aghera
@@ -44,7 +44,7 @@ public class SelfcareApiService {
     public Optional<Subscription> getSubscription(Locale locale, String msisdn, int deviceType, String subId) throws EcommerceException {
         SubscriptionFilter filter = new SubscriptionFilterImpl();
         filter.setSubscriptionId(subId);
-        Subscription [] subs = getSubscriptions(locale, CLIENT_ID.getValue(), msisdn, deviceType, filter);
+        Subscription [] subs = getSubscriptions(locale, CLIENT_ID.value(), msisdn, deviceType, filter);
         if(subs == null || subs.length != 1) {
             return Optional.empty();
         }

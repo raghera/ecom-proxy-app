@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Locale;
 
-import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.enums.EpaClientEnum.CLIENT_ID;
 
 /**
  * 1 uniform way to get the Decoupling ErApi's in a singleton way
@@ -52,28 +52,28 @@ public class ErApiManager {
     }
     public SelfcareApi getSelfcareApi(Locale locale) {
         if(null == selfcareApi) {
-            selfcareApi = DecouplingApiFactory.getSelfcareApi(locale, CLIENT_ID.getValue());
+            selfcareApi = DecouplingApiFactory.getSelfcareApi(locale, CLIENT_ID.value());
         }
         return selfcareApi;
     }
 
     public CustcareApi getCustcareApi(Locale locale) {
         if(null == custcareApi) {
-            custcareApi = DecouplingApiFactory.getCustcareApi(locale, CLIENT_ID.getValue());
+            custcareApi = DecouplingApiFactory.getCustcareApi(locale, CLIENT_ID.value());
         }
         return custcareApi;
     }
 
     public CatalogApi getCatalogApi(Locale locale) {
         if(null == catalogApi) {
-            catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.getValue());
+            catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.value());
         }
         return catalogApi;
     }
 
     public ProvisionApi getProvisionApi(Locale locale) {
         if(null == provisionApi) {
-            provisionApi = DecouplingApiFactory.getProvisionApi(locale, CLIENT_ID.getValue());
+            provisionApi = DecouplingApiFactory.getProvisionApi(locale, CLIENT_ID.value());
         }
         return provisionApi;
     }

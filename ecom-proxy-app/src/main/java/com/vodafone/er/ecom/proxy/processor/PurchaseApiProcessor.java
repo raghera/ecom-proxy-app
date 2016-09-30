@@ -26,13 +26,9 @@ public class PurchaseApiProcessor<T> implements PostProcessor<RequestResult<List
     private SelfcareApiService selfcareApiService;
 
     @Override
-    public RequestResult<List<PurchaseAuthorization>> process(RequestResult<List<PurchaseAuthorization>> result) {
-
+    public void process(RequestResult<List<PurchaseAuthorization>> result) {
         result.getMsisdn().ifPresent(msisdn ->
                 postProcessResult(result.getLocale(), msisdn, result.getResponse()));
-
-
-        return result;
     }
 
     public void postProcessResult(Locale locale, String msisdn, List<PurchaseAuthorization> auths) {

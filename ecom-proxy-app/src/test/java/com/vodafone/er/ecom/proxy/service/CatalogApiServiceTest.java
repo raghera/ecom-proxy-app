@@ -14,6 +14,7 @@ import com.vodafone.er.ecom.proxy.processor.PostProcessor;
 import com.vodafone.global.er.business.catalog.BasePrice;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -28,7 +29,6 @@ import static com.vodafone.er.ecom.proxy.data.builder.BasePricesDataBuilder.aBas
 import static com.vodafone.er.ecom.proxy.data.builder.CatalogPackageDataBuilder.aCatalogPackage;
 import static com.vodafone.er.ecom.proxy.data.builder.CatalogServiceDataBuilder.aCatalogService;
 import static com.vodafone.er.ecom.proxy.data.builder.PricePointDataBuilder.aPricePoint;
-import static com.vodafone.er.ecom.proxy.data.builder.RequestResultDataBuilder.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
@@ -49,18 +49,21 @@ public class CatalogApiServiceTest {
     @Mock
     private CatalogApiProcessor catalogApiProcessor;
 
+    private ArgumentCaptor<RequestResult> captor = ArgumentCaptor.forClass(RequestResult.class);
+
     @InjectMocks
     private CatalogApiService catalogApiService;
 
     @Test
     public void shouldCallGetPackageSuccessfully() {
+
         String packageId = "packageId_X";
         List<CatalogPackage> catalogPackages = newArrayList(aCatalogPackage());
 
         when(erApiManager.getCatalogApi(Locale.UK)).thenReturn(catalogApi);
         when(catalogApi.getPackage(packageId)).thenReturn(catalogPackages.get(0));
-        when(postProcessor.process(any(RequestResult.class))).thenReturn(
-                aCatalogPackageRequestResult(Locale.UK, "123", catalogPackages));
+//        when(postProcessor.process(any(RequestResult.class))).thenReturn(
+//                aCatalogPackageRequestResult(Locale.UK, "123", catalogPackages));
 
         CatalogPackage result = catalogApiService.getCatalogPackage(Locale.UK, packageId);
         assertNotNull(result);
@@ -69,8 +72,11 @@ public class CatalogApiServiceTest {
         InOrder inOrder = inOrder(erApiManager, catalogApi, postProcessor);
         inOrder.verify(erApiManager).getCatalogApi(Locale.UK);
         inOrder.verify(catalogApi).getPackage(packageId);
-        inOrder.verify(postProcessor).process(any(RequestResult.class));
+        inOrder.verify(postProcessor).process(captor.capture());
         verifyNoMoreInteractions(erApiManager, catalogApi, postProcessor);
+
+        RequestResult<List<CatalogPackage>> argument = captor.getValue();
+        assertThat(argument.getResponse().get(0)).isEqualToComparingFieldByField(catalogPackages.get(0));
     }
 
     @Test
@@ -80,8 +86,6 @@ public class CatalogApiServiceTest {
 
         when(erApiManager.getCatalogApi(Locale.UK)).thenReturn(catalogApi);
         when(catalogApi.getPackage(packageId)).thenReturn(null);
-        when(postProcessor.process(any(RequestResult.class))).thenReturn(
-                aCatalogPackageRequestResult(Locale.UK, "123", catalogPackages));
 
         CatalogPackage result = catalogApiService.getCatalogPackage(Locale.UK, packageId);
         assertNull(result);
@@ -100,8 +104,6 @@ public class CatalogApiServiceTest {
 
         when(erApiManager.getCatalogApi(Locale.UK)).thenReturn(catalogApi);
         when(catalogApi.getService(serviceId)).thenReturn(catalogServices.get(0));
-        when(postProcessor.process(any(RequestResult.class))).thenReturn(
-                aCatalogServiceRequestResult(Locale.UK, "123", catalogServices));
 
         CatalogService result = catalogApiService.getCatalogService(Locale.UK, serviceId);
         assertNotNull(result);
@@ -110,8 +112,12 @@ public class CatalogApiServiceTest {
         InOrder inOrder = inOrder(erApiManager, catalogApi, postProcessor);
         inOrder.verify(erApiManager).getCatalogApi(Locale.UK);
         inOrder.verify(catalogApi).getService(serviceId);
-        inOrder.verify(postProcessor).process(any(RequestResult.class));
+        inOrder.verify(postProcessor).process(captor.capture());
         verifyNoMoreInteractions(erApiManager, catalogApi, postProcessor);
+
+        RequestResult<List<CatalogPackage>> argument = captor.getValue();
+        assertThat(argument.getResponse().get(0)).isEqualToComparingFieldByField(catalogServices.get(0));
+
     }
 
     @Test
@@ -138,8 +144,6 @@ public class CatalogApiServiceTest {
 
         when(erApiManager.getCatalogApi(Locale.UK)).thenReturn(catalogApi);
         when(catalogApi.getPricePoint(ppId)).thenReturn(pricePoints.get(0));
-        when(postProcessor.process(any(RequestResult.class))).thenReturn(
-                aPricePointRequestResult(Locale.UK, "123", pricePoints));
 
         PricePoint result = catalogApiService.getPricePoint(Locale.UK, ppId);
         assertNotNull(result);
@@ -179,8 +183,6 @@ public class CatalogApiServiceTest {
         when(erApiManager.getCatalogApi(Locale.UK)).thenReturn(catalogApi);
         when(catalogApi.findPackagesWithService(msisdn, catalogServices.get(0), attributes))
                 .thenReturn(catalogPackages.toArray(new CatalogPackage[catalogPackages.size()]));
-        when(catalogApiProcessor.process(any(RequestResult.class)))
-                .thenReturn(aCatalogPackageRequestResult(Locale.UK, "123", catalogPackages));
 
         CatalogPackage[] result = catalogApiService.findPackageWithService(Locale.UK, msisdn, catalogServices.get(0), new PurchaseAttributes());
 
@@ -193,6 +195,7 @@ public class CatalogApiServiceTest {
         inOrder.verify(catalogApi).findPackagesWithService(msisdn, catalogServices.get(0), attributes);
         inOrder.verify(catalogApiProcessor).postProcessFindPackagesWithService(Locale.UK, catalogPackages);
         verifyNoMoreInteractions(erApiManager, catalogApi, catalogApiProcessor, postProcessor);
+
     }
 
     @Test
@@ -205,8 +208,6 @@ public class CatalogApiServiceTest {
         when(erApiManager.getCatalogApi(Locale.UK)).thenReturn(catalogApi);
         when(catalogApi.findPackagesWithService(msisdn, catalogServices.get(0), attributes))
                 .thenReturn(catalogPackages.toArray(new CatalogPackage[catalogPackages.size()]));
-        when(catalogApiProcessor.process(any(RequestResult.class)))
-                .thenReturn(aCatalogPackageRequestResult(Locale.UK, "123", catalogPackages));
 
         CatalogPackage[] result =
                 catalogApiService.findPackageWithService(Locale.UK, msisdn, catalogServices.get(0), new PurchaseAttributes());
@@ -221,6 +222,7 @@ public class CatalogApiServiceTest {
         inOrder.verify(catalogApiProcessor).postProcessFindPackagesWithService(Locale.UK, catalogPackages);
         verifyZeroInteractions(postProcessor, catalogApiProcessor);
         verifyNoMoreInteractions(erApiManager, catalogApi);
+
     }
 
     @Test
@@ -256,12 +258,16 @@ public class CatalogApiServiceTest {
         assertNotNull(result);
         assertThat(result.length).isEqualTo(5);
 
-        //TODO Add verifications
+        InOrder inOrder = inOrder(erApiManager, catalogApi);
+        inOrder.verify(erApiManager).getCatalogApi(Locale.UK);
+        inOrder.verify(catalogApi).getPackages();
+        verifyZeroInteractions(postProcessor);
+        verifyNoMoreInteractions(erApiManager, catalogApi);
 
     }
 
+    @Test
     public void shouldGetVersion() {
-
         String version = "priceplanVersion2000";
 
         when(erApiManager.getCatalogApi(Locale.UK)).thenReturn(catalogApi);
@@ -271,7 +277,11 @@ public class CatalogApiServiceTest {
         assertNotNull(version);
         assertThat(result).isEqualTo(version);
 
-        //TODO Add verifications
+        InOrder inOrder = inOrder(erApiManager, catalogApi);
+        inOrder.verify(erApiManager).getCatalogApi(Locale.UK);
+        inOrder.verify(catalogApi).getVersion();
+        verifyZeroInteractions(postProcessor);
+        verifyNoMoreInteractions(erApiManager, catalogApi);
 
     }
 

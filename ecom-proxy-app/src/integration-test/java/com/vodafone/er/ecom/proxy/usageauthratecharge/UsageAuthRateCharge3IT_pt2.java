@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.Locale;
 import java.util.Random;
 
-import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.enums.EpaClientEnum.CLIENT_ID;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -29,7 +29,7 @@ public class UsageAuthRateCharge3IT_pt2 {
         assertTrue("Auth response is false", auth.isSuccess());
 
         final ChargingApi chargingApi = EcomApiFactory.getChargingApi(Locale.UK);
-        UsageAuthorization usageAuth = chargingApi.usageAuthRateCharge(CLIENT_ID.getValue(), msisdn, "sAlt", new UsageAttributes());
+        UsageAuthorization usageAuth = chargingApi.usageAuthRateCharge(CLIENT_ID.value(), msisdn, "sAlt", new UsageAttributes());
         assertNotNull(usageAuth);
         assertTrue(usageAuth.isSuccess());
 

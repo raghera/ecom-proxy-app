@@ -27,14 +27,12 @@ public class SelfcareApiProcessor<T> implements PostProcessor<RequestResult<List
     private CatalogApiService catalogApiService;
 
     @Override
-    public RequestResult<List<?>> process(RequestResult<List<?>> result) {
+    public void process(RequestResult<List<?>> result) {
 
         if(!result.getResponse().isEmpty() && result.getResponse().get(0) instanceof Subscription ) {
             List<Subscription> subscriptions = (List<Subscription>) result.getResponse();
             processSubscriptionsResponse(result.getLocale(), subscriptions);
         }
-
-        return result;
     }
 
     public List<Subscription> processSubscriptionsResponse(Locale locale, final List<Subscription> subscriptions) {

@@ -25,4 +25,6 @@ public class CustcareApiService {
     public BasicAccount getBasicAccount(Locale locale, String clientId, String msisdn, int accessDevice) throws EcommerceException{
         return erApiManager.getCustcareApi(locale).getBasicAccount(clientId, msisdn, accessDevice);
     }
+
+
 }

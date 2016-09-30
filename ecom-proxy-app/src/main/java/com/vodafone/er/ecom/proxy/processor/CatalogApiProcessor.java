@@ -26,7 +26,7 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
 
     //Routes requests to process method
     @Override
-    public RequestResult<List<T>> process(RequestResult<List<T>> result) {
+    public void process(RequestResult<List<T>> result) {
 
         if(!result.getResponse().isEmpty()  && result.getResponse().get(0) instanceof CatalogPackage) {
             List<CatalogPackage> packages = (List<CatalogPackage>) result.getResponse();
@@ -38,7 +38,6 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
             List<PricePoint> pricePoints = (List<PricePoint>) result.getResponse();
             processPricePoint(pricePoints);
         }
-        return result;
     }
 
     public List<PricePoint> processPricePoint(final List<PricePoint> pricePoints) {
@@ -114,7 +113,7 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
     }
 
     //TODO potential performance degradation here.
-    public List<CatalogPackage> postProcessFindPackagesWithService(Locale locale, List<CatalogPackage> packs) {
+    public void postProcessFindPackagesWithService(Locale locale, List<CatalogPackage> packs) {
             packs.forEach(pack -> {
                 Optional<CatalogPackage> packOpt = Optional.of(catalogApiService.getCatalogPackage(locale, pack.getId()));
                 packOpt.ifPresent(returnedPack -> {
@@ -122,7 +121,6 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
                     pack.setPricePoints(returnedPack.getPricePoints());
                 });
             });
-        return packs;
     }
 
     private void processPricePointBalanceImpacts(PricePoint pricePoint) {

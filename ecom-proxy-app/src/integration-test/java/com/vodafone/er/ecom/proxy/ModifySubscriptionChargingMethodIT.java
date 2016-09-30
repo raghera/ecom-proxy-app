@@ -9,7 +9,7 @@ import java.util.Locale;
 import java.util.Random;
 
 import static com.vizzavi.ecommerce.business.common.EcomApiFactory.*;
-import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.enums.EpaClientEnum.CLIENT_ID;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -50,7 +50,7 @@ public class ModifySubscriptionChargingMethodIT {
         assertTrue(auth.isSuccess());
         assertNotNull(auth.getPackageSubscriptionId());
         CustcareApi custcareApi = getCustcareApi(Locale.UK);
-        boolean result2 = custcareApi.modifySubscriptionChargingMethod(CLIENT_ID.getValue(), msisdn, 0, auth.getPackageSubscriptionId(), 2);
+        boolean result2 = custcareApi.modifySubscriptionChargingMethod(CLIENT_ID.value(), msisdn, 0, auth.getPackageSubscriptionId(), 2);
 
         assertTrue(result2);
 

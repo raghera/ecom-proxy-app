@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.enums.EpaClientEnum.CLIENT_ID;
 import static com.vodafone.er.ecom.proxy.exception.EpaErrorMessageEnum.ERROR_FROM_CORE;
 
 /**
@@ -36,13 +36,12 @@ public class ChargingApiProcessor<T extends UsageAuthorization> implements PostP
     private SelfcareApiService selfcareApiService;
 
     @Override
-    public RequestResult<List<T>> process(RequestResult<List<T>> result) {
+    public void process(RequestResult<List<T>> result) {
         if (!result.getResponse().isEmpty() && result.getResponse().get(0) != null) {
             result.getMsisdn().ifPresent(msisdn ->
                     processUsageAuthResponse(result.getLocale(), msisdn, (List<UsageAuthorization>) result.getResponse())
             );
         }
-        return result;
     }
 
     public void processUsageAuthResponse(Locale locale, String msisdn, List<UsageAuthorization> usageAuths) {
@@ -91,7 +90,7 @@ public class ChargingApiProcessor<T extends UsageAuthorization> implements PostP
         SubscriptionFilter filter = new SubscriptionFilterImpl();
         filter.setSubscriptionId(subId);
         try {
-            final Subscription [] arr = selfcareApiService.getSubscriptions(locale, CLIENT_ID.getValue(), msisdn, 0, filter);
+            final Subscription [] arr = selfcareApiService.getSubscriptions(locale, CLIENT_ID.value(), msisdn, 0, filter);
             if(arr == null || arr.length != 1) {
                 return;
             }
@@ -107,7 +106,7 @@ public class ChargingApiProcessor<T extends UsageAuthorization> implements PostP
         SubscriptionFilter activeFilter = new SubscriptionFilterImpl();
         activeFilter.setSubscriptionStatus(SubscriptionStatus.ACTIVE);
         try {
-            final Subscription [] activeSubs = selfcareApiService.getSubscriptions(locale, CLIENT_ID.getValue(), msisdn, 0, activeFilter);
+            final Subscription [] activeSubs = selfcareApiService.getSubscriptions(locale, CLIENT_ID.value(), msisdn, 0, activeFilter);
             usageAuthorization.setActiveSubscriptions(Arrays.asList(activeSubs));
         } catch (EcommerceException e) {
             logger.error("Could not get Active Subscriptions.  Exception: {}", e );
