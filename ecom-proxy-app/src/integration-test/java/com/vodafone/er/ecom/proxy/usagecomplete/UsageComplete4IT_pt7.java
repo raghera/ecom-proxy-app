@@ -438,11 +438,11 @@ public class UsageComplete4IT_pt7 {
 //        softly.assertThat(result.getSubscription().getPricePoint().getTax().getTaxRates().size()).as("result.getSubscription().getPricePoint().getTax().getTaxRates().size()").isEqualTo(3);
 ////if the list is smaller than expected we can't continue, so do a hard assert
 //        assertTrue(result.getSubscription().getPricePoint().getTax().getTaxRates().size() >= 3);
-//        softly.assertThat(result.getSubscription().getPricePoint().getTax().getTaxRates().get(0).getValue() ).as(" result.getSubscription().getPricePoint().getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(result.getSubscription().getPricePoint().getTax().getTaxRates().get(0).value() ).as(" result.getSubscription().getPricePoint().getTax().getTaxRates().get(0).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(result.getSubscription().getPricePoint().getTax().getTaxRates().get(0).getKey() ).as(" result.getSubscription().getPricePoint().getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(result.getSubscription().getPricePoint().getTax().getTaxRates().get(1).getValue() ).as(" result.getSubscription().getPricePoint().getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(result.getSubscription().getPricePoint().getTax().getTaxRates().get(1).value() ).as(" result.getSubscription().getPricePoint().getTax().getTaxRates().get(1).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(result.getSubscription().getPricePoint().getTax().getTaxRates().get(1).getKey() ).as(" result.getSubscription().getPricePoint().getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(result.getSubscription().getPricePoint().getTax().getTaxRates().get(2).getValue() ).as(" result.getSubscription().getPricePoint().getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(result.getSubscription().getPricePoint().getTax().getTaxRates().get(2).value() ).as(" result.getSubscription().getPricePoint().getTax().getTaxRates().get(2).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(result.getSubscription().getPricePoint().getTax().getTaxRates().get(2).getKey() ).as(" result.getSubscription().getPricePoint().getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
 ////check size of array!
 //        softly.assertThat(result.getSubscription().getPricePoint().getBalances().length ).as(" result.getSubscription().getPricePoint().getBalances().length" ).isEqualTo(1) ;

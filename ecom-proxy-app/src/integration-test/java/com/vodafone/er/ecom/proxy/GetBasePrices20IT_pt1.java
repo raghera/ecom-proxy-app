@@ -178,7 +178,7 @@ public class GetBasePrices20IT_pt1 {
 //        softly.assertThat(result.getPricePoint().getTax().getTaxRates().size()).as("result.getPricePoint().getTax().getTaxRates().size()").isEqualTo(1);
 ////if the list is smaller than expected we can't continue, so do a hard assert
 //        assertTrue(result.getPricePoint().getTax().getTaxRates().size() >= 1);
-//        softly.assertThat(result.getPricePoint().getTax().getTaxRates().get(0).getValue() ).as(" result.getPricePoint().getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.185)) ;
+//        softly.assertThat(result.getPricePoint().getTax().getTaxRates().get(0).value() ).as(" result.getPricePoint().getTax().getTaxRates().get(0).value()" ).isEqualTo(new Double(0.185)) ;
 //        softly.assertThat(result.getPricePoint().getTax().getTaxRates().get(0).getKey() ).as(" result.getPricePoint().getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
 //        softly.assertThat(result.getPricePoint().getTax().getTaxRates().get(0).getEndDate() ).as(" result.getPricePoint().getTax().getTaxRates().get(0).getEndDate()" ).isNull();
 //        softly.assertThat(result.getPricePoint().getTax().getTaxRate() ).as(" result.getPricePoint().getTax().getTaxRate()" ).isEqualTo(new Double(0.185)) ;

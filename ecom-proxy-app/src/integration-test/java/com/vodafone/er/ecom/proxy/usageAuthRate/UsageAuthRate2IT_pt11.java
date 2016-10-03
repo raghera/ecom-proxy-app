@@ -11,7 +11,7 @@ import org.junit.Test;
 import java.util.Locale;
 import java.util.Random;
 
-import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.enums.EpaClientEnum.CLIENT_ID;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -36,7 +36,7 @@ public class UsageAuthRate2IT_pt11 {
         assertTrue("Auth response is false", purchaseAuthorization.isSuccess());
 
         final UsageAuthorization auth = EcomApiFactory.getChargingApi(Locale.UK)
-                .usageAuthRate(CLIENT_ID.getValue(), msisdn, "B001", new UsageAttributes());
+                .usageAuthRate(CLIENT_ID.value(), msisdn, "B001", new UsageAttributes());
         assertNotNull(auth);
         assertTrue(auth.isSuccess());
 
@@ -410,11 +410,11 @@ public class UsageAuthRate2IT_pt11 {
 //        softly.assertThat(auth.getSubscription().getPricePoint().getTax().getTaxRates().size()).as("auth.getSubscription().getPricePoint().getTax().getTaxRates().size()").isEqualTo(3);
 ////if the list is smaller than expected we can't continue, so do a hard assert
 //        assertTrue(auth.getSubscription().getPricePoint().getTax().getTaxRates().size() >= 3);
-//        softly.assertThat(auth.getSubscription().getPricePoint().getTax().getTaxRates().get(0).getValue() ).as(" auth.getSubscription().getPricePoint().getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(auth.getSubscription().getPricePoint().getTax().getTaxRates().get(0).value() ).as(" auth.getSubscription().getPricePoint().getTax().getTaxRates().get(0).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(auth.getSubscription().getPricePoint().getTax().getTaxRates().get(0).getKey() ).as(" auth.getSubscription().getPricePoint().getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(auth.getSubscription().getPricePoint().getTax().getTaxRates().get(1).getValue() ).as(" auth.getSubscription().getPricePoint().getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(auth.getSubscription().getPricePoint().getTax().getTaxRates().get(1).value() ).as(" auth.getSubscription().getPricePoint().getTax().getTaxRates().get(1).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(auth.getSubscription().getPricePoint().getTax().getTaxRates().get(1).getKey() ).as(" auth.getSubscription().getPricePoint().getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(auth.getSubscription().getPricePoint().getTax().getTaxRates().get(2).getValue() ).as(" auth.getSubscription().getPricePoint().getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(auth.getSubscription().getPricePoint().getTax().getTaxRates().get(2).value() ).as(" auth.getSubscription().getPricePoint().getTax().getTaxRates().get(2).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(auth.getSubscription().getPricePoint().getTax().getTaxRates().get(2).getKey() ).as(" auth.getSubscription().getPricePoint().getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
 //check size of array!
         softly.assertThat(auth.getSubscription().getPricePoint().getBalances().length ).as(" auth.getSubscription().getPricePoint().getBalances().length" ).isEqualTo(2) ;

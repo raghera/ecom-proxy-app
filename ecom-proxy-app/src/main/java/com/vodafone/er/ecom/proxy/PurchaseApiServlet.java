@@ -26,8 +26,7 @@ import static com.vodafone.global.er.endpoint.ApiNamesEnum.PURCHASE_API;
 public class PurchaseApiServlet extends AbstractEcomServlet {
 
     private static final long	serialVersionUID	= -5298650083905760799L;
-    //CR1231
-    //private static LWLogger log = LWSupportFactoryImpl.getInstance().getLogger(PurchaseApiServlet.class);
+
     private static Logger log = Logger.getLogger(PurchaseApiServlet.class);
 
     private PurchaseApiService purchaseApiService;

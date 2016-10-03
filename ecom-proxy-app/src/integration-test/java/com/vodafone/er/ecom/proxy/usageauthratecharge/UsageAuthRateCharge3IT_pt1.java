@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.Locale;
 import java.util.Random;
 
-import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.enums.EpaClientEnum.CLIENT_ID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -34,7 +34,7 @@ public class UsageAuthRateCharge3IT_pt1 {
         assertThat(auth).as("PurchaseAuth is null ").isNotNull();
 
         final ChargingApi chargingApi = EcomApiFactory.getChargingApi(Locale.UK);
-        UsageAuthorization usageAuth = chargingApi.usageAuthRateCharge(CLIENT_ID.getValue(), msisdn, "sAlt", new UsageAttributes());
+        UsageAuthorization usageAuth = chargingApi.usageAuthRateCharge(CLIENT_ID.value(), msisdn, "sAlt", new UsageAttributes());
         assertNotNull(usageAuth);
         assertTrue(usageAuth.isSuccess());
 
@@ -202,7 +202,7 @@ public class UsageAuthRateCharge3IT_pt1 {
 //        softly.assertThat(usageAuth.getServicePricePoint().getTax().getTaxRates().size()).as("usageAuth.getServicePricePoint().getTax().getTaxRates().size()").isEqualTo(3);
 //if the list is smaller than expected we can't continue, so do a hard assert
 //        assertTrue(usageAuth.getServicePricePoint().getTax().getTaxRates().size() >= 3);
-//        softly.assertThat(usageAuth.getServicePricePoint().getTax().getTaxRates().get(0).getValue() ).as(" usageAuth.getServicePricePoint().getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getServicePricePoint().getTax().getTaxRates().get(0).value() ).as(" usageAuth.getServicePricePoint().getTax().getTaxRates().get(0).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(usageAuth.getServicePricePoint().getTax().getTaxRates().get(0).getKey() ).as(" usageAuth.getServicePricePoint().getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
 // java.util.Date
 // java.util.Date
@@ -674,7 +674,7 @@ public class UsageAuthRateCharge3IT_pt1 {
 //        softly.assertThat(usageAuth.getPackage().getPricePoints().get(0).getTax().getTaxRates().size()).as("usageAuth.getPackage().getPricePoints().get(0).getTax().getTaxRates().size()").isEqualTo(3);
 //if the list is smaller than expected we can't continue, so do a hard assert
 //        assertTrue(usageAuth.getPackage().getPricePoints().get(0).getTax().getTaxRates().size() >= 3);
-//        softly.assertThat(usageAuth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(0).getValue() ).as(" usageAuth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(0).value() ).as(" usageAuth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(0).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(usageAuth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(0).getKey() ).as(" usageAuth.getPackage().getPricePoints().get(0).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
 // java.util.Date
 // java.util.Date
@@ -1115,7 +1115,7 @@ public class UsageAuthRateCharge3IT_pt1 {
 //        softly.assertThat(usageAuth.getPackage().getPricePoints().get(1).getTax().getTaxRates().size()).as("usageAuth.getPackage().getPricePoints().get(1).getTax().getTaxRates().size()").isEqualTo(3);
 //if the list is smaller than expected we can't continue, so do a hard assert
 //        assertTrue(usageAuth.getPackage().getPricePoints().get(1).getTax().getTaxRates().size() >= 3);
-//        softly.assertThat(usageAuth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(0).getValue() ).as(" usageAuth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(usageAuth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(0).value() ).as(" usageAuth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(0).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(usageAuth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(0).getKey() ).as(" usageAuth.getPackage().getPricePoints().get(1).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
 // java.util.Date
 // java.util.Date

@@ -3,7 +3,7 @@ package com.vodafone.er.ecom.proxy;
 import com.vizzavi.ecommerce.business.charging.PurchaseAttributes;
 import com.vizzavi.ecommerce.business.charging.PurchaseAuthorization;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
-import com.vodafone.er.ecom.proxy.enums.EcomAppEnum;
+import com.vodafone.er.ecom.proxy.enums.EpaClientEnum;
 import org.junit.Test;
 
 import java.util.Random;
@@ -25,7 +25,7 @@ public class InactivateSubscription6IT {
         assertNotNull(auth);
         assertTrue("Auth response is false", auth.isSuccess());
 
-        boolean result = EcomApiFactory.getCustcareApi(UK).inactivateSubscription(EcomAppEnum.CLIENT_ID.getValue(), msisdn, auth.getPackageSubscriptionId(), "test-csrId", "test-reason");
+        boolean result = EcomApiFactory.getCustcareApi(UK).inactivateSubscription(EpaClientEnum.CLIENT_ID.value(), msisdn, auth.getPackageSubscriptionId(), "test-csrId", "test-reason");
         assertTrue(result);
     }
 }

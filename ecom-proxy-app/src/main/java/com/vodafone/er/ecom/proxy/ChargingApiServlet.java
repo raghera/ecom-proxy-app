@@ -127,7 +127,7 @@ public class ChargingApiServlet extends AbstractEcomServlet {
 
                 final Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_USAGE_AUTH1.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = chargingApiService.processUsageAuth(locale, clientApplicationId,msisdn,serviceId,usageAttributes);
+                    result = chargingApiService.usageAuth(locale, clientApplicationId,msisdn,serviceId,usageAttributes);
                 } else {
                     result = getChargingApiDelegate(locale).usageAuth(clientApplicationId, msisdn, serviceId, usageAttributes);
                 }
@@ -174,7 +174,7 @@ public class ChargingApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_USAGE_AUTH_RATE2.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = chargingApiService.processUsageAuthRate(locale, clientApplicationId,msisdn,serviceId,usageAttributes);
+                    result = chargingApiService.usageAuthRate(locale, clientApplicationId,msisdn,serviceId,usageAttributes);
                 } else {
                     result = getChargingApiDelegate(locale)
                             .usageAuthRate(clientApplicationId, msisdn, serviceId, usageAttributes);
@@ -222,7 +222,7 @@ public class ChargingApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_USAGE_AUTH_RATE_CHARGE3.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = chargingApiService.processUsageAuthRateCharge(locale, clientApplicationId, msisdn, serviceId, usageAttributes);
+                    result = chargingApiService.usageAuthRateCharge(locale, clientApplicationId, msisdn, serviceId, usageAttributes);
                 } else {
                     result = getChargingApiDelegate(locale).usageAuthRateCharge(clientApplicationId, msisdn, serviceId, usageAttributes);
                 }
