@@ -40,7 +40,7 @@ public class PurchaseApiService {
 
     public PurchaseAuthorization renewPurchasePackageMsisdn(Locale locale, String clientId, String msisdn, String subId,
                                                             PurchaseAttributes attributes) throws Exception {
-        Optional<PurchaseAuthorization> authOpt = Optional.of(erApiManager.getPurchaseApi(locale, clientId)
+        Optional<PurchaseAuthorization> authOpt = Optional.ofNullable(erApiManager.getPurchaseApi(locale, clientId)
                 .renewPurchasePackageMsisdn(clientId, msisdn, subId, attributes));
 
         authOpt.ifPresent(auth ->
@@ -51,6 +51,6 @@ public class PurchaseApiService {
                         .build()
                 )
         );
-        return authOpt.get();
+        return authOpt.orElse(null);
     }
 }

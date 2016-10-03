@@ -54,19 +54,18 @@ public class SelfcareApiService {
 
     public Subscription [] getSubscriptions(Locale locale, String clientId, String msisdn, int device, SubscriptionFilter filter)
             throws EcommerceException{
-        Optional<Subscription[]> subsOpt =
-                Optional.of(erApiManager.getSelfcareApi(locale).getSubscriptions(clientId, msisdn, device, filter));
+        Subscription[] subscriptions = erApiManager.getSelfcareApi(locale).getSubscriptions(clientId, msisdn, device, filter);
 
-        subsOpt.ifPresent(subscriptions -> {
+        if(subscriptions.length > 0) {
             List<Subscription> subs = Lists.newArrayList(subscriptions);
             postProcessor.process(new RequestResult.Builder<List<Subscription>>()
                     .response(subs)
                     .msisdn(msisdn)
                     .locale(locale)
                     .build());
-        });
+        }
 
-        return subsOpt.get();
+        return subscriptions;
     }
 
     public Optional<Transaction> getTransaction(Locale locale, String clientId, TransactionFilter filter) throws EcommerceException {

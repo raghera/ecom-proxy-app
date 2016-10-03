@@ -1,5 +1,6 @@
 package com.vodafone.er.ecom.proxy.service;
 
+import com.vizzavi.ecommerce.business.provision.ProvisionException;
 import com.vodafone.er.ecom.proxy.api.ErApiManager;
 import com.vodafone.global.er.decoupling.client.ProvisionApiDecouplingImpl;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import java.util.Locale;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.when;
 
@@ -61,6 +63,16 @@ public class ProvisionApiServiceTest {
 
         inOrder.verify(erApiManager).getProvisionApi(Locale.UK);
         inOrder.verify(provisionApi).updateServiceStatus("123", 2, 2);
+    }
+
+    @Test(expected = ProvisionException.class)
+    public void shouldThrowProvisionException() throws Exception {
+
+        when(erApiManager.getProvisionApi(Locale.UK)).thenReturn(provisionApi);
+        when(provisionApi.updateServiceStatus("123", 2, 2)).thenThrow(new ProvisionException());
+
+        provisionApiService.updateServiceStatus(Locale.UK, "123", 2, 2);
+        fail("Should have thrown a ProvisionException");
 
     }
 }
