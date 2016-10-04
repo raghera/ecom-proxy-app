@@ -16,14 +16,10 @@ import static org.junit.Assert.assertNotNull;
 public class GetVersion_IT {
 
     @Test
-    public void getPackages() throws Exception {
+    public void shouldGetVersion() throws Exception {
         String result = EcomApiFactory.getCatalogApi(Locale.UK).getVersion();
 
         assertNotNull(result);
-        assertThat(result).as("Checking priceplan version").isEqualTo("dev23112015");
-
-
+        assertThat(result).as("Checking priceplan version").isNotEmpty();
     }
-
-
 }

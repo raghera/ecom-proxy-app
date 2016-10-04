@@ -9,9 +9,9 @@ import com.vizzavi.ecommerce.business.selfcare.*;
 import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
 import org.junit.Test;
 
-import java.util.Calendar;
-import java.util.Locale;
-import java.util.Random;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getCustcareApi;
 import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getSelfcareApi;
@@ -40,6 +40,44 @@ public class AdHocTests {
     }
 
     @Test
+    public void createDynamicPredicate() throws Exception {
+
+        List<String> values = new ArrayList<>();
+        values.add("A");
+        values.add("B");
+        values.add("C");
+        List<String> toFilter = new ArrayList<>();
+        toFilter.add("A");
+        toFilter.add("B");
+        toFilter.add("C");
+        toFilter.add("D");
+        toFilter.add("E");
+        toFilter.add("F");
+        toFilter.add("G");
+
+        Predicate<String> predicate = createCombinedPredicate(values);
+
+        List<String> filtered = toFilter.stream().filter(predicate).collect(Collectors.toList());
+        filtered.forEach(System.out::println);
+
+    }
+
+    private Predicate<String> createCombinedPredicate(List<String> values) {
+        List<Predicate<String>> predicates = new ArrayList<>();
+        values.forEach(value -> predicates.add(createPredicate(value)));
+
+        return x -> predicates.stream().anyMatch(stringPredicate -> stringPredicate.test(x));
+    }
+
+    private Predicate<String> createPredicate(String value) {
+
+        Predicate<String> predicate = x -> x.equals(value);
+        return predicate;
+
+    }
+
+
+        @Test
     public void simpleGetPackage2() throws Exception {
 
         //Refund Transaction test
