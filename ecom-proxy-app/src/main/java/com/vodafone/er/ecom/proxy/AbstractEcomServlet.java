@@ -50,6 +50,8 @@ public class AbstractEcomServlet extends HttpServlet {
         transLogging.ifPresent(x -> transLogManager.setIsTransLoggingOn(x));
 
         if(transLogManager.isTransLoggingOn()) {
+            //Always generate a new transaction id for each request.
+            transLogManager.addAttributeContext(Attr.ER_TX_LOG_ID, generateId());
 
             if (StringUtils.isNotBlank(requestData.getRequestName())) {
                 transLogManager.addAttributeContext(Attr.REQUEST_NAME, requestData.getRequestName());
@@ -66,8 +68,6 @@ public class AbstractEcomServlet extends HttpServlet {
             //The Id will need to be generated if its an ecom request as there are no headers
             if (StringUtils.isBlank(transLogManager.getAttribute(Attr.VF_TRACE_TRANSACTION_ID))) {
                 transLogManager.addAttributeContext(Attr.VF_TRACE_TRANSACTION_ID, generateId());
-                transLogManager.addAttributeContext(Attr.ER_TX_LOG_ID,
-                        transLogManager.getAttribute(Attr.VF_TRACE_TRANSACTION_ID));
             }
             if (StringUtils.isNotBlank(requestData.getMsisdn())) {
                 transLogManager.addAttributeContext(Attr.CUSTOMER_ID, requestData.getMsisdn());
