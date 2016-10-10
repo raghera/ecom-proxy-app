@@ -73,6 +73,11 @@
         <priority value="ALL"/>
         <appender-ref ref="trans-log"/>
     </category>
+    <category name="org.springframework" additivity="false">
+        <level value="INFO" />
+        <appender-ref ref="file" />
+    </category>
+
 
     <root>
         <level value="DEBUG"/>
