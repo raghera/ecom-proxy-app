@@ -55,5 +55,11 @@ public class PropertyService {
         return Optional.of(boolValue);
     }
 
+    public static void setProperty(String key, String value) {
+        log.info("Setting property: {}={}", key, value );
+        properties.setProperty(key, value);
+    }
+
+
 
 }

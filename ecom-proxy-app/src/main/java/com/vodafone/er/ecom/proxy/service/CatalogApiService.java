@@ -20,6 +20,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 @Service
+@SuppressWarnings("unchecked")
 public class CatalogApiService {
 
     @Autowired
@@ -37,6 +38,7 @@ public class CatalogApiService {
                 .build())
         );
 
+        //TODO Should not return null anywhere
         return resultOpt.orElse(null);
     }
 

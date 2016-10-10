@@ -19,7 +19,6 @@ import java.util.*;
  */
 @Component
 public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<T>>> {
-//public class CatalogApiProcessor<T> implements PostProcessor<T> {
 
     @Autowired
     private CatalogApiService catalogApiService;

@@ -28,16 +28,6 @@ public class ErApiManager {
     private ProvisionApi provisionApi;
     private PurchaseApi purchaseApi;
 
-//    public ErApiManager(ChargingApi chargingApi, CatalogApi catalogApi, SelfcareApi selfcareApi,
-//                        CustcareApi custcareApi, ProvisionApi provisionApi, PurchaseApi purchaseApi) {
-//        this.chargingApi = chargingApi;
-//        this.catalogApi = catalogApi;
-//        this.selfcareApi = selfcareApi;
-//        this.custcareApi = custcareApi;
-//        this.provisionApi = provisionApi;
-//        this.purchaseApi = purchaseApi;
-//    }
-
     public PurchaseApi getPurchaseApi(Locale locale, String clientId) {
         if (null == purchaseApi) {
             purchaseApi = DecouplingApiFactory.getPurchaseApi(locale , clientId);

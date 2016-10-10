@@ -11,7 +11,7 @@
     </appender>
 
     <appender name="file" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="append" value="false" />
+        <param name="append" value="true" />
         <param name="DatePattern" value="'.'yyyy-MM-dd" />
         <param name="file" value="./logs/ecom-proxy-app.log" />
         <layout class="org.apache.log4j.PatternLayout">
@@ -20,10 +20,69 @@
         </layout>
     </appender>
 
-    <root>
-        <level value="DEBUG" />
+    <appender name="caching-log" class="org.apache.log4j.FileAppender">
+    <param name="File" value="logs/caching.log" />
+    <param name="Append" value="true" />
+    <layout class="org.apache.log4j.PatternLayout">
+    <param name="ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss}|%m | %n" />
+    </layout>
+    </appender>
+
+    <!--<appender name="PerformanceLog" class="org.apache.log4j.FileAppender">-->
+        <!--<param name="File" value="logs/performance.log" />-->
+        <!--<param name="Append" value="true" />-->
+        <!--<layout class="org.apache.log4j.PatternLayout">-->
+            <!--<param name="ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss}|%m | %n" />-->
+        <!--</layout>-->
+    <!--</appender>-->
+
+    <appender name="AsyncTransLog" class="org.apache.log4j.AsyncAppender">
+        <!-- this parameter determines whether appender should block calling thread
+            when buffer is full. Set it to true (or leave it out) and the appender will
+            effectively become synchronous If false, messages will be counted by logger
+            and a summary message appended after the contents of the buffer have been
+            appended. -->
+        <param name="blocking" value="false" />
+        <appender-ref ref="trans-log"/>
+    </appender>
+
+    <appender name="trans-log" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="logs/translog.log" />
+        <param name="Append" value="true" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="CREATION_TS=%d{dd-MM-yy HH:mm:ss}|TX_LOG_ID=%X{ER_TX_LOG_ID}|APPLICATION_ID=EPA|REQUEST_NAME=%X{REQUEST_NAME}|CUSTOMER_TYPE=MSISDN|CUSTOMER_ID=%X{CUSTOMER_ID}|DI_REQUEST=%X{DI_REQUEST}|REQUEST_PL=%X{REQUEST_PL}|RESPONSE_PL=%X{RESPONSE_PL}|ER_RESPONSE_CODE=%X{ER_RESPONSE_CODE}|ER_RESPONSE_ERROR_DESCRIPTION=%X{ER_RESPONSE_ERROR_DESCRIPTION}| %n" />
+        </layout>
+    </appender>
+
+
+    <category name="com.vodafone" additivity="false">
+        <priority value="DEBUG"/>
+        <appender-ref ref="file"/>
+    </category>
+    <!--<category name="org.perf4j.TimingLogger" additivity="false">-->
+        <!--<level value="INFO"/>-->
+        <!--<appender-ref ref="PerformanceLog"/>-->
+    <!--</category>-->
+    <category name="com.vodafone.global.er.decoupling.client.CachingCatalogApiImpl" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="caching-log"/>
+    </category>
+    <category name="com.vodafone.transaction.logging" additivity="false">
+        <priority value="ALL"/>
+        <appender-ref ref="trans-log"/>
+    </category>
+    <category name="org.springframework" additivity="false">
+        <level value="INFO" />
         <appender-ref ref="file" />
-        <appender-ref ref="console" />
+    </category>
+
+
+    <root>
+        <level value="DEBUG"/>
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
     </root>
 
 </log4j:configuration>

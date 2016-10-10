@@ -129,7 +129,7 @@ public class PurchaseApiServiceTest {
 
         final PurchaseAuthorization result = purchaseApiService.renewPurchasePackageMsisdn(Locale.UK, CLIENT_ID.value(), msisdn, subId, attrs);
         assertNotNull(result);
-        assertTrue(result.isSuccess());
+        assertFalse(result.isSuccess());
 
         InOrder inOrder = inOrder(erApiManager, purchaseApi, postProcessor);
         inOrder.verify(erApiManager).getPurchaseApi(Locale.UK, CLIENT_ID.value());
@@ -138,7 +138,7 @@ public class PurchaseApiServiceTest {
         verifyNoMoreInteractions(erApiManager, purchaseApi, postProcessor);
 
         RequestResult<List<PurchaseAuthorization>> argument = captor.getValue();
-        assertThat(argument.getResponse().get(0)).isEqualToComparingFieldByField(aPurchaseAuthorization());
+        assertThat(argument.getResponse().get(0)).isEqualToComparingFieldByField(aPurchaseAuthorizationFailure());
         assertThat(argument.getLocale()).isEqualTo(Locale.UK);
         assertThat(argument.getMsisdn().get()).isEqualTo(msisdn);
     }
