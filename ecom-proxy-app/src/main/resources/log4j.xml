@@ -20,6 +20,14 @@
         </layout>
     </appender>
 
+    <appender name="caching-log" class="org.apache.log4j.FileAppender">
+    <param name="File" value="logs/caching.log" />
+    <param name="Append" value="true" />
+    <layout class="org.apache.log4j.PatternLayout">
+    <param name="ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss}|%m | %n" />
+    </layout>
+    </appender>
+
     <!--<appender name="PerformanceLog" class="org.apache.log4j.FileAppender">-->
         <!--<param name="File" value="logs/performance.log" />-->
         <!--<param name="Append" value="true" />-->
@@ -44,7 +52,7 @@
         <param name="DatePattern" value="'.'yyyy-MM-dd"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"
-                   value="CREATION_TS=%d{dd-MM-yy HH:mm:ss}|TX_LOG_ID=%X{ER_TX_LOG_ID}|APPLICATION_ID=EPA|REQUEST_NAME=%X{REQUEST_NAME}|CUSTOMER_TYPE=MSISDN|CUSTOMER_ID=%X{CUSTOMER_ID}|DI_REQUEST=%X{DI_REQUEST}|REQUEST_PL=%X{REQUEST_PL}|RESPONSE_PL=%X{RESPONSE_PL}|ER_RESPONSE_CODE=%X{ER_RESPONSE_CODE}|ER_RESPONSE_ERROR_DESCRIPTION=%X{ER_RESPONSE_ERROR_DESCRIPTION} %n" />
+                   value="CREATION_TS=%d{dd-MM-yy HH:mm:ss}|TX_LOG_ID=%X{ER_TX_LOG_ID}|APPLICATION_ID=EPA|REQUEST_NAME=%X{REQUEST_NAME}|CUSTOMER_TYPE=MSISDN|CUSTOMER_ID=%X{CUSTOMER_ID}|DI_REQUEST=%X{DI_REQUEST}|REQUEST_PL=%X{REQUEST_PL}|RESPONSE_PL=%X{RESPONSE_PL}|ER_RESPONSE_CODE=%X{ER_RESPONSE_CODE}|ER_RESPONSE_ERROR_DESCRIPTION=%X{ER_RESPONSE_ERROR_DESCRIPTION}| %n" />
         </layout>
     </appender>
 
@@ -57,6 +65,10 @@
         <!--<level value="INFO"/>-->
         <!--<appender-ref ref="PerformanceLog"/>-->
     <!--</category>-->
+    <category name="com.vodafone.global.er.decoupling.client.CachingCatalogApiImpl" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="caching-log"/>
+    </category>
     <category name="com.vodafone.transaction.logging" additivity="false">
         <priority value="ALL"/>
         <appender-ref ref="trans-log"/>
