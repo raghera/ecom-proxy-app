@@ -62,7 +62,6 @@
                 <skip.integration.tests>false</skip.integration.tests>
                 <skip.unit.tests>true</skip.unit.tests>
             </properties>
-
         </profile>
         <!--TODO This Run profile is to start Jetty using the existing main class from maven. Change to use the Jetty plugin. -->
         <profile>
@@ -425,7 +424,7 @@
                     <skipTests>${skip.unit.tests}</skipTests>
                     <!-- Excludes integration tests when unit tests are run -->
                     <excludes>
-                        <exclude>**/IT*.java</exclude>
+                        <exclude>**/*IT.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>

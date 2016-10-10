@@ -31,7 +31,7 @@ public class PurchaseApiProcessor<T> implements PostProcessor<RequestResult<List
                 postProcessResult(result.getLocale(), msisdn, result.getResponse()));
     }
 
-    public void postProcessResult(Locale locale, String msisdn, List<PurchaseAuthorization> auths) {
+    private void postProcessResult(Locale locale, String msisdn, List<PurchaseAuthorization> auths) {
         auths.forEach(auth -> {
             Optional<Subscription> subOpt;
             try {

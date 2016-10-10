@@ -45,36 +45,12 @@ public class RequestResultTest {
                 .response(newArrayList(new CatalogPackage()))
                 .build();
 
-//        RequestResult<List<UsageAuthorization>> result2 = new RequestResult
-//                .Builder<List<UsageAuthorization>>()
-//                .locale(Locale.UK)
-//                .msisdn(msisdn)
-//                .response(newArrayList(new UsageAuthorization()))
-//                .build();
-//
-//        RequestResult<List<UsageAuthorization>> result3 = new RequestResult
-//                .Builder<List<PurchaseAuthorization>>()
-//                .locale(Locale.UK)
-//                .msisdn(msisdn)
-//                .response(newArrayList(new PurchaseAuthorization()))
-//                .build();
 
-//        PostProcessor<RequestResult<List<UsageAuthorization>>> processor1 =
-//                new ChargingApiProcessor<>();
-
-        PostProcessor<RequestResult<List<CatalogPackage>>> processor2 =
+        PostProcessor<RequestResult<List<CatalogPackage>>> processor =
                 new CatalogApiProcessor<>();
 
-//        PostProcessor<RequestResult<List<PurchaseAuthorization>>> processor3 =
-//                new PurchaseApiProcessor<>();
 
-
-//        pr.process(Locale.UK, msisdn, result);
-
-        processor2.process(result);
-//        processor1.process(result2);
-
-//        processor2.process(Locale.UK, msisdn, result);
+        processor.process(result);
 
     }
 }

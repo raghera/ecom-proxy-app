@@ -8,33 +8,23 @@ import org.eclipse.jetty.server.handler.ContextHandler;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 import java.io.File;
-import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.util.Optional;
-import java.util.Properties;
 
 public class EcomProxyJetty9Server {
 
     private static final int JETTY_PORT = 8888;
     private static final String JETTY_HOST = "localhost";
+    private static final int ER_CORE_PORT = 8094;
+    private static final String ER_CORE_HOST = "127.0.0.1";
     private static final String WAR_PATH = "./ecom-proxy-app/target/ecom-proxy-app.war";
     private static final String CONTEXT_PATH = "/delegates";
 
     public static void main(String[] args) throws Exception {
         BasicConfigurator.configure();
+        overrideProperties();
 
-        Properties props = new Properties();
-        InputStream in = EcomProxyJetty9Server.class.getClassLoader().getResourceAsStream("env.properties");
-
-        System.out.println("Input stream " + in);
-        props.load(in);
-
-        System.out.println("ER host " + props.getProperty("er.server.host"));
-        System.out.println("ER port " + props.getProperty("er.server.port"));
-
-
-        final Optional<String> host = PropertyService.getProperty("ecom.server.host", "127.0.0.1");
-        final Optional<String> port = PropertyService.getProperty("ecom.server.host", "8094");
+//        setLog(new Slf4jLog());
 
         Logger.getRootLogger().setLevel(Level.DEBUG);
         Logger.getLogger("com.vodafone").setLevel(Level.DEBUG);
@@ -43,8 +33,9 @@ public class EcomProxyJetty9Server {
         Logger.getLogger("com.vodafone").addAppender(ca);
         Logger.getRootLogger().addAppender(ca);
         Logger.getLogger("com.vodafone.config").setLevel(Level.OFF);
-
         Logger.getLogger("org.eclipse").setLevel(Level.ERROR);
+        Logger.getLogger("org.springframework").setLevel(Level.OFF);
+//        Logger.getLogger("org.springframework").addAppender(ca);
 
         Server server = new Server(JETTY_PORT);
 
@@ -66,6 +57,22 @@ public class EcomProxyJetty9Server {
 
         server.start();
         server.join();
+    }
+
+    private static void overrideProperties() {
+
+        final Optional<String> host = PropertyService.getProperty("er.server.host", "127.0.0.1");
+        final Optional<String> port = PropertyService.getProperty("er.server.port", "8094");
+
+        System.out.println("ER host " + host);
+        System.out.println("ER port " + port);
+
+        PropertyService.setProperty("er.server.host", "127.0.0.1");
+        PropertyService.setProperty("er.server.port", String.valueOf(ER_CORE_PORT));
+
+        System.out.println("Overridden ER host " + PropertyService.getProperty("er.server.host", "127.0.0.1"));
+        System.out.println("Overridden port " + PropertyService.getProperty("er.server.port", "8094"));
+
     }
 
 }

@@ -1,9 +1,8 @@
 package com.vodafone.er.ecom.proxy.exception;
 
 /**
- * Created by Ravi Aghera
+ * TODO - Maybe remove since we don't need such defined error messages.
  */
-
 public enum EpaErrorMessageEnum {
     ERROR_FROM_CORE("Error from ER Core calling DecouplingApi."),
     ERROR_FROM_CORE_ECOM("Error from ER Core calling EcomApi."),

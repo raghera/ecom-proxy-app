@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="2">
+    <Appenders>
+        <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+            <layout class="org.apache.log4j.PatternLayout">
+                <param name="ConversionPattern"
+                       value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+            </layout>
+        </appender>
+
+        <RollingFile name="FILE" fileName="./logs/ecom-proxy-app.log" filePattern="'.'.%d{yyyy-MM-dd}" append="true">
+            <PatternLayout>
+                <Pattern>%d %-5p [%c] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+        <!--<appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">-->
+            <!--<param name="append" value="true" />-->
+            <!--<param name="DatePattern" value="'.'yyyy-MM-dd" />-->
+            <!--<param name="file" value="./logs/ecom-proxy-app.log" />-->
+            <!--<layout class="org.apache.log4j.PatternLayout">-->
+                <!--<param name="ConversionPattern"-->
+                       <!--value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>-->
+            <!--</layout>-->
+        <!--</appender>-->
+
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>%d{ABSOLUTE} %-5p [%c{1}] %m%n</Pattern>
+            </PatternLayout>
+        </Console>
+
+        <!--<File name="PerformanceLog" fileName="./logs/performance.log" append="true">-->
+            <!--<PatternLayout>%d{dd.MM.yyyy HH:mm:ss}|%m | %n</PatternLayout>-->
+        <!--</File>-->
+
+        <!--<Async name="AsyncTransLog" blocking="false">-->
+            <!--<AppenderRef ref="trans-log_gb"/>-->
+            <!--<AppenderRef ref="trans-log_de"/>-->
+        <!--</Async>-->
+
+        <!--<File name="trans-log_gb" fileName="logs/translog_GB.log">-->
+            <!--<ThreadContextMapFilter onMatch="ACCEPT" onMismatch="DENY">-->
+                <!--<KeyValuePair key="LOCALE" value="GB"/>-->
+            <!--</ThreadContextMapFilter>-->
+            <!--<PatternLayout>-->
+                <!--<Pattern>CREATION_TS=%d{dd-MM-yy-->
+                    <!--HH:mm:ss}|ER_TX_LOG_ID=%X{ER_TX_LOG_ID}|APPLICATION_ID=ER|REQUEST_NAME=%X{REQUEST_NAME}|VF_EXT_TRACE_ID=%X{VF_EXT_TRACE_ID}|VF_EXT_BP_ID=%X{VF_EXT_BP_ID}|VF_INT_TRACE_ID=%X{VF_INT_TRACE_ID}|VF_INT_TRACK_ID=%X{VF_INT_TRACK_ID}|VF_INT_CALLER_ID=%X{VF_INT_CALLER_ID}|CUSTOMER_TYPE=MSISDN|CUSTOMER_ID=%X{CUSTOMER_ID}|REQUEST_PL=%X{REQUEST_PL}|RESPONSE_PL=%X{RESPONSE_PL}|ER_SERVICE_ID=%X{ER_SERVICE_ID}|ER_PACKAGE_ID=%X{ER_PACKAGE_ID}|ER_RESPONSE_CODE=%X{ER_RESPONSE_CODE}|ER_RESPONSE_ERROR_DESCRIPTION=%X{ER_RESPONSE_ERROR_DESCRIPTION}|ER_PRICEPOINT_ID=%X{ER_PRICEPOINT_ID}|ER_SUBSCRIPTION_ID=%X{ER_SUBSCRIPTION_ID}|ER_TX_ID=%X{ER_TX_ID}-->
+                    <!--%n-->
+                <!--</Pattern>-->
+            <!--</PatternLayout>-->
+        <!--</File>-->
+
+        <!--<File name="trans-log_de" fileName="logs/translog_DE.log">-->
+            <!--<ThreadContextMapFilter onMatch="ACCEPT" onMismatch="DENY">-->
+                <!--<KeyValuePair key="LOCALE" value="DE"/>-->
+            <!--</ThreadContextMapFilter>-->
+            <!--<PatternLayout>-->
+                <!--<Pattern>CREATION_TS=%d{dd-MM-yy-->
+                    <!--HH:mm:ss}|ER_TX_LOG_ID=%X{ER_TX_LOG_ID}|APPLICATION_ID=ER|REQUEST_NAME=%X{REQUEST_NAME}|VF_EXT_TRACE_ID=%X{VF_EXT_TRACE_ID}|VF_EXT_BP_ID=%X{VF_EXT_BP_ID}|VF_INT_TRACE_ID=%X{VF_INT_TRACE_ID}|VF_INT_TRACK_ID=%X{VF_INT_TRACK_ID}|VF_INT_CALLER_ID=%X{VF_INT_CALLER_ID}|CUSTOMER_TYPE=MSISDN|CUSTOMER_ID=%X{CUSTOMER_ID}|REQUEST_PL=%X{REQUEST_PL}|RESPONSE_PL=%X{RESPONSE_PL}|ER_SERVICE_ID=%X{ER_SERVICE_ID}|ER_PACKAGE_ID=%X{ER_PACKAGE_ID}|ER_RESPONSE_CODE=%X{ER_RESPONSE_CODE}|ER_RESPONSE_ERROR_DESCRIPTION=%X{ER_RESPONSE_ERROR_DESCRIPTION}|ER_PRICEPOINT_ID=%X{ER_PRICEPOINT_ID}|ER_SUBSCRIPTION_ID=%X{ER_SUBSCRIPTION_ID}|ER_TX_ID=%X{ER_TX_ID}-->
+                    <!--%n-->
+                <!--</Pattern>-->
+            <!--</PatternLayout>-->
+        <!--</File>-->
+
+        <!--<RollingFile name="ultimate-log" fileName="logs/ultimate.log" filePattern="'.'.%d{yyyy-MM-dd}" append="true">-->
+            <!--<PatternLayout>-->
+                <!--<Pattern>%m %n</Pattern>-->
+            <!--</PatternLayout>-->
+            <!--<Policies>-->
+                <!--<TimeBasedTriggeringPolicy/>-->
+            <!--</Policies>-->
+        <!--</RollingFile>-->
+
+    </Appenders>
+
+    <Loggers>
+        <!--<Logger name="com.vodafone" additivity="false" level="DEBUG">-->
+            <!--<AppenderRef ref="ecom-proxy-app.log"/>-->
+        <!--</Logger>-->
+        <Logger name="ecom-proxy-app" additivity="false" level="DEBUG">
+            <AppenderRef ref="FILE"/>
+        </Logger>
+
+        <!--<Logger name="org.perf4j.TimingLogger" additivity="false" level="INFO">-->
+            <!--<AppenderRef ref="PerformanceLog"/>-->
+        <!--</Logger>-->
+        <!--<Logger name="com.vodafone.transaction.logging" additivity="false" level="ALL">-->
+            <!--<AppenderRef ref="AsyncTransLog"/>-->
+        <!--</Logger>-->
+        <!--<Logger name="com.vodafone.global.er.UltimateLog" additivity="false" level="ERROR">-->
+            <!--<AppenderRef ref="ultimate-log"/>-->
+        <!--</Logger>-->
+        <!--<Logger name="com.vodafone.global.er.util.FrameworkUtil.UltimateLog" additivity="false" level="ERROR">-->
+            <!--<AppenderRef ref="ultimate-log"/>-->
+        <!--</Logger>-->
+
+        <Root level="DEBUG">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="FILE"/>
+        </Root>
+
+    </Loggers>
+
+</Configuration>

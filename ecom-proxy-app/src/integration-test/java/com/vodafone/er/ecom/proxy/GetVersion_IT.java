@@ -12,13 +12,11 @@ import static org.junit.Assert.assertNotNull;
  * Created by Ravi Aghera
  *
  */
-
 public class GetVersion_IT {
 
     @Test
     public void shouldGetVersion() throws Exception {
         String result = EcomApiFactory.getCatalogApi(Locale.UK).getVersion();
-
         assertNotNull(result);
         assertThat(result).as("Checking priceplan version").isNotEmpty();
     }
