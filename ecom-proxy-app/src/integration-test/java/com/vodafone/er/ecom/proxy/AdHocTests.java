@@ -136,7 +136,6 @@ public class AdHocTests {
 //        String xml = sb.toString();
 //        System.out.println(xml);
 
-
 //        StringEntity reqEntity = new StringEntity(requestBody, XmlUtils.getCharacterEncoding());
 //        reqEntity.setContentType("application/xml");
 

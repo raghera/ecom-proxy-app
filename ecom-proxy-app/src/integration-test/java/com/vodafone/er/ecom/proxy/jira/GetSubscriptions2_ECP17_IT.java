@@ -69,42 +69,5 @@ public class GetSubscriptions2_ECP17_IT {
         assertEquals(1, all.length);
     }
 
-    @Test
-    public void shouldGetSubsciptions2Suspended() throws Exception {
-        final String msisdn = String.valueOf(new Random().nextInt());
-
-        final PurchaseAuthorization auth = EcomApiFactory.getPurchaseApi(Locale.UK)
-                .purchasePackageMsisdn("test", msisdn, "pPROV01__X__package:pPROV01_TAX_3_2_10010_999_*", new PurchaseAttributes());
-        assertNotNull(auth);
-        assertTrue("Auth response is false", auth.isSuccess());
-
-        SubscriptionFilter filter = EcomApiFactory.getSubscriptionFilter();
-        filter.setSubscriptionStatus(SubscriptionStatus.SUSPENDED);
-        filter.setAscendingOrder(false);
-        filter.setMaxEvents(100);
-
-        Subscription[] all = getSelfcareApi(Locale.UK).getSubscriptions("demo",msisdn, DeviceType.WAP, filter );
-        assertNotNull(all);
-        assertEquals(1, all.length);
-    }
-
-    @Test
-    public void shouldGetSubsciptions2UnderGracePeriod() throws Exception {
-        final String msisdn = String.valueOf(new Random().nextInt());
-
-        final PurchaseAuthorization auth = EcomApiFactory.getPurchaseApi(Locale.UK)
-                .purchasePackageMsisdn("test", msisdn, "pPROV01__X__package:pPROV01_TAX_3_2_10010_999_*", new PurchaseAttributes());
-        assertNotNull(auth);
-        assertTrue("Auth response is false", auth.isSuccess());
-
-        SubscriptionFilter filter = EcomApiFactory.getSubscriptionFilter();
-        filter.setSubscriptionStatus(SubscriptionStatus.UNDER_GRACE_PERIOD);
-        filter.setAscendingOrder(false);
-        filter.setMaxEvents(100);
-
-        Subscription[] all = getSelfcareApi(Locale.UK).getSubscriptions("demo",msisdn, DeviceType.WAP, filter );
-        assertNotNull(all);
-        assertEquals(1, all.length);
-    }
 
 }

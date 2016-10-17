@@ -25,11 +25,8 @@ public class EpaX509TrustManager implements X509TrustManager {
     private static Logger log = LoggerFactory.getLogger(EpaX509TrustManager.class);
 
     static {
-
-//      Optional<String> trustStore = Optional.of("/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/jre/lib/security/cacerts");
-//      Optional<String> password = Optional.of("changeit");
         Optional<String> store = PropertyService.getProperty("ssl.truststore", "");
-        Optional<String> pass = PropertyService.getProperty("ssl.truststore.password", "");
+        Optional<String> pass = PropertyService.getProperty("ssl.truststore.password", "changeit");
 
         if(store.isPresent() && pass.isPresent()) {
             System.setProperty("javax.net.ssl.trustStore", store.get());
@@ -46,8 +43,6 @@ public class EpaX509TrustManager implements X509TrustManager {
     private X509TrustManager defaultTrustManager = null;
 
     private X509KeyManager defaultKeyManager = null;
-
-
 
     private void init() throws GeneralSecurityException, IOException {
         Optional<String> trustStore = Optional.of(System.getProperty("javax.net.ssl.trustStore"));
