@@ -28,6 +28,7 @@ public class AbstractEcomServlet extends HttpServlet {
     }
 
     void logResponse() {
+        //TODO add final response log entry here
         TransLogManagerFactory.getInstance().emptyTranslogMDC();
     }
 

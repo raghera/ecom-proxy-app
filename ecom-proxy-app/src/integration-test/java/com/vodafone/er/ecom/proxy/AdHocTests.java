@@ -9,12 +9,16 @@ import com.vizzavi.ecommerce.business.selfcare.*;
 import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
 import org.junit.Test;
 
+import javax.net.ssl.*;
+import java.io.*;
+import java.net.URL;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getCustcareApi;
 import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getSelfcareApi;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -76,8 +80,82 @@ public class AdHocTests {
 
     }
 
+    @Test
+    public void testHttpsConnection() throws Exception {
+        //https://dgig-dit-rsd-o-de.sp.vodafone.com:20500/er-fep/frontendproxy
+        //        String host = "85.205.207.43";
+        String protocol = "https://";
+        String host = "dgig-dit-rsd-o-de.sp.vodafone.com";
 
-        @Test
+        String port = ":20500";
+        String path = "/er-fep/frontendproxy";
+
+        String payload =
+                "<?xml version='1.0' encoding='UTF-8'?>" +
+                "<er-request id=\"100029\" client-application-id=\"ecom-proxy-application\" purchase_locale=\"en_GB\" language_locale=\"en_GB\" client-domain=\"GB.ecom-proxy-application\">" +
+                "  <payload>" +
+                "    <get-version-request xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/>" +
+                "  </payload>" +
+                "</er-request>";
+
+        URL url = new URL(protocol + host + port + path);
+//        URL url = new URL(protocol + host + port );
+
+//        String trustStore = "/Users/raghera/working/development/erdev/us/dev/EcomProxyApp/ecom-proxy-app/src/main/resources/certs/DIT_Client_Cert_v4.jks";
+//        String password = "gig-dit-4";
+//        String trustStore = "/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/jre/lib/security";
+//        String password = "changeit";
+
+        System.setProperty("javax.net.debug", "ALL");
+
+        System.out.println("url: " + url.toString());
+        HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+        connection.setSSLSocketFactory(getSSLFactory());
+        connection.setRequestMethod("POST");
+
+        connection.setRequestProperty("Content-Type","application/xml");
+        connection.setDoOutput(true);
+        connection.setDoInput(true);
+
+        connection.connect();
+
+        OutputStream os = connection.getOutputStream();
+        PrintWriter pw = new PrintWriter(new OutputStreamWriter(os));
+        pw.write(payload);
+        pw.close();
+
+        InputStream in = connection.getInputStream();
+        BufferedReader bf = new BufferedReader(new InputStreamReader(in));
+
+        assertEquals(200, connection.getResponseCode());
+        bf.lines().forEach(System.out::println);
+
+//        StringBuffer sb = new StringBuffer();
+//        bf.lines().forEach(sb::append);
+//
+//        String xml = sb.toString();
+//        System.out.println(xml);
+
+
+//        StringEntity reqEntity = new StringEntity(requestBody, XmlUtils.getCharacterEncoding());
+//        reqEntity.setContentType("application/xml");
+
+    }
+
+    private SSLSocketFactory getSSLFactory() throws Exception {
+
+        //Set up the trust manager (re-use ER one)
+        EpaX509TrustManager trustManager = new EpaX509TrustManager();
+
+        SSLContext sslContext = SSLContext.getInstance("TLS");
+        sslContext.init(new KeyManager[]{trustManager.getDefaultKeyManager()}, new TrustManager[] { trustManager.getDefaultTrustManager() }, null);
+
+        SSLSocketFactory sslFactory = sslContext.getSocketFactory();
+        return  sslFactory;
+
+    }
+
+    @Test
     public void simpleGetPackage2() throws Exception {
 
         //Refund Transaction test

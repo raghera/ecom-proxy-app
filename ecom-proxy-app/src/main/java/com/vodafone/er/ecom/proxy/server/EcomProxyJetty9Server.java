@@ -50,6 +50,11 @@ public class EcomProxyJetty9Server {
 
         System.out.println(System.getProperty("user.dir"));
 
+        System.setProperty("DEBUG", "true");
+        System.setProperty("org.eclipse.jetty.LEVEL", "DEBUG");
+        System.setProperty("javax.net.debug", "ALL");
+
+
         webAppContext.setWar(warfile.getAbsolutePath());
 
         webAppContext.addAliasCheck(new AllowSymLinkAliasChecker());

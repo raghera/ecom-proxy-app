@@ -14,10 +14,7 @@ import com.vodafone.er.ecom.proxy.processor.PostProcessor;
 import com.vodafone.global.er.business.catalog.BasePrice;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InOrder;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.List;
@@ -56,7 +53,6 @@ public class CatalogApiServiceTest {
 
     @Test
     public void shouldCallGetPackageSuccessfully() {
-
         String packageId = "packageId_X";
         List<CatalogPackage> catalogPackages = newArrayList(aCatalogPackage());
 

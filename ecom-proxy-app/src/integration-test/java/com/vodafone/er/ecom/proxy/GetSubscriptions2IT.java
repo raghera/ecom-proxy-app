@@ -2,6 +2,7 @@ package com.vodafone.er.ecom.proxy;
 
 import com.vizzavi.ecommerce.business.charging.PurchaseAttributes;
 import com.vizzavi.ecommerce.business.charging.PurchaseAuthorization;
+import com.vizzavi.ecommerce.business.common.DeviceType;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.Subscription;
 import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
@@ -35,7 +36,7 @@ public class GetSubscriptions2IT {
 
         SubscriptionFilterImpl filter = new SubscriptionFilterImpl();
         filter.setTransactionsNotRequired("no");
-        final Subscription[] subscriptions = getSelfcareApi(Locale.UK).getSubscriptions("test", msisdn, 0, new SubscriptionFilterImpl());
+        final Subscription[] subscriptions = getSelfcareApi(Locale.UK).getSubscriptions("test", msisdn, DeviceType.WAP, new SubscriptionFilterImpl());
         assertNotNull(subscriptions);
         assertTrue("Size= " + subscriptions.length, subscriptions.length > 0);
         assertEquals("Size= " + subscriptions.length, subscriptions.length, 2);
