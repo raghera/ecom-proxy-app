@@ -74,8 +74,8 @@ public class EcomProxyJetty9Server {
 
         System.setProperty("javax.net.ssl.keyStore", keyStore);
         System.setProperty("javax.net.ssl.keyStorePassword", keyStorePassword);
-        System.setProperty("javax.net.ssl.trustStore", trustStore);
-        System.setProperty("javax.net.ssl.trustStorePassword", trustStorePassword);
+//        System.setProperty("javax.net.ssl.trustStore", trustStore);
+//        System.setProperty("javax.net.ssl.trustStorePassword", trustStorePassword);
     }
 
     private static void overrideProperties() {

@@ -1,6 +1,5 @@
 package com.vodafone.er.ecom.proxy;
 
-import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,45 +23,37 @@ public class EpaX509TrustManager implements X509TrustManager {
 
     private static Logger log = LoggerFactory.getLogger(EpaX509TrustManager.class);
 
-    static {
-        Optional<String> store = PropertyService.getProperty("ssl.truststore", "");
-        Optional<String> pass = PropertyService.getProperty("ssl.truststore.password", "changeit");
-
-        if(store.isPresent() && pass.isPresent()) {
-            System.setProperty("javax.net.ssl.trustStore", store.get());
-            System.setProperty("javax.net.ssl.trustStorePassword", pass.get());
-        } else {
-            log.warn("Could not find javax.net.ssl.trustStore property" );
-        }
-    }
-
-
     /*
      * The default trust manager used to verify trusted servers.
      */
     private X509TrustManager defaultTrustManager = null;
-
     private X509KeyManager defaultKeyManager = null;
 
-    private void init() throws GeneralSecurityException, IOException {
-        Optional<String> trustStore = Optional.of(System.getProperty("javax.net.ssl.trustStore"));
-        Optional<String> password = Optional.of(System.getProperty("javax.net.ssl.trustStorePassword"));
+    private void init() {
+        Optional<String> kStore = Optional.of(System.getProperty("javax.net.ssl.keyStore"));
+        Optional<String> kPassword = Optional.of(System.getProperty("javax.net.ssl.keyStorePassword"));
 
-        final KeyStore keyStore = KeyStore.getInstance("JKS");
-        try (final InputStream is = new FileInputStream(trustStore.get())) {
-            keyStore.load(is, password.get().toCharArray());
+        try {
+            final KeyStore keyStore = KeyStore.getInstance("JKS");
+            try (final InputStream is = new FileInputStream(kStore.get())) {
+                keyStore.load(is, kPassword.get().toCharArray());
+            }
+            final KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory
+                    .getDefaultAlgorithm());
+            kmf.init(keyStore, kPassword.get().toCharArray());
+
+            final TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory
+                    .getDefaultAlgorithm());
+            tmf.init(keyStore);
+
+            defaultTrustManager = (X509TrustManager) tmf.getTrustManagers()[0];
+            defaultKeyManager = (X509KeyManager) kmf.getKeyManagers()[0];
+
         }
-        final KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory
-                .getDefaultAlgorithm());
-        kmf.init(keyStore, password.get().toCharArray());
-
-        final TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory
-                .getDefaultAlgorithm());
-        tmf.init(keyStore);
-
-        defaultTrustManager = (X509TrustManager) tmf.getTrustManagers()[0];
-        defaultKeyManager = (X509KeyManager) kmf.getKeyManagers()[0];
-
+        catch (GeneralSecurityException | IOException e) {
+            log.error("Could not configure ssl correctly.  Check Key/TrustStore");
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -70,47 +61,7 @@ public class EpaX509TrustManager implements X509TrustManager {
      * manager.
      */
     public EpaX509TrustManager() {
-        try {
-
             init();
-
-/*            KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
-
-//            Optional<String> trustStore = Optional.of("/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/jre/lib/security/cacerts");
-//            Optional<String> password = Optional.of("changeit");
-//            Optional<String> trustStore = Optional.of("/USERS/raghera/working/development/erdev/us/dev/EcomProxyApp/ecom-proxy-app/src/main/resources/certs/DIT_Client_Cert_v4.jks");
-//            Optional<String> password = Optional.of("gig-dit-4");
-            Optional<String> trustStore = Optional.of(System.getProperty("javax.net.ssl.trustStore"));
-            Optional<String> password = Optional.of(System.getProperty("javax.net.ssl.trustStorePassword"));
-
-            if(!trustStore.isPresent() || !password.isPresent()) {
-                throw new ErHttpException("Could not find TrustStore file at: " + trustStore);
-            } else {
-                FileInputStream in = new FileInputStream(trustStore.get());
-                System.out.println("Certfile: " + trustStore.get());
-                System.out.println("Password: " + password.get());
-
-                keyStore.load(in, password.get().toCharArray());
-
-                Key key = keyStore.getKey("le-8913af52-360c-41eb-ae16-7d3ebb522e79", "gig-dit-4".toCharArray());
-                System.out.println("Key exists: " + key);
-
-                log.debug("Keystore loaded.");
-                TrustManagerFactory factory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-
-                log.debug("Configuring trustmanager factory...");
-
-                factory.init(keyStore);
-
-                log.debug("Trustmanager factory configured.");
-
-                defaultTrustManager = (X509TrustManager) factory.getTrustManagers()[0];
-            }
-            */
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }
-
     }
 
     /**

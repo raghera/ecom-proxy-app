@@ -154,6 +154,18 @@ public class AdHocTests {
 
     }
 
+    //Set system properties programatically
+    private static void setSystemProperties() {
+        System.setProperty("DEBUG", "true");
+        System.setProperty("org.eclipse.jetty.LEVEL", "DEBUG");
+//        System.setProperty("javax.net.debug", "ALL");
+
+//        System.setProperty("javax.net.ssl.keyStore", keyStore);
+//        System.setProperty("javax.net.ssl.keyStorePassword", keyStorePassword);
+//        System.setProperty("javax.net.ssl.trustStore", trustStore);
+//        System.setProperty("javax.net.ssl.trustStorePassword", trustStorePassword);
+    }
+
     @Test
     public void simpleGetPackage2() throws Exception {
 
