@@ -20,6 +20,11 @@ public class EcomProxyJetty9Server {
     private static final String WAR_PATH = "./ecom-proxy-app/target/ecom-proxy-app.war";
     private static final String CONTEXT_PATH = "/delegates";
 
+    private static final String keyStore = "./ecom-proxy-app/src/main/resources/certs/DIT_Client_Cert_v4.jks";
+    private static final String keyStorePassword = "gig-dit-4";
+    private static final String trustStore = keyStore;
+    private static final String trustStorePassword = keyStorePassword;
+
     public static void main(String[] args) throws Exception {
         BasicConfigurator.configure();
         overrideProperties();
@@ -48,12 +53,9 @@ public class EcomProxyJetty9Server {
         System.out.println("Warfile present: " + warfile.exists());
         System.out.println("Warfile path: " + warfile.getAbsolutePath());
 
-        System.out.println(System.getProperty("user.dir"));
+        System.out.println(">>>>>" + System.getProperty("user.dir"));
 
-        System.setProperty("DEBUG", "true");
-        System.setProperty("org.eclipse.jetty.LEVEL", "DEBUG");
-        System.setProperty("javax.net.debug", "ALL");
-
+        setSystemProperties();
 
         webAppContext.setWar(warfile.getAbsolutePath());
 
@@ -62,6 +64,18 @@ public class EcomProxyJetty9Server {
 
         server.start();
         server.join();
+    }
+
+    //Set system properties programatically
+    private static void setSystemProperties() {
+        System.setProperty("DEBUG", "true");
+        System.setProperty("org.eclipse.jetty.LEVEL", "DEBUG");
+//        System.setProperty("javax.net.debug", "ALL");
+
+        System.setProperty("javax.net.ssl.keyStore", keyStore);
+        System.setProperty("javax.net.ssl.keyStorePassword", keyStorePassword);
+        System.setProperty("javax.net.ssl.trustStore", trustStore);
+        System.setProperty("javax.net.ssl.trustStorePassword", trustStorePassword);
     }
 
     private static void overrideProperties() {
