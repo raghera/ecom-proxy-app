@@ -7,6 +7,8 @@ import com.vizzavi.ecommerce.business.selfcare.Subscription;
 import com.vizzavi.ecommerce.business.selfcare.Transaction;
 import com.vodafone.er.ecom.proxy.domain.RequestResult;
 import com.vodafone.er.ecom.proxy.service.CatalogApiService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +23,7 @@ import java.util.Locale;
 @Component
 public class SelfcareApiProcessor<T> implements PostProcessor<RequestResult<List<?>>> {
 
+    private static final Logger logger = LoggerFactory.getLogger(SelfcareApiProcessor.class);
     @Autowired
     private CatalogApiProcessor catalogApiProcessor;
     @Autowired
@@ -29,6 +32,8 @@ public class SelfcareApiProcessor<T> implements PostProcessor<RequestResult<List
     @Override
     public void process(RequestResult<List<?>> result) {
 
+        logger.debug("Enter SelfcareApiProcessor.process");
+
         if(!result.getResponse().isEmpty() && result.getResponse().get(0) instanceof Subscription ) {
             List<Subscription> subscriptions = (List<Subscription>) result.getResponse();
             processSubscriptionsResponse(result.getLocale(), subscriptions);
@@ -36,6 +41,7 @@ public class SelfcareApiProcessor<T> implements PostProcessor<RequestResult<List
     }
 
     public List<Subscription> processSubscriptionsResponse(Locale locale, final List<Subscription> subscriptions) {
+        logger.debug("Enter SelfcareApiProcessor.processSubscriptionsResponse");
         subscriptions.forEach(subscription -> populateTransactions(locale, subscription));
         //Currently nothing else required.
 //        populatePurchasedServices(subsList);
@@ -43,6 +49,7 @@ public class SelfcareApiProcessor<T> implements PostProcessor<RequestResult<List
     }
     //Sets the Subscription obj in the Transaction objects
     public void populateTransactions(Locale locale, Subscription subscription) {
+        logger.debug("Enter SelfcareApiProcessor.populateTransactions");
         List<Transaction> resultList = new ArrayList<>();
 
         subscription.getPaymentTransactions().forEach(paymentTxn -> {
@@ -64,6 +71,8 @@ public class SelfcareApiProcessor<T> implements PostProcessor<RequestResult<List
 //        }
 
         subscription.setTransactions(resultList);
+
+        logger.debug("Completed populating transactions");
 
         //populate the package correctly
         final CatalogPackage pack = catalogApiService.getCatalogPackage(locale, subscription.getPackageId());

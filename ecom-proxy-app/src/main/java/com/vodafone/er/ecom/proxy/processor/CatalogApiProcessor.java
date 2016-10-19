@@ -9,6 +9,8 @@ import com.vizzavi.ecommerce.business.selfcare.ResourceBalance;
 import com.vodafone.er.ecom.proxy.domain.RequestResult;
 import com.vodafone.er.ecom.proxy.service.CatalogApiService;
 import com.vodafone.global.er.util.CatalogUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +22,8 @@ import java.util.*;
 @Component
 public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<T>>> {
 
+    private static Logger logger = LoggerFactory.getLogger(CatalogApiProcessor.class);
+
     @Autowired
     private CatalogApiService catalogApiService;
 
@@ -27,6 +31,7 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
     @Override
     public void process(RequestResult<List<T>> result) {
 
+        logger.debug("Enter CatalogApiProcessor.process");
         if(!result.getResponse().isEmpty()  && result.getResponse().get(0) instanceof CatalogPackage) {
             List<CatalogPackage> packages = (List<CatalogPackage>) result.getResponse();
             processCatalogPackages(result.getLocale(), packages);
@@ -40,6 +45,7 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
     }
 
     public List<PricePoint> processPricePoint(final List<PricePoint> pricePoints) {
+        logger.debug("Enter CatalogApiServlet.processPricePoint");
         pricePoints.forEach(pricePoint ->
             pricePoint.setTaxCode(CatalogUtil.getTaxCodeFromPricePointId(pricePoint.getId()))
         );
@@ -48,6 +54,7 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
     }
 
     public List<CatalogPackage> processCatalogPackages(final Locale locale, final List<CatalogPackage> packages) {
+        logger.debug("Enter CatalogApiProcessor.processCatalogPackages");
         packages.forEach( catalogPackage -> {
             //populate missing service data
             for (CatalogService service : catalogPackage.getServiceArray()) {
@@ -90,7 +97,7 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
 
     //Takes a service and populates what is missing but required.
     public List<CatalogService> processCatalogService(final Locale locale, final List<CatalogService> catalogServices) {
-
+        logger.debug("Enter CatalogApiProcessor.processCatalogService");
         catalogServices.forEach(catalogService -> {
             //Go through the pricepoints, deduce the packageId and populate.
             final PricePoints origPpts = catalogService.getPricePoints();

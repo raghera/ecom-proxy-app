@@ -7,6 +7,8 @@ import com.vizzavi.ecommerce.business.provision.ProvisionApi;
 import com.vizzavi.ecommerce.business.selfcare.CustcareApi;
 import com.vizzavi.ecommerce.business.selfcare.SelfcareApi;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Locale;
@@ -20,6 +22,8 @@ import static com.vodafone.er.ecom.proxy.enums.EpaClientEnum.CLIENT_ID;
  */
 @Component
 public class ErApiManager {
+
+    private Logger log = LoggerFactory.getLogger(ErApiManager.class);
 
     private ChargingApi chargingApi;
     private CatalogApi catalogApi;
@@ -56,6 +60,7 @@ public class ErApiManager {
 
     public CatalogApi getCatalogApi(Locale locale) {
         if(null == catalogApi) {
+            log.info("getPackages5: Calling DecouplingApiFactory");
             catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.value());
         }
         return catalogApi;

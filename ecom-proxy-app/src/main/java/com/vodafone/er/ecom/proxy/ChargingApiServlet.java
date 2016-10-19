@@ -48,7 +48,7 @@ public class ChargingApiServlet extends AbstractEcomServlet {
            String clientApplicationId = (String) requestPayload.get("clientApplicationId");
            String msisdn = (String) requestPayload.get("msisdn");
            logRequest(new ERLogDataImpl(msisdn, clientApplicationId, methodName, locale.getCountry()) );
-           log(clientApplicationId, locale, methodName, CHARGING_API.getValue());
+           logEcomRequest(clientApplicationId, locale, methodName, CHARGING_API.getValue());
            if (methodName.equals("usageAuth1")) {
                  //String msisdn = (String) requestPayload.get("msisdn");
                  String serviceId = (String) requestPayload.get("serviceId");
@@ -100,11 +100,12 @@ public class ChargingApiServlet extends AbstractEcomServlet {
                  PromoCodeAttributes promoCodeAttrs = (PromoCodeAttributes) requestPayload.get("promoCodeAttrs");
                  validatePromoCodeHandler(locale, resp  ,promoCodeAttrs );
            }
-           
+           logEcomResponse(clientApplicationId, locale, methodName, CHARGING_API.getValue(), true);
        }
        catch (Exception e) {         
           try
            {
+               //TODO log exception to the application logs here
             ObjectOutputStream oostream = new ObjectOutputStream (new BufferedOutputStream (resp.getOutputStream()));
             oostream.writeObject( new ExceptionAdapter(e));
             oostream.flush();
@@ -112,8 +113,6 @@ public class ChargingApiServlet extends AbstractEcomServlet {
              {
                log.error(ioe.getMessage(),ioe);
              }
-       }	finally	{
-    	   logResponse();
        }
     }
 

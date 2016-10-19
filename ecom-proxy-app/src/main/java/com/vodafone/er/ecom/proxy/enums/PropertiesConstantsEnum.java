@@ -30,7 +30,13 @@ public enum  PropertiesConstantsEnum {
     PROP_GET_TRANSACTIONS6("proxy.getTransactions6"),
     PROP_GET_TRANSACTION17("proxy.getTransaction17"),
     PROP_GET_SUBSCRIPTION10("proxy.getSubscription10"),
-    PROP_RENEW_PURCHASE_PACKAGE_MSISDN3("proxy.renewPurchasePackageMsisdn3");
+    PROP_RENEW_PURCHASE_PACKAGE_MSISDN3("proxy.renewPurchasePackageMsisdn3"),
+
+    PROP_HTTPS_ER_SERVER_HOST("https.er.server.host"),
+    PROP_HTTPS_ER_SERVER_PORT("https.er.server.port"),
+    PROP_HTTPS_ER_SERVER_PATH("https.er.server.path"),
+    PROP_HTTPS_ER_CERT_FILE("https.er.cert.file"),
+    PROP_HTTPS_ER_CERT_PASSWORD("https.er.cert.password");
 
     private final String value;
 

@@ -46,8 +46,8 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
            String clientId = (String) requestPayload.get("clientId");
            //CR 2199
            String msisdn = (String) requestPayload.get("msisdn");
-           log(clientId, locale, methodName, PROVISION_API.getValue());
            logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
+           logEcomRequest(clientId, locale, methodName, PROVISION_API.getValue());
            if (methodName.equals("updateServiceStatus1")) {
                  String provisioningId = (String) requestPayload.get("provisioningId");
                 int serviceStatus =  ((Integer) requestPayload.get("serviceStatus")).intValue();
@@ -81,8 +81,6 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
              {
                log.error(ioe.getMessage(),ioe);
              }
-       }	finally	{
-    	   logResponse();
        }
     }
 
