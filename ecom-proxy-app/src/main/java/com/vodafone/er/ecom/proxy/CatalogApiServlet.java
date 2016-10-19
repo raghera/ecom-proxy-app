@@ -8,7 +8,6 @@ import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.er.ecom.proxy.service.CatalogApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
-import com.vodafone.global.er.translog.TransLogManagerFactory;
 import com.vodafone.global.er.util.ExceptionAdapter;
 import org.apache.log4j.Logger;
 
@@ -35,7 +34,6 @@ public class CatalogApiServlet extends AbstractEcomServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-
         try {
             startTx();
             ServletInputStream is = req.getInputStream();
@@ -48,9 +46,8 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             String clientId = (String) requestPayload.get("clientId");
             String msisdn = (String) requestPayload.get("msisdn");
 
-            log(clientId, locale, methodName, CATALOG_API.getValue());
             logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
-
+            logEcomRequest(clientId, locale, methodName, CATALOG_API.getValue());
 
             if (methodName.equals("getService1")) {
                 String id = (String) requestPayload.get("id");
@@ -73,6 +70,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             }
             if (methodName.equals("getPackages5")) {
                 getPackagesHandler(locale, resp );
+                log.error("getPackages5: Completed CatalogApiServlet.getPackages ");
             }
             if (methodName.equals("getServices6")) {
                 getServicesHandler(locale, resp );
@@ -183,6 +181,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             if (methodName.equals("getOverallGoodwillCreditLimits35")) {
                 getOverallGoodwillCreditLimitsHandler(locale, resp );
             }
+            logEcomResponse(clientId, locale, methodName, CATALOG_API.getValue(), true);
         } catch (Exception e) {
             try	{
                 ObjectOutputStream oostream = new ObjectOutputStream (new BufferedOutputStream (resp.getOutputStream()));
@@ -191,10 +190,6 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             } catch(IOException ioe)	{
                 log.error(ioe.getMessage(),ioe);
             }
-        }	finally	{
-            logResponse();
-
-            TransLogManagerFactory.getInstance().andFinally();
         }
     }
 
@@ -395,6 +390,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
     }
 
     public void getPackagesHandler(Locale locale, HttpServletResponse resp) {
+        log.debug("getPackages5: Enter CatalogApi.getPackagesHandler");
         ObjectOutputStream oos = null;
         try {
             CatalogPackage[] result = null;
@@ -403,21 +399,26 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_GET_PACKAGES5.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
+                    log.debug("getPackages5: Calling CatalogApiService.getPackages");
                     result = catalogApiService.getPackages(locale);
+                    log.debug("getPackages5: Received CatalogApiServlet.getPackages response " + result);
                 } else {
+                    log.debug("getPackages2: Calling ECOM Api");
                     result = getCatalogEcomClient(locale).getPackages();
                 }
             }
             catch (Exception e1) {
-                oos.writeObject( new ExceptionAdapter(e1));
+                log.error("getPackages5: ERROR calling CatalogApiServlet.getPackages e1" + e1.getStackTrace());                oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
+            log.debug("getPackages5: Sending response for CatalogApiServlet.getPackages ");
             // send response
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            log.error("getPackages5: ERROR calling CatalogApiServlet.getPackages e2" + e2.getStackTrace());
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (

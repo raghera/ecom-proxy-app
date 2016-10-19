@@ -27,15 +27,20 @@ public class AbstractEcomServlet extends HttpServlet {
     void startTx() {
     }
 
-    void logResponse() {
-        //TODO add final response log entry here
-        TransLogManagerFactory.getInstance().emptyTranslogMDC();
+    protected void logEcomRequest(String clientId, Locale locale, String methodName, String apiName) {
+        LOG.info("\nEcomRequest TX_LOG_ID={}, apiName={} locale={} clientId={} methodName={}\n",
+                getCurrentTransactionId(), apiName, locale, clientId, methodName);
     }
 
-    protected void log(String clientId, Locale locale, String methodName, String apiName) {
-        LOG.info("Incoming apiName={} locale={} clientId={} methodName={}",
-                apiName, locale, clientId, methodName);
+    void logEcomResponse(String clientId, Locale locale, String methodName, String apiName, boolean operationComplete) {
+        LOG.info("\nEcomResponse TX_LOG_ID={} apiName={} locale={} clientId={} methodName={}, operationComplete={}\n",
+                getCurrentTransactionId(), apiName, locale, clientId, methodName, operationComplete);
 
+        clearTranslog();
+    }
+
+    protected void clearTranslog() {
+        TransLogManagerFactory.getInstance().emptyTranslogMDC();
     }
 
     protected void startPerformanceLog(String apiName, String transactionId ) {
@@ -46,6 +51,8 @@ public class AbstractEcomServlet extends HttpServlet {
     }
 
     void logRequest(final ERLogData requestData) {
+        //Always generate a TX_LOG_ID
+        transLogManager.addAttributeContext(Attr.ER_TX_LOG_ID, generateId());
 
         final Optional<Boolean> transLogging = PropertyService.getPropertyAsBoolean(TransLogConstants.PROPERTY_TRANSLOG_LOGGING_ON, false);
         transLogging.ifPresent(x -> transLogManager.setIsTransLoggingOn(x));
@@ -79,9 +86,11 @@ public class AbstractEcomServlet extends HttpServlet {
         }
     }
 
+    public String getCurrentTransactionId() {
+        return transLogManager.getAttribute(Attr.ER_TX_LOG_ID);
+    }
+
     private String generateId() {
-
         return UUID.randomUUID().toString();
-
     }
 }

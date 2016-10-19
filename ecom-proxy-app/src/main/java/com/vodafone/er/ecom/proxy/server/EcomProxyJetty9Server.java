@@ -28,11 +28,13 @@ public class EcomProxyJetty9Server {
     public static void main(String[] args) throws Exception {
         BasicConfigurator.configure();
         overrideProperties();
-
 //        setLog(new Slf4jLog());
 
-        Logger.getRootLogger().setLevel(Level.DEBUG);
-        Logger.getLogger("com.vodafone").setLevel(Level.DEBUG);
+//        Logger.getRootLogger().setLevel(Level.DEBUG);
+//        Logger.getLogger("com.vodafone").setLevel(Level.DEBUG);
+
+        Logger logger = Logger.getLogger("com.vodafone");
+
         ConsoleAppender ca = new ConsoleAppender(new PatternLayout("%-5p [%t]: %m%n"));
         ca.setWriter(new OutputStreamWriter(System.out));
         Logger.getLogger("com.vodafone").addAppender(ca);

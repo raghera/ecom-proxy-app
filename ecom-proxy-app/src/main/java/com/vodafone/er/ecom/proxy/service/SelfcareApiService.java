@@ -10,6 +10,8 @@ import com.vodafone.er.ecom.proxy.api.ErApiManager;
 import com.vodafone.er.ecom.proxy.domain.RequestResult;
 import com.vodafone.er.ecom.proxy.processor.PostProcessor;
 import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,8 @@ import static com.vodafone.er.ecom.proxy.enums.EpaClientEnum.CLIENT_ID;
  */
 @Service
 public class SelfcareApiService {
+
+    private final Logger logger = LoggerFactory.getLogger(SelfcareApiService.class);
 
     @Resource(name = "selfcareApiProcessor")
     private PostProcessor<RequestResult<List<?>>> postProcessor;
@@ -54,16 +58,24 @@ public class SelfcareApiService {
 
     public Subscription [] getSubscriptions(Locale locale, String clientId, String msisdn, int device, SubscriptionFilter filter)
             throws EcommerceException{
+        logger.debug("Enter SelfcareApiService.getSubscriptions");
         Subscription[] subscriptions = erApiManager.getSelfcareApi(locale).getSubscriptions(clientId, msisdn, device, filter);
 
+        logger.debug("Enter SelfcareApiService.getSubscriptions recieved response" + subscriptions);
+
         if(subscriptions.length > 0) {
+            logger.debug("Calling SelfcareApiService.postProcessor");
+
             List<Subscription> subs = Lists.newArrayList(subscriptions);
             postProcessor.process(new RequestResult.Builder<List<Subscription>>()
                     .response(subs)
                     .msisdn(msisdn)
                     .locale(locale)
                     .build());
+            logger.debug("Received response from SelfcareApiService.postProcessor");
         }
+
+        logger.debug("SelfcareApiService.getSubscriptions returning processed subscriptions" + subscriptions);
 
         return subscriptions;
     }

@@ -13,7 +13,7 @@
     <appender name="file" class="org.apache.log4j.DailyRollingFileAppender">
         <param name="append" value="true" />
         <param name="DatePattern" value="'.'yyyy-MM-dd" />
-        <param name="file" value="./logs/ecom-proxy-app.log" />
+        <param name="file" value="/USERS/raghera/working/development/erdev/us/dev/EcomProxyApp/logs/ecom-proxy-app.log" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"
                    value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
@@ -21,7 +21,7 @@
     </appender>
 
     <appender name="caching-log" class="org.apache.log4j.FileAppender">
-    <param name="File" value="logs/caching.log" />
+    <param name="File" value="/USERS/raghera/working/development/erdev/us/dev/EcomProxyApp/logs/caching.log" />
     <param name="Append" value="true" />
     <layout class="org.apache.log4j.PatternLayout">
     <param name="ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss}|%m | %n" />
@@ -47,7 +47,7 @@
     </appender>
 
     <appender name="trans-log" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="logs/translog.log" />
+        <param name="File" value="/USERS/raghera/working/development/erdev/us/dev/EcomProxyApp/logs/translog.log" />
         <param name="Append" value="true" />
         <param name="DatePattern" value="'.'yyyy-MM-dd"/>
         <layout class="org.apache.log4j.PatternLayout">
@@ -74,7 +74,7 @@
         <appender-ref ref="trans-log"/>
     </category>
     <category name="org.springframework" additivity="false">
-        <level value="INFO" />
+        <level value="WARN" />
         <appender-ref ref="file" />
     </category>
 

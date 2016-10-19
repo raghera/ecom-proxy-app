@@ -47,10 +47,11 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             Locale locale = (Locale)requestPayload.get("locale");
             String methodName = (String) requestPayload.get("methodName");
             String clientId = (String) requestPayload.get("clientId");
-            log(clientId, locale, methodName, PURCHASE_API.getValue());
             //CR 2199 Add msisdn to context
             final String msisdn = (String) requestPayload.get("msisdn");
             logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
+            logEcomRequest(clientId, locale, methodName, PURCHASE_API.getValue());
+
             if (methodName.equals("purchasePackageMsisdn1")) {
                 String clientApplicationId = (String) requestPayload.get("clientApplicationId");
                 //String msisdn = (String) requestPayload.get("msisdn");
@@ -116,8 +117,6 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             {
                 log.error(ioe.getMessage(),ioe);
             }
-        }	finally	{
-            logResponse();
         }
     }
 
