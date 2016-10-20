@@ -4,6 +4,7 @@ import com.vizzavi.ecommerce.business.charging.BaseAuthorization;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.*;
 import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
+import com.vodafone.er.ecom.proxy.service.LogService;
 import com.vodafone.er.ecom.proxy.service.SelfcareApiService;
 import com.vodafone.global.er.business.selfcare.BalanceFilter;
 import com.vodafone.global.er.business.selfcare.MicroServiceStatus;
@@ -33,9 +34,11 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
     private static Logger log = Logger.getLogger(SelfcareApiServlet.class);
 
     private SelfcareApiService selfcareApiService;
+    private LogService logService;
 
     public SelfcareApiServlet() {
         selfcareApiService = ApplicationContextHolder.getContext().getBean(SelfcareApiService.class);
+        logService = ApplicationContextHolder.getContext().getBean(LogService.class);
     }
 
     protected SelfcareApi getSelfcareApiDelegate(Locale locale) throws Exception {
@@ -57,8 +60,8 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
             //CR 2199 - Add msisdn to context
             String msisdn = (String) requestPayload.get("msisdn");
 
-            logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
-            logEcomRequest(clientId, locale, methodName, SELFCARE_API.getValue());
+            logService.logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
+            logService.logEcomRequest(clientId, locale, methodName, SELFCARE_API.getValue());
 
             if (methodName.equals("getSubscriptions1")) {
 
@@ -174,7 +177,7 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
                 TransactionFilter filter = (TransactionFilter) requestPayload.get("filter");
                 getTransactionHandler(locale, resp  ,clientId  ,filter );
             }
-            logEcomResponse(clientId, locale, methodName, SELFCARE_API.getValue(), true);
+            logService.logEcomResponse(clientId, locale, methodName, SELFCARE_API.getValue(), true);
         }
         catch (Exception e) {
             try {

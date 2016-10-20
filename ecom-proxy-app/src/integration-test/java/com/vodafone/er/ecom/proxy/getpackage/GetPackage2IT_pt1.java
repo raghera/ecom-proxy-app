@@ -27,7 +27,6 @@ public class GetPackage2IT_pt1 {
     public void testGetPackage2AssertJ() throws Exception {
         CatalogPackage pack = getCatalogApi().getPackage("pAlt");
         assertNotNull(pack);
-
         softly.assertThat(pack.getName() ).as(" pack.getName()" ).isEqualTo("2 Usage Alternative Payment Pkg");
         softly.assertThat(pack.getResource() ).as(" pack.getResource()" ).isNull();
         softly.assertThat(pack.getKey() ).as(" pack.getKey()" ).isNull();

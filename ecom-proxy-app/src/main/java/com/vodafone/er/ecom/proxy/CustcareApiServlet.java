@@ -7,6 +7,7 @@ import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.*;
 import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
 import com.vodafone.er.ecom.proxy.service.CustcareApiService;
+import com.vodafone.er.ecom.proxy.service.LogService;
 import com.vodafone.er.ecom.proxy.service.SelfcareApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
@@ -35,10 +36,12 @@ public class CustcareApiServlet extends AbstractEcomServlet {
 
     private CustcareApiService custcareApiService;
     private SelfcareApiService selfcareApiService;
+    private LogService logService;
 
     public CustcareApiServlet() {
         custcareApiService = ApplicationContextHolder.getContext().getBean(CustcareApiService.class);
         selfcareApiService = ApplicationContextHolder.getContext().getBean(SelfcareApiService.class);
+        logService = ApplicationContextHolder.getContext().getBean(LogService.class);
     }
 
     protected SelfcareApi getSelfcareApiDelegate(Locale locale) throws Exception {
@@ -59,8 +62,8 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             String clientId = (String) requestPayload.get("clientId");
             String msisdn = (String) requestPayload.get("msisdn");
 
-            logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
-            logEcomRequest(clientId, locale, methodName, CUSTCARE_API.getValue());
+            logService.logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
+            logService.logEcomRequest(clientId, locale, methodName, CUSTCARE_API.getValue());
 
             if (methodName.equals("inactivateAccount2")) {
 
@@ -304,7 +307,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 modifyUserGroupsHandler(locale, resp, clientId, msisdn, csrId, reason, usergroups, action);
 
             }
-            logEcomResponse(clientId, locale, methodName, CUSTCARE_API.getValue(), true);
+            logService.logEcomResponse(clientId, locale, methodName, CUSTCARE_API.getValue(), true);
         }
         catch (Exception e) {
             try

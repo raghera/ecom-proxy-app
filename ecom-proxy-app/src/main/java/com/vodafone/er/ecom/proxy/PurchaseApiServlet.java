@@ -5,6 +5,7 @@ import com.vizzavi.ecommerce.business.charging.*;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
+import com.vodafone.er.ecom.proxy.service.LogService;
 import com.vodafone.er.ecom.proxy.service.PurchaseApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.util.ExceptionAdapter;
@@ -30,9 +31,11 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
     private static Logger log = Logger.getLogger(PurchaseApiServlet.class);
 
     private PurchaseApiService purchaseApiService;
+    private LogService logService;
 
     public PurchaseApiServlet() {
         purchaseApiService = ApplicationContextHolder.getContext().getBean(PurchaseApiService.class);
+        logService = ApplicationContextHolder.getContext().getBean(LogService.class);
     }
 
     @Override
@@ -49,8 +52,8 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             String clientId = (String) requestPayload.get("clientId");
             //CR 2199 Add msisdn to context
             final String msisdn = (String) requestPayload.get("msisdn");
-            logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
-            logEcomRequest(clientId, locale, methodName, PURCHASE_API.getValue());
+            logService.logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
+            logService.logEcomRequest(clientId, locale, methodName, PURCHASE_API.getValue());
 
             if (methodName.equals("purchasePackageMsisdn1")) {
                 String clientApplicationId = (String) requestPayload.get("clientApplicationId");
@@ -106,6 +109,7 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
 //        	   double preRate =  ((Double) requestPayload.get("preRate")).doubleValue();
 //        	   goodwillCreditHandler(locale, resp  ,clientId  ,msisdn  ,partnerId  ,merchantId  ,packageId  ,preRate );
 //           }
+            logService.logEcomResponse(clientId, locale, methodName, PURCHASE_API.getValue(), true);
         }
         catch (Exception e) {
             try

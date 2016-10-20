@@ -6,6 +6,7 @@ import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.er.ecom.proxy.service.ChargingApiService;
+import com.vodafone.er.ecom.proxy.service.LogService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.util.ExceptionAdapter;
 import org.apache.log4j.Logger;
@@ -29,9 +30,11 @@ public class ChargingApiServlet extends AbstractEcomServlet {
 	private static Logger log = Logger.getLogger(ChargingApiServlet.class);
 
     private ChargingApiService chargingApiService;
+    private LogService logService;
 
     public ChargingApiServlet() {
         chargingApiService = ApplicationContextHolder.getContext().getBean(ChargingApiService.class);
+        logService = ApplicationContextHolder.getContext().getBean(LogService.class);
     }
 
     @Override
@@ -47,8 +50,8 @@ public class ChargingApiServlet extends AbstractEcomServlet {
            //for some reason this API uses clientApplicationId and the others use clientId
            String clientApplicationId = (String) requestPayload.get("clientApplicationId");
            String msisdn = (String) requestPayload.get("msisdn");
-           logRequest(new ERLogDataImpl(msisdn, clientApplicationId, methodName, locale.getCountry()) );
-           logEcomRequest(clientApplicationId, locale, methodName, CHARGING_API.getValue());
+           logService.logRequest(new ERLogDataImpl(msisdn, clientApplicationId, methodName, locale.getCountry()) );
+           logService.logEcomRequest(clientApplicationId, locale, methodName, CHARGING_API.getValue());
            if (methodName.equals("usageAuth1")) {
                  //String msisdn = (String) requestPayload.get("msisdn");
                  String serviceId = (String) requestPayload.get("serviceId");
@@ -100,7 +103,7 @@ public class ChargingApiServlet extends AbstractEcomServlet {
                  PromoCodeAttributes promoCodeAttrs = (PromoCodeAttributes) requestPayload.get("promoCodeAttrs");
                  validatePromoCodeHandler(locale, resp  ,promoCodeAttrs );
            }
-           logEcomResponse(clientApplicationId, locale, methodName, CHARGING_API.getValue(), true);
+           logService.logEcomResponse(clientApplicationId, locale, methodName, CHARGING_API.getValue(), true);
        }
        catch (Exception e) {         
           try

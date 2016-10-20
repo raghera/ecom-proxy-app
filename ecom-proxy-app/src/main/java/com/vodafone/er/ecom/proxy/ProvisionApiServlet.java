@@ -5,6 +5,7 @@ import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vizzavi.ecommerce.business.provision.ProvisionApi;
 import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
+import com.vodafone.er.ecom.proxy.service.LogService;
 import com.vodafone.er.ecom.proxy.service.ProvisionApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.util.ExceptionAdapter;
@@ -27,9 +28,11 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
 	private static Logger log = Logger.getLogger(ProvisionApiServlet.class);
 
     private ProvisionApiService provisionApiService;
+    private LogService logService;
 
     public ProvisionApiServlet() {
         provisionApiService = ApplicationContextHolder.getContext().getBean(ProvisionApiService.class);
+        logService = ApplicationContextHolder.getContext().getBean(LogService.class);
     }
 
     @Override
@@ -46,8 +49,8 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
            String clientId = (String) requestPayload.get("clientId");
            //CR 2199
            String msisdn = (String) requestPayload.get("msisdn");
-           logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
-           logEcomRequest(clientId, locale, methodName, PROVISION_API.getValue());
+           logService.logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
+           logService.logEcomRequest(clientId, locale, methodName, PROVISION_API.getValue());
            if (methodName.equals("updateServiceStatus1")) {
                  String provisioningId = (String) requestPayload.get("provisioningId");
                 int serviceStatus =  ((Integer) requestPayload.get("serviceStatus")).intValue();
@@ -68,6 +71,8 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
                  String newProvisioningTag = (String) requestPayload.get("newProvisioningTag");
                  updateProvisioningTagHandler(locale, resp  ,clientId  ,msisdn  ,subscriptionId  ,serviceId  ,newProvisioningTag );
            }
+
+           logService.logEcomResponse(clientId, locale, methodName, PROVISION_API.getValue(), true);
            
        }
        catch (Exception e) {         

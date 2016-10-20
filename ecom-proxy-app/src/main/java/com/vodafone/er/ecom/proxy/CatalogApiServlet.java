@@ -7,6 +7,7 @@ import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.er.ecom.proxy.service.CatalogApiService;
+import com.vodafone.er.ecom.proxy.service.LogService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.util.ExceptionAdapter;
 import org.apache.log4j.Logger;
@@ -27,9 +28,11 @@ public class CatalogApiServlet extends AbstractEcomServlet {
     private static Logger log = Logger.getLogger(CatalogApiServlet.class);
 
     private CatalogApiService catalogApiService;
+    private LogService logService;
 
     public CatalogApiServlet() {
         catalogApiService = ApplicationContextHolder.getContext().getBean(CatalogApiService.class);
+        logService = ApplicationContextHolder.getContext().getBean(LogService.class);
     }
 
     @Override
@@ -46,8 +49,8 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             String clientId = (String) requestPayload.get("clientId");
             String msisdn = (String) requestPayload.get("msisdn");
 
-            logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
-            logEcomRequest(clientId, locale, methodName, CATALOG_API.getValue());
+            logService.logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
+            logService.logEcomRequest(clientId, locale, methodName, CATALOG_API.getValue());
 
             if (methodName.equals("getService1")) {
                 String id = (String) requestPayload.get("id");
@@ -181,7 +184,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             if (methodName.equals("getOverallGoodwillCreditLimits35")) {
                 getOverallGoodwillCreditLimitsHandler(locale, resp );
             }
-            logEcomResponse(clientId, locale, methodName, CATALOG_API.getValue(), true);
+            logService.logEcomResponse(clientId, locale, methodName, CATALOG_API.getValue(), true);
         } catch (Exception e) {
             try	{
                 ObjectOutputStream oostream = new ObjectOutputStream (new BufferedOutputStream (resp.getOutputStream()));

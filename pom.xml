@@ -29,45 +29,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vodafone.er</groupId>
-            <artifactId>ER_api</artifactId>
-            <version>${er.api.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.vodafone.er</groupId>
-            <artifactId>ER_transactions_log</artifactId>
-            <version>${er.translog.version}</version>
-        </dependency>
-        <!--<dependency>-->
-        <!--<groupId>com.vodafone.er</groupId>-->
-        <!--<artifactId>ER_client</artifactId>-->
-        <!--<version>${er.client.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.vodafone.er</groupId>-->
-        <!--<artifactId>ER_transactions_log</artifactId>-->
-        <!--<version>${er.translog.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.vodafone.er</groupId>-->
-        <!--<artifactId>DECOUPLING_client</artifactId>-->
-        <!--<version>${er.decoupling.client.version}</version>-->
-        <!--</dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
-        <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertj.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- All these Required if using JAXB 1 otherwise remove if using JAXB 2-->
 
         <dependency>
             <groupId>com.vodafone.er</groupId>
@@ -170,12 +136,6 @@
                 <version>${mockito.version}</version>
             </dependency>
 
-            <!--<dependency>-->
-            <!--<groupId>org.assertj</groupId>-->
-            <!--<artifactId>assertj-core</artifactId>-->
-            <!--<version>2.5.0</version>-->
-            <!--<scope>test</scope>-->
-            <!--</dependency>-->
         </dependencies>
     </dependencyManagement>
 
