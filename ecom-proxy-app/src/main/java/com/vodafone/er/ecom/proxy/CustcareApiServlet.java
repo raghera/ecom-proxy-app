@@ -50,17 +50,21 @@ public class CustcareApiServlet extends AbstractEcomServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+
+        Locale locale = null;
+        String methodName = "", clientId ="", msisdn = "";
+
         try {
             startTx();
             ServletInputStream is = req.getInputStream();
             ObjectInputStream ois = new ObjectInputStream(is);
-            @SuppressWarnings("unchecked")
             HashMap<String, Serializable> requestPayload = (HashMap<String, Serializable>) ois.readObject();
 
-            Locale locale = (Locale)requestPayload.get("locale");
-            String methodName = (String) requestPayload.get("methodName");
-            String clientId = (String) requestPayload.get("clientId");
-            String msisdn = (String) requestPayload.get("msisdn");
+            locale = (Locale) requestPayload.get("locale");
+            methodName = (String) requestPayload.get("methodName");
+            clientId = (String) requestPayload.get("clientId");
+            msisdn = (String) requestPayload.get("msisdn");
+
 
             logService.logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
             logService.logEcomRequest(clientId, locale, methodName, CUSTCARE_API.getValue());
@@ -312,6 +316,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
         catch (Exception e) {
             try
             {
+                logService.logEcomError(clientId, locale, methodName, CUSTCARE_API.getValue(), e);
 
                 ObjectOutputStream oostream = new ObjectOutputStream (new BufferedOutputStream (resp.getOutputStream()));
                 oostream.writeObject( new ExceptionAdapter(e));

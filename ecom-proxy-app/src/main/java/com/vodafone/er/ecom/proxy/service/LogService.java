@@ -36,14 +36,12 @@ public class LogService {
     public void logEcomResponse(String clientId, Locale locale, String methodName, String apiName, boolean operationComplete) {
         LOG.info("\nEcomResponse TX_LOG_ID={} apiName={} locale={} clientId={} methodName={}, operationComplete={}\n",
                 getCurrentTransactionId(), apiName, locale, clientId, methodName, operationComplete);
-
         clearTranslog();
     }
 
-    public void logEcomError(String clientId, Locale locale, String methodName, String apiName, boolean operationComplete) {
-        LOG.info("\nEcomResponse TX_LOG_ID={} apiName={} locale={} clientId={} methodName={}, operationComplete={}\n",
-                getCurrentTransactionId(), apiName, locale, clientId, methodName, operationComplete);
-
+    public void logEcomError(String clientId, Locale locale, String methodName, String apiName, Exception exception) {
+        LOG.info("\nEcomError TX_LOG_ID={} apiName={} locale={} clientId={} methodName={}, exceptionType={}, exceptionMessage={}\n",
+                getCurrentTransactionId(), apiName, locale, clientId, methodName, exception.getClass(), exception.getMessage());
         clearTranslog();
     }
 

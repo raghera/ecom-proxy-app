@@ -47,18 +47,19 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        String methodName = null;
+        Locale locale = null;
+        String methodName = "", clientId ="", msisdn = "";
         try {
             startTx();
             ServletInputStream is = req.getInputStream();
             ObjectInputStream ois = new ObjectInputStream(is);
             @SuppressWarnings("unchecked")
             HashMap<String, Serializable> requestPayload = (HashMap<String, Serializable>) ois.readObject();
-            Locale locale = (Locale)requestPayload.get("locale");
+            locale = (Locale)requestPayload.get("locale");
             methodName = (String) requestPayload.get("methodName");
-            String clientId = (String) requestPayload.get("clientId");
+            clientId = (String) requestPayload.get("clientId");
             //CR 2199 - Add msisdn to context
-            String msisdn = (String) requestPayload.get("msisdn");
+            msisdn = (String) requestPayload.get("msisdn");
 
             logService.logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
             logService.logEcomRequest(clientId, locale, methodName, SELFCARE_API.getValue());
@@ -181,6 +182,7 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
         }
         catch (Exception e) {
             try {
+                logService.logEcomError(clientId, locale, methodName, SELFCARE_API.getValue(), e);
                 ObjectOutputStream oostream = new ObjectOutputStream (new BufferedOutputStream (resp.getOutputStream()));
                 oostream.writeObject( new ExceptionAdapter(e));
                 oostream.flush();
