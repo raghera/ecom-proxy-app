@@ -5,7 +5,7 @@ import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vizzavi.ecommerce.business.provision.ProvisionApi;
 import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
-import com.vodafone.er.ecom.proxy.service.LogService;
+import com.vodafone.er.ecom.proxy.service.EpaLogService;
 import com.vodafone.er.ecom.proxy.service.ProvisionApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.util.ExceptionAdapter;
@@ -28,11 +28,11 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
     private static Logger log = Logger.getLogger(ProvisionApiServlet.class);
 
     private ProvisionApiService provisionApiService;
-    private LogService logService;
+    private EpaLogService epaLogService;
 
     public ProvisionApiServlet() {
         provisionApiService = ApplicationContextHolder.getContext().getBean(ProvisionApiService.class);
-        logService = ApplicationContextHolder.getContext().getBean(LogService.class);
+        epaLogService = ApplicationContextHolder.getContext().getBean(EpaLogService.class);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
             methodName = (String) requestPayload.get("methodName");
             clientId = (String) requestPayload.get("clientId");
             msisdn = (String) requestPayload.get("msisdn");
-            logService.logRequestIn(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry(), PROVISION_API.getValue()));
+            epaLogService.logRequestIn(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry(), PROVISION_API.getValue()));
 
             if (methodName.equals("updateServiceStatus1")) {
                 String provisioningId = (String) requestPayload.get("provisioningId");
@@ -73,7 +73,7 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
 
         }
         catch (Exception e) {
-            logService.logResponseError(e);
+            epaLogService.logResponseError(e);
             try {
                 ObjectOutputStream oostream = new ObjectOutputStream (new BufferedOutputStream (resp.getOutputStream()));
                 oostream.writeObject( new ExceptionAdapter(e));
@@ -104,18 +104,18 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
                 }
             }
             catch (Exception e1) {
-                logService.logResponseError(e1);
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
-            logService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("SUCCESS");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
-            logService.logResponseError(e2);
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -153,18 +153,18 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
                 result = getProvisionApiDelegate(locale).updateServiceStatus(provisioningId,serviceStatus,provisioningStatus,provisioningTag);
             }
             catch (Exception e1) {
-                logService.logResponseError(e1);
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
-            logService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("SUCCESS");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
-            logService.logResponseError(e2);
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -198,18 +198,18 @@ public class ProvisionApiServlet extends AbstractEcomServlet {
                 result = getProvisionApiDelegate(locale).updateProvisioningTag(clientId,msisdn,subscriptionId,serviceId,newProvisioningTag);
             }
             catch (Exception e1) {
-                logService.logResponseError(e1);
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
-            logService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("SUCCESS");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
-            logService.logResponseError(e2);
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (

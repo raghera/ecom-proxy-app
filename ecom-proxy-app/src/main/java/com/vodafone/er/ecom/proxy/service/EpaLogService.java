@@ -13,10 +13,10 @@ import com.vodafone.global.er.ulf.service.impl.ERULFLogDataManagerImpl;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.Optional;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static com.vodafone.global.er.translog.TransLogManager.Attr;
@@ -25,10 +25,12 @@ import static com.vodafone.global.er.translog.TransLogManager.Attr;
  * Created by Ravi Aghera
  */
 @Service
-public class LogService {
+public class EpaLogService {
 
-    private static Logger LOG = LoggerFactory.getLogger(LogService.class);
+    private static Logger LOG = LoggerFactory.getLogger(EpaLogService.class);
     private final TransLogManager transLogManager = TransLogManagerFactory.getInstance();
+    @Autowired
+    private EpaDateTimeProcessor dateProcessor;
 
     private void logEcomRequest(final ERLogData requestData) {
         LOG.info("\nEcomRequest TX_LOG_ID={}, apiName={} locale={} clientId={} requestName={}\n",
@@ -50,18 +52,14 @@ public class LogService {
     public void logRequestIn(final ERLogData requestData) {
         //Always generate a TX_LOG_ID
         transLogManager.addAttributeContext(Attr.ER_TX_LOG_ID, generateId());
-        //TODO Format the time for readable output
-        long startTime = new Date().getTime();
-        final Optional<Boolean> transLogging =
-                PropertyService.getPropertyAsBoolean(TransLogConstants.PROPERTY_TRANSLOG_LOGGING_ON, false);
-        transLogging.ifPresent(x -> transLogManager.setIsTransLoggingOn(x));
+        LOG.info("Generated TX_LOG_ID=", transLogManager.getAttribute(Attr.ER_TX_LOG_ID));
+
+        PropertyService.getPropertyAsBoolean(TransLogConstants.PROPERTY_TRANSLOG_LOGGING_ON, false)
+                .ifPresent(transLogManager::setIsTransLoggingOn);
 
         if(transLogManager.isTransLoggingOn()) {
-            //Always generate a new transaction id for each request.
-            transLogManager.addAttributeContext(Attr.ER_TX_LOG_ID, generateId());
             transLogManager.addAttributeOnce(Attr.LOG_POINT, ULFEntry.Logpoint.REQUEST_IN.name());
-
-            transLogManager.addAttributeContext(Attr.START_TS, Long.toString(startTime));
+            transLogManager.addAttributeContext(Attr.START_TS, dateProcessor.getLocalDateTimeString(LocalDateTime.now()));
 
             if (StringUtils.isNotBlank(requestData.getRequestName())) {
                 transLogManager.addAttributeContext(Attr.REQUEST_NAME, requestData.getRequestName());
@@ -99,11 +97,10 @@ public class LogService {
     public void logResponseOut(String status) {
         transLogManager.addAttributeOnce(Attr.STATUS, status);
         transLogManager.addAttributeOnce(Attr.LOG_POINT, ULFEntry.Logpoint.RESPONSE_OUT.name());
-        long startTime = Long.valueOf(transLogManager.getAttribute(Attr.START_TS));
-        long endTime = new Date().getTime();
-        long duration = endTime - startTime;
-        transLogManager.addAttributeContext(Attr.COMPLETE_TS, Long.toString(endTime));
-        transLogManager.addAttributeContext(Attr.DURATION, Long.toString(duration));
+        final String endTime = dateProcessor.getLocalDateTimeString(LocalDateTime.now());
+        transLogManager.addAttributeContext(Attr.COMPLETE_TS, endTime);
+        transLogManager.addAttributeContext(Attr.DURATION,
+                String.valueOf(dateProcessor.calculateDurationAsMillis(transLogManager.getAttribute(Attr.START_TS), endTime)));
         transLogManager.logResponse(true);
 
         logEcomResponse(new ERLogDataImpl(transLogManager.getAttribute(Attr.CUSTOMER_ID),

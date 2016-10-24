@@ -5,7 +5,7 @@ import com.vizzavi.ecommerce.business.charging.*;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
-import com.vodafone.er.ecom.proxy.service.LogService;
+import com.vodafone.er.ecom.proxy.service.EpaLogService;
 import com.vodafone.er.ecom.proxy.service.PurchaseApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.util.ExceptionAdapter;
@@ -31,11 +31,11 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
     private static Logger log = Logger.getLogger(PurchaseApiServlet.class);
 
     private PurchaseApiService purchaseApiService;
-    private LogService logService;
+    private EpaLogService epaLogService;
 
     public PurchaseApiServlet() {
         purchaseApiService = ApplicationContextHolder.getContext().getBean(PurchaseApiService.class);
-        logService = ApplicationContextHolder.getContext().getBean(LogService.class);
+        epaLogService = ApplicationContextHolder.getContext().getBean(EpaLogService.class);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             methodName = (String) requestPayload.get("methodName");
             clientId = (String) requestPayload.get("clientId");
             msisdn = (String) requestPayload.get("msisdn");
-            logService.logRequestIn(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry(), PURCHASE_API.getValue()) );
+            epaLogService.logRequestIn(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry(), PURCHASE_API.getValue()) );
 
             if (methodName.equals("purchasePackageMsisdn1")) {
                 String clientApplicationId = (String) requestPayload.get("clientApplicationId");
@@ -99,7 +99,7 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             }
         }
         catch (Exception e) {
-            logService.logResponseError(e);
+            epaLogService.logResponseError(e);
             try
             {
                 ObjectOutputStream oostream = new ObjectOutputStream (new BufferedOutputStream (resp.getOutputStream()));
@@ -132,19 +132,19 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
                 // Commit the transaction here as it will be committed in doPost anyway but we need to commit
                 // before sending a response.
 
-                logService.logResponseError(e1);
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
 
             // send response
-            logService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("SUCCESS");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
-            logService.logResponseError(e2);
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -181,18 +181,18 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             catch (Exception e1) {
                 // Commit the transaction here as it will be committed in doPost anyway but we need to commit
                 // before sending a response.
-                logService.logResponseError(e1);
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
-            logService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("SUCCESS");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
-            logService.logResponseError(e2);
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -235,18 +235,18 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             catch (Exception e1) {
                 // Commit the transaction here as it will be committed in doPost anyway but we need to commit
                 // before sending a response.
-                logService.logResponseError(e1);
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
-            logService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("SUCCESS");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
-            logService.logResponseError(e2);
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -283,18 +283,18 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             catch (Exception e1) {
                 // Commit the transaction here as it will be committed in doPost anyway but we need to commit
                 // before sending a response.
-                logService.logResponseError(e1);
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
-            logService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("SUCCESS");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
-            logService.logResponseError(e2);
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -332,18 +332,18 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             catch (Exception e1) {
                 // Commit the transaction here as it will be committed in doPost anyway but we need to commit
                 // before sending a response.
-                logService.logResponseError(e1);
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
-            logService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("SUCCESS");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
-            logService.logResponseError(e2);
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -380,18 +380,18 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             catch (Exception e1) {
                 // Commit the transaction here as it will be committed in doPost anyway but we need to commit
                 // before sending a response.
-                logService.logResponseError(e1);
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
-            logService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("SUCCESS");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
-            logService.logResponseError(e2);
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -429,18 +429,18 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             catch (Exception e1) {
                 // Commit the transaction here as it will be committed in doPost anyway but we need to commit
                 // before sending a response.
-                logService.logResponseError(e1);
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
-            logService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("SUCCESS");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
-            logService.logResponseError(e2);
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
