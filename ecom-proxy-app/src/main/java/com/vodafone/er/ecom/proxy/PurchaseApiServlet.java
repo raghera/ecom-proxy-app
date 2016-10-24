@@ -53,6 +53,9 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             locale = (Locale)requestPayload.get("locale");
             methodName = (String) requestPayload.get("methodName");
             clientId = (String) requestPayload.get("clientId");
+            if(clientId == null) {
+                clientId = (String) requestPayload.get("clientApplicationId");
+            }
             msisdn = (String) requestPayload.get("msisdn");
             epaLogService.logRequestIn(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry(), PURCHASE_API.getValue()) );
 
@@ -139,7 +142,7 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             }
 
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -187,7 +190,7 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -241,7 +244,7 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -289,7 +292,7 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -338,7 +341,7 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
@@ -386,7 +389,7 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -435,7 +438,7 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();

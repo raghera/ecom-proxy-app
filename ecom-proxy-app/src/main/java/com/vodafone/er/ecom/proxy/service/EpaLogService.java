@@ -9,7 +9,6 @@ import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.translog.TransLogConstants;
 import com.vodafone.global.er.translog.TransLogManager;
 import com.vodafone.global.er.translog.TransLogManagerFactory;
-import com.vodafone.global.er.ulf.service.impl.ERULFLogDataManagerImpl;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,47 +49,53 @@ public class EpaLogService {
     }
 
     public void logRequestIn(final ERLogData requestData) {
-        //Always generate a TX_LOG_ID
-        transLogManager.addAttributeContext(Attr.ER_TX_LOG_ID, generateId());
-        LOG.info("Generated TX_LOG_ID=", transLogManager.getAttribute(Attr.ER_TX_LOG_ID));
 
         PropertyService.getPropertyAsBoolean(TransLogConstants.PROPERTY_TRANSLOG_LOGGING_ON, false)
                 .ifPresent(transLogManager::setIsTransLoggingOn);
 
-        if(transLogManager.isTransLoggingOn()) {
-            transLogManager.addAttributeOnce(Attr.LOG_POINT, ULFEntry.Logpoint.REQUEST_IN.name());
-            transLogManager.addAttributeContext(Attr.START_TS, dateProcessor.getLocalDateTimeString(LocalDateTime.now()));
+        //Always generate a TX_LOG_ID even if translog is disabled
+        transLogManager.addAttributeContext(Attr.ER_TX_LOG_ID, generateId());
+        LOG.info("Generated TX_LOG_ID=", transLogManager.getAttribute(Attr.ER_TX_LOG_ID));
 
-            if (StringUtils.isNotBlank(requestData.getRequestName())) {
-                transLogManager.addAttributeContext(Attr.REQUEST_NAME, requestData.getRequestName());
-                transLogManager.addAttributeOnce(Attr.ULF_SERVICE_NAME, requestData.getRequestName());
-            }
+        transLogManager.addAttributeOnce(Attr.STATUS, "OK");//Always ok at this stage
 
-            if (StringUtils.isNotBlank(requestData.getApiName())) {
-                transLogManager.addAttributeContext(Attr.ER_API_NAME, requestData.getApiName());
-            }
 
-            if (StringUtils.isBlank(transLogManager.getAttribute(Attr.VF_INT_CALLER_ID))
-                    && StringUtils.isNotBlank(requestData.getClientId())) {
-                //will always be true since this is an ecom call, with no http headers
-                transLogManager.addAttributeContext(Attr.VF_INT_CALLER_ID, requestData.getClientId());
-            }
+        transLogManager.addAttributeOnce(Attr.LOG_POINT, ULFEntry.Logpoint.REQUEST_IN.name());
+        transLogManager.addAttributeContext(Attr.TX_START_TS, dateProcessor.getLocalDateTimeString(LocalDateTime.now()));
 
-            //Add ULF specific values if it's an EcomRequest
-            //The Id will need to be generated if its an ecom request as there are no headers
-            if (StringUtils.isBlank(transLogManager.getAttribute(Attr.VF_TRACE_TRANSACTION_ID))) {
-                transLogManager.addAttributeContext(Attr.VF_TRACE_TRANSACTION_ID, generateId());
-            }
-            if (StringUtils.isNotBlank(requestData.getMsisdn())) {
-                transLogManager.addAttributeContext(Attr.CUSTOMER_ID, requestData.getMsisdn());
-            }
-            if (StringUtils.isNotBlank(requestData.getCountryCode())) {
-                transLogManager.addAttributeContext(Attr.COUNTRY_CODE, requestData.getCountryCode());
-            }
-            transLogManager.logRequest(false);
-            ERULFLogDataManagerImpl ulf = new ERULFLogDataManagerImpl();
-//            ulf.logULFRequestIn(transLogManager, ULFEntry.Logpoint.REQUEST_IN);
+        if (StringUtils.isNotBlank(requestData.getRequestName())) {
+            transLogManager.addAttributeContext(Attr.REQUEST_NAME, requestData.getRequestName());
+            transLogManager.addAttributeOnce(Attr.ULF_SERVICE_NAME, requestData.getRequestName());
         }
+
+        if (StringUtils.isNotBlank(requestData.getClientId())) {
+            transLogManager.addAttributeContext(Attr.TX_CLIENT_ID, requestData.getClientId());
+        }
+
+        if (StringUtils.isNotBlank(requestData.getApiName())) {
+            transLogManager.addAttributeContext(Attr.ER_API_NAME, requestData.getApiName());
+        }
+
+        if (StringUtils.isBlank(transLogManager.getAttribute(Attr.VF_INT_CALLER_ID))
+                && StringUtils.isNotBlank(requestData.getClientId())) {
+            //will always be true since this is an ecom call, with no http headers
+            transLogManager.addAttributeContext(Attr.VF_INT_CALLER_ID, requestData.getClientId());
+        }
+
+        //Add ULF specific values if it's an EcomRequest
+        //The Id will need to be generated if its an ecom request as there are no headers
+        if (StringUtils.isBlank(transLogManager.getAttribute(Attr.VF_TRACE_TRANSACTION_ID))) {
+            transLogManager.addAttributeContext(Attr.VF_TRACE_TRANSACTION_ID, generateId());
+        }
+        if (StringUtils.isNotBlank(requestData.getMsisdn())) {
+            transLogManager.addAttributeContext(Attr.CUSTOMER_ID, requestData.getMsisdn());
+        }
+        if (StringUtils.isNotBlank(requestData.getCountryCode())) {
+            transLogManager.addAttributeContext(Attr.COUNTRY_CODE, requestData.getCountryCode());
+        }
+        transLogManager.logRequest(false);
+//        ERULFLogDataManagerImpl ulf = new ERULFLogDataManagerImpl();
+//            ulf.logULFRequestIn(transLogManager, ULFEntry.Logpoint.REQUEST_IN);
         logEcomRequest(requestData);
     }
 
@@ -98,9 +103,9 @@ public class EpaLogService {
         transLogManager.addAttributeOnce(Attr.STATUS, status);
         transLogManager.addAttributeOnce(Attr.LOG_POINT, ULFEntry.Logpoint.RESPONSE_OUT.name());
         final String endTime = dateProcessor.getLocalDateTimeString(LocalDateTime.now());
-        transLogManager.addAttributeContext(Attr.COMPLETE_TS, endTime);
-        transLogManager.addAttributeContext(Attr.DURATION,
-                String.valueOf(dateProcessor.calculateDurationAsMillis(transLogManager.getAttribute(Attr.START_TS), endTime)));
+        transLogManager.addAttributeContext(Attr.TX_COMPLETE_TS, endTime);
+        transLogManager.addAttributeContext(Attr.TX_DURATION,
+                String.valueOf(dateProcessor.calculateDurationAsMillis(transLogManager.getAttribute(Attr.TX_START_TS), endTime)));
         transLogManager.logResponse(true);
 
         logEcomResponse(new ERLogDataImpl(transLogManager.getAttribute(Attr.CUSTOMER_ID),
@@ -112,19 +117,17 @@ public class EpaLogService {
         //        ulf.logULFRequestIn(transLogManager, ULFEntry.Logpoint.REQUEST_OUT);
     }
     public void logResponseError(Exception e) {
-        if(transLogManager.isTransLoggingOn()) {
-            transLogManager.addAttributeOnce(Attr.ERROR, e.getMessage());
-            transLogManager.addAttributeOnce(Attr.STATUS, "ERROR");
+        transLogManager.addAttributeOnce(Attr.ERROR, e.getMessage());
+        transLogManager.addAttributeOnce(Attr.STATUS, "ERROR");
 
-            if (e instanceof EcommerceException) {
-                EcommerceException ecom = (EcommerceException) e;
-                transLogManager.addAttributeOnce(Attr.ERROR_CODE, Integer.toString(ecom.getErrorId()));
-                transLogManager.addAttributeOnce(Attr.ERROR, ecom.getErrorDescription());
-            }
-            transLogManager.addAttributeOnce(Attr.LOG_POINT, ULFEntry.Logpoint.REQUEST_OUT.name());
-
-            transLogManager.logResponse(true);
+        if (e instanceof EcommerceException) {
+            EcommerceException ecom = (EcommerceException) e;
+            transLogManager.addAttributeOnce(Attr.ERROR_CODE, Integer.toString(ecom.getErrorId()));
+            transLogManager.addAttributeOnce(Attr.ERROR, ecom.getErrorDescription());
         }
+        transLogManager.addAttributeOnce(Attr.LOG_POINT, ULFEntry.Logpoint.REQUEST_OUT.name());
+
+        transLogManager.logResponse(true);
 
         logEcomError(new ERLogDataImpl(transLogManager.getAttribute(Attr.CUSTOMER_ID),
                         transLogManager.getAttribute(Attr.VF_INT_CALLER_ID),

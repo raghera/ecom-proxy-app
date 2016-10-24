@@ -344,7 +344,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
@@ -389,7 +389,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
@@ -434,7 +434,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
@@ -479,7 +479,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
@@ -529,7 +529,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
@@ -574,7 +574,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
@@ -619,7 +619,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -664,7 +664,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -709,7 +709,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -754,7 +754,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
@@ -799,7 +799,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
@@ -844,7 +844,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
@@ -889,7 +889,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
@@ -942,7 +942,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -987,7 +987,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
@@ -1074,7 +1074,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1120,7 +1120,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1173,7 +1173,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1225,7 +1225,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
@@ -1270,7 +1270,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
@@ -1315,7 +1315,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1360,7 +1360,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1405,7 +1405,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1450,7 +1450,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1495,7 +1495,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1551,7 +1551,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1596,7 +1596,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1641,7 +1641,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
@@ -1728,7 +1728,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1773,7 +1773,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1818,7 +1818,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1863,7 +1863,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1920,7 +1920,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1983,7 +1983,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -2036,7 +2036,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 return;
             }
             //send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -2087,7 +2087,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             }
 
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();

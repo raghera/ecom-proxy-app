@@ -223,7 +223,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -278,7 +278,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -329,7 +329,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -373,7 +373,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -427,7 +427,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             }
             log.debug("getPackages5: Sending response for CatalogApiServlet.getPackages ");
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -473,7 +473,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -524,7 +524,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -575,7 +575,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -625,7 +625,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -676,7 +676,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -721,7 +721,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -766,7 +766,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -811,7 +811,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -856,7 +856,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -903,7 +903,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             //APIs refactored to produce Maps - so wrap it in a Hashtable here for ecom clients
             oos.writeObject(new Hashtable<String, ExpressData>(result));
@@ -991,7 +991,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1041,7 +1041,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1086,7 +1086,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
@@ -1132,7 +1132,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1179,7 +1179,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1224,7 +1224,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
@@ -1269,7 +1269,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1313,7 +1313,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1355,7 +1355,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1401,7 +1401,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
@@ -1447,7 +1447,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             //APIs refactored to produce Maps - so wrap it in a Hashtable here for ecom clients
             oos.writeObject(new Hashtable<String, OneStepData>(result));
@@ -1493,7 +1493,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 return;
             }
             // send response
-            epaLogService.logResponseOut("SUCCESS");
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
