@@ -40,8 +40,8 @@ public class ChargingApiServlet extends AbstractEcomServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 
-        Locale locale = null;
-        String methodName = "", clientApplicationId ="", msisdn = "";
+        Locale locale;
+        String methodName, clientApplicationId, msisdn;
         try {
             startTx();
             ServletInputStream is = req.getInputStream();
@@ -53,22 +53,18 @@ public class ChargingApiServlet extends AbstractEcomServlet {
             //for some reason this API uses clientApplicationId and the others use clientId
             clientApplicationId = (String) requestPayload.get("clientApplicationId");
             msisdn = (String) requestPayload.get("msisdn");
-            logService.logRequest(new ERLogDataImpl(msisdn, clientApplicationId, methodName, locale.getCountry()) );
-            logService.logEcomRequest(clientApplicationId, locale, methodName, CHARGING_API.getValue());
+            logService.logRequestIn(new ERLogDataImpl(msisdn, clientApplicationId, methodName, locale.getCountry(), CHARGING_API.getValue()) );
             if (methodName.equals("usageAuth1")) {
-                //String msisdn = (String) requestPayload.get("msisdn");
                 String serviceId = (String) requestPayload.get("serviceId");
                 UsageAttributes usageAttributes = (UsageAttributes) requestPayload.get("usageAttributes");
                 usageAuthHandler(locale, resp  ,clientApplicationId  ,msisdn  ,serviceId  ,usageAttributes );
             }
             if (methodName.equals("usageAuthRate2")) {
-                //String msisdn = (String) requestPayload.get("msisdn");
                 String serviceId = (String) requestPayload.get("serviceId");
                 UsageAttributes usageAttributes = (UsageAttributes) requestPayload.get("usageAttributes");
                 usageAuthRateHandler(locale, resp  ,clientApplicationId  ,msisdn  ,serviceId  ,usageAttributes );
             }
             if (methodName.equals("usageAuthRateCharge3")) {
-                //String msisdn = (String) requestPayload.get("msisdn");
                 String serviceId = (String) requestPayload.get("serviceId");
                 UsageAttributes usageAttributes = (UsageAttributes) requestPayload.get("usageAttributes");
                 usageAuthRateChargeHandler(locale, resp  ,clientApplicationId  ,msisdn  ,serviceId  ,usageAttributes );
@@ -84,17 +80,13 @@ public class ChargingApiServlet extends AbstractEcomServlet {
                 rateServiceHandler(locale, resp  ,clientApplicationId  ,serviceId  ,usageAttributes );
             }
             if (methodName.equals("usageAuthRateCharge6")) {
-                //String msisdn = (String) requestPayload.get("msisdn");
                 String serviceId = (String) requestPayload.get("serviceId");
                 UsageAttributes usageAttributes = (UsageAttributes) requestPayload.get("usageAttributes");
-//                 ServiceUsageInstance serviceUsageInstance = (ServiceUsageInstance) requestPayload.get("serviceUsageInstance");
                 usageAuthRateChargeHandler(locale, resp  ,clientApplicationId  ,msisdn  ,serviceId  ,usageAttributes   );
             }
             if (methodName.equals("usageAuthRate7")) {
-                //String msisdn = (String) requestPayload.get("msisdn");
                 String serviceId = (String) requestPayload.get("serviceId");
                 UsageAttributes usageAttributes = (UsageAttributes) requestPayload.get("usageAttributes");
-//                 ServiceUsageInstance serviceUsageInstance = (ServiceUsageInstance) requestPayload.get("serviceUsageInstance");
                 usageAuthRateHandler(locale, resp  ,clientApplicationId  ,msisdn  ,serviceId  ,usageAttributes   );
             }
             if (methodName.equals("usageComplete8")) {
@@ -106,11 +98,10 @@ public class ChargingApiServlet extends AbstractEcomServlet {
                 PromoCodeAttributes promoCodeAttrs = (PromoCodeAttributes) requestPayload.get("promoCodeAttrs");
                 validatePromoCodeHandler(locale, resp  ,promoCodeAttrs );
             }
-            logService.logEcomResponse(clientApplicationId, locale, methodName, CHARGING_API.getValue(), true);
         }
         catch (Exception e) {
+            logService.logResponseError(e);
             try {
-                logService.logEcomError(clientApplicationId, locale, methodName, CHARGING_API.getValue(), e);
                 ObjectOutputStream oostream = new ObjectOutputStream (new BufferedOutputStream (resp.getOutputStream()));
                 oostream.writeObject( new ExceptionAdapter(e));
                 oostream.flush();
@@ -137,15 +128,18 @@ public class ChargingApiServlet extends AbstractEcomServlet {
                 }
             }
             catch (Exception e1) {
+                logService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
+            logService.logResponseOut("SUCCESS");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            logService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -185,15 +179,18 @@ public class ChargingApiServlet extends AbstractEcomServlet {
                 }
             }
             catch (Exception e1) {
+                logService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
+            logService.logResponseOut("SUCCESS");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            logService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -232,15 +229,18 @@ public class ChargingApiServlet extends AbstractEcomServlet {
                 }
             }
             catch (Exception e1) {
+                logService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
+            logService.logResponseOut("SUCCESS");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            logService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -279,15 +279,18 @@ public class ChargingApiServlet extends AbstractEcomServlet {
                 }
             }
             catch (Exception e1) {
+                logService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
+            logService.logResponseOut("SUCCESS");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            logService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -322,15 +325,18 @@ public class ChargingApiServlet extends AbstractEcomServlet {
                 result = getChargingApiDelegate(locale).rateService(clientApplicationId,serviceId,usageAttributes);
             }
             catch (Exception e1) {
+                logService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
+            logService.logResponseOut("SUCCESS");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            logService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -364,15 +370,18 @@ public class ChargingApiServlet extends AbstractEcomServlet {
                 result = getChargingApiDelegate(locale).usageComplete(clientId,reservationId,att);
             }
             catch (Exception e1) {
+                logService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
+            logService.logResponseOut("SUCCESS");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            logService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -406,15 +415,18 @@ public class ChargingApiServlet extends AbstractEcomServlet {
                 result = getChargingApiDelegate(locale).validatePromoCode(promoCodeAttrs);
             }
             catch (Exception e1) {
+                logService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
+            logService.logResponseOut("SUCCESS");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            logService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
