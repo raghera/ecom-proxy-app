@@ -59,6 +59,7 @@ public class EpaLogService {
         LOG.info("Generated TX_LOG_ID=", transLogManager.getAttribute(Attr.ER_TX_LOG_ID));
 
         transLogManager.addAttributeOnce(Attr.STATUS, "OK");//Always ok at this stage
+        transLogManager.addAttributeOnce(Attr.REQUEST_TYPE, TransLogConstants.REQUEST_TYPE_ECOM);
 
         transLogManager.addAttributeOnce(Attr.LOG_POINT, ULFEntry.Logpoint.REQUEST_IN.name());
         transLogManager.addAttributeContext(Attr.TX_START_TS, dateProcessor.getLocalDateTimeString(LocalDateTime.now()));
@@ -108,6 +109,8 @@ public class EpaLogService {
         transLogManager.addAttributeContext(Attr.TX_COMPLETE_TS, endTime);
         transLogManager.addAttributeContext(Attr.TX_DURATION,
                 String.valueOf(dateProcessor.calculateDurationAsMillis(transLogManager.getAttribute(Attr.TX_START_TS), endTime)));
+
+        transLogManager.addAttributeOnce(Attr.REQUEST_TYPE, TransLogConstants.REQUEST_TYPE_ECOM);
 
         transLogManager.logResponse(true);
 
