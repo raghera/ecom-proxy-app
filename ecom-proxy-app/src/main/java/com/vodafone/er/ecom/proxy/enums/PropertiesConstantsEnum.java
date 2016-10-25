@@ -35,8 +35,7 @@ public enum  PropertiesConstantsEnum {
     PROP_HTTPS_ER_SERVER_HOST("https.er.server.host"),
     PROP_HTTPS_ER_SERVER_PORT("https.er.server.port"),
     PROP_HTTPS_ER_SERVER_PATH("https.er.server.path"),
-    PROP_HTTPS_ER_CERT_FILE("https.er.cert.file"),
-    PROP_HTTPS_ER_CERT_PASSWORD("https.er.cert.password");
+    PROP_HTTPS_ER_CERT_FILE("https.er.cert.file");
 
     private final String value;
 

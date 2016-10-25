@@ -49,16 +49,16 @@ public class EpaLogService {
     }
 
     public void logRequestIn(final ERLogData requestData) {
-
         PropertyService.getPropertyAsBoolean(TransLogConstants.PROPERTY_TRANSLOG_LOGGING_ON, false)
                 .ifPresent(transLogManager::setIsTransLoggingOn);
+        PropertyService.getPropertyAsBoolean(TransLogConstants.PROPERTY_OUTPUT_PAYLOAD, false)
+                .ifPresent(transLogManager::setIsOutputPayload);
 
         //Always generate a TX_LOG_ID even if translog is disabled
         transLogManager.addAttributeContext(Attr.ER_TX_LOG_ID, generateId());
         LOG.info("Generated TX_LOG_ID=", transLogManager.getAttribute(Attr.ER_TX_LOG_ID));
 
         transLogManager.addAttributeOnce(Attr.STATUS, "OK");//Always ok at this stage
-
 
         transLogManager.addAttributeOnce(Attr.LOG_POINT, ULFEntry.Logpoint.REQUEST_IN.name());
         transLogManager.addAttributeContext(Attr.TX_START_TS, dateProcessor.getLocalDateTimeString(LocalDateTime.now()));
@@ -93,10 +93,12 @@ public class EpaLogService {
         if (StringUtils.isNotBlank(requestData.getCountryCode())) {
             transLogManager.addAttributeContext(Attr.COUNTRY_CODE, requestData.getCountryCode());
         }
+
         transLogManager.logRequest(false);
+        logEcomRequest(requestData);
+
 //        ERULFLogDataManagerImpl ulf = new ERULFLogDataManagerImpl();
 //            ulf.logULFRequestIn(transLogManager, ULFEntry.Logpoint.REQUEST_IN);
-        logEcomRequest(requestData);
     }
 
     public void logResponseOut(String status) {
@@ -106,6 +108,7 @@ public class EpaLogService {
         transLogManager.addAttributeContext(Attr.TX_COMPLETE_TS, endTime);
         transLogManager.addAttributeContext(Attr.TX_DURATION,
                 String.valueOf(dateProcessor.calculateDurationAsMillis(transLogManager.getAttribute(Attr.TX_START_TS), endTime)));
+
         transLogManager.logResponse(true);
 
         logEcomResponse(new ERLogDataImpl(transLogManager.getAttribute(Attr.CUSTOMER_ID),
