@@ -18,6 +18,7 @@ public class EcomProxyJetty9Server {
     private static final int ER_CORE_PORT = 8094;
     private static final String ER_CORE_HOST = "127.0.0.1";
     private static final String WAR_PATH = "./ecom-proxy-app/target/ecom-proxy-app.war";
+//    private static final String WAR_PATH = "./ecom-proxy-app/target/epa-integration-test-build.war";
     private static final String CONTEXT_PATH = "/delegates";
 
     private static final String keyStore = "./ecom-proxy-app/src/main/resources/certs/DIT_Client_Cert_v4.jks";

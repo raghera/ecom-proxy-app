@@ -62,32 +62,79 @@
                 <skip.integration.tests>false</skip.integration.tests>
                 <skip.unit.tests>true</skip.unit.tests>
             </properties>
-        </profile>
-        <!--TODO This Run profile is to start Jetty using the existing main class from maven. Change to use the Jetty plugin. -->
-        <profile>
-            <id>run</id>
-            <activation>
-            </activation>
             <build>
+                <!-- Build for integration test running -->
+                <finalName>ecom-proxy-app</finalName>
                 <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>properties-maven-plugin</artifactId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>1.9.1</version>
                         <executions>
                             <execution>
-                                <phase>initialize</phase>
+                                <id>add-integration-test-sources</id>
+                                <phase>generate-test-sources</phase>
                                 <goals>
-                                    <goal>read-project-properties</goal>
+                                    <goal>add-test-source</goal>
                                 </goals>
                                 <configuration>
-                                    <files>
-                                        <!--Add any required options in here-->
-                                        <file>src/main/resources/java.options</file>
-                                    </files>
+                                    <!-- Configures the source directory of our integration tests -->
+                                    <sources>
+                                        <source>src/integration-test/java</source>
+                                        <!--<source>src/integration-test/java/com/vodafone/er/ecom/proxy/gettransactions</source>-->
+                                    </sources>
+                                </configuration>
+                            </execution>
+                            <!-- Add a new resource directory to our build -->
+                            <execution>
+                                <id>add-integration-test-resources</id>
+                                <phase>generate-test-resources</phase>
+                                <goals>
+                                    <goal>add-test-resource</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- Configures the resource directory of our integration tests -->
+                                    <resources>
+                                        <!--
+                                            Placeholders that are found from the files located in the configured resource
+                                            directories are replaced with the property values found from the profile
+                                            specific configuration file.
+                                        -->
+                                        <resource>
+                                            <filtering>true</filtering>
+                                            <directory>src/integration-test/resources</directory>
+                                        </resource>
+                                    </resources>
                                 </configuration>
                             </execution>
                         </executions>
                     </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>2.19.1</version>
+                        <executions>
+                            <execution>
+                                <id>integration-tests</id>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                                <configuration>
+                                    <includes>
+                                        <include>**/*IT*.java</include>
+                                    </includes>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>run-server</id>
+            <build>
+                <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
@@ -105,7 +152,7 @@
                             <execution>
                                 <phase>initialize</phase>
                                 <goals>
-                                    <goal>exec</goal>
+                                    <goal>java</goal>
                                 </goals>
                             </execution>
                         </executions>
@@ -113,6 +160,59 @@
                 </plugins>
             </build>
         </profile>
+
+
+        <!--TODO This Run profile is to start Jetty using the existing main class from maven. Change to use the Jetty plugin. -->
+        <!--<profile>-->
+        <!--<id>run</id>-->
+        <!--<activation>-->
+        <!--</activation>-->
+        <!--<build>-->
+        <!--<plugins>-->
+        <!--<plugin>-->
+        <!--<groupId>org.codehaus.mojo</groupId>-->
+        <!--<artifactId>properties-maven-plugin</artifactId>-->
+        <!--<executions>-->
+        <!--<execution>-->
+        <!--<phase>initialize</phase>-->
+        <!--<goals>-->
+        <!--<goal>read-project-properties</goal>-->
+        <!--</goals>-->
+        <!--<configuration>-->
+        <!--<files>-->
+        <!--&lt;!&ndash;Add any required options in here&ndash;&gt;-->
+        <!--<file>src/main/resources/java.options</file>-->
+        <!--</files>-->
+        <!--</configuration>-->
+        <!--</execution>-->
+        <!--</executions>-->
+        <!--</plugin>-->
+        <!--<plugin>-->
+        <!--<groupId>org.codehaus.mojo</groupId>-->
+        <!--<artifactId>exec-maven-plugin</artifactId>-->
+        <!--<configuration>-->
+        <!--<mainClass>${main.class}</mainClass>-->
+        <!--<executable>${java.home}/bin/java</executable>-->
+        <!--<commandlineArgs>-->
+        <!--&lt;!&ndash; -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=8001,server=y,suspend=n&ndash;&gt;-->
+        <!-- -classpath %classpath-->
+        <!--com.vodafone.er.ecom.proxy.server.EcomProxyJetty9Server-->
+        <!--</commandlineArgs>-->
+        <!--<classpathScope>runtime</classpathScope>-->
+        <!--</configuration>-->
+        <!--<executions>-->
+        <!--<execution>-->
+        <!--<phase>initialize</phase>-->
+        <!--<goals>-->
+        <!--<goal>exec</goal>-->
+        <!--</goals>-->
+        <!--</execution>-->
+        <!--</executions>-->
+        <!--</plugin>-->
+        <!--</plugins>-->
+        <!--</build>-->
+        <!--</profile>-->
+
     </profiles>
 
     <dependencies>
@@ -299,52 +399,8 @@
     </dependencies>
 
     <build>
-
         <finalName>ecom-proxy-app</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.9.1</version>
-                <executions>
-                    <execution>
-                        <id>add-integration-test-sources</id>
-                        <phase>generate-test-sources</phase>
-                        <goals>
-                            <goal>add-test-source</goal>
-                        </goals>
-                        <configuration>
-                            <!-- Configures the source directory of our integration tests -->
-                            <sources>
-                                <source>src/integration-test/java</source>
-                                <!--<source>src/integration-test/java/com/vodafone/er/ecom/proxy/gettransactions</source>-->
-                            </sources>
-                        </configuration>
-                    </execution>
-                    <!-- Add a new resource directory to our build -->
-                    <execution>
-                        <id>add-integration-test-resources</id>
-                        <phase>generate-test-resources</phase>
-                        <goals>
-                            <goal>add-test-resource</goal>
-                        </goals>
-                        <configuration>
-                            <!-- Configures the resource directory of our integration tests -->
-                            <resources>
-                                <!--
-                                    Placeholders that are found from the files located in the configured resource
-                                    directories are replaced with the property values found from the profile
-                                    specific configuration file.
-                                -->
-                                <resource>
-                                    <filtering>true</filtering>
-                                    <directory>src/integration-test/resources</directory>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -358,74 +414,7 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.18</version>
-                <executions>
-                    <execution>
-                        <id>integration-tests</id>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                        <configuration>
-                            <skipTests>${skip.integration.tests}</skipTests>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <!--Below not working - complains about a JSF dependency not existing (prob needs to be provided when running this-->
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty.version}</version>
-                <configuration>
-                    <skip>${skip.integration.tests}</skip>
-                    <httpConnector>
-                        <port>8888</port>
-                    </httpConnector>
-                    <scanIntervalSeconds>0</scanIntervalSeconds>
-                    <daemon>false</daemon>
-                    <stopKey>STOP</stopKey>
-                    <stopPort>8888</stopPort>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>start-jetty</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>stop-jetty</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
-        <!--<filters>-->
-            <!--&lt;!&ndash;-->
-                <!--Ensures that the config.properties file is always loaded from the-->
-                <!--configuration directory of the active Maven profile. -->
-            <!--&ndash;&gt;-->
-            <!--<filter>profiles/${build.profile.id}/env.properties</filter>-->
-        <!--</filters>-->
-        <!--<resources>-->
-            <!--&lt;!&ndash;-->
-                <!--Placeholders that are found from the files located in the configured resource-->
-                <!--directories are replaced with the property values found from the profile-->
-                <!--specific configuration file.-->
-            <!--&ndash;&gt;-->
-            <!--<resource>-->
-                <!--<filtering>true</filtering>-->
-                <!--<directory>src/main/resources</directory>-->
-            <!--</resource>-->
-        <!--</resources>-->
     </build>
 
 </project>
