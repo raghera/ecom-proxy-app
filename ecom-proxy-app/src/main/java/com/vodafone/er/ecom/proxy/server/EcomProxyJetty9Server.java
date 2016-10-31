@@ -26,7 +26,11 @@ public class EcomProxyJetty9Server {
     private static final String trustStore = keyStore;
     private static final String trustStorePassword = keyStorePassword;
 
+//    private Server server;
+
+
     public static void main(String[] args) throws Exception {
+
         BasicConfigurator.configure();
         overrideProperties();
 //        setLog(new Slf4jLog());
@@ -45,7 +49,12 @@ public class EcomProxyJetty9Server {
         Logger.getLogger("org.springframework").setLevel(Level.OFF);
 //        Logger.getLogger("org.springframework").addAppender(ca);
 
-        Server server = new Server(JETTY_PORT);
+        Server server = null;
+        try {
+            server = new Server(JETTY_PORT);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         ContextHandler contextHandler = new ContextHandler();
         contextHandler.setContextPath("/delegates");
@@ -65,9 +74,86 @@ public class EcomProxyJetty9Server {
         webAppContext.addAliasCheck(new AllowSymLinkAliasChecker());
         server.setHandler(webAppContext);
 
+//        startServer();
         server.start();
         server.join();
+
+
+        System.out.println( "SERVER STATUS " + server.getState() );
+
     }
+
+    public static void startJetty() throws Exception {
+        BasicConfigurator.configure();
+//        overrideProperties();
+//        setLog(new Slf4jLog());
+
+//        Logger.getRootLogger().setLevel(Level.DEBUG);
+//        Logger.getLogger("com.vodafone").setLevel(Level.DEBUG);
+
+        Logger logger = Logger.getLogger("com.vodafone");
+
+        ConsoleAppender ca = new ConsoleAppender(new PatternLayout("%-5p [%t]: %m%n"));
+        ca.setWriter(new OutputStreamWriter(System.out));
+        Logger.getLogger("com.vodafone").addAppender(ca);
+        Logger.getRootLogger().addAppender(ca);
+        Logger.getLogger("com.vodafone.config").setLevel(Level.OFF);
+        Logger.getLogger("org.eclipse").setLevel(Level.ERROR);
+        Logger.getLogger("org.springframework").setLevel(Level.OFF);
+//        Logger.getLogger("org.springframework").addAppender(ca);
+
+        Server server = null;
+        try {
+            server = new Server(JETTY_PORT);
+        } catch (Throwable thr) {
+            thr.printStackTrace();
+        }
+
+//        MBeanContainer mbContainer = new MBeanContainer(
+//                ManagementFactory.getPlatformMBeanServer());
+//        server.addBean(mbContainer);
+
+
+        ContextHandler contextHandler = new ContextHandler();
+        contextHandler.setContextPath("/delegates");
+
+        WebAppContext webAppContext = new WebAppContext();
+        webAppContext.setContextPath(CONTEXT_PATH);
+        File warfile = new File(WAR_PATH);
+        System.out.println("Warfile present: " + warfile.exists());
+        System.out.println("Warfile path: " + warfile.getAbsolutePath());
+
+        System.out.println(">>>>>" + System.getProperty("user.dir"));
+
+        setSystemProperties();
+
+        webAppContext.setWar(warfile.getAbsolutePath());
+
+        webAppContext.addAliasCheck(new AllowSymLinkAliasChecker());
+        server.setHandler(webAppContext);
+
+//        startServer();
+        server.start();
+        server.join();
+
+
+        System.out.println( "SERVER STATUS " + server.getState() );
+
+    }
+
+
+
+    private void startServer(Server server) throws Exception {
+        if(server != null ) {
+            server.start();
+            server.join();
+        }
+    }
+
+//    public static void stopServer() throws Exception {
+//        server.stop();
+//    }
+
 
     //Set system properties programatically
     private static void setSystemProperties() {

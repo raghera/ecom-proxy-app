@@ -4,14 +4,99 @@ import com.vizzavi.ecommerce.business.catalog.CatalogApi;
 import com.vizzavi.ecommerce.business.catalog.CatalogService;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
+import org.apache.log4j.*;
 import org.assertj.core.api.SoftAssertions;
-import org.junit.Test;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AllowSymLinkAliasChecker;
+import org.eclipse.jetty.server.handler.ContextHandler;
+import org.eclipse.jetty.webapp.WebAppContext;
+import org.junit.*;
 
+import java.io.File;
+import java.io.OutputStreamWriter;
 import java.util.Locale;
 
 import static junit.framework.TestCase.assertNotNull;
 
 public class GetServiceIT {
+
+    private static final int JETTY_PORT = 8888;
+    //    private static final String WAR_PATH = "./ecom-proxy-app/target/ecom-proxy-app.war";
+    private static final String WAR_PATH = "./target/ecom-proxy-app.war";
+    private static final String CONTEXT_PATH = "/delegates";
+
+    private static Server server;
+
+    String clientId = "AdhocTestClient";
+
+
+//    @BeforeClass
+//    public static void startJetty() throws Exception {
+//        BasicConfigurator.configure();
+////        overrideProperties();
+////        setLog(new Slf4jLog());
+//
+////        Logger.getRootLogger().setLevel(Level.DEBUG);
+////        Logger.getLogger("com.vodafone").setLevel(Level.DEBUG);
+//
+//        Logger logger = Logger.getLogger("com.vodafone");
+//
+//        ConsoleAppender ca = new ConsoleAppender(new PatternLayout("%-5p [%t]: %m%n"));
+//        ca.setWriter(new OutputStreamWriter(System.out));
+//        Logger.getLogger("com.vodafone").addAppender(ca);
+//        Logger.getRootLogger().addAppender(ca);
+//        Logger.getLogger("com.vodafone.config").setLevel(Level.OFF);
+//        Logger.getLogger("org.eclipse").setLevel(Level.ERROR);
+//        Logger.getLogger("org.springframework").setLevel(Level.OFF);
+////        Logger.getLogger("org.springframework").addAppender(ca);
+//
+//        try {
+//            server = new Server(JETTY_PORT);
+//        } catch (Throwable thr) {
+//            thr.printStackTrace();
+//        }
+//
+////        MBeanContainer mbContainer = new MBeanContainer(
+////                ManagementFactory.getPlatformMBeanServer());
+////        server.addBean(mbContainer);
+//
+//
+//        ContextHandler contextHandler = new ContextHandler();
+//        contextHandler.setContextPath("/delegates");
+//
+//        WebAppContext webAppContext = new WebAppContext();
+//        webAppContext.setContextPath(CONTEXT_PATH);
+//        File warfile = new File(WAR_PATH);
+//        System.out.println("Warfile present: " + warfile.exists());
+//        System.out.println("Warfile path: " + warfile.getAbsolutePath());
+//
+//        System.out.println(">>>>>" + System.getProperty("user.dir"));
+//
+////        setSystemProperties();
+//
+//        webAppContext.setWar(warfile.getAbsolutePath());
+//
+//        webAppContext.addAliasCheck(new AllowSymLinkAliasChecker());
+//        server.setHandler(webAppContext);
+//
+////        startServer();
+//        System.out.println("STATE=" + server.getState());
+//        server.start();
+////        server.join();
+//        System.out.println("STATE=" + server.getState());
+//
+//
+//        System.out.println( "SERVER STATUS " + server.getState() );
+//
+//    }
+//
+//    @AfterClass
+//    public static void tearDownJetty() throws Exception {
+//        System.out.println( "STOPPING SERVER " + server.getState() );
+//        server.stop();
+////        server.join();
+//        System.out.println( "STOPPED SERVER " + server.getState() );
+//    }
 
     private SoftAssertions softly = new SoftAssertions();
 

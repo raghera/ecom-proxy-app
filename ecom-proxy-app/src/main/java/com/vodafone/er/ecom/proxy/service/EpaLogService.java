@@ -49,10 +49,6 @@ public class EpaLogService {
     }
 
     public void logRequestIn(final ERLogData requestData) {
-        PropertyService.getPropertyAsBoolean(TransLogConstants.PROPERTY_TRANSLOG_LOGGING_ON, false)
-                .ifPresent(transLogManager::setIsTransLoggingOn);
-        PropertyService.getPropertyAsBoolean(TransLogConstants.PROPERTY_OUTPUT_PAYLOAD, false)
-                .ifPresent(transLogManager::setIsOutputPayload);
 
         //Always generate a TX_LOG_ID even if translog is disabled
         transLogManager.addAttributeContext(Attr.ER_TX_LOG_ID, generateId());
@@ -83,8 +79,6 @@ public class EpaLogService {
             transLogManager.addAttributeContext(Attr.VF_INT_CALLER_ID, requestData.getClientId());
         }
 
-        //Add ULF specific values if it's an EcomRequest
-        //The Id will need to be generated if its an ecom request as there are no headers
         if (StringUtils.isBlank(transLogManager.getAttribute(Attr.VF_TRACE_TRANSACTION_ID))) {
             transLogManager.addAttributeContext(Attr.VF_TRACE_TRANSACTION_ID, generateId());
         }
@@ -94,7 +88,7 @@ public class EpaLogService {
         if (StringUtils.isNotBlank(requestData.getCountryCode())) {
             transLogManager.addAttributeContext(Attr.COUNTRY_CODE, requestData.getCountryCode());
         }
-
+        //output log
         transLogManager.logRequest(false);
         logEcomRequest(requestData);
 
@@ -107,11 +101,11 @@ public class EpaLogService {
         transLogManager.addAttributeOnce(Attr.LOG_POINT, ULFEntry.Logpoint.RESPONSE_OUT.name());
         final String endTime = dateProcessor.getLocalDateTimeString(LocalDateTime.now());
         transLogManager.addAttributeContext(Attr.TX_COMPLETE_TS, endTime);
-        transLogManager.addAttributeContext(Attr.TX_DURATION,
-                String.valueOf(dateProcessor.calculateDurationAsMillis(transLogManager.getAttribute(Attr.TX_START_TS), endTime)));
+        dateProcessor.calculateDurationAsMillis(transLogManager.getAttribute(Attr.TX_START_TS), endTime)
+                .ifPresent(duration ->
+                        transLogManager.addAttributeOnce(Attr.TX_DURATION , String.valueOf(duration)));
 
         transLogManager.addAttributeOnce(Attr.REQUEST_TYPE, TransLogConstants.REQUEST_TYPE_ECOM);
-
         transLogManager.logResponse(true);
 
         logEcomResponse(new ERLogDataImpl(transLogManager.getAttribute(Attr.CUSTOMER_ID),
@@ -143,6 +137,13 @@ public class EpaLogService {
                 e);
 
 //      ulf.logULFRequestIn(transLogManager, ULFEntry.Logpoint.REQUEST_OUT);
+    }
+
+    private void loadLoggingProperties() {
+        PropertyService.getPropertyAsBoolean(TransLogConstants.PROPERTY_TRANSLOG_LOGGING_ON, false)
+                .ifPresent(transLogManager::setIsTransLoggingOn);
+        PropertyService.getPropertyAsBoolean(TransLogConstants.PROPERTY_OUTPUT_PAYLOAD, true)
+                .ifPresent(transLogManager::setIsOutputPayload);
     }
 
     private void clearTranslog() {

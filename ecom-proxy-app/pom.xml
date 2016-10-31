@@ -161,58 +161,6 @@
             </build>
         </profile>
 
-
-        <!--TODO This Run profile is to start Jetty using the existing main class from maven. Change to use the Jetty plugin. -->
-        <!--<profile>-->
-        <!--<id>run</id>-->
-        <!--<activation>-->
-        <!--</activation>-->
-        <!--<build>-->
-        <!--<plugins>-->
-        <!--<plugin>-->
-        <!--<groupId>org.codehaus.mojo</groupId>-->
-        <!--<artifactId>properties-maven-plugin</artifactId>-->
-        <!--<executions>-->
-        <!--<execution>-->
-        <!--<phase>initialize</phase>-->
-        <!--<goals>-->
-        <!--<goal>read-project-properties</goal>-->
-        <!--</goals>-->
-        <!--<configuration>-->
-        <!--<files>-->
-        <!--&lt;!&ndash;Add any required options in here&ndash;&gt;-->
-        <!--<file>src/main/resources/java.options</file>-->
-        <!--</files>-->
-        <!--</configuration>-->
-        <!--</execution>-->
-        <!--</executions>-->
-        <!--</plugin>-->
-        <!--<plugin>-->
-        <!--<groupId>org.codehaus.mojo</groupId>-->
-        <!--<artifactId>exec-maven-plugin</artifactId>-->
-        <!--<configuration>-->
-        <!--<mainClass>${main.class}</mainClass>-->
-        <!--<executable>${java.home}/bin/java</executable>-->
-        <!--<commandlineArgs>-->
-        <!--&lt;!&ndash; -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=8001,server=y,suspend=n&ndash;&gt;-->
-        <!-- -classpath %classpath-->
-        <!--com.vodafone.er.ecom.proxy.server.EcomProxyJetty9Server-->
-        <!--</commandlineArgs>-->
-        <!--<classpathScope>runtime</classpathScope>-->
-        <!--</configuration>-->
-        <!--<executions>-->
-        <!--<execution>-->
-        <!--<phase>initialize</phase>-->
-        <!--<goals>-->
-        <!--<goal>exec</goal>-->
-        <!--</goals>-->
-        <!--</execution>-->
-        <!--</executions>-->
-        <!--</plugin>-->
-        <!--</plugins>-->
-        <!--</build>-->
-        <!--</profile>-->
-
     </profiles>
 
     <dependencies>
@@ -340,15 +288,15 @@
             <version>9.3.8.v20160314</version>
         </dependency>
 
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>6.0</version>
-            <!--scope required at runtime to be able to work on Jetty-->
-            <!--scope required as provided to be able to run on Tomcat!-->
+        <!--<dependency>-->
+            <!--<groupId>javax</groupId>-->
+            <!--<artifactId>javaee-api</artifactId>-->
+            <!--<version>6.0</version>-->
+            <!--&lt;!&ndash;scope required at runtime to be able to work on Jetty&ndash;&gt;-->
+            <!--&lt;!&ndash;scope required as provided to be able to run on Tomcat!&ndash;&gt;-->
+            <!--&lt;!&ndash;<scope>provided</scope>&ndash;&gt;-->
             <!--<scope>provided</scope>-->
-            <scope>runtime</scope>
-        </dependency>
+        <!--</dependency>-->
 
         <!--JBOSS Dependencies -->
 
@@ -410,7 +358,7 @@
                     <skipTests>${skip.unit.tests}</skipTests>
                     <!-- Excludes integration tests when unit tests are run -->
                     <excludes>
-                        <exclude>**/*IT.java</exclude>
+                        <exclude>**/*IT*.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
