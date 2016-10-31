@@ -123,6 +123,7 @@
                                 <configuration>
                                     <includes>
                                         <include>**/*IT*.java</include>
+                                        <!--<include>CompleteTestSuite.java</include>-->
                                     </includes>
                                 </configuration>
                             </execution>
@@ -131,6 +132,7 @@
                 </plugins>
             </build>
         </profile>
+        <!--Simply Run the application in a Jetty web server -->
         <profile>
             <id>run-server</id>
             <build>
