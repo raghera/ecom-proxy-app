@@ -8,7 +8,6 @@
         <version>1.0</version>
     </parent>
 
-    <groupId>com.vodafone</groupId>
     <artifactId>ecom-proxy-app</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
@@ -81,7 +80,6 @@
                                     <!-- Configures the source directory of our integration tests -->
                                     <sources>
                                         <source>src/integration-test/java</source>
-                                        <!--<source>src/integration-test/java/com/vodafone/er/ecom/proxy/gettransactions</source>-->
                                     </sources>
                                 </configuration>
                             </execution>
@@ -95,11 +93,6 @@
                                 <configuration>
                                     <!-- Configures the resource directory of our integration tests -->
                                     <resources>
-                                        <!--
-                                            Placeholders that are found from the files located in the configured resource
-                                            directories are replaced with the property values found from the profile
-                                            specific configuration file.
-                                        -->
                                         <resource>
                                             <filtering>true</filtering>
                                             <directory>src/integration-test/resources</directory>
@@ -109,6 +102,13 @@
                             </execution>
                         </executions>
                     </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>exec-int-tests</id>
+            <build>
+                <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
@@ -120,12 +120,13 @@
                                     <goal>integration-test</goal>
                                     <goal>verify</goal>
                                 </goals>
-                                <configuration>
-                                    <includes>
-                                        <include>**/*IT*.java</include>
+                                <!--<configuration>-->
+                                    <!--<includes>-->
+                                        <!--<include>**/*IT*.java</include>-->
+                                        <!--<include>**/IT*.java</include>-->
                                         <!--<include>CompleteTestSuite.java</include>-->
-                                    </includes>
-                                </configuration>
+                                    <!--</includes>-->
+                                <!--</configuration>-->
                             </execution>
                         </executions>
                     </plugin>
@@ -211,6 +212,13 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
+            <exclusions>
+                <!-- Starters use SLF4J -->
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -235,26 +243,26 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.slf4j</groupId>-->
+        <!--<artifactId>slf4j-api</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.slf4j</groupId>-->
+        <!--<artifactId>slf4j-log4j12</artifactId>-->
+        <!--<version>${slf4j.version}</version>-->
+        <!--</dependency>-->
         <!--Test dependencies-->
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-module-junit4</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-api-mockito</artifactId>
-            <scope>test</scope>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.powermock</groupId>-->
+        <!--<artifactId>powermock-module-junit4</artifactId>-->
+        <!--<scope>test</scope>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.powermock</groupId>-->
+        <!--<artifactId>powermock-api-mockito</artifactId>-->
+        <!--<scope>test</scope>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
@@ -291,13 +299,13 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>javax</groupId>-->
-            <!--<artifactId>javaee-api</artifactId>-->
-            <!--<version>6.0</version>-->
-            <!--&lt;!&ndash;scope required at runtime to be able to work on Jetty&ndash;&gt;-->
-            <!--&lt;!&ndash;scope required as provided to be able to run on Tomcat!&ndash;&gt;-->
-            <!--&lt;!&ndash;<scope>provided</scope>&ndash;&gt;-->
-            <!--<scope>provided</scope>-->
+        <!--<groupId>javax</groupId>-->
+        <!--<artifactId>javaee-api</artifactId>-->
+        <!--<version>6.0</version>-->
+        <!--&lt;!&ndash;scope required at runtime to be able to work on Jetty&ndash;&gt;-->
+        <!--&lt;!&ndash;scope required as provided to be able to run on Tomcat!&ndash;&gt;-->
+        <!--&lt;!&ndash;<scope>provided</scope>&ndash;&gt;-->
+        <!--<scope>provided</scope>-->
         <!--</dependency>-->
 
         <!--JBOSS Dependencies -->
@@ -361,6 +369,7 @@
                     <!-- Excludes integration tests when unit tests are run -->
                     <excludes>
                         <exclude>**/*IT*.java</exclude>
+                        <exclude>CompleteTestSuite.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>

@@ -69,10 +69,10 @@ public class AdHocTests {
 
         Logger logger = Logger.getLogger("com.vodafone");
 
-        ConsoleAppender ca = new ConsoleAppender(new PatternLayout("%-5p [%t]: %m%n"));
-        ca.setWriter(new OutputStreamWriter(System.out));
-        Logger.getLogger("com.vodafone").addAppender(ca);
-        Logger.getRootLogger().addAppender(ca);
+//        ConsoleAppender ca = new ConsoleAppender(new PatternLayout("%-5p [%t]: %m%n"));
+//        ca.setWriter(new OutputStreamWriter(System.out));
+//        Logger.getLogger("com.vodafone").addAppender(ca);
+//        Logger.getRootLogger().addAppender(ca);
         Logger.getLogger("com.vodafone.config").setLevel(Level.OFF);
         Logger.getLogger("org.eclipse").setLevel(Level.ERROR);
         Logger.getLogger("org.springframework").setLevel(Level.OFF);
