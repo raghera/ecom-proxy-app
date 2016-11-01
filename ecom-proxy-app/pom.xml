@@ -102,17 +102,18 @@
                             </execution>
                         </executions>
                     </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>exec-int-tests</id>
-            <build>
-                <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <version>2.19.1</version>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/*IT.java</exclude>
+                            </excludes>
+                            <includes>
+                                <include>CompleteTestSuite.java</include>
+                            </includes>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>integration-tests</id>
@@ -120,16 +121,10 @@
                                     <goal>integration-test</goal>
                                     <goal>verify</goal>
                                 </goals>
-                                <!--<configuration>-->
-                                    <!--<includes>-->
-                                        <!--<include>**/*IT*.java</include>-->
-                                        <!--<include>**/IT*.java</include>-->
-                                        <!--<include>CompleteTestSuite.java</include>-->
-                                    <!--</includes>-->
-                                <!--</configuration>-->
                             </execution>
                         </executions>
                     </plugin>
+
                 </plugins>
             </build>
         </profile>
