@@ -16,31 +16,19 @@ public class HttpHealthCheck extends HealthCheck {
     private CatalogApiService service;
 
     public HttpHealthCheck() {
-
         service = ApplicationContextHolder.getContext().getBean(CatalogApiService.class);
     }
 
-//    @Override
-//    protected Result check() throws Exception {
-//        //Try all supported locales
-//        final String ptResult = service.getVersion(new Locale("pt", "PT"));
-//        final String huResult = service.getVersion(new Locale("hu", "HU"));
-//
-//        if(ptResult == null || huResult ==null
-//                || ptResult.length() == 0 || huResult.length() == 0) {
-//            return Result.unhealthy("Could not get a result from ER Core.  Check ER Core is up and running");
-//        }
-//        return Result.healthy();
-//    }
     @Override
-    //TODO - this is for DEV only so restart
     protected Result check() throws Exception {
-
         //Try all supported locales
-        final String ptResult = service.getVersion(Locale.UK);
+        final String ptResult = service.getVersion(new Locale("pt", "PT"));
+        final String huResult = service.getVersion(new Locale("hu", "HU"));
 
-        if(ptResult == null || ptResult.length() == 0) {
-            return Result.unhealthy("Could not get a result from ER Core.  Check ER Core is up and running");
+        if(ptResult == null || huResult ==null
+                || ptResult.length() == 0 || huResult.length() == 0) {
+            return Result.unhealthy("Http get-version request to ER Core did not return a response.  " +
+                    "Check ER Core is up and running correctly for PT and HU Operating Countries");
         }
         return Result.healthy();
     }
