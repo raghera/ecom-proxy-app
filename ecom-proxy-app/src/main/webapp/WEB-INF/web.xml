@@ -35,6 +35,29 @@
     <!--</servlet-mapping>-->
 
     <servlet>
+        <servlet-name>initServlet</servlet-name>
+        <servlet-class>com.vodafone.metrics.InitServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <listener>
+        <listener-class>com.vodafone.metrics.EpaMetricsServletContextListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>com.vodafone.metrics.EpaHealthCheckServletContextListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>metrics</servlet-name>
+        <servlet-class>com.codahale.metrics.servlets.AdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>metrics</servlet-name>
+        <url-pattern>/metrics/*</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
 		<servlet-name>CatalogApiServlet</servlet-name>
 		<servlet-class>com.vodafone.er.ecom.proxy.CatalogApiServlet</servlet-class>
 	</servlet>
@@ -57,6 +80,10 @@
 	<servlet>
 		<servlet-name>CustcareApiServlet</servlet-name>
 		<servlet-class>com.vodafone.er.ecom.proxy.CustcareApiServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>HealthCheckServlet</servlet-name>
+		<servlet-class>com.codahale.metrics.servlets.HealthCheckServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>CatalogApiServlet</servlet-name>
@@ -81,6 +108,10 @@
 	<servlet-mapping>
 		<servlet-name>CustcareApiServlet</servlet-name>
 		<url-pattern>/CustcareApi</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>HealthCheckServlet</servlet-name>
+		<url-pattern>/health</url-pattern>
 	</servlet-mapping>
 
 </web-app>

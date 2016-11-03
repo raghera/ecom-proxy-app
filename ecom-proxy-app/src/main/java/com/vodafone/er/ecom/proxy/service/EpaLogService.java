@@ -50,6 +50,8 @@ public class EpaLogService {
 
     public void logRequestIn(final ERLogData requestData) {
 
+        loadLoggingProperties();
+
         //Always generate a TX_LOG_ID even if translog is disabled
         transLogManager.addAttributeContext(Attr.ER_TX_LOG_ID, generateId());
         LOG.info("Generated TX_LOG_ID=", transLogManager.getAttribute(Attr.ER_TX_LOG_ID));
