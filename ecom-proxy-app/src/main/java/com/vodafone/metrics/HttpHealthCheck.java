@@ -10,12 +10,12 @@ import java.util.Locale;
 /**
  * Created by Ravi Aghera
  */
-public class EpaHealthCheck extends HealthCheck {
+public class HttpHealthCheck extends HealthCheck {
 
     @Autowired
     private CatalogApiService service;
 
-    public EpaHealthCheck() {
+    public HttpHealthCheck() {
 
         service = ApplicationContextHolder.getContext().getBean(CatalogApiService.class);
     }
