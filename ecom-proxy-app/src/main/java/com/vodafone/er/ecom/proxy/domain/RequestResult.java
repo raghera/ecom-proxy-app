@@ -6,6 +6,7 @@ import java.util.Optional;
 /**
  * Created by Ravi Aghera
  */
+@SuppressWarnings("unchecked")
 public class RequestResult<T> {
 
     private final T response;

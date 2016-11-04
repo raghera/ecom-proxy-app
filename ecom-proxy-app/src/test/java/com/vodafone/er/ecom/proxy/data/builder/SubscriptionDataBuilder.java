@@ -9,6 +9,7 @@ import java.util.Random;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.vodafone.er.ecom.proxy.data.builder.CatalogPackageDataBuilder.aCatalogPackage;
+import static com.vodafone.er.ecom.proxy.data.builder.PricePointDataBuilder.*;
 import static com.vodafone.er.ecom.proxy.data.builder.TransactionDataBuilder.aTransaction;
 
 /**
@@ -23,6 +24,7 @@ public class SubscriptionDataBuilder {
         sub.setStatus(SubscriptionStatus.ACTIVE);
         sub.setSubscriptionIdLong(new Random().nextLong());
         sub.setTransactions(newArrayList(aTransaction()));
+        sub.setPricePoint(aPricePoint());
         return sub;
 
     }
