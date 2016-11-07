@@ -3,6 +3,7 @@ package com.vodafone.er.ecom.proxy;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vizzavi.ecommerce.business.provision.ProvisionApi;
+import com.vodafone.er.ecom.proxy.annotations.Legacy;
 import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.er.ecom.proxy.service.EpaLogService;
@@ -22,6 +23,7 @@ import java.util.Optional;
 import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.PROP_UPDATE_SERVICE_STATUS1;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.PROVISION_API;
 
+@Legacy("Legacy source adapted from ER core")
 public class ProvisionApiServlet extends AbstractEcomServlet {
 
     private static final long	serialVersionUID	= 7730131820760083128L;

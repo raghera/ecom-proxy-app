@@ -4,6 +4,7 @@ import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
 import com.vizzavi.ecommerce.business.charging.*;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
+import com.vodafone.er.ecom.proxy.annotations.Legacy;
 import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
 import com.vodafone.er.ecom.proxy.service.EpaLogService;
 import com.vodafone.er.ecom.proxy.service.PurchaseApiService;
@@ -24,6 +25,7 @@ import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.PROP_RENE
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.PURCHASE_API;
 
+@Legacy("Legacy source adapted from ER core")
 public class PurchaseApiServlet extends AbstractEcomServlet {
 
     private static final long	serialVersionUID	= -5298650083905760799L;

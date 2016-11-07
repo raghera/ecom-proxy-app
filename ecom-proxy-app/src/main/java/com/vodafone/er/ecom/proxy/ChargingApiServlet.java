@@ -3,6 +3,7 @@ package com.vodafone.er.ecom.proxy;
 import com.vizzavi.ecommerce.business.charging.*;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
+import com.vodafone.er.ecom.proxy.annotations.Legacy;
 import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
 import com.vodafone.er.ecom.proxy.service.ChargingApiService;
@@ -23,6 +24,7 @@ import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.*;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.CHARGING_API;
 
+@Legacy("Legacy source adapted from ER core")
 public class ChargingApiServlet extends AbstractEcomServlet {
 
     private static final long	serialVersionUID	= -3163007763179445975L;

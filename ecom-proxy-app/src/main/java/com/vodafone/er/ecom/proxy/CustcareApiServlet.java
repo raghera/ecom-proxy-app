@@ -5,6 +5,7 @@ import com.vizzavi.ecommerce.business.charging.ModifyAuthorisation;
 import com.vizzavi.ecommerce.business.charging.SubscriptionAttributes;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.*;
+import com.vodafone.er.ecom.proxy.annotations.Legacy;
 import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
 import com.vodafone.er.ecom.proxy.service.CustcareApiService;
 import com.vodafone.er.ecom.proxy.service.EpaLogService;
@@ -28,6 +29,7 @@ import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.*;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.CUSTCARE_API;
 
+@Legacy("Legacy source adapted from ER core")
 public class CustcareApiServlet extends AbstractEcomServlet {
 
 
