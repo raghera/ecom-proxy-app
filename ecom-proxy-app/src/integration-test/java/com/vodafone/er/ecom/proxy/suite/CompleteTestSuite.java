@@ -139,6 +139,7 @@ public class CompleteTestSuite {
         Logger.getLogger("org.springframework").setLevel(Level.OFF);
 //        Logger.getLogger("org.springframework").addAppender(ca);
 
+
         server = new Server(JETTY_PORT);
 
         ContextHandler contextHandler = new ContextHandler();

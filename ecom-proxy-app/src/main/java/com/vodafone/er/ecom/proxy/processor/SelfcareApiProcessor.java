@@ -24,6 +24,7 @@ import java.util.Locale;
 public class SelfcareApiProcessor<T> implements PostProcessor<RequestResult<List<?>>> {
 
     private static final Logger logger = LoggerFactory.getLogger(SelfcareApiProcessor.class);
+
     @Autowired
     private CatalogApiProcessor catalogApiProcessor;
     @Autowired
@@ -31,24 +32,24 @@ public class SelfcareApiProcessor<T> implements PostProcessor<RequestResult<List
 
     @Override
     public void process(RequestResult<List<?>> result) {
-
         logger.debug("Enter SelfcareApiProcessor.process");
 
-        if(!result.getResponse().isEmpty() && result.getResponse().get(0) instanceof Subscription ) {
+        if(!result.getResponse().isEmpty() && (result.getResponse().get(0) instanceof Subscription)) {
             List<Subscription> subscriptions = (List<Subscription>) result.getResponse();
             processSubscriptionsResponse(result.getLocale(), subscriptions);
         }
     }
 
-    public List<Subscription> processSubscriptionsResponse(Locale locale, final List<Subscription> subscriptions) {
+    private List<Subscription> processSubscriptionsResponse(Locale locale, final List<Subscription> subscriptions) {
         logger.debug("Enter SelfcareApiProcessor.processSubscriptionsResponse");
         subscriptions.forEach(subscription -> populateTransactions(locale, subscription));
         //Currently nothing else required.
 //        populatePurchasedServices(subsList);
         return subscriptions;
     }
-    //Sets the Subscription obj in the Transaction objects
-    public void populateTransactions(Locale locale, Subscription subscription) {
+
+    //Sets the Subscription obj in the Transaction objects without any calls to ER Core
+    private void populateTransactions(Locale locale, Subscription subscription) {
         logger.debug("Enter SelfcareApiProcessor.populateTransactions");
         List<Transaction> resultList = new ArrayList<>();
 
@@ -70,20 +71,23 @@ public class SelfcareApiProcessor<T> implements PostProcessor<RequestResult<List
 //                    });
 //        }
 
-        subscription.setTransactions(resultList);
+        subscription.getTransactions().addAll(resultList);
 
         logger.debug("Completed populating transactions");
 
+        //TODO modify getCatalogPackage service call to never return a null (make it Optional).
         //populate the package correctly
         final CatalogPackage pack = catalogApiService.getCatalogPackage(locale, subscription.getPackageId());
-        catalogApiProcessor.populatePricePointInPackage(pack, subscription.getPackage().getPricePoint().getId());
-        subscription.setPackage(pack);
+        if(pack != null) {
+            catalogApiProcessor.populatePricePointInPackage(pack, subscription.getPackage().getPricePoint().getId());
+            subscription.setPackage(pack);
+        }
 
     }
 
     //TODO Rather delete this method as potentially thousands of calls to catalogApi.getService(serviceId);
     //TODO Better to test if purchasedServices object is required first, then potentially add an operation to obtain all services in a list in CORE
-    public void populatePurchasedServices(Locale locale, final List<Subscription> subscriptions) {
+    private void populatePurchasedServices(Locale locale, final List<Subscription> subscriptions) {
 
         subscriptions.forEach(subscription -> {
             final List<String> serviceIds = Arrays.asList(subscription.getServiceIds());
@@ -101,7 +105,6 @@ public class SelfcareApiProcessor<T> implements PostProcessor<RequestResult<List
                 purchasedServices.add(purchasedService);
             });
 
-            //TODO Commented after move to 13-12
             subscription.setPurcServiceList(purchasedServices);
 
         });
