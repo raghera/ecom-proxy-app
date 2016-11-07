@@ -29,7 +29,7 @@ public class ChargingApiService {
     @Autowired
     private ErApiManager erApiManager;
     @Resource(name = "chargingApiProcessor")
-    private PostProcessor<RequestResult<List<UsageAuthorization>>> postProcessor;
+    private PostProcessor<RequestResult<List<?>>> postProcessor;
 
     public UsageAuthorization usageAuthRateCharge(Locale locale, String clientId, String msisdn, String serviceId,
                                                   UsageAttributes usageAttributes) throws EcommerceException {
@@ -37,7 +37,7 @@ public class ChargingApiService {
                 Optional.ofNullable(erApiManager.getChargingApi(locale, clientId)
                 .usageAuthRateCharge(clientId, msisdn, serviceId, usageAttributes));
         usageAuthOpt.ifPresent(usageAuth ->
-                postProcessor.process(new RequestResult.Builder<>()
+                postProcessor.process(new RequestResult.Builder<List<?>>()
                         .response(Lists.newArrayList(usageAuth))
                         .msisdn(msisdn)
                         .locale(locale)
@@ -55,7 +55,7 @@ public class ChargingApiService {
                 .usageAuth(clientId,msisdn,serviceId, attributes));
 
         usageAuthOpt.ifPresent(usageAuth ->
-                postProcessor.process(new RequestResult.Builder<>()
+                postProcessor.process(new RequestResult.Builder<List<?>>()
                         .response(Lists.newArrayList(usageAuth))
                         .msisdn(msisdn)
                         .locale(locale)
@@ -73,7 +73,7 @@ public class ChargingApiService {
                 .usageAuthRate(clientId, msisdn, serviceId, usageAttributes));
 
         usageAuthOpt.ifPresent(usageAuth ->
-                postProcessor.process(new RequestResult.Builder<>()
+                postProcessor.process(new RequestResult.Builder<List<?>>()
                         .response(Lists.newArrayList(usageAuth))
                         .msisdn(msisdn)
                         .locale(locale)

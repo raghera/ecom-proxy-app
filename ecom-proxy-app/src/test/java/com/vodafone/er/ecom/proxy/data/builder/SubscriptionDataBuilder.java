@@ -24,6 +24,8 @@ public class SubscriptionDataBuilder {
         sub.setPackage(aCatalogPackage());
         sub.setStatus(SubscriptionStatus.ACTIVE);
         sub.setSubscriptionIdLong(new Random().nextLong());
+        sub.setSubscriptionId(sub.getSubscriptionIdLong() + "");
+
         sub.setPaymentTransactions(aTransactionList(1));
         sub.setModifyTransactions(aTransactionList(1));
         sub.setPricePoint(aPricePoint());

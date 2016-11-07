@@ -35,7 +35,7 @@ public class SelfcareApiProcessorTest {
     private CatalogApiProcessor<CatalogPackage> catalogApiProcessor;
 
     @InjectMocks
-    private SelfcareApiProcessor<List<Subscription>> selfcareApiProcessor;
+    private SelfcareApiProcessor<List<?>> selfcareApiProcessor;
 
     @Test
     public void shouldProcessSelfcareApiSubscriptions() {
@@ -46,11 +46,13 @@ public class SelfcareApiProcessorTest {
         when(catalogApiService.getCatalogPackage(Locale.UK, subscriptions.get(0).getPackageId()))
                 .thenReturn(pack);
 
-        selfcareApiProcessor.process(new RequestResult.Builder<List<Subscription>>()
+        RequestResult<List<?>> requestResult = new RequestResult.Builder<List<?>>()
                 .msisdn(msisdn)
                 .locale(Locale.UK)
                 .response(subscriptions)
-                .build());
+                .build();
+
+        selfcareApiProcessor.process(requestResult);
 
         verify(catalogApiService).getCatalogPackage(Locale.UK, subscriptions.get(0).getPackageId());
         verify(catalogApiProcessor).populatePricePointInPackage(pack, subscriptions.get(0).getPricePoint().getId());
@@ -70,7 +72,7 @@ public class SelfcareApiProcessorTest {
 
     @Test
     public void shouldNotProcessSelfcareApiSubscriptionsWhenNoResults() {
-        selfcareApiProcessor.process(new RequestResult.Builder<List<Subscription>>()
+        selfcareApiProcessor.process(new RequestResult.Builder<List<?>>()
                 .msisdn("" + new Random().nextLong())
                 .locale(Locale.UK)
                 .response(newArrayList())
@@ -93,7 +95,7 @@ public class SelfcareApiProcessorTest {
         when(catalogApiService.getCatalogPackage(Locale.UK, subscriptions.get(0).getPackageId()))
                 .thenReturn(pack);
 
-        selfcareApiProcessor.process(new RequestResult.Builder<List<Subscription>>()
+        selfcareApiProcessor.process(new RequestResult.Builder<List<?>>()
                 .msisdn(msisdn)
                 .locale(Locale.UK)
                 .response(subscriptions)
@@ -117,7 +119,7 @@ public class SelfcareApiProcessorTest {
         when(catalogApiService.getCatalogPackage(Locale.UK, subscriptions.get(0).getPackageId()))
                 .thenReturn(null);
 
-        selfcareApiProcessor.process(new RequestResult.Builder<List<Subscription>>()
+        selfcareApiProcessor.process(new RequestResult.Builder<List<?>>()
                 .msisdn(msisdn)
                 .locale(Locale.UK)
                 .response(subscriptions)

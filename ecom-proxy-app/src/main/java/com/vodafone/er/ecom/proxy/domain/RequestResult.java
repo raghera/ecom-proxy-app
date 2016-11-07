@@ -6,7 +6,6 @@ import java.util.Optional;
 /**
  * Created by Ravi Aghera
  */
-@SuppressWarnings("unchecked")
 public class RequestResult<T> {
 
     private final T response;
@@ -23,11 +22,10 @@ public class RequestResult<T> {
         return Optional.of(msisdn);
     }
 
-    private RequestResult(Builder builder) {
-        //Can only be Type T
-        this.response = (T) builder.response;
-        this.msisdn = builder.msisdn;
-        this.locale = builder.locale;
+    private RequestResult(T response, String msisdn, Locale locale) {
+        this.response = response;
+        this.msisdn = msisdn;
+        this.locale = locale;
     }
 
     public static class Builder<T> {
@@ -35,20 +33,20 @@ public class RequestResult<T> {
         private Locale locale;
         private String msisdn;
 
-        public Builder response(T response) {
+        public Builder<T> response(T response) {
             this.response = response;
             return this;
         }
-        public Builder locale(Locale locale) {
+        public Builder<T> locale(Locale locale) {
             this.locale = locale;
             return this;
         }
-        public Builder msisdn(String msisdn) {
+        public Builder<T> msisdn(String msisdn) {
             this.msisdn = msisdn;
             return this;
         }
         public RequestResult<T> build() {
-            return new RequestResult<>(this);
+            return new RequestResult<>(response, msisdn, locale);
         }
     }
 }

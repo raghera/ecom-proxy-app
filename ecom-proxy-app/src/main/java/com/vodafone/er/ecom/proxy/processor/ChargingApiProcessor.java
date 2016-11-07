@@ -28,7 +28,7 @@ import static com.vodafone.er.ecom.proxy.exception.EpaErrorMessageEnum.ERROR_FRO
  * Created by Ravi Aghera
  */
 @Component
-public class ChargingApiProcessor<T extends UsageAuthorization> implements PostProcessor<RequestResult<List<T>>> {
+public class ChargingApiProcessor<T extends UsageAuthorization> implements PostProcessor<RequestResult<List<UsageAuthorization>>> {
 
     private static final Logger logger = LoggerFactory.getLogger(ChargingApiProcessor.class);
 
@@ -36,16 +36,15 @@ public class ChargingApiProcessor<T extends UsageAuthorization> implements PostP
     private SelfcareApiService selfcareApiService;
 
     @Override
-    public void process(RequestResult<List<T>> result) {
+    public void process(RequestResult<List<UsageAuthorization>> result) {
         if (!result.getResponse().isEmpty() && result.getResponse().get(0) != null) {
             result.getMsisdn().ifPresent(msisdn ->
-                    processUsageAuthResponse(result.getLocale(), msisdn, (List<UsageAuthorization>) result.getResponse())
+                    processUsageAuthResponse(result.getLocale(), msisdn, result.getResponse())
             );
         }
     }
 
     public void processUsageAuthResponse(Locale locale, String msisdn, List<UsageAuthorization> usageAuths) {
-
         usageAuths.forEach(usageAuth -> {
             if(usageAuth.isSuccess()) {
                 populateSubscription(locale, msisdn, usageAuth);
@@ -61,22 +60,21 @@ public class ChargingApiProcessor<T extends UsageAuthorization> implements PostP
     //finds the complete service pricepoint object from the subscription and replaces the one on the usageAuth
     protected void populateUsageAuthServicePricePointFromSubscription(Locale locale, String msisdn, UsageAuthorization usageAuthorization) {
 
-        //The existing content
-        Optional<String> ppIdOpt = Optional.of(usageAuthorization.getServicePricePoint().getId());
-        Optional<Subscription> subOpt = Optional.of(usageAuthorization.getSubscription());
+        if(null != usageAuthorization.getServicePricePoint() &&
+                null != usageAuthorization.getServicePricePoint().getId() &&
+                null != usageAuthorization.getSubscription() &&
+                null != usageAuthorization.getSubscription().getPackage()) {
 
-        if(subOpt.isPresent() && null != subOpt.get().getPackage()) {
-
-            ppIdOpt.ifPresent(ppId -> {
-                //Find the full service object
-                List<CatalogService> services = subOpt.get().getPackage().getServices();
-                Optional<CatalogService> foundService = services.stream()
-                        .filter(catalogService -> null != catalogService.getPricePoints().getPricePoint(ppId).getId())
-                        .findFirst();
-                foundService.ifPresent(service -> {
-                    PricePoint foundPp = service.getPricePoints().getPricePoint(ppId);
-                    usageAuthorization.setPricePoint(foundPp);
-                });
+            String ppId = usageAuthorization.getServicePricePoint().getId();
+            Subscription sub = usageAuthorization.getSubscription();
+            //Find the full service object
+            List<CatalogService> services = sub.getPackage().getServices();
+            Optional<CatalogService> foundService = services.stream()
+                    .filter(catalogService -> null != catalogService.getPricePoints().getPricePoint(ppId).getId())
+                    .findFirst();
+            foundService.ifPresent(service -> {
+                PricePoint foundPp = service.getPricePoints().getPricePoint(ppId);
+                usageAuthorization.setPricePoint(foundPp);
             });
         }
     }

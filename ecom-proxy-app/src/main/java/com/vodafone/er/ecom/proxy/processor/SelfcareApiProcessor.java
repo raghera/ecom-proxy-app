@@ -34,7 +34,7 @@ public class SelfcareApiProcessor<T> implements PostProcessor<RequestResult<List
     public void process(RequestResult<List<?>> result) {
         logger.debug("Enter SelfcareApiProcessor.process");
 
-        if(!result.getResponse().isEmpty() && (result.getResponse().get(0) instanceof Subscription)) {
+        if(!result.getResponse().isEmpty() && result.getResponse().get(0) instanceof Subscription) {
             List<Subscription> subscriptions = (List<Subscription>) result.getResponse();
             processSubscriptionsResponse(result.getLocale(), subscriptions);
         }

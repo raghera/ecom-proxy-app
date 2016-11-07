@@ -108,8 +108,9 @@ public class EpaLogService {
                         transLogManager.addAttributeOnce(Attr.TX_DURATION , String.valueOf(duration)));
 
         transLogManager.addAttributeOnce(Attr.REQUEST_TYPE, TransLogConstants.REQUEST_TYPE_ECOM);
-        transLogManager.logResponse(true);
 
+        //TODO swap these around, translog actually wipes the cache
+        transLogManager.logResponse(true);
         logEcomResponse(new ERLogDataImpl(transLogManager.getAttribute(Attr.CUSTOMER_ID),
                         transLogManager.getAttribute(Attr.VF_INT_CALLER_ID),
                         transLogManager.getAttribute(Attr.REQUEST_NAME),
