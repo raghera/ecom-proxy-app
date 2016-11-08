@@ -189,11 +189,35 @@ public class ChargingApiProcessorTest {
                 .build());
 
         verify(selfcareApiService).getSubscriptions(eq(Locale.UK), eq(CLIENT_ID.value()), eq(msisdn), eq(0), any(SubscriptionFilter.class));
+        verifyNoMoreInteractions(selfcareApiService);
+        assertNull(uAuth.getActiveSubscriptions());
 
-        final List<SubscriptionFilter> argFilters = captor.getAllValues();
+    }
 
-        assertThat(filter).as("Comparing filter with SubscriptionId").isEqualToComparingFieldByField(argFilters.get(0));
-        assertThat(activeFilter).as("Comparing filter with SubscriptionStatus object").isEqualToComparingFieldByField(argFilters.get(1));
+    @Test
+    public void shouldHandleEcommerceExceptionForGetActiveSubsFromCore() throws EcommerceException {
+
+        String msisdn = "" + new Random().nextLong();
+        UsageAuthorization uAuth = aUsageAuthorization();
+        SubscriptionFilter filter = new SubscriptionFilterImpl();
+        filter.setSubscriptionId(uAuth.getPackageSubscriptionId());
+        SubscriptionFilter activeFilter = new SubscriptionFilterImpl();
+        activeFilter.setSubscriptionStatus(SubscriptionStatus.ACTIVE);
+
+        when(selfcareApiService.getSubscriptions(eq(Locale.UK), eq(CLIENT_ID.value()), eq(msisdn), eq(0), refEq(filter)))
+                .thenReturn(new Subscription[]{aSubscription()});
+        when(selfcareApiService.getSubscriptions(eq(Locale.UK), eq(CLIENT_ID.value()), eq(msisdn), eq(0), refEq(activeFilter)))
+                .thenThrow(new EcommerceException("This is a test exception"));
+
+        chargingApiProcessor.process(new RequestResult.Builder<List<UsageAuthorization>>()
+                .msisdn(msisdn)
+                .locale(Locale.UK)
+                .response(newArrayList(uAuth))
+                .build());
+
+        verify(selfcareApiService).getSubscriptions(eq(Locale.UK), eq(CLIENT_ID.value()), eq(msisdn), eq(0), refEq(filter));
+        verify(selfcareApiService).getSubscriptions(eq(Locale.UK), eq(CLIENT_ID.value()), eq(msisdn), eq(0), refEq(activeFilter));
+        verifyNoMoreInteractions(selfcareApiService);
         assertNull(uAuth.getActiveSubscriptions());
 
     }

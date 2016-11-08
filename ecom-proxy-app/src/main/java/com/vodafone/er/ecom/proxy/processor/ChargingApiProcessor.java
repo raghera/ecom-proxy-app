@@ -93,6 +93,7 @@ public class ChargingApiProcessor<T extends UsageAuthorization> implements PostP
             }
         } catch (EcommerceException e) {
             logger.error("PostProcessor error. Could not get Subscription from ER Core correctly using id: {}, with exception message: {}. Continuing responding with original response", subId, e);
+            //don't bother trying again
             return;
         }
         populateActiveSubscriptions(locale, msisdn, usageAuthorization);
