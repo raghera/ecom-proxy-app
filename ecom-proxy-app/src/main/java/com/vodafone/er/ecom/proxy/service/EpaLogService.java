@@ -110,7 +110,7 @@ public class EpaLogService {
         transLogManager.addAttributeOnce(Attr.REQUEST_TYPE, TransLogConstants.REQUEST_TYPE_ECOM);
 
         //TODO swap these around, translog actually wipes the cache
-        transLogManager.logResponse(true);
+
         logEcomResponse(new ERLogDataImpl(transLogManager.getAttribute(Attr.CUSTOMER_ID),
                         transLogManager.getAttribute(Attr.VF_INT_CALLER_ID),
                         transLogManager.getAttribute(Attr.REQUEST_NAME),
@@ -118,6 +118,7 @@ public class EpaLogService {
                         transLogManager.getAttribute(Attr.ER_API_NAME)),
                 true);
         //        ulf.logULFRequestIn(transLogManager, ULFEntry.Logpoint.REQUEST_OUT);
+        transLogManager.logResponse(true);
     }
     public void logResponseError(Exception e) {
         transLogManager.addAttributeOnce(Attr.ERROR, e.getMessage());
@@ -160,7 +161,7 @@ public class EpaLogService {
         PerfLogger.stop();
     }
 
-    public String getCurrentTransactionId() {
+    private String getCurrentTransactionId() {
         return transLogManager.getAttribute(Attr.ER_TX_LOG_ID);
     }
 
