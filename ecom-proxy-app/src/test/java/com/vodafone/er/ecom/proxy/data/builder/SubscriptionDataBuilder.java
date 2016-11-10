@@ -9,7 +9,9 @@ import java.util.Random;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.vodafone.er.ecom.proxy.data.builder.CatalogPackageDataBuilder.aCatalogPackage;
+import static com.vodafone.er.ecom.proxy.data.builder.PricePointDataBuilder.aPricePoint;
 import static com.vodafone.er.ecom.proxy.data.builder.TransactionDataBuilder.aTransaction;
+import static com.vodafone.er.ecom.proxy.data.builder.TransactionDataBuilder.aTransactionList;
 
 /**
  * Created by Ravi Aghera
@@ -22,9 +24,12 @@ public class SubscriptionDataBuilder {
         sub.setPackage(aCatalogPackage());
         sub.setStatus(SubscriptionStatus.ACTIVE);
         sub.setSubscriptionIdLong(new Random().nextLong());
-        sub.setTransactions(newArrayList(aTransaction()));
-        return sub;
+        sub.setSubscriptionId(sub.getSubscriptionIdLong() + "");
 
+        sub.setPaymentTransactions(aTransactionList(1));
+        sub.setModifyTransactions(aTransactionList(1));
+        sub.setPricePoint(aPricePoint());
+        return sub;
     }
 
     public static List<Subscription> aSubscriptionList(int length) {

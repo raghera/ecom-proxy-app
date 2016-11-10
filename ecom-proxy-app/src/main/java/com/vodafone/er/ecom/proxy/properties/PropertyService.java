@@ -36,19 +36,21 @@ public class PropertyService {
 
     public static Optional<String> getProperty(String key, String defaultValue) {
         final String property = properties.getProperty(key, defaultValue);
-        if(property != null) {
+        if(property != null && property.length() > 0) {
+            log.info("Retrieved property using key={} value={}", key, property );
             return Optional.of(property);
         }
-        log.info("Retrieved property using key={} value={}", key, property );
-        return Optional.empty();
+        log.info("Could not find property using key={} so using default={}", key, defaultValue );
+        return Optional.of(defaultValue);
     }
 
     public static Optional<Boolean> getPropertyAsBoolean(String key, boolean defaultValue) {
         final String value = properties.getProperty(key, String.valueOf(defaultValue));
 
-        if(value == null) {
-            return Optional.empty();
+        if(value == null || value.length() == 0) {
+            return Optional.of(defaultValue);
         }
+
         final Boolean boolValue = Boolean.parseBoolean(value);
 
         log.info("Retrieved property using key={} value={}", key, boolValue);

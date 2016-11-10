@@ -16,8 +16,6 @@ import java.util.Locale;
 import static com.vodafone.er.ecom.proxy.enums.EpaClientEnum.CLIENT_ID;
 
 /**
- * 1 uniform way to get the Decoupling ErApi's in a singleton way
- *
  * Created by Ravi Aghera
  */
 @Component
@@ -25,52 +23,33 @@ public class ErApiManager {
 
     private Logger log = LoggerFactory.getLogger(ErApiManager.class);
 
-    private ChargingApi chargingApi;
     private CatalogApi catalogApi;
-    private SelfcareApi selfcareApi;
-    private CustcareApi custcareApi;
-    private ProvisionApi provisionApi;
-    private PurchaseApi purchaseApi;
 
     public PurchaseApi getPurchaseApi(Locale locale, String clientId) {
-        if (null == purchaseApi) {
-            purchaseApi = DecouplingApiFactory.getPurchaseApi(locale , clientId);
-        }
-        return purchaseApi;
+        return DecouplingApiFactory.getPurchaseApi(locale , checkClientId(clientId));
     }
     public ChargingApi getChargingApi(Locale locale, String clientId) {
-        if (null == chargingApi) {
-            chargingApi = DecouplingApiFactory.getChargingApi(locale , clientId);
-        }
-        return chargingApi;
+        return DecouplingApiFactory.getChargingApi(locale , checkClientId(clientId));
     }
     public SelfcareApi getSelfcareApi(Locale locale) {
-        if(null == selfcareApi) {
-            selfcareApi = DecouplingApiFactory.getSelfcareApi(locale, CLIENT_ID.value());
-        }
-        return selfcareApi;
+        return DecouplingApiFactory.getSelfcareApi(locale, CLIENT_ID.value());
     }
-
     public CustcareApi getCustcareApi(Locale locale) {
-        if(null == custcareApi) {
-            custcareApi = DecouplingApiFactory.getCustcareApi(locale, CLIENT_ID.value());
-        }
-        return custcareApi;
+        return DecouplingApiFactory.getCustcareApi(locale, CLIENT_ID.value());
     }
-
     public CatalogApi getCatalogApi(Locale locale) {
-        if(null == catalogApi) {
-            log.info("getPackages5: Calling DecouplingApiFactory");
-            catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.value());
-        }
+        log.info("getPackages5: Calling DecouplingApiFactory");
+        catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.value());
         return catalogApi;
     }
-
     public ProvisionApi getProvisionApi(Locale locale) {
-        if(null == provisionApi) {
-            provisionApi = DecouplingApiFactory.getProvisionApi(locale, CLIENT_ID.value());
-        }
-        return provisionApi;
+        return DecouplingApiFactory.getProvisionApi(locale, CLIENT_ID.value());
     }
-
+    private String checkClientId(String clientId) {
+        if(null == clientId || clientId.isEmpty()) {
+            log.warn("No clientId provided by the client so populating it with a default: " + CLIENT_ID.value());
+            return CLIENT_ID.value();
+        }
+        return clientId;
+    }
 }

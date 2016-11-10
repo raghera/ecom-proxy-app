@@ -5,5 +5,5 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 public @interface ExpectedTestFailure {
-    public boolean enabled() default true;
+    boolean enabled() default true;
 }

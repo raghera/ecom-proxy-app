@@ -1,15 +1,24 @@
 package com.vodafone.er.ecom.proxy;
 
 import com.vizzavi.ecommerce.business.catalog.CatalogApi;
+import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
 import com.vizzavi.ecommerce.business.charging.*;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vizzavi.ecommerce.business.common.ResponseStatus;
 import com.vizzavi.ecommerce.business.selfcare.*;
 import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
+import org.apache.log4j.*;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AllowSymLinkAliasChecker;
+import org.eclipse.jetty.server.handler.ContextHandler;
+import org.eclipse.jetty.webapp.WebAppContext;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
-import javax.net.ssl.*;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
@@ -18,9 +27,7 @@ import java.util.stream.Collectors;
 
 import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getCustcareApi;
 import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getSelfcareApi;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 public class AdHocTests {
@@ -38,13 +45,132 @@ public class AdHocTests {
     CustcareApi custcareApi = getCustcareApi(Locale.UK);
     CatalogApi catalogApi = EcomApiFactory.getCatalogApi(Locale.UK);
 
+    private static final int JETTY_PORT = 8888;
+//    private static final String WAR_PATH = "./ecom-proxy-app/target/ecom-proxy-app.war";
+    private static final String WAR_PATH = "./target/ecom-proxy-app.war";
+    private static final String CONTEXT_PATH = "/delegates";
+
+    private Server server;
+
     String clientId = "AdhocTestClient";
 
     public AdHocTests() throws EcommerceException {
     }
 
+
+    @Before
+    public void startJetty() throws Exception {
+        BasicConfigurator.configure();
+//        overrideProperties();
+//        setLog(new Slf4jLog());
+
+//        Logger.getRootLogger().setLevel(Level.DEBUG);
+//        Logger.getLogger("com.vodafone").setLevel(Level.DEBUG);
+
+        Logger logger = Logger.getLogger("com.vodafone");
+
+//        ConsoleAppender ca = new ConsoleAppender(new PatternLayout("%-5p [%t]: %m%n"));
+//        ca.setWriter(new OutputStreamWriter(System.out));
+//        Logger.getLogger("com.vodafone").addAppender(ca);
+//        Logger.getRootLogger().addAppender(ca);
+        Logger.getLogger("com.vodafone.config").setLevel(Level.OFF);
+        Logger.getLogger("org.eclipse").setLevel(Level.ERROR);
+        Logger.getLogger("org.springframework").setLevel(Level.OFF);
+//        Logger.getLogger("org.springframework").addAppender(ca);
+
+        try {
+            server = new Server(JETTY_PORT);
+        } catch (Throwable thr) {
+            thr.printStackTrace();
+        }
+
+//        MBeanContainer mbContainer = new MBeanContainer(
+//                ManagementFactory.getPlatformMBeanServer());
+//        server.addBean(mbContainer);
+
+
+        ContextHandler contextHandler = new ContextHandler();
+        contextHandler.setContextPath("/delegates");
+
+        WebAppContext webAppContext = new WebAppContext();
+        webAppContext.setContextPath(CONTEXT_PATH);
+        File warfile = new File(WAR_PATH);
+        System.out.println("Warfile present: " + warfile.exists());
+        System.out.println("Warfile path: " + warfile.getAbsolutePath());
+
+        System.out.println(">>>>>" + System.getProperty("user.dir"));
+
+        setSystemProperties();
+
+        webAppContext.setWar(warfile.getAbsolutePath());
+
+        webAppContext.addAliasCheck(new AllowSymLinkAliasChecker());
+        server.setHandler(webAppContext);
+
+//        startServer();
+        System.out.println("STATE=" + server.getState());
+        server.start();
+//        server.join();
+        System.out.println("STATE=" + server.getState());
+
+
+        System.out.println( "SERVER STATUS " + server.getState() );
+
+    }
+
+    @After
+    public void tearDownJetty() throws Exception {
+        System.out.println( "STOPPING SERVER " + server.getState() );
+        server.stop();
+//        server.join();
+        System.out.println( "STOPPED SERVER " + server.getState() );
+    }
+
+    @Test
+    public void runImbeddedServer() throws Exception {
+//        ExecutorService executorService = Executors.newFixedThreadPool(1);
+//
+//        executorService.submit(() -> {
+//            try {
+//                System.out.println("STARTING SERVER");
+//
+//                System.out.println("COMPLETE START SERVER");
+//            } catch (Exception e) {
+//                try {
+//                    System.out.println("STOPPING SERVER");
+////                    EcomProxyJetty9Server.stopServer();
+//                } catch (Exception e1) {
+//                    System.out.println("Stop server failed " + e);
+//                    e1.printStackTrace();
+//                }
+//                throw new AssertionError(e);
+//            }
+//        });
+
+
+
+//        EcomProxyJetty9Server.main(new String[0]);
+//        Thread.sleep(5000);
+        System.out.println("HELLO THIS TEST IS RUNNING ....");
+
+        final CatalogPackage catalogPackage = catalogApi.getPackage("pAlt");
+        assertNotNull(catalogPackage);
+        System.out.println("Result = " + catalogPackage);
+
+        System.out.println("TEST IS COMPLETE ....");
+
+//        System.out.println("Shutting down Executor");
+//        executorService.shutdown();
+//        if(!executorService.awaitTermination(5, TimeUnit.SECONDS)) {
+//            System.out.println("Killing Executor");
+//            executorService.shutdownNow();
+//        }
+    }
+
     @Test
     public void createDynamicPredicate() throws Exception {
+
+
 
         List<String> values = new ArrayList<>();
         values.add("A");
@@ -92,11 +218,11 @@ public class AdHocTests {
 
         String payload =
                 "<?xml version='1.0' encoding='UTF-8'?>" +
-                "<er-request id=\"100029\" client-application-id=\"ecom-proxy-application\" purchase_locale=\"en_GB\" language_locale=\"en_GB\" client-domain=\"GB.ecom-proxy-application\">" +
-                "  <payload>" +
-                "    <get-version-request xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/>" +
-                "  </payload>" +
-                "</er-request>";
+                        "<er-request id=\"100029\" client-application-id=\"ecom-proxy-application\" purchase_locale=\"en_GB\" language_locale=\"en_GB\" client-domain=\"GB.ecom-proxy-application\">" +
+                        "  <payload>" +
+                        "    <get-version-request xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/>" +
+                        "  </payload>" +
+                        "</er-request>";
 
         URL url = new URL(protocol + host + port + path);
 //        URL url = new URL(protocol + host + port );
@@ -144,13 +270,14 @@ public class AdHocTests {
     private SSLSocketFactory getSSLFactory() throws Exception {
 
         //Set up the trust manager (re-use ER one)
-        EpaX509TrustManager trustManager = new EpaX509TrustManager();
-
-        SSLContext sslContext = SSLContext.getInstance("TLS");
-        sslContext.init(new KeyManager[]{trustManager.getDefaultKeyManager()}, new TrustManager[] { trustManager.getDefaultTrustManager() }, null);
-
-        SSLSocketFactory sslFactory = sslContext.getSocketFactory();
-        return  sslFactory;
+//        EpaX509TrustManager trustManager = new EpaX509TrustManager();
+//
+//        SSLContext sslContext = SSLContext.getInstance("TLS");
+//        sslContext.init(new KeyManager[]{trustManager.getDefaultKeyManager()}, new TrustManager[] { trustManager.getDefaultTrustManager() }, null);
+//
+//        SSLSocketFactory sslFactory = sslContext.getSocketFactory();
+//        return  sslFactory;
+        return null;
 
     }
 

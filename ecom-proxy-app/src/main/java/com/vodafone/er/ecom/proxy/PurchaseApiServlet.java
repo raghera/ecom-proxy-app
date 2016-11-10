@@ -4,7 +4,9 @@ import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
 import com.vizzavi.ecommerce.business.charging.*;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
+import com.vodafone.er.ecom.proxy.annotations.Legacy;
 import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
+import com.vodafone.er.ecom.proxy.service.EpaLogService;
 import com.vodafone.er.ecom.proxy.service.PurchaseApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.util.ExceptionAdapter;
@@ -23,6 +25,7 @@ import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.PROP_RENE
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.PURCHASE_API;
 
+@Legacy("Legacy source adapted from ER core")
 public class PurchaseApiServlet extends AbstractEcomServlet {
 
     private static final long	serialVersionUID	= -5298650083905760799L;
@@ -30,13 +33,18 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
     private static Logger log = Logger.getLogger(PurchaseApiServlet.class);
 
     private PurchaseApiService purchaseApiService;
+    private EpaLogService epaLogService;
 
     public PurchaseApiServlet() {
         purchaseApiService = ApplicationContextHolder.getContext().getBean(PurchaseApiService.class);
+        epaLogService = ApplicationContextHolder.getContext().getBean(EpaLogService.class);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        Locale locale;
+        String methodName, clientId, msisdn;
+
         try {
             startTx();
             ServletInputStream is = req.getInputStream();
@@ -44,31 +52,29 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             @SuppressWarnings("unchecked")
             HashMap<String, Serializable> requestPayload = (HashMap<String, Serializable>) ois.readObject();
 
-            Locale locale = (Locale)requestPayload.get("locale");
-            String methodName = (String) requestPayload.get("methodName");
-            String clientId = (String) requestPayload.get("clientId");
-            //CR 2199 Add msisdn to context
-            final String msisdn = (String) requestPayload.get("msisdn");
-            logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
-            logEcomRequest(clientId, locale, methodName, PURCHASE_API.getValue());
+            locale = (Locale)requestPayload.get("locale");
+            methodName = (String) requestPayload.get("methodName");
+            clientId = (String) requestPayload.get("clientId");
+            if(clientId == null) {
+                clientId = (String) requestPayload.get("clientApplicationId");
+            }
+            msisdn = (String) requestPayload.get("msisdn");
+            epaLogService.logRequestIn(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry(), PURCHASE_API.getValue()) );
 
             if (methodName.equals("purchasePackageMsisdn1")) {
                 String clientApplicationId = (String) requestPayload.get("clientApplicationId");
-                //String msisdn = (String) requestPayload.get("msisdn");
                 String packageId = (String) requestPayload.get("packageId");
                 PurchaseAttributes purchaseAttributes = (PurchaseAttributes) requestPayload.get("purchaseAttributes");
                 purchasePackageMsisdnHandler(locale, resp  ,clientApplicationId  ,msisdn  ,packageId  ,purchaseAttributes );
             }
             if (methodName.equals("ratePackage2")) {
                 String clientApplicationId = (String) requestPayload.get("clientApplicationId");
-                //String msisdn = (String) requestPayload.get("msisdn");
                 String packageId = (String) requestPayload.get("packageId");
                 PurchaseAttributes purchaseAttributes = (PurchaseAttributes) requestPayload.get("purchaseAttributes");
                 ratePackageHandler(locale, resp  ,clientApplicationId  ,msisdn  ,packageId  ,purchaseAttributes );
             }
             if (methodName.equals("renewPurchasePackageMsisdn3")) {
                 String clientApplicationId = (String) requestPayload.get("clientApplicationId");
-                //String msisdn = (String) requestPayload.get("msisdn");
                 String packageSubscriptionId = (String) requestPayload.get("packageSubscriptionId");
                 PurchaseAttributes purchaseAttributes = (PurchaseAttributes) requestPayload.get("purchaseAttributes");
                 renewPurchasePackageMsisdnHandler(locale, resp  ,clientApplicationId  ,msisdn  ,packageSubscriptionId  ,purchaseAttributes );
@@ -92,22 +98,13 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
                 ValidatePromoParam vpParam = (ValidatePromoParam) requestPayload.get("vpParam");
                 validatePromoCodeHandler(locale, resp  ,vpParam );
             }
-            //CR-0978 Location Services
             if (methodName.equals("modifyTariff7")) {
-                //String msisdn = (String) requestPayload.get("msisdn");
                 ModifyTariffAttributes modifyTariffAttributes = (ModifyTariffAttributes) requestPayload.get("modifyTariffAttributes");
                 modifyTariffHandler(locale, resp  ,msisdn  ,modifyTariffAttributes );
             }
-//           if (methodName.equals("goodwillCredit9")) {
-//        	   String msisdn = (String) requestPayload.get("msisdn");
-//        	   String partnerId = (String) requestPayload.get("partnerId");
-//        	   String merchantId = (String) requestPayload.get("merchantId");
-//        	   String packageId = (String) requestPayload.get("packageId");
-//        	   double preRate =  ((Double) requestPayload.get("preRate")).doubleValue();
-//        	   goodwillCreditHandler(locale, resp  ,clientId  ,msisdn  ,partnerId  ,merchantId  ,packageId  ,preRate );
-//           }
         }
         catch (Exception e) {
+            epaLogService.logResponseError(e);
             try
             {
                 ObjectOutputStream oostream = new ObjectOutputStream (new BufferedOutputStream (resp.getOutputStream()));
@@ -140,16 +137,19 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
                 // Commit the transaction here as it will be committed in doPost anyway but we need to commit
                 // before sending a response.
 
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
 
             // send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -186,16 +186,18 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             catch (Exception e1) {
                 // Commit the transaction here as it will be committed in doPost anyway but we need to commit
                 // before sending a response.
-
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -238,16 +240,18 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             catch (Exception e1) {
                 // Commit the transaction here as it will be committed in doPost anyway but we need to commit
                 // before sending a response.
-
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -284,16 +288,18 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             catch (Exception e1) {
                 // Commit the transaction here as it will be committed in doPost anyway but we need to commit
                 // before sending a response.
-
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -331,16 +337,18 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             catch (Exception e1) {
                 // Commit the transaction here as it will be committed in doPost anyway but we need to commit
                 // before sending a response.
-
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -377,16 +385,18 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             catch (Exception e1) {
                 // Commit the transaction here as it will be committed in doPost anyway but we need to commit
                 // before sending a response.
-
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -424,16 +434,18 @@ public class PurchaseApiServlet extends AbstractEcomServlet {
             catch (Exception e1) {
                 // Commit the transaction here as it will be committed in doPost anyway but we need to commit
                 // before sending a response.
-
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             // send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (

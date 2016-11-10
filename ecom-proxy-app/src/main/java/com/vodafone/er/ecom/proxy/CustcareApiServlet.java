@@ -5,8 +5,10 @@ import com.vizzavi.ecommerce.business.charging.ModifyAuthorisation;
 import com.vizzavi.ecommerce.business.charging.SubscriptionAttributes;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.*;
+import com.vodafone.er.ecom.proxy.annotations.Legacy;
 import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
 import com.vodafone.er.ecom.proxy.service.CustcareApiService;
+import com.vodafone.er.ecom.proxy.service.EpaLogService;
 import com.vodafone.er.ecom.proxy.service.SelfcareApiService;
 import com.vodafone.global.er.data.ERLogDataImpl;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
@@ -27,6 +29,7 @@ import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.*;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.CUSTCARE_API;
 
+@Legacy("Legacy source adapted from ER core")
 public class CustcareApiServlet extends AbstractEcomServlet {
 
 
@@ -35,10 +38,12 @@ public class CustcareApiServlet extends AbstractEcomServlet {
 
     private CustcareApiService custcareApiService;
     private SelfcareApiService selfcareApiService;
+    private EpaLogService epaLogService;
 
     public CustcareApiServlet() {
         custcareApiService = ApplicationContextHolder.getContext().getBean(CustcareApiService.class);
         selfcareApiService = ApplicationContextHolder.getContext().getBean(SelfcareApiService.class);
+        epaLogService = ApplicationContextHolder.getContext().getBean(EpaLogService.class);
     }
 
     protected SelfcareApi getSelfcareApiDelegate(Locale locale) throws Exception {
@@ -47,20 +52,23 @@ public class CustcareApiServlet extends AbstractEcomServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+
+        Locale locale;
+        String methodName, clientId, msisdn;
+
         try {
             startTx();
             ServletInputStream is = req.getInputStream();
             ObjectInputStream ois = new ObjectInputStream(is);
-            @SuppressWarnings("unchecked")
             HashMap<String, Serializable> requestPayload = (HashMap<String, Serializable>) ois.readObject();
 
-            Locale locale = (Locale)requestPayload.get("locale");
-            String methodName = (String) requestPayload.get("methodName");
-            String clientId = (String) requestPayload.get("clientId");
-            String msisdn = (String) requestPayload.get("msisdn");
+            locale = (Locale) requestPayload.get("locale");
+            methodName = (String) requestPayload.get("methodName");
+            clientId = (String) requestPayload.get("clientId");
+            msisdn = (String) requestPayload.get("msisdn");
 
-            logRequest(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry()) );
-            logEcomRequest(clientId, locale, methodName, CUSTCARE_API.getValue());
+
+            epaLogService.logRequestIn(new ERLogDataImpl(msisdn, clientId, methodName, locale.getCountry(), CUSTCARE_API.getValue()) );
 
             if (methodName.equals("inactivateAccount2")) {
 
@@ -304,11 +312,12 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 modifyUserGroupsHandler(locale, resp, clientId, msisdn, csrId, reason, usergroups, action);
 
             }
-            logEcomResponse(clientId, locale, methodName, CUSTCARE_API.getValue(), true);
         }
         catch (Exception e) {
+            epaLogService.logResponseError(e);
             try
             {
+                epaLogService.logResponseError(e);
 
                 ObjectOutputStream oostream = new ObjectOutputStream (new BufferedOutputStream (resp.getOutputStream()));
                 oostream.writeObject( new ExceptionAdapter(e));
@@ -331,15 +340,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getCustcareApiDelegate(locale).inactivateAccount(clientId,msisdn,csrId,reason);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -373,15 +385,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getCustcareApiDelegate(locale).inactivateAccount(clientId,msisdn, null, null);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -415,15 +430,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getCustcareApiDelegate(locale).inactivateAccount(clientId,msisdn,validateAccount,csrId,reason);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -457,15 +475,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getCustcareApiDelegate(locale).inactivateAccount(clientId,msisdn,validateAccount, null, null);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -504,15 +525,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 }
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -546,15 +570,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getCustcareApiDelegate(locale).inactivateSubscription(clientId,msisdn,subscriptionId, null, null);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -588,16 +615,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getCustcareApiDelegate(locale).refundTransactionMonetary(clientId,msisdn,transactionId,amount,res,attributes);
             }
             catch (Exception e1) {
-
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -631,15 +660,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getCustcareApiDelegate(locale).refundTransactionEnlargement(clientId,msisdn,transactionId,numberDaysToExtend,attributes);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -673,15 +705,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getCustcareApiDelegate(locale).refundTransactionDiscount(clientId,msisdn,transactionId,discount,attributes);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -715,15 +750,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getCustcareApiDelegate(locale).modifyMsisdn(clientId,msisdn,newMsisdn,csrId,reason);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -757,15 +795,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getCustcareApiDelegate(locale).modifyMsisdn(clientId,msisdn,newMsisdn, null, null);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -799,15 +840,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getCustcareApiDelegate(locale).modifyBan(clientId,msisdn,newBan,csrId,reason);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -841,15 +885,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getCustcareApiDelegate(locale).modifyBan(clientId,msisdn,newBan, null, null);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -891,15 +938,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
 
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -933,15 +983,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getCustcareApiDelegate(locale).inactivateSubscription(clientId,msisdn,device,custcareAttributes);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1017,15 +1070,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getCustcareApiDelegate(locale).refundTransactionCredit(refundAttr);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1060,15 +1116,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 //hydrateSubscriptions(result);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1110,15 +1169,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 }
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1159,15 +1221,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 }
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1201,15 +1266,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getSelfcareApiDelegate(locale).modifySubscriptionChargingMethod(clientId,msisdn,deviceType,packageSubId,chargingMethod,csrId,reason);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1243,15 +1311,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getSelfcareApiDelegate(locale).getTransactions(clientId,msisdn,deviceType,startDate,endDate,maxNum);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1285,15 +1356,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getSelfcareApiDelegate(locale).getTransactions(clientId,msisdn,accessDevice,filter);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1327,15 +1401,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getSelfcareApiDelegate(locale).getTransaction(clientId,transId);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1369,15 +1446,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getSelfcareApiDelegate(locale).getPaymentTransactions(clientId,msisdn,deviceType,filter);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1411,15 +1491,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getSelfcareApiDelegate(locale).getBalances(clientId,msisdn,device);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1464,15 +1547,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 }
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1506,15 +1592,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getSelfcareApiDelegate(locale).getNextPaymentAmount(clientId,msisdn,subscriptionId);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1548,15 +1637,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getSelfcareApiDelegate(locale).modifySubscriptionChargingMethod(clientId,msisdn,deviceType,attr);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeBoolean(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1632,15 +1724,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getSelfcareApiDelegate(locale).getBalances(msisdn,clientId,deviceId,filter);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1674,15 +1769,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getSelfcareApiDelegate(locale).getParentTransaction(clientId,msisdn,transactionfilter);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1716,15 +1814,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getSelfcareApiDelegate(locale).getMicroServiceStatus(clientId,msisdn,msfilter);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1758,15 +1859,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getSelfcareApiDelegate(locale).getTransaction(clientId,filter);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1812,17 +1916,20 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             }
             catch (Exception e1)
             {
+                epaLogService.logResponseError(e1);
                 oos.writeObject(new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         }
         catch (Exception e2)
         {
+            epaLogService.logResponseError(e2);
             try
             {
                 log(e2.getMessage(), e2);
@@ -1872,17 +1979,20 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             }
             catch (Exception e1)
             {
+                epaLogService.logResponseError(e1);
                 oos.writeObject(new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         }
         catch (Exception e2)
         {
+            epaLogService.logResponseError(e2);
             try
             {
                 log(e2.getMessage(), e2);
@@ -1922,15 +2032,18 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getCustcareApiDelegate(locale).modifySpendLimits(clientId,msisdn,spendLimits,csrId);
             }
             catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
             //send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -1969,18 +2082,20 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                 result = getCustcareApiDelegate(locale).modifyUserGroup(clientId, msisdn, usergroups, csrId, reason, action);
             }
             catch (Exception e1) {
-
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
             }
 
             // send response
+            epaLogService.logResponseOut("OK");
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
         }
         catch(Exception e2) {
+            epaLogService.logResponseError(e2);
             try {
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (

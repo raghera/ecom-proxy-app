@@ -1,7 +1,8 @@
 package com.vodafone.er.ecom.proxy.data.builder;
 
-import com.vizzavi.ecommerce.business.selfcare.SubscriptionStatus;
 import com.vizzavi.ecommerce.business.selfcare.Transaction;
+import com.vizzavi.ecommerce.business.selfcare.TransactionStatus;
+import com.vodafone.global.er.decoupling.binding.response.v2.PaymentTransaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ public class TransactionDataBuilder {
 
     public static Transaction aTransaction() {
         Transaction trans = new Transaction();
-        trans.setStatus(SubscriptionStatus.ACTIVE);
+        trans.setStatus(TransactionStatus.COMPLETED);
         trans.setSubscriptionIdLong(new Random().nextLong());
         return trans;
     }
@@ -24,12 +25,17 @@ public class TransactionDataBuilder {
         for(int i = 0; i < length; i++) {
             result.add(aTransaction());
         }
-
         return result;
     }
 
     public static Transaction [] aTransactionArray(int length) {
         return aTransactionList(length).toArray(new Transaction [length]);
+    }
+
+    public static PaymentTransaction aPaymentTransaction() {
+        PaymentTransaction trans = new PaymentTransaction();
+        trans.setStatus(TransactionStatus.COMPLETED);
+        return trans;
     }
 
 }

@@ -1,7 +1,10 @@
 package com.vodafone.er.ecom.proxy.server;
 
 import com.vodafone.er.ecom.proxy.properties.PropertyService;
-import org.apache.log4j.*;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AllowSymLinkAliasChecker;
 import org.eclipse.jetty.server.handler.ContextHandler;
@@ -18,24 +21,28 @@ public class EcomProxyJetty9Server {
     private static final int ER_CORE_PORT = 8094;
     private static final String ER_CORE_HOST = "127.0.0.1";
     private static final String WAR_PATH = "./ecom-proxy-app/target/ecom-proxy-app.war";
+//    private static final String WAR_PATH = "./ecom-proxy-app/target/epa-integration-test-build.war";
     private static final String CONTEXT_PATH = "/delegates";
 
     private static final String keyStore = "./ecom-proxy-app/src/main/resources/certs/DIT_Client_Cert_v4.jks";
     private static final String keyStorePassword = "gig-dit-4";
-    private static final String trustStore = keyStore;
-    private static final String trustStorePassword = keyStorePassword;
+//    private static final String trustStore = keyStore;
+//    private static final String trustStorePassword = keyStorePassword;
+
+    private static Server server;
 
     public static void main(String[] args) throws Exception {
+        startServer();
+    }
+
+    public static void startServer() throws Exception {
         BasicConfigurator.configure();
         overrideProperties();
-//        setLog(new Slf4jLog());
 
-//        Logger.getRootLogger().setLevel(Level.DEBUG);
-//        Logger.getLogger("com.vodafone").setLevel(Level.DEBUG);
+        Logger.getRootLogger().setLevel(Level.DEBUG);
+        Logger.getLogger("com.vodafone").setLevel(Level.DEBUG);
 
-        Logger logger = Logger.getLogger("com.vodafone");
-
-        ConsoleAppender ca = new ConsoleAppender(new PatternLayout("%-5p [%t]: %m%n"));
+        ConsoleAppender ca = new ConsoleAppender();
         ca.setWriter(new OutputStreamWriter(System.out));
         Logger.getLogger("com.vodafone").addAppender(ca);
         Logger.getRootLogger().addAppender(ca);
@@ -44,7 +51,7 @@ public class EcomProxyJetty9Server {
         Logger.getLogger("org.springframework").setLevel(Level.OFF);
 //        Logger.getLogger("org.springframework").addAppender(ca);
 
-        Server server = new Server(JETTY_PORT);
+        server = new Server(JETTY_PORT);
 
         ContextHandler contextHandler = new ContextHandler();
         contextHandler.setContextPath("/delegates");
@@ -65,6 +72,13 @@ public class EcomProxyJetty9Server {
         server.setHandler(webAppContext);
 
         server.start();
+        server.join();
+
+        System.out.println( "SERVER STATUS " + server.getState() );
+    }
+
+    public static void stopServer() throws Exception {
+        server.stop();
         server.join();
     }
 

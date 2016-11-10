@@ -53,46 +53,50 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
         return pricePoints;
     }
 
+    //TODO - Review with OpCos as there could be performance hit here
     public List<CatalogPackage> processCatalogPackages(final Locale locale, final List<CatalogPackage> packages) {
         logger.debug("Enter CatalogApiProcessor.processCatalogPackages");
         packages.forEach( catalogPackage -> {
-            //populate missing service data
+            //populate missing service data§
             for (CatalogService service : catalogPackage.getServiceArray()) {
 
                 final CatalogService returnedService = catalogApiService.getCatalogService(locale, service.getId());
                 service.setPricePoints(returnedService.getPricePoints());
                 service.getPricePoints().forEach(ppt -> {
 
-                    //Populate Service Pricepoint data
-                    final PricePoint processedPricePoint = catalogApiService.getPricePoint(locale, ppt.getId());
+                    processServicePricePoint(locale, ppt);
                     ppt.setPackageId(catalogPackage.getSimplePackageId());
-                    ppt.setTaxCode(processedPricePoint.getTaxCode());
                     ppt.setContentId(service.getId());
-                    ppt.setTariff(processedPricePoint.getTariff());
-
-                    //Should be fixed on core
-                    if (ppt.getReceiptingAttribute() != null && ppt.getReceiptingAttribute().equals("NULL")) {
-                        ppt.setReceiptingAttribute(null);
-                    }
-                    processPricePointBalanceImpacts(ppt);
                 });
 
                 //Populate PackagePricepoint Attributes
                 catalogPackage.getPricePoints().forEach(packagePricePoint -> {
 
-                    final PricePoint processedPricePoint = catalogApiService.getPricePoint(locale, packagePricePoint.getId());
+                    final PricePoint returnedPackPp = catalogApiService.getPricePoint(locale, packagePricePoint.getId());
 
                     packagePricePoint.setPackageId(catalogPackage.getSimplePackageId());
-                    packagePricePoint.setTaxCode(processedPricePoint.getTaxCode());
-                    packagePricePoint.setTariff(processedPricePoint.getTariff());
+                    packagePricePoint.setTaxCode(returnedPackPp.getTaxCode());
+                    packagePricePoint.setTariff(returnedPackPp.getTariff());
 
                     final BalanceImpact[] balanceImpacts = packagePricePoint.getAllBalanceImpacts().getBalanceImpacts();
-                    final List<ResourceBalance> resourceBalances = processBalanceImpacts(Arrays.asList(balanceImpacts));
+                    final List<ResourceBalance> resourceBalances = buildBalanceImpacts(Arrays.asList(balanceImpacts));
                     packagePricePoint.setBalances(resourceBalances.toArray(new ResourceBalance[resourceBalances.size()]));
                 });
             }
         });
         return packages;
+    }
+
+    private void processServicePricePoint(Locale locale, PricePoint ppt) {
+        final PricePoint returnedServPp = catalogApiService.getPricePoint(locale, ppt.getId());
+        ppt.setTaxCode(returnedServPp.getTaxCode());
+        ppt.setTariff(returnedServPp.getTariff());
+
+        //Should be fixed on core
+        if (ppt.getReceiptingAttribute() != null && ppt.getReceiptingAttribute().equals("NULL")) {
+            ppt.setReceiptingAttribute(null);
+        }
+        processPricePointBalanceImpacts(ppt);
     }
 
     //Takes a service and populates what is missing but required.
@@ -140,7 +144,7 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
         pricePoint.setBalances(resourceBalances.toArray(new ResourceBalance[resourceBalances.size()]));
     }
 
-    private List<ResourceBalance> processBalanceImpacts(List<BalanceImpact> balanceImpacts) {
+    private List<ResourceBalance> buildBalanceImpacts(List<BalanceImpact> balanceImpacts) {
         List<ResourceBalance> resourceBalances = new ArrayList<>();
         balanceImpacts.forEach(balanceImpact -> {
             ResourceBalance resourceBalance = new ResourceBalance(balanceImpact.getResource(), balanceImpact.getFixedAmount());
@@ -155,7 +159,5 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
             pack.setPricePoint(ppt);
         }
     }
-
-
 
 }

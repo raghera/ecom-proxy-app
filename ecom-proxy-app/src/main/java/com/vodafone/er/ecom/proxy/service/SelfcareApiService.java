@@ -67,7 +67,7 @@ public class SelfcareApiService {
             logger.debug("Calling SelfcareApiService.postProcessor");
 
             List<Subscription> subs = Lists.newArrayList(subscriptions);
-            postProcessor.process(new RequestResult.Builder<List<Subscription>>()
+            postProcessor.process(new RequestResult.Builder<List<?>>()
                     .response(subs)
                     .msisdn(msisdn)
                     .locale(locale)

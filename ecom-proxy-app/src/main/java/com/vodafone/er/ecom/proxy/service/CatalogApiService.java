@@ -36,7 +36,7 @@ public class CatalogApiService {
     public CatalogPackage getCatalogPackage(final Locale locale, String packageId) {
         log.debug("Enter CatalogApiService.getCatalogPackage");
         final Optional<CatalogPackage> resultOpt = Optional.ofNullable(erApiManager.getCatalogApi(locale).getPackage(packageId));
-        resultOpt.ifPresent( result -> postProcessor.process(new RequestResult.Builder<List<CatalogPackage>>()
+        resultOpt.ifPresent( result -> postProcessor.process(new RequestResult.Builder<List<?>>()
                 .response(Lists.newArrayList(result))
                 .locale(locale)
                 .build())
@@ -49,7 +49,7 @@ public class CatalogApiService {
     public CatalogService getCatalogService(final Locale locale, String serviceId) {
         log.debug("Enter CatalogApiService.getCatalogService");
         final Optional<CatalogService> serviceOpt = Optional.ofNullable(erApiManager.getCatalogApi(locale).getService(serviceId));
-        serviceOpt.ifPresent(service -> postProcessor.process(new RequestResult.Builder<List<CatalogService>>()
+        serviceOpt.ifPresent(service -> postProcessor.process(new RequestResult.Builder<List<?>>()
                 .response(Lists.newArrayList(service))
                 .locale(locale)
                 .build())
@@ -62,7 +62,7 @@ public class CatalogApiService {
         log.debug("Enter CatalogApiService.getPricePoint");
         final Optional<PricePoint> ppOpt =
                 Optional.ofNullable(erApiManager.getCatalogApi(locale).getPricePoint(pricePointId));
-        ppOpt.ifPresent(pricePoint -> postProcessor.process(new RequestResult.Builder<List<PricePoint>>()
+        ppOpt.ifPresent(pricePoint -> postProcessor.process(new RequestResult.Builder<List<?>>()
                 .response(Lists.newArrayList(pricePoint))
                 .locale(locale)
                 .build())

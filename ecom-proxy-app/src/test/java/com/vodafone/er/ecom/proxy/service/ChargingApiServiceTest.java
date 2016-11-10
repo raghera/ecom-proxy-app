@@ -49,10 +49,11 @@ public class ChargingApiServiceTest {
         String msisdn = String.valueOf(new Random().nextLong());
         String serviceId = "packageId_X";
         UsageAttributes attributes = new UsageAttributes();
+        UsageAuthorization uAuth = aUsageAuthorization();
 
         when(erApiManager.getChargingApi(Locale.UK, CLIENT_ID.value())).thenReturn(chargingApi);
         when(chargingApi.usageAuth(CLIENT_ID.value(), msisdn, serviceId, attributes))
-                .thenReturn(aUsageAuthorization());
+                .thenReturn(uAuth);
 
         UsageAuthorization result =
                 chargingApiService.usageAuth(Locale.UK, CLIENT_ID.value(), msisdn, serviceId, attributes);
@@ -66,7 +67,7 @@ public class ChargingApiServiceTest {
         verifyNoMoreInteractions(erApiManager, chargingApi, postProcessor);
 
         RequestResult<List<UsageAuthorization>> argument = captor.getValue();
-        assertThat(argument.getResponse().get(0)).isEqualToComparingFieldByField(aUsageAuthorization());
+        assertThat(argument.getResponse().get(0)).isEqualToComparingFieldByField(uAuth);
     }
 
     @Test
@@ -121,10 +122,11 @@ public class ChargingApiServiceTest {
         String msisdn = String.valueOf(new Random().nextLong());
         String serviceId = "packageId_X";
         UsageAttributes attributes = new UsageAttributes();
+        UsageAuthorization uAuth = aUsageAuthorization();
 
         when(erApiManager.getChargingApi(Locale.UK, CLIENT_ID.value())).thenReturn(chargingApi);
         when(chargingApi.usageAuthRate(CLIENT_ID.value(), msisdn, serviceId, attributes))
-                .thenReturn(aUsageAuthorization());
+                .thenReturn(uAuth);
 
         UsageAuthorization result =
                 chargingApiService.usageAuthRate(Locale.UK, CLIENT_ID.value(), msisdn, serviceId, attributes);
@@ -138,7 +140,7 @@ public class ChargingApiServiceTest {
         verifyNoMoreInteractions(erApiManager, chargingApi, postProcessor);
 
         RequestResult<List<UsageAuthorization>> argument = captor.getValue();
-        assertThat(argument.getResponse().get(0)).isEqualToComparingFieldByField(aUsageAuthorization());
+        assertThat(argument.getResponse().get(0)).isEqualToComparingFieldByField(uAuth);
     }
 
     @Test
@@ -146,10 +148,11 @@ public class ChargingApiServiceTest {
         String msisdn = String.valueOf(new Random().nextLong());
         String serviceId = "packageId_X";
         UsageAttributes attributes = new UsageAttributes();
+        UsageAuthorization uAuthFail = aUsageAuthorizationFailure();
 
         when(erApiManager.getChargingApi(Locale.UK, CLIENT_ID.value())).thenReturn(chargingApi);
         when(chargingApi.usageAuthRate(CLIENT_ID.value(), msisdn, serviceId, attributes))
-                .thenReturn(aUsageAuthorizationFailure());
+                .thenReturn(uAuthFail);
 
         UsageAuthorization result =
                 chargingApiService.usageAuthRate(Locale.UK, CLIENT_ID.value(), msisdn, serviceId, attributes);
@@ -163,7 +166,7 @@ public class ChargingApiServiceTest {
         verifyNoMoreInteractions(erApiManager, chargingApi, postProcessor);
 
         RequestResult<List<UsageAuthorization>> argument = captor.getValue();
-        assertThat(argument.getResponse().get(0)).isEqualToComparingFieldByField(aUsageAuthorizationFailure());
+        assertThat(argument.getResponse().get(0)).isEqualToComparingFieldByField(uAuthFail);
     }
 
     @Test
@@ -192,10 +195,11 @@ public class ChargingApiServiceTest {
         String msisdn = String.valueOf(new Random().nextLong());
         String serviceId = "packageId_X";
         UsageAttributes attributes = new UsageAttributes();
+        UsageAuthorization uAuth = aUsageAuthorization();
 
         when(erApiManager.getChargingApi(Locale.UK, CLIENT_ID.value())).thenReturn(chargingApi);
         when(chargingApi.usageAuthRateCharge(CLIENT_ID.value(), msisdn, serviceId, attributes))
-                .thenReturn(aUsageAuthorization());
+                .thenReturn(uAuth);
 
         UsageAuthorization result =
                 chargingApiService.usageAuthRateCharge(Locale.UK, CLIENT_ID.value(), msisdn, serviceId, attributes);
@@ -209,7 +213,7 @@ public class ChargingApiServiceTest {
         verifyNoMoreInteractions(erApiManager, chargingApi, postProcessor);
 
         RequestResult<List<UsageAuthorization>> argument = captor.getValue();
-        assertThat(argument.getResponse().get(0)).isEqualToComparingFieldByField(aUsageAuthorization());
+        assertThat(argument.getResponse().get(0)).isEqualToComparingFieldByField(uAuth);
     }
 
     @Test
@@ -217,10 +221,11 @@ public class ChargingApiServiceTest {
         String msisdn = String.valueOf(new Random().nextLong());
         String serviceId = "packageId_X";
         UsageAttributes attributes = new UsageAttributes();
+        UsageAuthorization uAuthFail = aUsageAuthorizationFailure();
 
         when(erApiManager.getChargingApi(Locale.UK, CLIENT_ID.value())).thenReturn(chargingApi);
         when(chargingApi.usageAuthRateCharge(CLIENT_ID.value(), msisdn, serviceId, attributes))
-                .thenReturn(aUsageAuthorizationFailure());
+                .thenReturn(uAuthFail);
 
         UsageAuthorization result =
                 chargingApiService.usageAuthRateCharge(Locale.UK, CLIENT_ID.value(), msisdn, serviceId, attributes);
