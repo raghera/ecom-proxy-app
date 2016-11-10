@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Locale;
 import java.util.Optional;
 
-import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.PROP_EPA_STARTUP_HEALTHCHECK_COUNTRY;
-import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.PROP_EPA_STARTUP_HEALTHCHECK_LANG;
+import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.*;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getProperty;
 
 /**
@@ -26,9 +25,8 @@ public class HttpHealthCheck extends HealthCheck {
 
     @Override
     protected Result check() throws Exception {
-
-        Optional<String> countryStr = getProperty(PROP_EPA_STARTUP_HEALTHCHECK_COUNTRY.value(), "HU");
-        Optional<String> langStr = getProperty(PROP_EPA_STARTUP_HEALTHCHECK_LANG.value(), "HU");
+        Optional<String> countryStr = getProperty(PROP_EPA_HEALTHCHECK_COUNTRY.value(), "HU");
+        Optional<String> langStr = getProperty(PROP_EPA_HEALTHCHECK_LANG.value(), "hu");
 
         String result = null;
         if(countryStr.isPresent() && langStr.isPresent()) {
