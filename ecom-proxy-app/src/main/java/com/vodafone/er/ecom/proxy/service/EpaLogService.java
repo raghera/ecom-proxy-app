@@ -54,7 +54,7 @@ public class EpaLogService {
 
         //Always generate a TX_LOG_ID even if translog is disabled
         transLogManager.addAttributeContext(Attr.ER_TX_LOG_ID, generateId());
-        LOG.info("Generated TX_LOG_ID=", transLogManager.getAttribute(Attr.ER_TX_LOG_ID));
+        LOG.info("Generated TX_LOG_ID={}", transLogManager.getAttribute(Attr.ER_TX_LOG_ID));
 
         transLogManager.addAttributeOnce(Attr.STATUS, "OK");//Always ok at this stage
         transLogManager.addAttributeOnce(Attr.REQUEST_TYPE, TransLogConstants.REQUEST_TYPE_ECOM);

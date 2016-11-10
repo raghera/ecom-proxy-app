@@ -36,7 +36,9 @@ public enum  PropertiesConstantsEnum {
     PROP_HTTPS_ER_SERVER_PORT("https.er.server.port"),
     PROP_HTTPS_ER_SERVER_PATH("https.er.server.path"),
     PROP_HTTPS_ER_CERT_FILE("https.er.cert.file"),
-    PROP_EPA_STARTUP_HEALTHCHECK("epa.startup.healthcheck");
+    PROP_EPA_STARTUP_HEALTHCHECK("epa.startup.healthcheck"),
+    PROP_EPA_STARTUP_HEALTHCHECK_COUNTRY("epa.startup.healthcheck.country"),
+    PROP_EPA_STARTUP_HEALTHCHECK_LANG("epa.startup.healthcheck.lang");
 
     private final String value;
 

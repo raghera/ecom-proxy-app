@@ -57,7 +57,7 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
     public List<CatalogPackage> processCatalogPackages(final Locale locale, final List<CatalogPackage> packages) {
         logger.debug("Enter CatalogApiProcessor.processCatalogPackages");
         packages.forEach( catalogPackage -> {
-            //populate missing service data§
+            //populate missing service DATA
             for (CatalogService service : catalogPackage.getServiceArray()) {
 
                 final CatalogService returnedService = catalogApiService.getCatalogService(locale, service.getId());
