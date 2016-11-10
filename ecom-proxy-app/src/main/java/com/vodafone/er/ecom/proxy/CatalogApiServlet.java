@@ -219,7 +219,8 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                     result = EcomApiFactory.getCatalogApi(locale).getService(id);
                 }
             }
-            catch (Exception e1) {                    epaLogService.logResponseError(e1);                    epaLogService.logResponseError(e1);
+            catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
@@ -229,7 +230,8 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
-        } catch (Exception e2) {                    epaLogService.logResponseError(e2);
+        } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -274,7 +276,8 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                     result = EcomApiFactory.getCatalogApi(locale).getPackage(id);
                 }
             }
-            catch (Exception e1) {                    epaLogService.logResponseError(e1);                    epaLogService.logResponseError(e1);
+            catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
@@ -284,7 +287,8 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
-        } catch (Exception e2) {                    epaLogService.logResponseError(e2);                    epaLogService.logResponseError(e2);
+        } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -325,7 +329,8 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             try {
                 result = getCatalogEcomClient(locale).getPackage(packageId);
             }
-            catch (Exception e1) {                    epaLogService.logResponseError(e1);
+            catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
@@ -335,7 +340,8 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
-        } catch (Exception e2) {                    epaLogService.logResponseError(e2);
+        } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (
@@ -369,7 +375,8 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             try {
                 result = getCatalogEcomClient(locale).getPackage(packageId,pricePointId,tierId);
             }
-            catch (Exception e1) {                    epaLogService.logResponseError(e1);
+            catch (Exception e1) {
+                epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
                 return;
@@ -379,7 +386,8 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             resp.setStatus(HttpServletResponse.SC_OK);
             oos.writeObject(result);
             oos.flush();
-        } catch (Exception e2) {                    epaLogService.logResponseError(e2);
+        } catch (Exception e2) {
+            epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
                 oos = new ObjectOutputStream (

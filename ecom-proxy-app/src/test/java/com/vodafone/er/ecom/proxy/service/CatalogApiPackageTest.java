@@ -6,9 +6,12 @@
 //import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
 //import org.junit.Before;
 //import org.junit.Ignore;
+//import org.junit.runner.RunWith;
 //import org.mockito.Mock;
 //import org.mockito.MockitoAnnotations;
 //import org.powermock.api.mockito.PowerMockito;
+//import org.powermock.core.classloader.annotations.PrepareForTest;
+//import org.powermock.modules.junit4.PowerMockRunner;
 //
 //import java.util.Locale;
 //
@@ -23,8 +26,8 @@
 ///**
 // * Created by Ravi Aghera
 // */
-////@RunWith(PowerMockRunner.class)
-////@PrepareForTest(DecouplingApiFactory.class)
+//@RunWith(PowerMockRunner.class)
+//@PrepareForTest(DecouplingApiFactory.class)
 //public class CatalogApiPackageTest {
 //
 //
