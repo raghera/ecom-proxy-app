@@ -109,8 +109,6 @@ public class EpaLogService {
 
         transLogManager.addAttributeOnce(Attr.REQUEST_TYPE, TransLogConstants.REQUEST_TYPE_ECOM);
 
-        //TODO swap these around, translog actually wipes the cache
-
         logEcomResponse(new ERLogDataImpl(transLogManager.getAttribute(Attr.CUSTOMER_ID),
                         transLogManager.getAttribute(Attr.VF_INT_CALLER_ID),
                         transLogManager.getAttribute(Attr.REQUEST_NAME),
