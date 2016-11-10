@@ -9,3 +9,8 @@ src/main/webapp/WEB-INF/lib/
 logs-returned/
 logs/
 delegates.war/
+.DS_Store
+returnedLogs/
+ecom-proxy-app/src/main/resources/certs/DIT_contents.txt
+ecom-proxy-app/src/main/resources/certs/dgig-dit-rsd-o-de.sp.vodafone.com.crt
+java_cacerts.txt

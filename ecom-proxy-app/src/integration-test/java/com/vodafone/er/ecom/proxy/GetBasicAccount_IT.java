@@ -10,7 +10,7 @@ import org.junit.Test;
 import java.util.Locale;
 import java.util.Random;
 
-import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.enums.EpaClientEnum.CLIENT_ID;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -33,7 +33,7 @@ public class GetBasicAccount_IT {
         assertTrue("Auth response is false", auth.isSuccess());
 
          BasicAccount result = EcomApiFactory.getCustcareApi(Locale.UK)
-                .getBasicAccount(CLIENT_ID.getValue(), msisdn, 0);
+                .getBasicAccount(CLIENT_ID.value(), msisdn, 0);
         assertNotNull(result);
 
         softly.assertThat(result.getName() ).as(" result.getName()" ).isNull();

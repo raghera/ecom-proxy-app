@@ -48,7 +48,7 @@ public class ChargingApiServlet extends AbstractEcomServlet {
            String clientApplicationId = (String) requestPayload.get("clientApplicationId");
            String msisdn = (String) requestPayload.get("msisdn");
            logRequest(new ERLogDataImpl(msisdn, clientApplicationId, methodName, locale.getCountry()) );
-           log(clientApplicationId, locale, methodName, CHARGING_API.getValue());
+           logEcomRequest(clientApplicationId, locale, methodName, CHARGING_API.getValue());
            if (methodName.equals("usageAuth1")) {
                  //String msisdn = (String) requestPayload.get("msisdn");
                  String serviceId = (String) requestPayload.get("serviceId");
@@ -100,11 +100,12 @@ public class ChargingApiServlet extends AbstractEcomServlet {
                  PromoCodeAttributes promoCodeAttrs = (PromoCodeAttributes) requestPayload.get("promoCodeAttrs");
                  validatePromoCodeHandler(locale, resp  ,promoCodeAttrs );
            }
-           
+           logEcomResponse(clientApplicationId, locale, methodName, CHARGING_API.getValue(), true);
        }
        catch (Exception e) {         
           try
            {
+               //TODO log exception to the application logs here
             ObjectOutputStream oostream = new ObjectOutputStream (new BufferedOutputStream (resp.getOutputStream()));
             oostream.writeObject( new ExceptionAdapter(e));
             oostream.flush();
@@ -112,8 +113,6 @@ public class ChargingApiServlet extends AbstractEcomServlet {
              {
                log.error(ioe.getMessage(),ioe);
              }
-       }	finally	{
-    	   logResponse();
        }
     }
 
@@ -127,7 +126,7 @@ public class ChargingApiServlet extends AbstractEcomServlet {
 
                 final Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_USAGE_AUTH1.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = chargingApiService.processUsageAuth(locale, clientApplicationId,msisdn,serviceId,usageAttributes);
+                    result = chargingApiService.usageAuth(locale, clientApplicationId,msisdn,serviceId,usageAttributes);
                 } else {
                     result = getChargingApiDelegate(locale).usageAuth(clientApplicationId, msisdn, serviceId, usageAttributes);
                 }
@@ -174,7 +173,7 @@ public class ChargingApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_USAGE_AUTH_RATE2.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = chargingApiService.processUsageAuthRate(locale, clientApplicationId,msisdn,serviceId,usageAttributes);
+                    result = chargingApiService.usageAuthRate(locale, clientApplicationId,msisdn,serviceId,usageAttributes);
                 } else {
                     result = getChargingApiDelegate(locale)
                             .usageAuthRate(clientApplicationId, msisdn, serviceId, usageAttributes);
@@ -222,7 +221,7 @@ public class ChargingApiServlet extends AbstractEcomServlet {
             try {
                 Optional<Boolean> shouldProxy = PropertyService.getPropertyAsBoolean(PROP_USAGE_AUTH_RATE_CHARGE3.value(), true);
                 if(shouldProxy.isPresent() && shouldProxy.get()) {
-                    result = chargingApiService.processUsageAuthRateCharge(locale, clientApplicationId, msisdn, serviceId, usageAttributes);
+                    result = chargingApiService.usageAuthRateCharge(locale, clientApplicationId, msisdn, serviceId, usageAttributes);
                 } else {
                     result = getChargingApiDelegate(locale).usageAuthRateCharge(clientApplicationId, msisdn, serviceId, usageAttributes);
                 }

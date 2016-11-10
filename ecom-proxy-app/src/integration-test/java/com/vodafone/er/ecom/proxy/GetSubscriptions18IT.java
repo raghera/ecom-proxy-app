@@ -12,7 +12,7 @@ import java.util.Locale;
 import java.util.Random;
 
 import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getCustcareApi;
-import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.enums.EpaClientEnum.CLIENT_ID;
 import static org.junit.Assert.*;
 
 public class GetSubscriptions18IT {
@@ -37,7 +37,7 @@ public class GetSubscriptions18IT {
         SubscriptionFilterImpl filter = new SubscriptionFilterImpl();
         filter.setTransactionsNotRequired("no");
 
-        final Subscription[] subscriptions = getCustcareApi(Locale.UK).getSubscriptions(CLIENT_ID.getValue(), msisdn, 0, new SubscriptionFilterImpl());
+        final Subscription[] subscriptions = getCustcareApi(Locale.UK).getSubscriptions(CLIENT_ID.value(), msisdn, 0, new SubscriptionFilterImpl());
         assertNotNull(subscriptions);
         assertTrue("Size= " + subscriptions.length, subscriptions.length > 0);
         assertEquals("Size= " + subscriptions.length, subscriptions.length, 2);

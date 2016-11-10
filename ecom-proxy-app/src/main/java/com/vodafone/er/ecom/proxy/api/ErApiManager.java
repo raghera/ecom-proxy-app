@@ -7,11 +7,13 @@ import com.vizzavi.ecommerce.business.provision.ProvisionApi;
 import com.vizzavi.ecommerce.business.selfcare.CustcareApi;
 import com.vizzavi.ecommerce.business.selfcare.SelfcareApi;
 import com.vodafone.global.er.decoupling.client.DecouplingApiFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Locale;
 
-import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
+import static com.vodafone.er.ecom.proxy.enums.EpaClientEnum.CLIENT_ID;
 
 /**
  * 1 uniform way to get the Decoupling ErApi's in a singleton way
@@ -21,22 +23,14 @@ import static com.vodafone.er.ecom.proxy.enums.EcomAppEnum.CLIENT_ID;
 @Component
 public class ErApiManager {
 
+    private Logger log = LoggerFactory.getLogger(ErApiManager.class);
+
     private ChargingApi chargingApi;
     private CatalogApi catalogApi;
     private SelfcareApi selfcareApi;
     private CustcareApi custcareApi;
     private ProvisionApi provisionApi;
     private PurchaseApi purchaseApi;
-
-//    public ErApiManager(ChargingApi chargingApi, CatalogApi catalogApi, SelfcareApi selfcareApi,
-//                        CustcareApi custcareApi, ProvisionApi provisionApi, PurchaseApi purchaseApi) {
-//        this.chargingApi = chargingApi;
-//        this.catalogApi = catalogApi;
-//        this.selfcareApi = selfcareApi;
-//        this.custcareApi = custcareApi;
-//        this.provisionApi = provisionApi;
-//        this.purchaseApi = purchaseApi;
-//    }
 
     public PurchaseApi getPurchaseApi(Locale locale, String clientId) {
         if (null == purchaseApi) {
@@ -52,28 +46,29 @@ public class ErApiManager {
     }
     public SelfcareApi getSelfcareApi(Locale locale) {
         if(null == selfcareApi) {
-            selfcareApi = DecouplingApiFactory.getSelfcareApi(locale, CLIENT_ID.getValue());
+            selfcareApi = DecouplingApiFactory.getSelfcareApi(locale, CLIENT_ID.value());
         }
         return selfcareApi;
     }
 
     public CustcareApi getCustcareApi(Locale locale) {
         if(null == custcareApi) {
-            custcareApi = DecouplingApiFactory.getCustcareApi(locale, CLIENT_ID.getValue());
+            custcareApi = DecouplingApiFactory.getCustcareApi(locale, CLIENT_ID.value());
         }
         return custcareApi;
     }
 
     public CatalogApi getCatalogApi(Locale locale) {
         if(null == catalogApi) {
-            catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.getValue());
+            log.info("getPackages5: Calling DecouplingApiFactory");
+            catalogApi = DecouplingApiFactory.getCatalogApi(locale, CLIENT_ID.value());
         }
         return catalogApi;
     }
 
     public ProvisionApi getProvisionApi(Locale locale) {
         if(null == provisionApi) {
-            provisionApi = DecouplingApiFactory.getProvisionApi(locale, CLIENT_ID.getValue());
+            provisionApi = DecouplingApiFactory.getProvisionApi(locale, CLIENT_ID.value());
         }
         return provisionApi;
     }

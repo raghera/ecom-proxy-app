@@ -86,14 +86,14 @@ public class GetTransactions6_IT_pt1 {
         softly.assertThat(purchaseTrans.getPaymentErrorId() ).as(" purchaseTrans.getPaymentErrorId()" ).isEqualTo("OK");
         softly.assertThat(purchaseTrans.getPaymentErrorDescription() ).as(" purchaseTrans.getPaymentErrorDescription()" ).isNull();
         softly.assertThat(purchaseTrans.getPaymentStatus() ).as(" purchaseTrans.getPaymentStatus()" ).isEqualTo(101) ;
-        softly.assertThat(purchaseTrans.getTransactionIdLong() ).as(" purchaseTrans.getTransactionIdLong()" ).isEqualTo(new Long(9106)) ;
+        softly.assertThat(purchaseTrans.getTransactionIdLong() ).as(" purchaseTrans.getTransactionIdLong()" ).isNotNull() ;
         softly.assertThat(purchaseTrans.getParentTransactionId() ).as(" purchaseTrans.getParentTransactionId()" ).isNull();
         softly.assertThat(purchaseTrans.getExternalField1() ).as(" purchaseTrans.getExternalField1()" ).isNull();
         softly.assertThat(purchaseTrans.getExternalField2() ).as(" purchaseTrans.getExternalField2()" ).isNull();
         softly.assertThat(purchaseTrans.getExternalTransId() ).as(" purchaseTrans.getExternalTransId()" ).isNull();
         softly.assertThat(purchaseTrans.getPartnerId() ).as(" purchaseTrans.getPartnerId()" ).isNull();
         softly.assertThat(purchaseTrans.isZeroCostIgnore() ).as(" purchaseTrans.isZeroCostIgnore()" ).isFalse() ;
-        softly.assertThat(purchaseTrans.getSubscriptionIdLong() ).as(" purchaseTrans.getSubscriptionIdLong()" ).isEqualTo(new Long(8418)) ;
+        softly.assertThat(purchaseTrans.getSubscriptionIdLong() ).as(" purchaseTrans.getSubscriptionIdLong()" ).isNotNull() ;
         softly.assertThat(purchaseTrans.getContentName() ).as(" purchaseTrans.getContentName()" ).isNull();
         softly.assertThat(purchaseTrans.getAssetID() ).as(" purchaseTrans.getAssetID()" ).isNull();
         softly.assertThat(purchaseTrans.getPaymentType() ).as(" purchaseTrans.getPaymentType()" ).isEqualTo(10010) ;
@@ -228,7 +228,7 @@ public class GetTransactions6_IT_pt1 {
         softly.assertThat(purchaseTrans.getRateIdentifier() ).as(" purchaseTrans.getRateIdentifier()" ).isEqualTo("pAlt__X__package:pAlt_TAX_3_2_999_999_999_*_*");
         softly.assertThat(purchaseTrans.getUsageTime() ).as(" purchaseTrans.getUsageTime()" ).isEqualTo(new Double(0.0)) ;
         softly.assertThat(purchaseTrans.getAccessDevice() ).as(" purchaseTrans.getAccessDevice()" ).isEqualTo(999) ;
-        softly.assertThat(purchaseTrans.getSubscriptionId() ).as(" purchaseTrans.getSubscriptionId()" ).isEqualTo("8418");
+        softly.assertThat(purchaseTrans.getSubscriptionId() ).as(" purchaseTrans.getSubscriptionId()" ).isNotEmpty();
 // com.vodafone.global.er.subscriptionmanagement.ERSubscription
 //check size of array!
 //        softly.assertThat(purchaseTrans.getSubscription().getPurchasedServices().length ).as(" purchaseTrans.getSubscription().getPurchasedServices().length" ).isEqualTo(1) ;
@@ -438,7 +438,7 @@ public class GetTransactions6_IT_pt1 {
         softly.assertThat(purchaseTrans.getSubscription().getPackage().isDataVoiceTariffInclusive() ).as(" purchaseTrans.getSubscription().getPackage().isDataVoiceTariffInclusive()" ).isFalse() ;
         softly.assertThat(purchaseTrans.getSubscription().getPackage().getNominalValue() ).as(" purchaseTrans.getSubscription().getPackage().getNominalValue()" ).isEqualTo(new Double(0.0)) ;
         softly.assertThat(purchaseTrans.getSubscription().getPackage().isUseBeingDeprovisionedStatus() ).as(" purchaseTrans.getSubscription().getPackage().isUseBeingDeprovisionedStatus()" ).isFalse() ;
-        softly.assertThat(purchaseTrans.getSubscription().getPackage().getDisallowDuplicateSubPurchase() ).as(" purchaseTrans.getSubscription().getPackage().getDisallowDuplicateSubPurchase()" ).isNull();
+        softly.assertThat(purchaseTrans.getSubscription().getPackage().getDisallowDuplicateSubPurchase() ).as(" purchaseTrans.getSubscription().getPackage().getDisallowDuplicateSubPurchase()" ).isNullOrEmpty();
         softly.assertThat(purchaseTrans.getSubscription().getPackage().getNoActivePricepoints() ).as(" purchaseTrans.getSubscription().getPackage().getNoActivePricepoints()" ).isEqualTo(2) ;
         softly.assertThat(purchaseTrans.getSubscription().getPackage().isHasBalanceImpactsWithDate() ).as(" purchaseTrans.getSubscription().getPackage().isHasBalanceImpactsWithDate()" ).isFalse() ;
         softly.assertThat(purchaseTrans.getSubscription().getPackage().isHasPricePointsWithDate() ).as(" purchaseTrans.getSubscription().getPackage().isHasPricePointsWithDate()" ).isFalse() ;
@@ -680,7 +680,7 @@ public class GetTransactions6_IT_pt1 {
         softly.assertThat(purchaseTrans.getSubscription().getPackage().getPricePoint().getCsrId() ).as(" purchaseTrans.getSubscription().getPackage().getPricePoint().getCsrId()" ).isNull();
         softly.assertThat(purchaseTrans.getSubscription().getCountry() ).as(" purchaseTrans.getSubscription().getCountry()" ).isNull();
         softly.assertThat(purchaseTrans.getSubscription().getPartnerId() ).as(" purchaseTrans.getSubscription().getPartnerId()" ).isNull();
-        softly.assertThat(purchaseTrans.getSubscription().getSubscriptionIdLong() ).as(" purchaseTrans.getSubscription().getSubscriptionIdLong()" ).isEqualTo(new Long(8418)) ;
+        softly.assertThat(purchaseTrans.getSubscription().getSubscriptionIdLong() ).as(" purchaseTrans.getSubscription().getSubscriptionIdLong()" ).isNotNull() ;
         softly.assertThat(purchaseTrans.getSubscription().isActive() ).as(" purchaseTrans.getSubscription().isActive()" ).isTrue() ;
         softly.assertThat(purchaseTrans.getSubscription().getPaymentType() ).as(" purchaseTrans.getSubscription().getPaymentType()" ).isEqualTo(10010) ;
         softly.assertThat(purchaseTrans.getSubscription().getMerchantName() ).as(" purchaseTrans.getSubscription().getMerchantName()" ).isNull();
@@ -702,9 +702,9 @@ public class GetTransactions6_IT_pt1 {
         softly.assertThat(purchaseTrans.getSubscription().getResourceBalances()[0].getResource().getResourceName() ).as(" purchaseTrans.getSubscription().getResourceBalances()[0].getResource().getResourceName()" ).isEqualTo("ChargingResource_1100035");
         softly.assertThat(purchaseTrans.getSubscription().getResourceBalances()[0].getResource().getDescription() ).as(" purchaseTrans.getSubscription().getResourceBalances()[0].getResource().getDescription()" ).isEqualTo("MULTIPLE_1100035");
         softly.assertThat(purchaseTrans.getSubscription().getResourceBalances()[0].getResource().getCountryId() ).as(" purchaseTrans.getSubscription().getResourceBalances()[0].getResource().getCountryId()" ).isEqualTo(0) ;
-        softly.assertThat(purchaseTrans.getSubscription().getResourceBalances()[0].getSubscriptionIdLong() ).as(" purchaseTrans.getSubscription().getResourceBalances()[0].getSubscriptionIdLong()" ).isEqualTo(new Long(8418)) ;
+        softly.assertThat(purchaseTrans.getSubscription().getResourceBalances()[0].getSubscriptionIdLong() ).as(" purchaseTrans.getSubscription().getResourceBalances()[0].getSubscriptionIdLong()" ).isNotNull() ;
         softly.assertThat(purchaseTrans.getSubscription().getResourceBalances()[0].getPackageId() ).as(" purchaseTrans.getSubscription().getResourceBalances()[0].getPackageId()" ).isNull();
-        softly.assertThat(purchaseTrans.getSubscription().getResourceBalances()[0].getSubscriptionId() ).as(" purchaseTrans.getSubscription().getResourceBalances()[0].getSubscriptionId()" ).isEqualTo("8418");
+        softly.assertThat(purchaseTrans.getSubscription().getResourceBalances()[0].getSubscriptionId() ).as(" purchaseTrans.getSubscription().getResourceBalances()[0].getSubscriptionId()" ).isNotEmpty();
         softly.assertThat(purchaseTrans.getSubscription().getResourceBalances()[0].getOldestSubscriptionId() ).as(" purchaseTrans.getSubscription().getResourceBalances()[0].getOldestSubscriptionId()" ).isNull();
         softly.assertThat(purchaseTrans.getSubscription().getResourceBalances()[0].getSubscription() ).as(" purchaseTrans.getSubscription().getResourceBalances()[0].getSubscription()" ).isNull();
         softly.assertThat(purchaseTrans.getSubscription().getResourceBalances()[0].getBalance() ).as(" purchaseTrans.getSubscription().getResourceBalances()[0].getBalance()" ).isEqualTo(new Double(1.0)) ;
@@ -715,7 +715,7 @@ public class GetTransactions6_IT_pt1 {
         softly.assertThat(purchaseTrans.getSubscription().isArchived() ).as(" purchaseTrans.getSubscription().isArchived()" ).isFalse() ;
         softly.assertThat(purchaseTrans.getSubscription().getExtensionPeriod() ).as(" purchaseTrans.getSubscription().getExtensionPeriod()" ).isEqualTo(0) ;
         softly.assertThat(purchaseTrans.getSubscription().isRecurring() ).as(" purchaseTrans.getSubscription().isRecurring()" ).isTrue() ;
-        softly.assertThat(purchaseTrans.getSubscription().getSubscriptionId() ).as(" purchaseTrans.getSubscription().getSubscriptionId()" ).isEqualTo("8418");
+        softly.assertThat(purchaseTrans.getSubscription().getSubscriptionId() ).as(" purchaseTrans.getSubscription().getSubscriptionId()" ).isNotEmpty();
         softly.assertThat(purchaseTrans.getSubscription().isDefault() ).as(" purchaseTrans.getSubscription().isDefault()" ).isFalse() ;
         softly.assertThat(purchaseTrans.getSubscription().getMsisdn() ).as(" purchaseTrans.getSubscription().getMsisdn()" ).isEqualTo("-1289763512");
         softly.assertThat(purchaseTrans.getSubscription().getCsrId() ).as(" purchaseTrans.getSubscription().getCsrId()" ).isEqualTo("test");

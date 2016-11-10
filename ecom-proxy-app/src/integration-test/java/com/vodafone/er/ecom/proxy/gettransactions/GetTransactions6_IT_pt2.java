@@ -41,10 +41,6 @@ public class GetTransactions6_IT_pt2 {
         assertNotNull(transactions);
         assertEquals(2, transactions.length);
 
-
-        System.out.println("PURCHASETRANSID= " + transId1);
-        System.out.println("USAGETRANSID= " + transId2);
-
         Transaction purchaseTrans = null;
         Transaction usageTrans = null;
 
@@ -381,7 +377,7 @@ public class GetTransactions6_IT_pt2 {
         softly.assertThat(purchaseTrans.getMatchingAttributes().isPreRatePriceGross() ).as(" purchaseTrans.getMatchingAttributes().isPreRatePriceGross()" ).isFalse() ;
         softly.assertThat(purchaseTrans.getMatchingAttributes().getPreRate() ).as(" purchaseTrans.getMatchingAttributes().getPreRate()" ).isEqualTo(new Double(-1.0)) ;
         softly.assertThat(purchaseTrans.getMatchingAttributes().getPaymentInformation() ).as(" purchaseTrans.getMatchingAttributes().getPaymentInformation()" ).isNull();
-        softly.assertThat(purchaseTrans.getMatchingAttributes().getContentName() ).as(" purchaseTrans.getMatchingAttributes().getContentName()" ).isNull();
+        softly.assertThat(purchaseTrans.getMatchingAttributes().getContentName() ).as(" purchaseTrans.getMatchingAttributes().getContentName()" ).isNullOrEmpty();
         softly.assertThat(purchaseTrans.getMatchingAttributes().getAssetID() ).as(" purchaseTrans.getMatchingAttributes().getAssetID()" ).isNull();
         softly.assertThat(purchaseTrans.getMatchingAttributes().getPremiumLevel() ).as(" purchaseTrans.getMatchingAttributes().getPremiumLevel()" ).isEqualTo(999) ;
         softly.assertThat(purchaseTrans.getMatchingAttributes().getReserveOnlyFlag() ).as(" purchaseTrans.getMatchingAttributes().getReserveOnlyFlag()" ).isEqualTo(0) ;
@@ -605,7 +601,7 @@ public class GetTransactions6_IT_pt2 {
         softly.assertThat(purchaseTrans.getSubscription().getPackage().getPricePoint().getFixedRecurrence() ).as(" purchaseTrans.getSubscription().getPackage().getPricePoint().getFixedRecurrence()" ).isEqualTo(new Long(0)) ;
         softly.assertThat(purchaseTrans.getSubscription().getPackage().getPricePoint().isFixedRecurringPricePoint() ).as(" purchaseTrans.getSubscription().getPackage().getPricePoint().isFixedRecurringPricePoint()" ).isFalse() ;
         softly.assertThat(purchaseTrans.getSubscription().getPackage().getPricePoint().isReceipting() ).as(" purchaseTrans.getSubscription().getPackage().getPricePoint().isReceipting()" ).isFalse() ;
-        softly.assertThat(purchaseTrans.getSubscription().getPackage().getPricePoint().getReceiptingAttribute() ).as(" purchaseTrans.getSubscription().getPackage().getPricePoint().getReceiptingAttribute()" ).isNull();
+        softly.assertThat(purchaseTrans.getSubscription().getPackage().getPricePoint().getReceiptingAttribute() ).as(" purchaseTrans.getSubscription().getPackage().getPricePoint().getReceiptingAttribute()" ).isNullOrEmpty();
         softly.assertThat(purchaseTrans.getSubscription().getPackage().getPricePoint().getOrder() ).as(" purchaseTrans.getSubscription().getPackage().getPricePoint().getOrder()" ).isEqualTo(0) ;
         softly.assertThat(purchaseTrans.getSubscription().getPackage().getPricePoint().getPaymentHandler() ).as(" purchaseTrans.getSubscription().getPackage().getPricePoint().getPaymentHandler()" ).isEqualTo("NULL");
 //check size of array!
@@ -626,7 +622,7 @@ public class GetTransactions6_IT_pt2 {
 // java.util.HashMap
         softly.assertThat(purchaseTrans.getSubscription().getPackage().getPricePoint().getPricepointIdLink() ).as(" purchaseTrans.getSubscription().getPackage().getPricePoint().getPricepointIdLink()" ).isNull();
         softly.assertThat(purchaseTrans.getSubscription().getPackage().getPricePoint().isPreview() ).as(" purchaseTrans.getSubscription().getPackage().getPricePoint().isPreview()" ).isFalse() ;
-        softly.assertThat(purchaseTrans.getSubscription().getPackage().getPricePoint().getInteractiveFlag() ).as(" purchaseTrans.getSubscription().getPackage().getPricePoint().getInteractiveFlag()" ).isNull();
+        softly.assertThat(purchaseTrans.getSubscription().getPackage().getPricePoint().getInteractiveFlag() ).as(" purchaseTrans.getSubscription().getPackage().getPricePoint().getInteractiveFlag()" ).isNullOrEmpty();
         softly.assertThat(purchaseTrans.getSubscription().getPackage().getPricePoint().isForcedPurchase() ).as(" purchaseTrans.getSubscription().getPackage().getPricePoint().isForcedPurchase()" ).isFalse() ;
         softly.assertThat(purchaseTrans.getSubscription().getPackage().getPricePoint().isSubscriptionDuplicate() ).as(" purchaseTrans.getSubscription().getPackage().getPricePoint().isSubscriptionDuplicate()" ).isFalse() ;
         softly.assertThat(purchaseTrans.getSubscription().getPackage().getPricePoint().getFixedExpiryDate() ).as(" purchaseTrans.getSubscription().getPackage().getPricePoint().getFixedExpiryDate()" ).isNull();

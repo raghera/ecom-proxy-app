@@ -302,11 +302,11 @@ public class FindPackagesWithService7IT_pt2 {
 //        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().size()).as("pack.getPricePoint().getTax().getTaxRates().size()").isEqualTo(3);
 ////if the list is smaller than expected we can't continue, so do a hard assert
 //        assertTrue(pack.getPricePoint().getTax().getTaxRates().size() >= 3);
-//        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(0).getValue() ).as(" pack.getPricePoint().getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(0).value() ).as(" pack.getPricePoint().getTax().getTaxRates().get(0).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(0).getKey() ).as(" pack.getPricePoint().getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(1).getValue() ).as(" pack.getPricePoint().getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(1).value() ).as(" pack.getPricePoint().getTax().getTaxRates().get(1).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(1).getKey() ).as(" pack.getPricePoint().getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(2).getValue() ).as(" pack.getPricePoint().getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(2).value() ).as(" pack.getPricePoint().getTax().getTaxRates().get(2).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getPricePoint().getTax().getTaxRates().get(2).getKey() ).as(" pack.getPricePoint().getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
         softly.assertThat(pack.getPricePoint().getDescription() ).as(" pack.getPricePoint().getDescription()" ).isEqualTo("Recurring 7 day");
         softly.assertThat(pack.getPricePoint().isReserveOnly() ).as(" pack.getPricePoint().isReserveOnly()" ).isFalse() ;
@@ -722,11 +722,11 @@ public class FindPackagesWithService7IT_pt2 {
 //        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().size()).as("pack.getPricePoints().get(0).getTax().getTaxRates().size()").isEqualTo(3);
 ////if the list is smaller than expected we can't continue, so do a hard assert
 //        assertTrue(pack.getPricePoints().get(0).getTax().getTaxRates().size() >= 3);
-//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(0).getValue() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(0).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(0).value() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(0).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(0).getKey() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(0).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(1).getValue() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(1).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(1).value() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(1).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(1).getKey() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(1).getKey()" ).isEqualTo(new Long(0)) ;
-//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(2).getValue() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(2).getValue()" ).isEqualTo(new Double(0.175)) ;
+//        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(2).value() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(2).value()" ).isEqualTo(new Double(0.175)) ;
 //        softly.assertThat(pack.getPricePoints().get(0).getTax().getTaxRates().get(2).getKey() ).as(" pack.getPricePoints().get(0).getTax().getTaxRates().get(2).getKey()" ).isEqualTo(new Long(0)) ;
         softly.assertThat(pack.getPricePoints().get(0).getDescription() ).as(" pack.getPricePoints().get(0).getDescription()" ).isEqualTo("Non-recurring 7 day");
         softly.assertThat(pack.getPricePoints().get(0).isReserveOnly() ).as(" pack.getPricePoints().get(0).isReserveOnly()" ).isFalse() ;
