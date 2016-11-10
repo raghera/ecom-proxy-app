@@ -1,0 +1,352 @@
+
+Keystore type: JKS
+Keystore provider: SUN
+
+Your keystore contains 2 entries
+
+Alias name: dgig-dit-rsd.sp.vodafone.com
+Creation date: 13-Oct-2016
+Entry type: trustedCertEntry
+
+Owner: CN=dgig-dit-rsd.sp.vodafone.com, OU=VF Technology, O=Vodafone Group Services Limited, L=Duesseldorf, ST=NRW, C=DE
+Issuer: CN=Verizon Public SureServer CA G14-SHA2, OU=Cybertrust, O=Verizon Enterprise Solutions, L=Amsterdam, C=NL
+Serial number: 54db6d78c5af4ca70e45f9416c6547a3c4ca48ae
+Valid from: Mon Oct 19 13:08:59 BST 2015 until: Thu Oct 19 13:08:56 BST 2017
+Certificate fingerprints:
+	 MD5:  F0:57:80:B8:AA:C9:44:41:B0:C8:10:69:2A:2C:0E:CF
+	 SHA1: BD:BA:E7:EC:7C:76:33:50:FE:A2:E2:AC:98:07:7D:A1:39:9D:86:7C
+	 SHA256: 6A:6A:AE:8F:C5:5F:06:C2:B2:B5:9A:46:78:AE:38:C4:E3:62:84:03:FE:A3:8F:12:71:E6:DA:6E:D9:D6:86:3D
+	 Signature algorithm name: SHA256withRSA
+	 Version: 3
+
+Extensions: 
+
+#1: ObjectId: 1.3.6.1.5.5.7.1.1 Criticality=false
+AuthorityInfoAccess [
+  [
+   accessMethod: ocsp
+   accessLocation: URIName: http://vpssg142.ocsp.omniroot.com
+, 
+   accessMethod: caIssuers
+   accessLocation: URIName: http://cacert.omniroot.com/vpssg142.crt
+, 
+   accessMethod: caIssuers
+   accessLocation: URIName: http://cacert.omniroot.com/vpssg142.der
+]
+]
+
+#2: ObjectId: 2.5.29.35 Criticality=false
+AuthorityKeyIdentifier [
+KeyIdentifier [
+0000: E4 2D BB 91 01 65 26 1F   B4 7A 3F A3 15 25 A4 CE  .-...e&..z?..%..
+0010: 8C 44 33 3B                                        .D3;
+]
+]
+
+#3: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:false
+  PathLen: undefined
+]
+
+#4: ObjectId: 2.5.29.31 Criticality=false
+CRLDistributionPoints [
+  [DistributionPoint:
+     [URIName: http://vpssg142.crl.omniroot.com/vpssg142.crl]
+]]
+
+#5: ObjectId: 2.5.29.32 Criticality=false
+CertificatePolicies [
+  [CertificatePolicyId: [1.3.6.1.4.1.6334.1.50]
+[PolicyQualifierInfo: [
+  qualifierID: 1.3.6.1.5.5.7.2.1
+  qualifier: 0000: 16 26 68 74 74 70 73 3A   2F 2F 73 65 63 75 72 65  .&https://secure
+0010: 2E 6F 6D 6E 69 72 6F 6F   74 2E 63 6F 6D 2F 72 65  .omniroot.com/re
+0020: 70 6F 73 69 74 6F 72 79                            pository
+
+]]  ]
+]
+
+#6: ObjectId: 2.5.29.37 Criticality=false
+ExtendedKeyUsages [
+  serverAuth
+  clientAuth
+]
+
+#7: ObjectId: 2.5.29.15 Criticality=true
+KeyUsage [
+  DigitalSignature
+  Key_Encipherment
+]
+
+#8: ObjectId: 2.5.29.17 Criticality=false
+SubjectAlternativeName [
+  DNSName: dgig-dit-rsd.sp.vodafone.com
+  DNSName: dgig-dit-rsd-de.sp.vodafone.com
+  DNSName: dgig-dit-rsd-o-de.sp.vodafone.com
+  DNSName: dgig-dit-rsd-o-uk.sp.vodafone.com
+  DNSName: dgig-dit-rsd-dit1.sp.vodafone.com
+  DNSName: dgig-dit-rsd-dit2.sp.vodafone.com
+  DNSName: dgig-dit-de.sp.vodafone.com
+  DNSName: dgig-dit-o-de.sp.vodafone.com
+  DNSName: dgig-dit-o-uk.sp.vodafone.com
+  DNSName: dgig-dit-dit1.sp.vodafone.com
+  DNSName: dgig-dit-dit2.sp.vodafone.com
+]
+
+#9: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: 14 1E 5D 17 FF A6 EA 51   7C 4F 58 20 27 C0 83 00  ..]....Q.OX '...
+0010: 24 D6 9D 75                                        $..u
+]
+]
+
+
+
+*******************************************
+*******************************************
+
+
+Alias name: le-8913af52-360c-41eb-ae16-7d3ebb522e79
+Creation date: 07-Jan-2015
+Entry type: PrivateKeyEntry
+Certificate chain length: 4
+Certificate[1]:
+Owner: CN=Client Certificate for DIT Environment, O=Vodafone Group, C=UK
+Issuer: CN=Vodafone (Corporate Services 2009), O=Vodafone Group, C=UK
+Serial number: 77001b428b943cfc0bd0ba67560001001b428b
+Valid from: Tue Jan 06 16:18:03 GMT 2015 until: Thu Jan 05 16:18:03 GMT 2017
+Certificate fingerprints:
+	 MD5:  F1:14:CE:CD:62:38:F0:5D:B5:09:8D:7E:D3:7C:C5:75
+	 SHA1: E6:74:10:45:15:3D:C7:43:3C:11:8B:B0:30:03:B1:B0:C6:09:F3:CD
+	 SHA256: 66:91:3D:A1:C0:87:B5:35:10:09:BB:76:41:EC:F8:12:99:14:05:67:E4:15:5E:3E:9F:EA:73:73:6B:77:71:50
+	 Signature algorithm name: SHA1withRSA
+	 Version: 3
+
+Extensions: 
+
+#1: ObjectId: 1.3.6.1.4.1.311.21.10 Criticality=false
+0000: 30 0C 30 0A 06 08 2B 06   01 05 05 07 03 02        0.0...+.......
+
+
+#2: ObjectId: 1.3.6.1.4.1.311.21.7 Criticality=false
+0000: 30 2C 06 24 2B 06 01 04   01 82 37 15 08 DA 89 6B  0,.$+.....7....k
+0010: F5 B0 6B 81 A1 9F 18 83   A8 E6 15 82 AF EF 20 81  ..k........... .
+0020: 3B 86 A8 F5 3A D0 CA 33   02 01 64 02 01 07        ;...:..3..d...
+
+
+#3: ObjectId: 1.3.6.1.5.5.7.1.1 Criticality=false
+AuthorityInfoAccess [
+  [
+   accessMethod: caIssuers
+   accessLocation: URIName: http://cert.ca.vodafone.com/cert/VodafoneCorporateServices2009(1).cer
+, 
+   accessMethod: ocsp
+   accessLocation: URIName: http://ocsp.ca.vodafone.com/ocsp
+]
+]
+
+#4: ObjectId: 2.5.29.35 Criticality=false
+AuthorityKeyIdentifier [
+KeyIdentifier [
+0000: 54 71 E4 33 4E E5 A8 A9   30 B7 C7 29 6C E0 D8 12  Tq.3N...0..)l...
+0010: 1F C3 9D B8                                        ....
+]
+]
+
+#5: ObjectId: 2.5.29.31 Criticality=false
+CRLDistributionPoints [
+  [DistributionPoint:
+     [URIName: http://crl.ca.vodafone.com/crl/VodafoneCorporateServices2009(1).crl]
+]]
+
+#6: ObjectId: 2.5.29.32 Criticality=false
+CertificatePolicies [
+  [CertificatePolicyId: [1.2.826.0.1.1833679.1.1.5.2.5]
+[]  ]
+]
+
+#7: ObjectId: 2.5.29.37 Criticality=false
+ExtendedKeyUsages [
+  clientAuth
+]
+
+#8: ObjectId: 2.5.29.15 Criticality=true
+KeyUsage [
+  DigitalSignature
+  Key_Encipherment
+]
+
+#9: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: 19 F3 C1 3E 14 C0 69 59   1C 32 DB EF 60 DB A9 2D  ...>..iY.2..`..-
+0010: 6E 60 CE 89                                        n`..
+]
+]
+
+Certificate[2]:
+Owner: CN=Vodafone (Corporate Services 2009), O=Vodafone Group, C=UK
+Issuer: CN=Vodafone (Corporate Domain 2009), O=Vodafone Group, C=UK
+Serial number: 77000000039498f1a84f93025c000000000003
+Valid from: Mon Mar 04 15:19:02 GMT 2013 until: Sat Sep 04 16:29:02 BST 2021
+Certificate fingerprints:
+	 MD5:  F1:91:F1:A0:E0:35:70:55:A3:B0:71:CD:E3:25:7E:52
+	 SHA1: 46:7F:E3:85:CC:49:A1:99:57:9C:5A:09:5D:F1:70:94:07:2F:F4:71
+	 SHA256: 4A:E7:8F:57:DA:F4:BE:07:BF:34:A8:55:E8:21:03:37:7F:15:E0:8E:C0:CB:53:57:3B:88:1D:9B:12:3C:AF:48
+	 Signature algorithm name: SHA1withRSA
+	 Version: 3
+
+Extensions: 
+
+#1: ObjectId: 1.3.6.1.5.5.7.1.1 Criticality=false
+AuthorityInfoAccess [
+  [
+   accessMethod: caIssuers
+   accessLocation: URIName: http://cert.ca.vodafone.com/cert/VodafoneCorporateDomain2009.cer
+]
+]
+
+#2: ObjectId: 2.5.29.35 Criticality=false
+AuthorityKeyIdentifier [
+KeyIdentifier [
+0000: F9 57 DA 90 5C DA 37 25   41 C4 95 5E 61 21 E9 F8  .W..\.7%A..^a!..
+0010: 64 78 F4 8E                                        dx..
+]
+]
+
+#3: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:true
+  PathLen:0
+]
+
+#4: ObjectId: 2.5.29.31 Criticality=false
+CRLDistributionPoints [
+  [DistributionPoint:
+     [URIName: http://crl.ca.vodafone.com/crl/VodafoneCorporateDomain2009.crl]
+]]
+
+#5: ObjectId: 2.5.29.32 Criticality=false
+CertificatePolicies [
+  [CertificatePolicyId: [1.2.826.0.1.1833679.1.1.5.2]
+[]  ]
+]
+
+#6: ObjectId: 2.5.29.15 Criticality=true
+KeyUsage [
+  Key_CertSign
+  Crl_Sign
+]
+
+#7: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: 54 71 E4 33 4E E5 A8 A9   30 B7 C7 29 6C E0 D8 12  Tq.3N...0..)l...
+0010: 1F C3 9D B8                                        ....
+]
+]
+
+Certificate[3]:
+Owner: CN=Vodafone (Corporate Domain 2009), O=Vodafone Group, C=UK
+Issuer: CN=Baltimore CyberTrust Root, OU=CyberTrust, O=Baltimore, C=IE
+Serial number: 7277f4f
+Valid from: Wed Dec 19 17:26:20 GMT 2012 until: Thu Dec 19 17:25:36 GMT 2019
+Certificate fingerprints:
+	 MD5:  E9:1D:C8:36:E9:72:B7:5B:39:ED:64:67:B9:C5:63:4A
+	 SHA1: C5:0E:88:E5:20:A8:10:41:1D:63:4C:B8:F9:CC:93:9B:FD:76:93:99
+	 SHA256: 25:74:38:47:87:52:18:D6:C3:C6:C5:0D:DC:1E:1F:75:97:7E:70:59:26:D7:28:2B:87:B2:8E:AE:D3:9A:F7:3D
+	 Signature algorithm name: SHA1withRSA
+	 Version: 3
+
+Extensions: 
+
+#1: ObjectId: 2.5.29.35 Criticality=false
+AuthorityKeyIdentifier [
+KeyIdentifier [
+0000: E5 9D 59 30 82 47 58 CC   AC FA 08 54 36 86 7B 3A  ..Y0.GX....T6..:
+0010: B5 04 4D F0                                        ..M.
+]
+]
+
+#2: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:true
+  PathLen:1
+]
+
+#3: ObjectId: 2.5.29.31 Criticality=false
+CRLDistributionPoints [
+  [DistributionPoint:
+     [URIName: http://cdp1.public-trust.com/CRL/Omniroot2025.crl]
+]]
+
+#4: ObjectId: 2.5.29.32 Criticality=false
+CertificatePolicies [
+  [CertificatePolicyId: [1.3.6.1.4.1.6334.1.0]
+[PolicyQualifierInfo: [
+  qualifierID: 1.3.6.1.5.5.7.2.1
+  qualifier: 0000: 16 2D 68 74 74 70 3A 2F   2F 63 79 62 65 72 74 72  .-http://cybertr
+0010: 75 73 74 2E 6F 6D 6E 69   72 6F 6F 74 2E 63 6F 6D  ust.omniroot.com
+0020: 2F 72 65 70 6F 73 69 74   6F 72 79 2E 63 66 6D     /repository.cfm
+
+]]  ]
+  [CertificatePolicyId: [1.2.826.0.1.1833679.1.1.5.2]
+[]  ]
+]
+
+#5: ObjectId: 2.5.29.15 Criticality=true
+KeyUsage [
+  Key_CertSign
+  Crl_Sign
+]
+
+#6: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: F9 57 DA 90 5C DA 37 25   41 C4 95 5E 61 21 E9 F8  .W..\.7%A..^a!..
+0010: 64 78 F4 8E                                        dx..
+]
+]
+
+Certificate[4]:
+Owner: CN=Baltimore CyberTrust Root, OU=CyberTrust, O=Baltimore, C=IE
+Issuer: CN=Baltimore CyberTrust Root, OU=CyberTrust, O=Baltimore, C=IE
+Serial number: 20000b9
+Valid from: Fri May 12 19:46:00 BST 2000 until: Tue May 13 00:59:00 BST 2025
+Certificate fingerprints:
+	 MD5:  AC:B6:94:A5:9C:17:E0:D7:91:52:9B:B1:97:06:A6:E4
+	 SHA1: D4:DE:20:D0:5E:66:FC:53:FE:1A:50:88:2C:78:DB:28:52:CA:E4:74
+	 SHA256: 16:AF:57:A9:F6:76:B0:AB:12:60:95:AA:5E:BA:DE:F2:2A:B3:11:19:D6:44:AC:95:CD:4B:93:DB:F3:F2:6A:EB
+	 Signature algorithm name: SHA1withRSA
+	 Version: 3
+
+Extensions: 
+
+#1: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:true
+  PathLen:3
+]
+
+#2: ObjectId: 2.5.29.15 Criticality=true
+KeyUsage [
+  Key_CertSign
+  Crl_Sign
+]
+
+#3: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: E5 9D 59 30 82 47 58 CC   AC FA 08 54 36 86 7B 3A  ..Y0.GX....T6..:
+0010: B5 04 4D F0                                        ..M.
+]
+]
+
+
+
+*******************************************
+*******************************************
+
+
