@@ -54,6 +54,8 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
     }
 
     //TODO - Review with OpCos as there could be performance hit here
+    //Removed calls to getPricepoint as not needed. getFullCatalogService/Package should get you all the data you need now.
+    //
     public List<CatalogPackage> processCatalogPackages(final Locale locale, final List<CatalogPackage> packages) {
         logger.debug("Enter CatalogApiProcessor.processCatalogPackages");
         packages.forEach( catalogPackage -> {
@@ -72,11 +74,12 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
                 //Populate PackagePricepoint Attributes
                 catalogPackage.getPricePoints().forEach(packagePricePoint -> {
 
-                    final PricePoint returnedPackPp = catalogApiService.getPricePoint(locale, packagePricePoint.getId());
+
+//                    final PricePoint returnedPackPp = catalogApiService.getPricePoint(locale, packagePricePoint.getId());
 
                     packagePricePoint.setPackageId(catalogPackage.getSimplePackageId());
-                    packagePricePoint.setTaxCode(returnedPackPp.getTaxCode());
-                    packagePricePoint.setTariff(returnedPackPp.getTariff());
+//                    packagePricePoint.setTaxCode(returnedPackPp.getTaxCode());
+//                    packagePricePoint.setTariff(returnedPackPp.getTariff());
 
                     final BalanceImpact[] balanceImpacts = packagePricePoint.getAllBalanceImpacts().getBalanceImpacts();
                     final List<ResourceBalance> resourceBalances = buildBalanceImpacts(Arrays.asList(balanceImpacts));
@@ -88,9 +91,10 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
     }
 
     private void processServicePricePoint(Locale locale, PricePoint ppt) {
-        final PricePoint returnedServPp = catalogApiService.getPricePoint(locale, ppt.getId());
-        ppt.setTaxCode(returnedServPp.getTaxCode());
-        ppt.setTariff(returnedServPp.getTariff());
+        //removed call to getPricePoint as not needed.
+//        final PricePoint returnedServPp = catalogApiService.getPricePoint(locale, ppt.getId());
+//        ppt.setTaxCode(returnedServPp.getTaxCode());
+//        ppt.setTariff(returnedServPp.getTariff());
 
         //Should be fixed on core
         if (ppt.getReceiptingAttribute() != null && ppt.getReceiptingAttribute().equals("NULL")) {
