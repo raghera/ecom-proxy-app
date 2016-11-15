@@ -51,17 +51,9 @@ public class CatalogApiProcessorTest {
         CatalogService[] serviceArray = pack.getServiceArray();
         assertEquals(1, serviceArray.length);
         CatalogService serviceToReturn = aCatalogService();
-        PricePoint servicePpToReturn = aPricePoint();
-        PricePoint packPpToReturn = aPricePoint();
-        packPpToReturn.setTaxCode("TestTax");
-        packPpToReturn.setTariff("TestTariff");
 
         when(catalogApiService.getCatalogService(Locale.UK, pack.getServiceArray()[0].getId()))
                 .thenReturn(serviceToReturn);
-        when(catalogApiService.getPricePoint(Locale.UK, serviceToReturn.getPricePoints().get(0).getId()))
-                .thenReturn(servicePpToReturn);
-        when(catalogApiService.getPricePoint(Locale.UK, pack.getPricePoints().get(0).getId()))
-                .thenReturn(packPpToReturn);
 
         catalogApiProcessor.process(new RequestResult.Builder<List<CatalogPackage>>()
                 .locale(Locale.UK)
@@ -71,8 +63,9 @@ public class CatalogApiProcessorTest {
 
         InOrder inOrder = inOrder(catalogApiService);
         inOrder.verify(catalogApiService).getCatalogService(Locale.UK, pack.getServiceArray()[0].getId());
-        inOrder.verify(catalogApiService).getPricePoint(Locale.UK, serviceToReturn.getPricePoints().get(0).getId());
-        inOrder.verify(catalogApiService).getPricePoint(Locale.UK, pack.getPricePoints().get(0).getId());
+
+        verify(catalogApiService, times(0)).getPricePoint(any(Locale.class), anyString());
+        verifyNoMoreInteractions(catalogApiService);
 
         //Check that the returned objects are the ones you get
         assertEquals(serviceToReturn.getPricePoints(), pack.getServiceArray()[0].getPricePoints());
@@ -81,15 +74,11 @@ public class CatalogApiProcessorTest {
         pack.getServiceArray()[0].getPricePoints().forEach(servPp -> {
             assertEquals(pack.getSimplePackageId(), servPp.getPackageId());
             assertEquals(pack.getServiceArray()[0].getId(), servPp.getContentId());
-            assertEquals(servicePpToReturn.getTaxCode(), servPp.getTaxCode());
-            assertEquals(servicePpToReturn.getTariff(), servPp.getTariff());
         });
 
         //Test Package pricepoints
         pack.getPricePoints().forEach(packPp -> {
             assertEquals(pack.getSimplePackageId(), packPp.getPackageId());
-            assertEquals(packPpToReturn.getTaxCode(), packPp.getTaxCode());
-            assertEquals(packPpToReturn.getTariff(), packPp.getTariff());
         });
         //TODO test balance impacts in it's own test
 
@@ -122,8 +111,6 @@ public class CatalogApiProcessorTest {
         when(catalogApiService.getCatalogService(Locale.UK, pack.getServiceArray()[0].getId()))
                 .thenReturn(serviceToReturn);
         when(serviceToReturn.getPricePoints()).thenReturn(new PricePoints());
-        when(catalogApiService.getPricePoint(Locale.UK, pack.getPricePoints().get(0).getId()))
-                .thenReturn(packPpToReturn);
 
         catalogApiProcessor.process(new RequestResult.Builder<List<CatalogPackage>>()
                 .locale(Locale.UK)
@@ -134,7 +121,6 @@ public class CatalogApiProcessorTest {
         InOrder inOrder = inOrder(catalogApiService);
         inOrder.verify(catalogApiService).getCatalogService(Locale.UK, pack.getServiceArray()[0].getId());
         verify(catalogApiService, times(0)).getPricePoint(any(Locale.class), eq(servicePpToReturn.getId()));
-        inOrder.verify(catalogApiService).getPricePoint(Locale.UK, pack.getPricePoints().get(0).getId());
 
         //Check that the returned objects are the ones you get
         assertEquals(serviceToReturn.getPricePoints(), pack.getServiceArray()[0].getPricePoints());
@@ -189,6 +175,8 @@ public class CatalogApiProcessorTest {
             assertEquals("test-package-id", pricePoint.getPackageId());
             assertEquals(service.getId(), pricePoint.getContentId());
         });
+
+        verifyZeroInteractions(catalogApiService);
     }
 
     @Test
@@ -226,6 +214,7 @@ public class CatalogApiProcessorTest {
 
         assertEquals("test-TAX-code", pricePoint.getTaxCode());
 
+        verifyZeroInteractions(catalogApiService);
     }
 
     @Test
