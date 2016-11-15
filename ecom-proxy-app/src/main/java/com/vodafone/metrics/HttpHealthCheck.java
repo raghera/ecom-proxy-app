@@ -6,6 +6,10 @@ import com.vodafone.er.ecom.proxy.service.CatalogApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Locale;
+import java.util.Optional;
+
+import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.*;
+import static com.vodafone.er.ecom.proxy.properties.PropertyService.getProperty;
 
 /**
  * Created by Ravi Aghera
@@ -21,14 +25,18 @@ public class HttpHealthCheck extends HealthCheck {
 
     @Override
     protected Result check() throws Exception {
-        //Try all supported locales
-        final String ptResult = service.getVersion(new Locale("pt", "PT"));
-        final String huResult = service.getVersion(new Locale("hu", "HU"));
+        Optional<String> countryStr = getProperty(PROP_EPA_HEALTHCHECK_COUNTRY.value(), "HU");
+        Optional<String> langStr = getProperty(PROP_EPA_HEALTHCHECK_LANG.value(), "hu");
 
-        if(ptResult == null || huResult ==null
-                || ptResult.length() == 0 || huResult.length() == 0) {
+        String result = null;
+        if(countryStr.isPresent() && langStr.isPresent()) {
+             result = service.getVersion(new Locale(langStr.get(), countryStr.get()));
+        }
+
+        if(result == null || result.length() == 0) {
             return Result.unhealthy("Http get-version request to ER Core did not return a response.  " +
-                    "Check ER Core is up and running correctly for PT and HU Operating Countries");
+                    "Check ER Core is up and running correctly for country: " + countryStr +
+                    "and language: " + langStr + " Operating Countries");
         }
         return Result.healthy();
     }
