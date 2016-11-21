@@ -39,7 +39,6 @@ public class EpaLogService {
     private void logEcomResponse(final ERLogData requestData, boolean operationComplete) {
         LOG.info("\nEcomResponse TX_LOG_ID={} apiName={} locale={} clientId={} requestName={}, operationComplete={}\n",
                 getCurrentTransactionId(), requestData.getApiName(), requestData.getCountryCode(), requestData.getClientId(), requestData.getRequestName(), operationComplete);
-        clearTranslog();
     }
 
     private void logEcomError(final ERLogData requestData, Exception ex) {
@@ -129,8 +128,6 @@ public class EpaLogService {
         }
         transLogManager.addAttributeOnce(Attr.LOG_POINT, ULFEntry.Logpoint.REQUEST_OUT.name());
 
-        transLogManager.logResponse(true);
-
         logEcomError(new ERLogDataImpl(transLogManager.getAttribute(Attr.CUSTOMER_ID),
                         transLogManager.getAttribute(Attr.VF_INT_CALLER_ID),
                         transLogManager.getAttribute(Attr.REQUEST_NAME),
@@ -139,6 +136,8 @@ public class EpaLogService {
                 e);
 
 //      ulf.logULFRequestIn(transLogManager, ULFEntry.Logpoint.REQUEST_OUT);
+        transLogManager.logResponse(true);
+
     }
 
     private void loadLoggingProperties() {
