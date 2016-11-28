@@ -518,7 +518,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                     new BufferedOutputStream (resp.getOutputStream()));
             try {
                 Optional<Boolean> shouldProxy = getPropertyAsBoolean( PROP_INACTIVATE_SUBSCRIPTION6.value(), true);
-                if(shouldProxy.isPresent()) {
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
                     result = custcareApiService.inactivateSubscription(locale, clientId, msisdn, subscriptionId, csrId, reason);
                 } else {
                     result = getCustcareApiDelegate(locale).inactivateSubscription(clientId, msisdn, subscriptionId, csrId, reason);
@@ -929,7 +929,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             try {
 
                 Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_BASIC_ACCOUNT15.value(), true);
-                if(shouldProxy.isPresent()) {
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
                     result = custcareApiService.getBasicAccount(locale, clientId,msisdn,accessDevice);
                 } else {
                     result = getCustcareApiDelegate(locale).getBasicAccount(clientId,msisdn,accessDevice);
@@ -1159,7 +1159,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                     new BufferedOutputStream (resp.getOutputStream()));
             try {
                 Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_SUBSCRIPTIONS18.value(), true);
-                if(shouldProxy.isPresent()) {
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
                     filter.setIncludeModifyTxns(true);
                     filter.setIncludePaymentTxns(true);
                     filter.setIncludeRefundTxns(true);
@@ -1534,7 +1534,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                     new BufferedOutputStream (resp.getOutputStream()));
             try {
                 Optional<Boolean> shouldProxy = getPropertyAsBoolean( PROP_GET_SUBSCRIPTION26.value(), true);
-                if(shouldProxy.isPresent()) {
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
                     SubscriptionFilter filter = new SubscriptionFilterImpl();
                     filter.setSubscriptionId(packageSubId);
                     filter.setIncludeModifyTxns(true);
