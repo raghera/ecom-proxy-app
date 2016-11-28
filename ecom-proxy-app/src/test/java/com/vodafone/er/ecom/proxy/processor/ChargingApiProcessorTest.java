@@ -54,6 +54,8 @@ public class ChargingApiProcessorTest {
         SubscriptionFilterImpl activeFilter = new SubscriptionFilterImpl();
         activeFilter.setSubscriptionStatus(SubscriptionStatus.ACTIVE);
 
+//        when(selfcareApiService.getSubscriptions(eq(Locale.UK), eq(CLIENT_ID.value()), eq(msisdn), eq(0), eq(activeFilter)))
+//                .thenReturn(newArrayList(subResponse).toArray(new Subscription[1]));
         when(selfcareApiService.getSubscriptions(eq(Locale.UK), eq(CLIENT_ID.value()), eq(msisdn), eq(0), any(SubscriptionFilter.class)))
                 .thenReturn(newArrayList(subResponse).toArray(new Subscription[1]));
 

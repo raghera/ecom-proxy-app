@@ -74,7 +74,6 @@ public class CatalogApiProcessor<T> implements PostProcessor<RequestResult<List<
                 //Populate PackagePricepoint Attributes
                 catalogPackage.getPricePoints().forEach(packagePricePoint -> {
 
-
 //                    final PricePoint returnedPackPp = catalogApiService.getPricePoint(locale, packagePricePoint.getId());
 
                     packagePricePoint.setPackageId(catalogPackage.getSimplePackageId());

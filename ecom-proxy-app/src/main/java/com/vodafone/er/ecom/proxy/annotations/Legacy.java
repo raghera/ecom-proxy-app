@@ -7,6 +7,8 @@ import java.lang.annotation.Target;
 
 /**
  * Created by Ravi Aghera
+ *
+ * Intended to demarcate imported legacy code
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.SOURCE)

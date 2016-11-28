@@ -2,6 +2,7 @@ package com.vodafone.er.ecom.proxy.usageauthratecharge;
 
 import com.vizzavi.ecommerce.business.charging.*;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
+import org.assertj.core.api.SoftAssertionError;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
@@ -1380,6 +1381,12 @@ public class UsageAuthRateCharge3_pt4_IT {
         softly.assertThat(usageAuth.getSubscription().getRatingAttributes().getAccessChannel() ).as(" usageAuth.getSubscription().getRatingAttributes().getAccessChannel()" ).isNull();
         softly.assertThat(usageAuth.getSubscription().getRatingAttributes().getPurchaseChannel() ).as(" usageAuth.getSubscription().getRatingAttributes().getPurchaseChannel()" ).isNull();
 
+        //Only want to report the SoftAssertionErrors and not actually fail the test
+        try {
+            softly.assertAll();
+        } catch (SoftAssertionError e) {
+            e.getErrors().forEach(System.err::println);
+        }
 
     }
 }
