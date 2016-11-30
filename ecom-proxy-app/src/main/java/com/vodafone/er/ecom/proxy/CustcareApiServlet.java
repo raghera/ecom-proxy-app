@@ -3,10 +3,10 @@ package com.vodafone.er.ecom.proxy;
 import com.vizzavi.ecommerce.business.charging.AccountValidationAuthorization;
 import com.vizzavi.ecommerce.business.charging.ModifyAuthorisation;
 import com.vizzavi.ecommerce.business.charging.SubscriptionAttributes;
-import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.selfcare.*;
 import com.vodafone.er.ecom.proxy.annotations.Legacy;
 import com.vodafone.er.ecom.proxy.context.ApplicationContextHolder;
+import com.vodafone.er.ecom.proxy.enums.EpaClientEnum;
 import com.vodafone.er.ecom.proxy.service.CustcareApiService;
 import com.vodafone.er.ecom.proxy.service.EpaLogService;
 import com.vodafone.er.ecom.proxy.service.SelfcareApiService;
@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
+import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getCustcareApi;
+import static com.vizzavi.ecommerce.business.common.EcomApiFactory.getSelfcareApi;
 import static com.vodafone.er.ecom.proxy.enums.PropertiesConstantsEnum.*;
 import static com.vodafone.er.ecom.proxy.properties.PropertyService.getPropertyAsBoolean;
 import static com.vodafone.global.er.endpoint.ApiNamesEnum.CUSTCARE_API;
@@ -47,7 +49,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
     }
 
     protected SelfcareApi getSelfcareApiDelegate(Locale locale) throws Exception {
-        return EcomApiFactory.getSelfcareApi(locale);
+        return getSelfcareApi(locale);
     }
 
     @Override
@@ -518,7 +520,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                     new BufferedOutputStream (resp.getOutputStream()));
             try {
                 Optional<Boolean> shouldProxy = getPropertyAsBoolean( PROP_INACTIVATE_SUBSCRIPTION6.value(), true);
-                if(shouldProxy.isPresent()) {
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
                     result = custcareApiService.inactivateSubscription(locale, clientId, msisdn, subscriptionId, csrId, reason);
                 } else {
                     result = getCustcareApiDelegate(locale).inactivateSubscription(clientId, msisdn, subscriptionId, csrId, reason);
@@ -612,7 +614,11 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             oos = new ObjectOutputStream (
                     new BufferedOutputStream (resp.getOutputStream()));
             try {
-                result = getCustcareApiDelegate(locale).refundTransactionMonetary(clientId,msisdn,transactionId,amount,res,attributes);
+                //Always call decoupling here
+                //TODO - Should always go through the service layer
+                result = DecouplingApiFactory.getCustcareApi(locale, EpaClientEnum.CLIENT_ID.value())
+                        .refundTransactionMonetary(clientId, msisdn, transactionId, amount, res, attributes);
+//                    result = getCustcareApiDelegate(locale).refundTransactionMonetary(clientId, msisdn, transactionId, amount, res, attributes);
             }
             catch (Exception e1) {
                 epaLogService.logResponseError(e1);
@@ -929,7 +935,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
             try {
 
                 Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_BASIC_ACCOUNT15.value(), true);
-                if(shouldProxy.isPresent()) {
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
                     result = custcareApiService.getBasicAccount(locale, clientId,msisdn,accessDevice);
                 } else {
                     result = getCustcareApiDelegate(locale).getBasicAccount(clientId,msisdn,accessDevice);
@@ -1159,7 +1165,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                     new BufferedOutputStream (resp.getOutputStream()));
             try {
                 Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_SUBSCRIPTIONS18.value(), true);
-                if(shouldProxy.isPresent()) {
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
                     filter.setIncludeModifyTxns(true);
                     filter.setIncludePaymentTxns(true);
                     filter.setIncludeRefundTxns(true);
@@ -1534,7 +1540,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
                     new BufferedOutputStream (resp.getOutputStream()));
             try {
                 Optional<Boolean> shouldProxy = getPropertyAsBoolean( PROP_GET_SUBSCRIPTION26.value(), true);
-                if(shouldProxy.isPresent()) {
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
                     SubscriptionFilter filter = new SubscriptionFilterImpl();
                     filter.setSubscriptionId(packageSubId);
                     filter.setIncludeModifyTxns(true);
@@ -2122,7 +2128,7 @@ public class CustcareApiServlet extends AbstractEcomServlet {
 
 
     private CustcareApi getCustcareApiDelegate(Locale locale) throws Exception {
-        return EcomApiFactory.getCustcareApi(locale);
+        return getCustcareApi(locale);
     }
 
 }

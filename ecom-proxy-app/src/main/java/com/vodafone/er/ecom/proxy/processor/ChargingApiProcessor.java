@@ -82,21 +82,33 @@ public class ChargingApiProcessor<T extends UsageAuthorization> implements PostP
         String subId = usageAuthorization.getPackageSubscriptionId();
         SubscriptionFilter filter = new SubscriptionFilterImpl();
         filter.setSubscriptionId(subId);
+
         try {
-            final Subscription [] arr = selfcareApiService.getSubscriptions(locale, CLIENT_ID.value(), msisdn, 0, filter);
-            if(arr == null || arr.length < 1) {
-                logger.warn("Could not find any subscriptions using subscriptionId: {}.", subId);
-            } else if (arr.length > 1) {
-                logger.warn("Found more than one Subscription using subscriptionId: {}.", subId);
-            } else {
-                usageAuthorization.setSubscription(arr[0]);
-            }
+            //First see if we've already got it
+//            Optional<Subscription> subscription = usageAuthorization.getActiveSubscriptions().stream()
+//                    .filter(sub -> sub.getSubscriptionId().equals(subId)).findFirst();
+
+//            if(subscription.isPresent()) {
+//                usageAuthorization.setSubscription(subscription.get());
+//            }
+//            else {
+                final Subscription [] arr = selfcareApiService.getSubscriptions(locale, CLIENT_ID.value(), msisdn, 0, filter);
+                if(arr == null || arr.length < 1) {
+                    logger.warn("Could not find any subscriptions using subscriptionId: {}.", subId);
+                } else if (arr.length > 1) {
+                    logger.warn("Found more than one Subscription using subscriptionId: {}.", subId);
+                } else {
+                    usageAuthorization.setSubscription(arr[0]);
+                }
+//        }
+            populateActiveSubscriptions(locale, msisdn, usageAuthorization);
+
         } catch (EcommerceException e) {
             logger.error("PostProcessor error. Could not get Subscription from ER Core correctly using id: {}, with exception message: {}. Continuing responding with original response", subId, e);
             //don't bother trying again
             return;
         }
-        populateActiveSubscriptions(locale, msisdn, usageAuthorization);
+
     }
 
     private void populateActiveSubscriptions(Locale locale, String msisdn, UsageAuthorization usageAuthorization) {

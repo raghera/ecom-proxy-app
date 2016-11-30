@@ -960,7 +960,7 @@ public class SelfcareApiServlet extends AbstractEcomServlet {
                     new BufferedOutputStream (resp.getOutputStream()));
             try {
                 Optional<Boolean> shouldProxy = getPropertyAsBoolean(PROP_GET_TRANSACTION17.value(), true);
-                if(shouldProxy.isPresent()) {
+                if(shouldProxy.isPresent() && shouldProxy.get()) {
                     Optional<Transaction> resultOpt = selfcareApiService.getTransaction(locale, clientId, filter);
                     if(resultOpt.isPresent()) {
                         result = resultOpt.get();
