@@ -220,6 +220,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
                 }
             }
             catch (Exception e1) {
+                log.error("Exception calling getCatalogService {}", e1);
                 epaLogService.logResponseError(e1);
                 oos.writeObject( new ExceptionAdapter(e1));
                 oos.flush();
@@ -231,6 +232,7 @@ public class CatalogApiServlet extends AbstractEcomServlet {
             oos.writeObject(result);
             oos.flush();
         } catch (Exception e2) {
+            log.error("Exception in getServiceHandler {}", e2);
             epaLogService.logResponseError(e2);
             try{
                 log(e2.getMessage(), e2);
