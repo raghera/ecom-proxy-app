@@ -65,7 +65,10 @@ public class ChargingApiProcessor<T extends UsageAuthorization> implements PostP
             //Find the full service object
             List<CatalogService> services = sub.getPackage().getServices();
             Optional<CatalogService> foundService = services.stream()
-                    .filter(catalogService -> null != catalogService.getPricePoints().getPricePoint(ppId).getId())
+                    .filter(catalogService ->
+                        null != catalogService.getPricePoints() &&
+                                null != catalogService.getPricePoints().getPricePoint(ppId) &&
+                                null != catalogService.getPricePoints().getPricePoint(ppId).getId())
                     .findFirst();
             foundService.ifPresent(service -> {
                 PricePoint foundPp = service.getPricePoints().getPricePoint(ppId);
