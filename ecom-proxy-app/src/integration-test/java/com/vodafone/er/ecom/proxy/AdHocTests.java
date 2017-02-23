@@ -1,14 +1,16 @@
 package com.vodafone.er.ecom.proxy;
 
+import com.google.common.collect.Lists;
 import com.vizzavi.ecommerce.business.catalog.CatalogApi;
-import com.vizzavi.ecommerce.business.catalog.CatalogPackage;
 import com.vizzavi.ecommerce.business.charging.*;
 import com.vizzavi.ecommerce.business.common.EcomApiFactory;
 import com.vizzavi.ecommerce.business.common.EcommerceException;
 import com.vizzavi.ecommerce.business.common.ResponseStatus;
 import com.vizzavi.ecommerce.business.selfcare.*;
 import com.vodafone.global.er.subscriptionmanagement.SubscriptionFilterImpl;
-import org.apache.log4j.*;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AllowSymLinkAliasChecker;
 import org.eclipse.jetty.server.handler.ContextHandler;
@@ -22,6 +24,9 @@ import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -46,7 +51,7 @@ public class AdHocTests {
     CatalogApi catalogApi = EcomApiFactory.getCatalogApi(Locale.UK);
 
     private static final int JETTY_PORT = 8888;
-//    private static final String WAR_PATH = "./ecom-proxy-app/target/ecom-proxy-app.war";
+    //    private static final String WAR_PATH = "./ecom-proxy-app/target/ecom-proxy-app.war";
     private static final String WAR_PATH = "./target/ecom-proxy-app.war";
     private static final String CONTEXT_PATH = "/delegates";
 
@@ -128,34 +133,40 @@ public class AdHocTests {
 
     @Test
     public void runImbeddedServer() throws Exception {
-//        ExecutorService executorService = Executors.newFixedThreadPool(1);
-//
-//        executorService.submit(() -> {
-//            try {
-//                System.out.println("STARTING SERVER");
-//
-//                System.out.println("COMPLETE START SERVER");
-//            } catch (Exception e) {
-//                try {
-//                    System.out.println("STOPPING SERVER");
-////                    EcomProxyJetty9Server.stopServer();
-//                } catch (Exception e1) {
-//                    System.out.println("Stop server failed " + e);
-//                    e1.printStackTrace();
-//                }
-//                throw new AssertionError(e);
-//            }
-//        });
 
-
-
-//        EcomProxyJetty9Server.main(new String[0]);
-//        Thread.sleep(5000);
         System.out.println("HELLO THIS TEST IS RUNNING ....");
 
-        final CatalogPackage catalogPackage = catalogApi.getPackage("pAlt");
-        assertNotNull(catalogPackage);
-        System.out.println("Result = " + catalogPackage);
+        ExecutorService executor = Executors.newFixedThreadPool(8);
+
+        List<String> msisdns =  Lists.newArrayList();
+
+        for (int i =0; i < 8; i++) {
+            msisdns.add("" + new Random().nextInt());
+        }
+
+        List<Callable<PurchaseAuthorization>> callables = Lists.newArrayList();
+
+        for (String msisdn : msisdns) {
+
+            callables.add(createCallable(msisdn));
+        }
+
+        executor.invokeAll(callables).stream()
+                .map(tFuture -> {
+                    try {
+                        return tFuture.get();
+                    }
+                    catch (Exception e) {
+                        throw new IllegalStateException(e);
+                    }
+                }).forEach(auth -> {
+            System.out.println(auth.toString());
+        });
+
+
+
+
+
 
         System.out.println("TEST IS COMPLETE ....");
 
@@ -165,6 +176,28 @@ public class AdHocTests {
 //            System.out.println("Killing Executor");
 //            executorService.shutdownNow();
 //        }
+    }
+
+
+    public Callable<PurchaseAuthorization> createCallable(String msisdn) {
+
+        Callable<PurchaseAuthorization> callable = () -> {
+            String packageId = "BP001__X__package:BP001_TAX_3_4_10010_999_999_*_*_*_false_false";
+
+
+            PurchaseAuthorization auth = null;
+            try {
+                auth = EcomApiFactory.getPurchaseApi(Locale.UK).purchasePackageMsisdn("epa-test", msisdn, packageId, new PurchaseAttributes());
+            } catch (EcommerceException e) {
+                e.printStackTrace();
+            }
+            assertNotNull(auth);
+            assertTrue("Auth response is false", auth.isSuccess());
+            return auth;
+        };
+
+        return callable;
+
     }
 
     @Test
