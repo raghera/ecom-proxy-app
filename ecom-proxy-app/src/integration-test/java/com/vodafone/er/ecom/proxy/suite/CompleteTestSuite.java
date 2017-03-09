@@ -117,6 +117,7 @@ public class CompleteTestSuite {
 
     private static final int JETTY_PORT = 8888;
     private static final String WAR_PATH = "./target/ecom-proxy-app.war";
+    private static final String EXPLODED_WAR_PATH = "./target/ecom-proxy-app";
     private static final String CONTEXT_PATH = "/delegates";
 
     private static Server server;
@@ -139,7 +140,6 @@ public class CompleteTestSuite {
         Logger.getLogger("org.springframework").setLevel(Level.OFF);
 //        Logger.getLogger("org.springframework").addAppender(ca);
 
-
         server = new Server(JETTY_PORT);
 
         ContextHandler contextHandler = new ContextHandler();
@@ -148,20 +148,17 @@ public class CompleteTestSuite {
         WebAppContext webAppContext = new WebAppContext();
         webAppContext.setContextPath(CONTEXT_PATH);
         File warfile = new File(WAR_PATH);
-        System.out.println("Warfile present: " + warfile.exists());
-        System.out.println("Warfile path: " + warfile.getAbsolutePath());
-
-        System.out.println(">>>>>" + System.getProperty("user.dir"));
-
-//        setSystemProperties();
-
+//        File warfile = new File(EXPLODED_WAR_PATH);
+        if (!warfile.exists()) {
+            throw new RuntimeException( "Unable to find WAR File: "
+                    + warfile.getAbsolutePath() );
+        }
         webAppContext.setWar(warfile.getAbsolutePath());
-
+        webAppContext.setExtractWAR(true);
         webAppContext.addAliasCheck(new AllowSymLinkAliasChecker());
         server.setHandler(webAppContext);
 
         server.start();
-//        server.join();
         System.out.println("STATE=" + server.getState());
 
         System.out.println( "SERVER STATUS " + server.getState() );

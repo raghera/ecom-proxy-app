@@ -12,6 +12,8 @@ import org.eclipse.jetty.webapp.WebAppContext;
 
 import java.io.File;
 import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.security.ProtectionDomain;
 import java.util.Optional;
 
 public class EcomProxyJetty9Server {
@@ -21,6 +23,7 @@ public class EcomProxyJetty9Server {
     private static final int ER_CORE_PORT = 8094;
     private static final String ER_CORE_HOST = "127.0.0.1";
     private static final String WAR_PATH = "./ecom-proxy-app/target/ecom-proxy-app.war";
+    private static final String EXPLODED_WAR_PATH = "./ecom-proxy-app/target/ecom-proxy-app";
 //    private static final String WAR_PATH = "./ecom-proxy-app/target/epa-integration-test-build.war";
     private static final String CONTEXT_PATH = "/delegates";
 
@@ -53,20 +56,47 @@ public class EcomProxyJetty9Server {
 
         server = new Server(JETTY_PORT);
 
+        //Get the libs dir
+        ProtectionDomain domain = EcomProxyJetty9Server.class.getProtectionDomain();
+        URL location = domain.getCodeSource().getLocation();
+        String webXmlLoc = location.toExternalForm() + "/web.xml";
+
+        System.out.println("Location: " + location.toExternalForm());
+        System.out.println("WebXml: " + webXmlLoc);
+
         ContextHandler contextHandler = new ContextHandler();
         contextHandler.setContextPath("/delegates");
 
         WebAppContext webAppContext = new WebAppContext();
         webAppContext.setContextPath(CONTEXT_PATH);
-        File warfile = new File(WAR_PATH);
-        System.out.println("Warfile present: " + warfile.exists());
-        System.out.println("Warfile path: " + warfile.getAbsolutePath());
 
-        System.out.println(">>>>>" + System.getProperty("user.dir"));
+        webAppContext.setDescriptor(webXmlLoc);
+
+//        File warfile = new File(WAR_PATH);
+//        File warfile = new File(EXPLODED_WAR_PATH);
+//        if (!warfile.exists()) {
+//            throw new RuntimeException( "Unable to find WAR File: "
+//                    + warfile.getAbsolutePath() );
+//        }
+
+//        System.out.println("Warfile path: " + warfile.getAbsolutePath());
+//        System.out.println(">>>>>" + System.getProperty("user.dir"));
 
         setSystemProperties();
 
-        webAppContext.setWar(warfile.getAbsolutePath());
+//        webAppContext.setWar(warfile.getAbsolutePath());
+        webAppContext.setWar("./ecom-proxy-app.war"); //This assumes you are in the target dir running an executable warfile
+//        webAppContext.setExtractWAR(true);
+//        webAppContext.setWar(location.toExternalForm());
+
+        webAppContext.setAttribute(
+                "org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern",
+                ".*/[^/]*servlet-api-[^/]*\\.jar$|.*/javax.servlet.jsp.jstl-.*\\.jar$|.*/[^/]*taglibs.*\\.jar$" );
+
+
+        //TODO Get the appl config and load it in
+
+        webAppContext.setTempDirectory(new File("./temp-webapp"));
 
         webAppContext.addAliasCheck(new AllowSymLinkAliasChecker());
         server.setHandler(webAppContext);

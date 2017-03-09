@@ -111,8 +111,6 @@ public class DecouplingAdHocTests {
     @Test
     public void purchaseDecoupling() throws Exception {
 
-        System.out.println("HELLO THIS TEST IS RUNNING ....");
-
         ExecutorService executor = Executors.newFixedThreadPool(5);
 
         List<String> msisdns = Lists.newArrayList();
